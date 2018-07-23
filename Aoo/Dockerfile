@@ -6,7 +6,7 @@ EXPOSE 44300
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY Aoo.csproj Aoo/
-COPY BLL.csproj BLL/
+COPY ./BLL.csproj BLL/
 RUN dotnet restore Aoo/Aoo.csproj
 COPY . .
 WORKDIR /src/Aoo
