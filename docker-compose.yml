@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY}aoo
     build:
       context: .
-      dockerfile: Aoo\Dockerfile
+      dockerfile: Dockerfile
