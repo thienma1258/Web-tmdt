@@ -13,6 +13,11 @@
     <Content Remove="wwwroot\css\flexslider.css" />
     <Content Remove="wwwroot\css\fluid_dg.css" />
     <Content Remove="wwwroot\css\font-awesome.css" />
+    <Content Remove="wwwroot\css\Shop\bootstrap.css" />
+    <Content Remove="wwwroot\css\Shop\flexslider.css" />
+    <Content Remove="wwwroot\css\Shop\fluid_dg.css" />
+    <Content Remove="wwwroot\css\Shop\font-awesome.css" />
+    <Content Remove="wwwroot\css\Shop\style.css" />
     <Content Remove="wwwroot\css\style.css" />
     <Content Remove="wwwroot\js\bootstrap.js" />
     <Content Remove="wwwroot\js\cbpShop.min.js" />
@@ -60,6 +65,11 @@
     <None Include="wwwroot\css\flexslider.css" />
     <None Include="wwwroot\css\fluid_dg.css" />
     <None Include="wwwroot\css\font-awesome.css" />
+    <None Include="wwwroot\css\Shop\bootstrap.css" />
+    <None Include="wwwroot\css\Shop\flexslider.css" />
+    <None Include="wwwroot\css\Shop\fluid_dg.css" />
+    <None Include="wwwroot\css\Shop\font-awesome.css" />
+    <None Include="wwwroot\css\Shop\style.css" />
     <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\js\bootstrap.js" />
     <None Include="wwwroot\js\cbpShop.min.js" />
@@ -89,6 +99,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Shop\" />
   </ItemGroup>
 
 </Project>
