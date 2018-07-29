@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheHelpers", "CacheHelpers\CacheHelpers.csproj", "{BEF23ED0-751F-4FB3-8059-10165344A359}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4E16E380-9FF5-430E-AE7A-5453BDF009DC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTest", "UniTest\UniTest.csproj", "{1F790371-7E07-4FA0-8BAB-6E514EBD343F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniTest", "UniTest\UniTest.csproj", "{1F790371-7E07-4FA0-8BAB-6E514EBD343F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{BEF23ED0-751F-4FB3-8059-10165344A359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF23ED0-751F-4FB3-8059-10165344A359}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEF23ED0-751F-4FB3-8059-10165344A359}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E16E380-9FF5-430E-AE7A-5453BDF009DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E16E380-9FF5-430E-AE7A-5453BDF009DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E16E380-9FF5-430E-AE7A-5453BDF009DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E16E380-9FF5-430E-AE7A-5453BDF009DC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F790371-7E07-4FA0-8BAB-6E514EBD343F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F790371-7E07-4FA0-8BAB-6E514EBD343F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F790371-7E07-4FA0-8BAB-6E514EBD343F}.Release|Any CPU.ActiveCfg = Release|Any CPU
