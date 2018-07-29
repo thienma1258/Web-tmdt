@@ -42,6 +42,11 @@
     <Content Remove="wwwroot\Shop\js\moment.js" />
     <Content Remove="wwwroot\Shop\js\timer.js" />
     <Content Remove="wwwroot\Shop\style.css" />
+    <Content Remove="wwwroot\Shop\bootstrap.css" />
+    <Content Remove="wwwroot\Shop\flexslider.css" />
+    <Content Remove="wwwroot\Shop\fluid_dg.css" />
+    <Content Remove="wwwroot\Shop\font-awesome.css" />
+    <Content Remove="wwwroot\Shop\style.css" />
     <Content Remove="wwwroot\css\style.css" />
     <Content Remove="wwwroot\js\bootstrap.js" />
     <Content Remove="wwwroot\js\cbpShop.min.js" />
@@ -79,11 +84,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Bill\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Bill\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Bill\js\creditly.js" />
+    <None Include="wwwroot\Bill\js\easy-responsive-tabs.js" />
+    <None Include="wwwroot\Bill\js\jquery.min.js" />
     <None Include="wwwroot\css\bootstrap.css" />
     <None Include="wwwroot\css\dev.css" />
     <None Include="wwwroot\css\flexslider.css" />
     <None Include="wwwroot\css\fluid_dg.css" />
     <None Include="wwwroot\css\font-awesome.css" />
+    <None Include="wwwroot\Shop\css\bootstrap.css" />
+    <None Include="wwwroot\Shop\css\flexslider.css" />
+    <None Include="wwwroot\Shop\css\fluid_dg.css" />
+    <None Include="wwwroot\Shop\css\font-awesome.css" />
     <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />

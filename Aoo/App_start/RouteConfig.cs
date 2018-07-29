@@ -24,7 +24,7 @@ namespace Aoo.App_start
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                name: "default_route",
+                name: "Shop_route",
                 template: "{controller}/{action}/{id?}",
                 defaults: new { controller = "Shop", action = "MenShop" });
 
@@ -33,9 +33,33 @@ namespace Aoo.App_start
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                name: "default_route",
+                name: "Shop_route",
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Shop", action = "WomenShop" });
+
+            });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "Shop_route",
                 template: "{controller}/{action}/{id?}",
                 defaults: new { controller = "Shop", action = "Detail" });
+
+            });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "Shop_route",
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Shop", action = "CartItem" });
+
+            });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "Bill_route",
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Bill", action = "Payment" });
 
             });
             app.UseMvc(routes =>

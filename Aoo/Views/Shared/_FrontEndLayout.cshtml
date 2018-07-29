@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -20,9 +19,9 @@
     <!-- //Meta-Tags -->
     <!-- Custom-Stylesheet-Links -->
     <!-- Bootstrap-CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="all">
+    <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css" media="all">
     <!-- Index-Page-CSS -->
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all">
     <!-- //Custom-Stylesheet-Links -->
     <!-- Fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700" type="text/css" media="all">
@@ -34,9 +33,9 @@
     <!-- //Fonts -->
     <!-- Font-Awesome-File-Links -->
     <!-- CSS -->
-    <link rel="stylesheet" href="css/font-awesome.css" type="text/css" media="all">
+    <link rel="stylesheet" href="~/css/font-awesome.css" type="text/css" media="all">
     <!-- TTF -->
-    <link rel="stylesheet" href="fonts/fontawesome-webfont.ttf" type="text/css" media="all">
+    <link rel="stylesheet" href="~/fonts/fontawesome-webfont.ttf" type="text/css" media="all">
     <!-- //Font-Awesome-File-Links -->
 
     <script id="_bsa_srv-CKYI627U_0" type="text/javascript" src="https://srv.buysellads.com/ads/CKYI627U.json?callback=_bsa_go&amp;segment=placement:w3layoutscom"></script>
@@ -255,11 +254,15 @@
                         </li>
                         <li class="wthreecartaits wthreecartaits2 cart cart box_1">
                             <form action="#" method="post" class="last">
-                                <input type="hidden" name="cmd" value="_cart" />
-                                <input type="hidden" name="display" value="1" />
-                                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                                
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="display" value="1" />
+                                    
+                                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
                             </form>
+                            
                         </li>
+                        
                     </ul>
 
                 </div>

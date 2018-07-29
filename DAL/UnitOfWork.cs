@@ -15,9 +15,9 @@ namespace DAL
         }
         private bool disposed = false;
 
-        private IGenericRepository<User, string> userRepository;
+        private IGenericRepository<System_User, string> userRepository;
 
-        public IGenericRepository<User, string> UserRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IGenericRepository<System_User, string> UserRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         protected virtual void Dispose(bool disposing)
         {

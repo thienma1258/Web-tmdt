@@ -15,8 +15,8 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\CRM\" />
-    <Folder Include="Model\PM\" />
+    <Folder Include="Model\Log\PM\" />
+    <Folder Include="Model\SM\" />
     <Folder Include="Repository\PM\" />
   </ItemGroup>
 
