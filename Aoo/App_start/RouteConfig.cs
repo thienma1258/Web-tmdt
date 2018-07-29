@@ -38,6 +38,22 @@ namespace Aoo.App_start
                 defaults: new { controller = "Shop", action = "Detail" });
 
             });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "default_route",
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Admin", action = "Admin" });
+
+            });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "default_route",
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Admin/PM", action = "Index" });
+
+            });
         }
     }
 }

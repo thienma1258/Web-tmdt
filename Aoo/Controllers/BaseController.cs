@@ -8,6 +8,6 @@ namespace Aoo.Controllers
 {
     public class BaseController : Controller
     {
-        
+        public string BASE_ADMIN_URL = "~/Views/Admin/";
     }
 }
