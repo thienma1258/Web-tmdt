@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-    @await Html.PartialAsync("~/Views/Home/Header.cshtml");
+    @await Html.PartialAsync("~/Views/Shared/Header.cshtml");
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -49,6 +49,6 @@
 
     @RenderSection("Scripts", required: false)
 
-    @await Html.PartialAsync("~/Views/Home/Footer.cshtml");
+    @await Html.PartialAsync("~/Views/Shared/Footer.cshtml");
 </body>
 </html>

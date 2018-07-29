@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL.DataContext
 {
-    public class DataContext : IdentityDbContext<User>
+    public class DataContext : IdentityDbContext<System_User>
     {
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)

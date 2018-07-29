@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Model
 {
-    public class User : IdentityUser
+    public class System_User : IdentityUser
     {
     }
 }

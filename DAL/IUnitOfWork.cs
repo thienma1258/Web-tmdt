@@ -8,6 +8,6 @@ namespace DAL
 {
     public interface IUnitOfWork : IDisposable
     {
-          IGenericRepository<User,string> UserRepository { get; set; }
+          IGenericRepository<System_User,string> UserRepository { get; set; }
     }
 }
