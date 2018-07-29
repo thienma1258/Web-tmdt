@@ -14,5 +14,17 @@ namespace Aoo.Controllers.Shop
         {
             return View();
         }
+        public IActionResult WomenShop()
+        {
+            return View();
+        }
+        public IActionResult Detail()
+        {
+            return View();
+        }
+        public IActionResult CartItem()
+        {
+            return View();
+        }
     }
 }
