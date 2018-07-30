@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
+    [Area("PM")]
     public class ProductController : BaseController
     {
         public async Task<IActionResult> Index()
         {
             
-            return View(BASE_ADMIN_URL+"/PM/View.cshtml");
+            return View();
         }
     }
 }

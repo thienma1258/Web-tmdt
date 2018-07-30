@@ -13,6 +13,7 @@ using Aoo.Models;
 using Aoo.Services;
 using Aoo.App_start;
 using Aoo.Helpers;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Aoo
 {
@@ -34,6 +35,11 @@ namespace Aoo
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             // Add application services.
+            services.Configure<RazorViewEngineOptions>(o =>
+            {
+                o.ViewLocationExpanders.Add(new CustomViewEngine());
+            });
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             RegisterBLLConfig.RegisterBLL(ref services);
