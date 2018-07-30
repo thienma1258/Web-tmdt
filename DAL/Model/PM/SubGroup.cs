@@ -13,8 +13,9 @@ namespace DAL.Model.PM
         public string Description { get; set; } = string.Empty;
         
         public TypeSexEnum TypeSex { get; set; } = TypeSexEnum.All;
-        public MainGroup MainGroup { get; set; }
+        public virtual MainGroup MainGroup { get; set; }
         #region SEO
+        public string MetaTitle { get; set; }
         public string MetaKey { get; set; }
         public string MetaDescription { get; set; }
         public string UrlFriendly { get; set; }

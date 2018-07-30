@@ -14,6 +14,7 @@ namespace DAL.Model.PM
         public float Lng { get; set; }
         public string DefaultImage { get; set; }
         #region SEO
+        public string MetaTitle { get; set; }
         public string MetaKey { get; set; }
         public string MetaDescription { get; set; }
         public string UrlFriendly { get; set; }

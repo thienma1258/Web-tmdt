@@ -10,6 +10,6 @@ namespace DAL.Model.PM
         [Key]
         public int ProvinceID { get; set; }
         public string ProvinceName { get; set; }
-        public ICollection<District> Districts { get; set; }
+        public virtual ICollection<District> Districts { get; set; }
     }
 }

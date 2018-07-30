@@ -8,6 +8,6 @@ namespace DAL.Model.PM
     {
         public TransportType TransportType { get; set; }
         public decimal Price { get; set; }
-        public District District { get; set; }
+        public virtual District District { get; set; }
     }
 }

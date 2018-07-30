@@ -10,6 +10,6 @@ namespace DAL.Model.PM
         [Key]
         public int DistrictID{get;set;}
         public string DistrictName { get; set; }
-        public Province province { get; set; }
+        public virtual Province province { get; set; }
     }
 }

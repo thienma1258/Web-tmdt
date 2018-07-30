@@ -9,7 +9,7 @@ namespace DAL.Model.CRM
     {
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public ICollection<Product> Product { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
         public int DiscoutRate { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace DAL.Model.PM
         public string ImagePath { get; set; }
         public string Description { get; set; }
         public int OrderIndex { get; set; }
-     
         public bool IsHiding { get; set; }
 
     }
