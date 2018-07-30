@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Enum.PM
+namespace Common.Enum.PM
 {
     public enum TypeSexEnum
     {

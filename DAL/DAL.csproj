@@ -15,9 +15,12 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Model\Log\SM\" />
     <Folder Include="Model\Log\PM\" />
-    <Folder Include="Model\SM\" />
     <Folder Include="Repository\PM\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using DAL.Enum.PM;
+﻿using Common.Enum.PM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,14 +17,15 @@ namespace DAL.Model.PM
         public string Note { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string Details { get; set; } = string.Empty;
-      
+        public string DefaultImage { get; set; }
         public int Quality { get; set; }
         public int StockMin { get; set; }
         public int MaxQualityBuy { get; set; }
+
         [Column]
         private String listImages { get; set; }
         [NotMapped]
-        public List<String> ListImages
+        public List<string> ListImages
         {
             get { return listImages.Split(',').ToList(); }
             set
