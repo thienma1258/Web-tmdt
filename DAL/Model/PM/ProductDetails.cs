@@ -23,7 +23,7 @@ namespace DAL.Model.PM
         public int MaxQualityBuy { get; set; }
 
         [Column]
-        private String listImages { get; set; }
+        public string listImages { get; set; }
         [NotMapped]
         public List<string> ListImages
         {
