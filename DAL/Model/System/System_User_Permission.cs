@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Model.System
 {
-    public class System_User_Permission
+    public class System_User_Permission:TrackingObject
     {
         public virtual System_User User { get; set; }
         public string UserPermission { get; set; }

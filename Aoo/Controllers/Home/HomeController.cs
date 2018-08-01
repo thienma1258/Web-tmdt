@@ -5,13 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Aoo.Models;
+using DAL.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aoo.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ShopContext shopContext;
+        public HomeController(ShopContext shopContext)
+        {
+            this.shopContext = shopContext;
+        }
         public async Task<IActionResult> Index()
         {
+         
             return View();
         }
        

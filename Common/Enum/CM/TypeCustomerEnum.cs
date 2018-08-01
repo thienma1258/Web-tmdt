@@ -12,4 +12,11 @@ namespace Common.Enum.SM
         google=3
 
     }
+    public enum CustomerStateEnum
+    {
+       confirm=-1,
+       active =1,
+       block=0
+      
+    }
 }

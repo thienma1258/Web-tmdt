@@ -6,11 +6,10 @@ using System.Text;
 
 namespace DAL.Model.CM
 {
-    public class CM_Customer
+    public class CM_Customer:TrackingObject
     {
-        [Key]
-        public string CustomerID { get; set; } = Guid.NewGuid().ToString();
-
+        
+        public CustomerStateEnum CustomerStateEnum { get; set; } = CustomerStateEnum.confirm;
         public string CustomerName { get; set; }
         public string CustomerPhone { get; set; }
         [EmailAddress]
@@ -19,6 +18,8 @@ namespace DAL.Model.CM
         public int Prestige { get; set; } = 0;
         public string CMNN { get; set; }
         public string ConfirmCode { get; set; }
+        
         public string AuthenticationID { get; set; }
+        public string Password { get; set; }
     }
 }
