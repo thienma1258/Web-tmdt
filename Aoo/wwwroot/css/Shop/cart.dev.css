@@ -9,7 +9,7 @@ div {
     border-radius: 5px;
 }
 .product {
-    width: 65%;
+    width: 45%;
     float: left;
 }
 .quantity {
@@ -39,24 +39,26 @@ img {
 }
 
 img {
-    max-width: 10%;
+    max-width: 8%;
 }
 .title1, .title2, .title3 {
     width: 45%;
     float: left;
 }
 .quantity1, .quantity2, .quantity3 {
-    width: 15%;
-    float: left;
+    /*width: 15%;
+    float: left;*/
     text-align: center;
+    float:right;
+    margin:-35px 45% 0 40%;
 }
 form {
     display: block;
     margin-top: 0em;
 }
 .price1, .price2, .price3 {
-    width: 20%;
-    float: left;
+    width: 72%;
+    float: right;
     text-align: center;
 }
 .total {
@@ -133,6 +135,6 @@ form {
     transition: color 0.2s ease-in-out;
 }
 p {
-    margin-top: 15px;
+    margin: -35px 0 0 140px;
     color: #8D8E98;
 }
