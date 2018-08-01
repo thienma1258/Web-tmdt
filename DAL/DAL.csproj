@@ -18,8 +18,6 @@
   <ItemGroup>
     <Folder Include="Model\Log\SM\" />
     <Folder Include="Model\Log\PM\" />
-    <Folder Include="Repository\SM\Implement\" />
-    <Folder Include="Repository\System\Implement\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
