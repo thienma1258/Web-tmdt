@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.Model;
 using DAL.Repository;
 
@@ -18,7 +19,7 @@ namespace DAL
         private IGenericRepository<System_User, string> userRepository;
 
         public IGenericRepository<System_User, string> UserRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+      
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -35,6 +36,11 @@ namespace DAL
             Dispose(true);
             GC.SuppressFinalize(this);
             this.dataContext.Dispose();
+        }
+
+        public async Task<int> SaveChangeAsync()
+        {
+            return await dataContext.SaveChangesAsync();
         }
     }
 }
