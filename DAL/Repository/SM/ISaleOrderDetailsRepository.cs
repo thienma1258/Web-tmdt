@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DAL.Model.SM;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAL.Repository.SM
 {
-    interface ISaleOrderDetailsRepository
+    interface ISaleOrderDetailsRepository:IGenericRepository<SaleOrderDetail,string>
     {
     }
 }

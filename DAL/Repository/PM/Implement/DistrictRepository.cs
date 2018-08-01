@@ -7,24 +7,23 @@ using DAL.Model.PM;
 
 namespace DAL.Repository.PM
 {
-    public class DistrictRepository : IDistrictRepository
+    public class DistrictRepository :GenericRepository<District,string>, IDistrictRepository
     {
-        public readonly ShopContext shopContext;
-        public DistrictRepository(DataContext.ShopContext shopContext)
+        public DistrictRepository(ShopContext shopContext) : base(shopContext)
         {
-            this.shopContext = shopContext;
+
         }
-        public bool Delete(District entity)
+        public override void Delete(District entity)
         {
-            return false;
+            return;
         }
 
-        public District Find(string ID)
+        public override District Find(string ID)
         {
             return this.shopContext.Districts.Find(ID);
         }
 
-        public IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int number = 0,int skippage = 0)
+        public override IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int skippage = 0, int number = 0)
         {
            var IQuery= this.shopContext.Districts.Where(filter);
             if (skippage != 0)
@@ -43,14 +42,20 @@ namespace DAL.Repository.PM
            
         }
 
-        public bool Insert(District entity)
+  
+
+      
+
+        public override void Insert(District entity)
         {
-            return false;
+            return ;
         }
 
-        public bool Update(District entity)
+        public override void Update(District entity)
         {
-            return false;
+            return ;
         }
+
+       
     }
 }

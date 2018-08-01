@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Repository.PM.Implement
 {
-    class HomeSliderRepository
+    public class HomeSliderRepository
     {
     }
 }

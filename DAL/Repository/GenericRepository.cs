@@ -8,32 +8,25 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class GenericRepository<TEntity,T> where TEntity : class
+    public class GenericRepository<TEntity,T>:IGenericRepository<TEntity,T> where TEntity : class
     {
-        private readonly  ShopContext context;
+        public readonly  ShopContext shopContext;
         private readonly  DbSet<TEntity> dbSet;
 
         public GenericRepository(ShopContext context)
         {
-            this.context = context;
+            this.shopContext = context;
             this.dbSet = context.Set<TEntity>();
         }
         public virtual IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "")
+          Expression<Func<TEntity, bool>> filter = null,
+              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int skippage = 0, int number = 0)
         {
             IQueryable<TEntity> query = dbSet;
 
             if (filter != null)
             {
                 query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
             }
 
             if (orderBy != null)
@@ -46,7 +39,7 @@ namespace DAL.Repository
             }
         }
 
-        public virtual TEntity GetByID(T id)
+        public virtual TEntity Find(T id)
         {
             return dbSet.Find(id);
         }
@@ -64,7 +57,7 @@ namespace DAL.Repository
 
         public virtual void Delete(TEntity entityToDelete)
         {
-            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            if (shopContext.Entry(entityToDelete).State == EntityState.Detached)
             {
                 dbSet.Attach(entityToDelete);
             }
@@ -74,7 +67,7 @@ namespace DAL.Repository
         public virtual void Update(TEntity entityToUpdate)
         {
             dbSet.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
+            shopContext.Entry(entityToUpdate).State = EntityState.Modified;
         }
     }
 }
