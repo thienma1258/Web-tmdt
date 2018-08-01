@@ -1,0 +1,157 @@
+﻿.w3layouts_main_grid_left {
+    float: left;
+    width: 40%;
+}
+
+.agileits_main_grid_right {
+    float: inherit;
+    width: 60%;
+    min-height: 555px;
+    background: #fff;
+}
+
+.agileinfo_main_grid_left_grid {
+    padding: 2em;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.wthree_payment_grid {
+    padding: 2em;
+}
+
+    .wthree_payment_grid h2 {
+        font-size: 1.6em;
+        color: #f71926;
+        margin-bottom: 1em;
+    }
+
+.w3_agileits_card_number_grid_left, .w3_agileits_card_number_grid_right {
+    float: left;
+    width: 48%;
+}
+
+.w3_agileits_card_number_grid_right {
+    float: right !important;
+}
+
+.agileits_w3layouts_tab2 h3 {
+    font-size: 1.2em;
+    color: #212121;
+    margin-bottom: 2em;
+}
+
+    .agileits_w3layouts_tab2 h3 a {
+        text-decoration: underline;
+        color: #f71926;
+    }
+
+        .agileits_w3layouts_tab2 h3 a:hover {
+            color: #212121;
+        }
+
+.agileits_w3layouts_tab2 input[type="email"], .agileits_w3layouts_tab2 input[type="password"], .creditly-wrapper .form-control {
+    display: block;
+    width: 95.5%;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #212121;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    margin-bottom: 25px;
+    outline: none;
+}
+
+    .agileits_w3layouts_tab2 input[type="email"]:focus, .agileits_w3layouts_tab2 input[type="password"]:focus, .creditly-wrapper .form-control:focus {
+        border-color: #66afe9;
+        outline: 0;
+    }
+
+.security-code, .number {
+    width: 91% !important;
+}
+
+.agileits_w3layouts_tab2 input[type="submit"] {
+    display: block;
+    position: relative;
+    padding: 6px 50px 11px;
+    letter-spacing: 3px;
+    background: #1adeed;
+    font-size: 1.5em;
+    color: #fff;
+    border: 1px solid #1adeed;
+    outline: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+    .agileits_w3layouts_tab2 input[type="submit"]:hover {
+        background: #fff;
+        color: #212121;
+        border: 1px solid #e7e7e7;
+    }
+
+.agileinfo_main_grid_left_grid h3 {
+    font-size: 1.3em;
+    color: #fff;
+}
+
+.agileinfo_main_grid_left_grid ul {
+    margin-top: 1.5em;
+}
+
+    .agileinfo_main_grid_left_grid ul li {
+        display: inline-block;
+        color: #fff;
+        font-weight: bold;
+        font-size: 2em;
+        vertical-align: top;
+    }
+
+        .agileinfo_main_grid_left_grid ul li span {
+            display: block;
+            font-size: .5em;
+            color: #999;
+        }
+
+        .agileinfo_main_grid_left_grid ul li:first-child {
+            width: 70%;
+            border-right: 1px solid #999;
+        }
+
+        .agileinfo_main_grid_left_grid ul li:last-child {
+            padding-left: 1em;
+            text-align: right;
+        }
+
+.agile_amount {
+    padding: 1em 2em;
+    background: #f71926;
+}
+
+    .agile_amount h3 {
+        font-size: 1.3em;
+        color: #fff;
+    }
+
+    .agile_amount h4 {
+        font-size: 2em;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .agile_amount p {
+        font-size: 1em;
+        color: #1adeed;
+        line-height: 1.8em;
+    }
+.img {
+    width: 40%;
+}
+
+.img {
+    vertical-align: middle;
+}
+
+.img {
+    border: 0;
+}

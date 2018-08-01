@@ -1,39 +1,39 @@
 ﻿
 @{
     ViewData["Title"] = "CartItem";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
 }
-<link rel="stylesheet" href="~/Shop/css/shopdev.css" type="text/css" media="all">
-<link rel="stylesheet" href="~/Shop/css/bootstrap.css" type="text/css" media="all">
-<h1>CART ITEM</h1>
-
-<!-- Content-Starts-Here -->
+<link rel="stylesheet" href="~/css/Shop/cart.dev.css" type="text/css" />
+<link rel="stylesheet" href="~/fonts/Shop/FjallaOne-Regular.ttf" type="text/css" media="all">
+<link rel="stylesheet" href="~/fonts/Shop/OpenSans-Regular.ttf" type="text/css" media="all">
+<link rel="stylesheet" href="~/js/bootstrap.js" />
 <div class="container">
     <!-- Mainbar-Starts-Here -->
     <div class="main-bar">
         <div class="product">
-            <h3> Product</h3>
+            <h3>Product</h3>
         </div>
         <div class="quantity">
-            <h3> Quantity</h3>
+            <h3>Quantity</h3>
         </div>
         <div class="price">
-            <h3> Price</h3>
+            <h3>Price</h3>
         </div>
-        <div class="clear"> </div>
+        <div class="clear"></div>
     </div>
     <!-- //Mainbar-Ends-Here -->
     <!-- Items-Starts-Here -->
     <div class="items">
+
         <!-- Item1-Starts-Here -->
         <div class="item1">
             <div class="close1">
-                <!-- Remove-Item --> <div class="alert-close1"> </div><!-- //Remove-Item -->
+                <!-- Remove-Item --><div class="alert-close1"> </div><!-- //Remove-Item -->
                 <div class="image1">
-                    <img src="images/item1.png" alt="item1">
+                    <img src="~/images/item1.png" alt="item1">
                 </div>
                 <div class="title1">
-                    <p> Gucci Gg1078/S 4Uavk Grey Wayfarer</p>
+                    <p>Gucci Gg1078/S 4Uavk Grey Wayfarer</p>
                 </div>
                 <div class="quantity1">
                     <form action="action_page.php">
@@ -41,21 +41,21 @@
                     </form>
                 </div>
                 <div class="price1">
-                    <p> $ 210</p>
+                    <p>$ 210</p>
                 </div>
-                <div class="clear"> </div>
+                <div class="clear"></div>
             </div>
         </div>
         <!-- //Item1-Ends-Here -->
         <!-- Item2-Starts-Here -->
         <div class="item2">
             <div class="close2">
-                <!-- Remove-Item --> <div class="alert-close2"> </div><!-- //Remove-Item -->
+                <!-- Remove-Item --><div class="alert-close2"> </div><!-- //Remove-Item -->
                 <div class="image2">
-                    <img src="images/item2.png" alt="item2">
+                    <img src="~/images/item2.png" alt="item2">
                 </div>
                 <div class="title2">
-                    <p> Gucci Men's YA131202 Coupe Dual</p>
+                    <p>Gucci Men's YA131202 Coupe Dual</p>
                 </div>
                 <div class="quantity2">
                     <form action="action_page.php">
@@ -63,21 +63,21 @@
                     </form>
                 </div>
                 <div class="price2">
-                    <p> $ 545</p>
+                    <p>$ 545</p>
                 </div>
-                <div class="clear"> </div>
+                <div class="clear"></div>
             </div>
         </div>
         <!-- //Item2-Ends-Here -->
         <!-- Item3-Starts-Here -->
         <div class="item3">
             <div class="close3">
-                <!-- Remove-Item --> <div class="alert-close3"> </div><!-- //Remove-Item -->
+                <!-- Remove-Item --><div class="alert-close3"> </div><!-- //Remove-Item -->
                 <div class="image3">
-                    <img src="images/item3.png" alt="item3">
+                    <img src="~/images/item3.png" alt="item3">
                 </div>
                 <div class="title3">
-                    <p> Gucci Cufflinks with Interlocking G Motif</p>
+                    <p>Gucci Cufflinks with Interlocking G Motif</p>
                 </div>
                 <div class="quantity3">
                     <form action="action_page.php">
@@ -85,66 +85,65 @@
                     </form>
                 </div>
                 <div class="price3">
-                    <p> $ 169</p>
+                    <p>$ 169</p>
                 </div>
-                <div class="clear"> </div>
+                <div class="clear"></div>
             </div>
         </div>
         <!-- //Item3-Ends-Here -->
+
     </div>
     <!-- //Items-Ends-Here -->
     <!-- Total-Price-Starts-Here -->
     <div class="total">
-        <div class="total1"> Total Price</div>
-        <div class="total2"> $ 924</div>
-        <div class="clear"> </div>
+        <div class="total1">Total Price</div>
+        <div class="total2">$ 924</div>
+        <div class="clear"></div>
     </div>
     <!-- //Total-Price-Ends-Here -->
     <!-- Checkout-Starts-Here -->
     <div class="checkout">
         <div class="discount">
-            <span> Apply Discount Code</span> <input type="text">
+            <span>Apply Discount Code</span> <input type="text">
         </div>
         <div class="add">
-            <a href="#"> Add to Cart</a>
+            <a href="#">Add to Cart</a>
         </div>
         <div class="checkout-btn">
-            <a href="#"> Checkout</a>
+            <a href="#">Checkout</a>
         </div>
-        <div class="clear"> </div>
+        <div class="clear"></div>
     </div>
     <!-- //Checkout-Ends-Here -->
 </div>
-<!-- Content-Ends-Here -->
+
 <!-- Remove-Item-JavaScript -->
-<!-- Remove-Item-JavaScript -->
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="~/js/Shop/jquery-1.11.1.min.js"></script>
 <script>
-    $(document).ready(function (c) {
-        $('.alert-close1').on('click', function (c) {
-            $('.close1').fadeOut('slow', function (c) {
-                $('.close1').remove();
-            });
-        });
-    });
+$(document).ready(function(c) {
+		$('.alert-close1').on('click', function(c){
+			$('.close1').fadeOut('slow', function(c){
+		  		$('.close1').remove();
+			});
+		});
+	});
 </script>
 <script>
-    $(document).ready(function (c) {
-        $('.alert-close2').on('click', function (c) {
-            $('.close2').fadeOut('slow', function (c) {
-                $('.close2').remove();
-            });
-        });
-    });
+$(document).ready(function(c) {
+		$('.alert-close2').on('click', function(c){
+			$('.close2').fadeOut('slow', function(c){
+		  		$('.close2').remove();
+			});
+		});
+	});
 </script>
 <script>
-    $(document).ready(function (c) {
-        $('.alert-close3').on('click', function (c) {
-            $('.close3').fadeOut('slow', function (c) {
-                $('.close3').remove();
-            });
-        });
-    });
+$(document).ready(function(c) {
+		$('.alert-close3').on('click', function(c){
+			$('.close3').fadeOut('slow', function(c){
+		  		$('.close3').remove();
+			});
+		});
+	});
 </script>
-<!-- //Remove-Item-JavaScript -->
 <!-- //Remove-Item-JavaScript -->
