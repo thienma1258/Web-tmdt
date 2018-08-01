@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DAL.Model.PM;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAL.Repository.PM
 {
-    public interface IBrandRepository
+    public interface IBrandRepository:IGenericRepository<Brand,string>
     {
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Repository.System
+namespace DAL.Repository.PM.Implement
 {
-    interface System_Policy_Repository
+    class SubGroupRepository
     {
     }
 }

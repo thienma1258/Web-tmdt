@@ -18,10 +18,7 @@
   <ItemGroup>
     <Folder Include="Model\Log\SM\" />
     <Folder Include="Model\Log\PM\" />
-    <Folder Include="Repository\CM\" />
-    <Folder Include="Repository\CRM\" />
-    <Folder Include="Repository\Log\" />
-    <Folder Include="Repository\SM\" />
+    <Folder Include="Repository\SM\Implement\" />
     <Folder Include="Repository\System\Implement\" />
   </ItemGroup>
   <ItemGroup>
