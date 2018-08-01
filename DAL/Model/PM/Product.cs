@@ -14,9 +14,12 @@ namespace DAL.Model.PM
 
         public string LadingPage { get; set; }
         public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
+        //adidas nike
         public virtual  Brand Brand { get; set; }
         public virtual Category Category { get; set; }
+        //nganh hang chinh giay dep tat
         public virtual MainGroup MainGroup { get; set; }
+        // giay the thao giay công so, giay em be
         public virtual SubGroup SubGroup { get; set; }
         #region SEO
         public string MetaTitle { get; set; }

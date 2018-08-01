@@ -19,9 +19,7 @@ namespace Aoo
             RequestDelegate next)
         {
             _next = next;
-         
         }
-
         public async Task Invoke(HttpContext httpContext)
         {
             bool check=Utils.IsMobilePhone(ref httpContext);
