@@ -1,0 +1,63 @@
+﻿html,body {
+    background: white;
+}
+.titlename {
+    margin-left: 19%;
+    margin-top: 7%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.title ul {
+    color: white;
+    opacity: 0.8;
+    background: #1494e2;
+    border: 2px solid #ccc;
+    margin-left: 20%;
+    margin-top: 1%;
+    margin-bottom: 5%;
+    display: inline-flex;
+    list-style-type: none;
+}
+    .title ul li {
+        padding: 10px 30px 10px 35px;
+        border-right: 1px solid #ccc;
+    }
+.btnsearch {
+    margin: 35px 0 0 -340px;
+    height: 30px;
+}
+.btnadd {
+    margin-left: 26%;
+    height: 30px;
+}
+.btnedit {
+    margin-left: 26%;
+    height: 30px;
+}
+.btndel {
+    margin-left: 26%;
+    height: 30px;
+}
+.editbtn {
+    float: right;
+    width: 12%;
+}
+.wrapper{
+    padding:0px;
+}
+.cmbbrand {
+    margin: 3% 0px 0 20%;
+}
+    .cmbbrand select {
+        font-size: 20px;
+        width: 14%;
+        font-weight: 600;
+    }
+.valuebrand{
+}
+.valuebrand ul{
+    margin-left:20%;
+}
+    .valuebrand ul li {
+        padding: 10px 30px 10px 35px;
+        border-right: 1px solid #ccc 
+    }
