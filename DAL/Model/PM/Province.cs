@@ -8,8 +8,10 @@ namespace DAL.Model.PM
     public class Province
     {
         [Key]
-        public int ProvinceID { get; set; }
-        public string ProvinceName { get; set; }
+        public string  ProvinceID { get; set; }
+        public string Name { get; set; }
+        public string type { get; set; }
+        
         public virtual ICollection<District> Districts { get; set; }
     }
 }

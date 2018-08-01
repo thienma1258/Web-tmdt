@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Model.CRM
+namespace DAL.Model.PM
 {
    public class Discout:TrackingObject
     {
