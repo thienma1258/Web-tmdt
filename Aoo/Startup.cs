@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Aoo.Data;
 using Aoo.Models;
 using Aoo.Services;
 using Aoo.App_start;
 using Aoo.Helpers;
+using Microsoft.AspNetCore.Mvc.Razor;
+using DAL.DataContext;
+using DAL.Model;
 
 namespace Aoo
 {
@@ -28,12 +30,17 @@ namespace Aoo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ShopContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<System_User, IdentityRole>()
+                .AddEntityFrameworkStores<ShopContext>()
                 .AddDefaultTokenProviders();
             // Add application services.
+            services.Configure<RazorViewEngineOptions>(o =>
+            {
+                o.ViewLocationExpanders.Add(new CustomViewEngine());
+            });
+            services.AddMemoryCache();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             RegisterBLLConfig.RegisterBLL(ref services);

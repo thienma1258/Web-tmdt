@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\Shop\**" />
+    <Content Remove="wwwroot\js\Shop\**" />
+    <EmbeddedResource Remove="wwwroot\js\Shop\**" />
+    <None Remove="wwwroot\js\Shop\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\css\bootstrap.css" />
     <Content Remove="wwwroot\css\flexslider.css" />
     <Content Remove="wwwroot\css\fluid_dg.css" />
@@ -79,6 +86,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Admin\CM\" />
+    <Folder Include="Controllers\Admin\Log\" />
+    <Folder Include="Controllers\Admin\SM\" />
+    <Folder Include="Controllers\Admin\System\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
 
 </Project>

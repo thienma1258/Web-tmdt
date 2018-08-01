@@ -8,8 +8,8 @@ namespace DAL
 {
    public class UnitOfWork:IUnitOfWork
     {
-        private DataContext.DataContext dataContext;
-        public UnitOfWork(DataContext.DataContext dataContext)
+        private DataContext.ShopContext dataContext;
+        public UnitOfWork(DataContext.ShopContext dataContext)
         {
             this.dataContext = dataContext;
         }

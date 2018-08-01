@@ -10,7 +10,7 @@ namespace Aoo.Controllers.Shop
     public class ShopController : Controller
     {
         
-        public IActionResult MenShop()
+        public async Task<IActionResult> MenShop()
         {
             return View();
         }

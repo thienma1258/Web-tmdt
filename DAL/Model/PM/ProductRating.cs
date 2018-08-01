@@ -7,8 +7,9 @@ namespace DAL.Model.PM
 {
     public class ProductRating
     {
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public float RateStar { get; set; } = 0;
+        public virtual CM.CM_Customer Customer { get; set; }
         public string IpAddress { get; set; } = string.Empty;
         public DateTime CreatedTime { get; set; } = DateTime.Now;
 
