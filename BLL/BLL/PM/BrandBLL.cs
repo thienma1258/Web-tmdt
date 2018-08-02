@@ -74,7 +74,8 @@ namespace BLL.BLL.PM
                 {
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
+                    ModuleName = "PM->Brand",
+                    TableName="Brand"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);

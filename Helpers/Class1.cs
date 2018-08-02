@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
-namespace Services
+namespace Helpers
 {
-    public class StringExtension
-    {
+
         public static String RemoveDiacritics(this String s)
         {
             String normalizedString = s.Normalize(NormalizationForm.FormD);
@@ -19,6 +20,6 @@ namespace Services
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-        }
-    }
+        
+        }   
 }
