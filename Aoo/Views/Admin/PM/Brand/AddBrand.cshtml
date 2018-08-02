@@ -1,20 +1,19 @@
-﻿@model Common.ViewModel.PM.CategoryViewModel
+﻿@model Common.ViewModel.PM.BrandViewModel
 
 @{
-    ViewData["Title"] = "AddCategory";
+    ViewData["Title"] = "AddBrand";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
 
-<h2>Tạo Kiểu Giày Mới</h2>
-<hr />
+<h2>Tạo Thương Hiệu Mới</h2>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddCategory">
+        <form asp-action="AddBrand">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label  class="control-label">Tên Loại</label>
-                <input asp-for="nameCategory" class="form-control" />
-                <span asp-validation-for="nameCategory" class="text-danger"></span>
+                <label class="control-label">Tên thương hiệu </label>
+                <input asp-for="nameBrand" class="form-control" />
+                <span asp-validation-for="nameBrand" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Mô tả</label>
@@ -27,13 +26,13 @@
                 <span asp-validation-for="defaultImages" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Thêm loại" class="btn btn-danger" />
+                <input type="submit" value="Tạo mới" class="btn btn-danger" />
             </div>
         </form>
     </div>
 </div>
 
 <div class="backtolist">
-    <a asp-action="Index">Back to Manage List</a>
+    <input asp-action="Index"  value="Back to List" class="btn btn-info" />
 </div>
 

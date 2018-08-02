@@ -20,8 +20,14 @@ namespace Aoo.App_start
             defaults: new { controller = "Home", action = "Index" });
                     
             });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "area_route",
+                template: "{area:exists}/{controller}/{action}/{id?}",
+                defaults: new { controller = "Home", action = "Index" });
+            });
 
-       
         }
     }
 }
