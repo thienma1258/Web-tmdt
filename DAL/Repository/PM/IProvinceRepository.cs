@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface IProvinceRepository:IGenericRepository<Province, string>
+    public interface IProvinceRepository:IGenericRepository<Province, string>
     {
     }
 }

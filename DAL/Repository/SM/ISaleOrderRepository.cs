@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.SM
 {
-    interface ISaleOrderRepository : IGenericRepository<SaleOrder, string>
+    public interface ISaleOrderRepository : IGenericRepository<SaleOrder, string>
     {
     }
 }

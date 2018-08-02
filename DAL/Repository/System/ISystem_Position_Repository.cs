@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.System
 {
-    interface ISystem_Position_Repository: IGenericRepository<System_Position, string>
+    public interface ISystem_Position_Repository: IGenericRepository<System_Position, string>
     {
     }
 }

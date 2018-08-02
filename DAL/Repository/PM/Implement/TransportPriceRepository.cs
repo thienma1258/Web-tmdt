@@ -11,5 +11,11 @@ namespace DAL.Repository.PM.Implement
         public TransportPriceRepository(ShopContext context) : base(context)
         {
         }
+        public override void Delete(TransportPrice entityToDelete, string DeletedUser)
+        {
+            entityToDelete.isDeleted = true;
+            entityToDelete.DeletedDate = DateTime.Now;
+            entityToDelete.DeletedUser = DeletedUser;
+        }
     }
 }

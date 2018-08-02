@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.System
 {
-    public interface ISystem_Policy_Repository : IGenericRepository<System_Policy, string>
+   public interface ISystem_User_Permission_Repository:IGenericRepository<System_User_Permission,string>
     {
     }
 }

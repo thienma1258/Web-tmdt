@@ -11,5 +11,11 @@ namespace DAL.Repository.System.Implement
         public System_Position_Repository(ShopContext context) : base(context)
         {
         }
+        public override void Delete(System_Position entityToDelete, string DeletedUser)
+        {
+            entityToDelete.isDeleted = true;
+            entityToDelete.DeletedDate = DateTime.Now;
+            entityToDelete.DeletedUser = DeletedUser;
+        }
     }
 }

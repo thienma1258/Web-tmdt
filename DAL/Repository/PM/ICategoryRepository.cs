@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface ICategoryRepository:IGenericRepository<Category,string>
+    public interface ICategoryRepository:IGenericRepository<Category,string>
     {
     }
 }

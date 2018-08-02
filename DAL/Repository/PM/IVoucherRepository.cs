@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface IVoucherRepository : IGenericRepository<Voucher, string>
+    public interface IVoucherRepository : IGenericRepository<Voucher, string>
     {
     }
 }

@@ -11,6 +11,6 @@ namespace DAL.Repository.PM.Implement
         public ProductRatingRepository(ShopContext context) : base(context)
         {
         }
-        
+      
     }
 }

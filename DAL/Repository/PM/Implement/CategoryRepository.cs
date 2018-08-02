@@ -11,11 +11,11 @@ namespace DAL.Repository.PM.Implement
         public CategoryRepository(ShopContext context) : base(context)
         {
         }
-        public override void Delete(Category entityToDelete,string DeletedUser)
+        public override void Delete(Category entityToDelete,string DeletedUser = "adminstrator")
         {
             entityToDelete.isDeleted = true;
+            entityToDelete.DeletedUser = DeletedUser;
             entityToDelete.DeletedDate = DateTime.Now;
-            this.shopContext.SaveChanges();
         }
     }
 }

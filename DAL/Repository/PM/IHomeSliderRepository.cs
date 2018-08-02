@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface IHomeSliderRepository:IGenericRepository<HomeSlider,string>
+    public interface IHomeSliderRepository:IGenericRepository<HomeSlider,string>
     {
     }
 }

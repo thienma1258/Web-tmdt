@@ -1,18 +1,21 @@
-﻿@model DAL.Model.PM.Brand
+﻿@model Common.ViewModel.PM.CategoryViewModel
+
 @{
-    ViewData["Title"] = "AddBrand";
+    ViewData["Title"] = "EditCategory";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
 
-<h2>Tạo Thương Hiệu Mới</h2>
+<h2>Chỉnh Sửa Kiểu Giày Mới</h2>
+
+<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddBrand">
+        <form asp-action="EditCategory">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Tên thương hiệu </label>
-                <input class="form-control" />
-                <span class="text-danger"></span>
+                <label class="control-label">Tên Kiểu Giày</label>
+                <input asp-for="nameCategory" class="form-control" />
+                <span asp-validation-for="nameCategory" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Mô tả</label>
@@ -21,11 +24,11 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Ảnh</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <input asp-for="defaultImages" class="form-control" />
+                <span asp-validation-for="defaultImages" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Tạo mới" class="btn btn-danger" />
+                <input type="submit" value="Lưu" class="btn btn-danger" />
             </div>
         </form>
     </div>

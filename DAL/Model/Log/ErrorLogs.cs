@@ -7,6 +7,10 @@ namespace DAL.Model
 {
    public class ErrorLogs
     {
+        public ErrorLogs()
+        {
+        }
+
         [Key]
         public string ID { get; set; } = Guid.NewGuid().ToString();
         public DateTime CreatedTime { get; set; } = DateTime.Now;

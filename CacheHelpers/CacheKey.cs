@@ -8,6 +8,7 @@ namespace CacheHelpers
     {
         public readonly string DistrictKey = "CacheHelpers.District";
         public readonly string ProvinceKey = "CacheHelpers.Province";
+        public readonly string BrandKey = "CacheHelpers.Brand";
 
     }
 }

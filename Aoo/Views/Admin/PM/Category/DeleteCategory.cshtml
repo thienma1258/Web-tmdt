@@ -1,0 +1,38 @@
+﻿@model Common.ViewModel.PM.CategoryViewModel
+
+@{
+    ViewData["Title"] = "DeleteCategory";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+
+<h3>Bạn có muốn xóa không?</h3>
+<div class="delmodel">
+    @*<dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.nameCategory)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nameCategory)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.defaultImages)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.defaultImages)
+            </dd>
+        </dl>*@
+
+    <form asp-action="DeleteCategory">
+        <input type="submit" value="Xác nhận" class="btn btn-warning" /> |
+        <div class="backtolist">
+            <a href="/Product/Index">Trở lại trang quản lý</a>
+        </div>
+    </form>
+</div>
+

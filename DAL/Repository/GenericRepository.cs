@@ -20,7 +20,7 @@ namespace DAL.Repository
         }
         public virtual IEnumerable<TEntity> Get(
           Expression<Func<TEntity, bool>> filter = null,
-              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int skippage = 0, int number = 0)
+              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int skippage = -1, int number = -1)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -28,7 +28,13 @@ namespace DAL.Repository
             {
                 query = query.Where(filter);
             }
-
+            
+            if (number != -1)
+            {
+                if (skippage != -1)
+                    query = query.Skip(number * skippage);
+                query = query.Take(number);
+            }
             if (orderBy != null)
             {
                 return orderBy(query).ToList();
@@ -68,6 +74,11 @@ namespace DAL.Repository
         {
             dbSet.Attach(entityToUpdate);
             shopContext.Entry(entityToUpdate).State = EntityState.Modified;
+        }
+
+        public void Delete(TEntity entityToDelete)
+        {
+            throw new NotImplementedException();
         }
     }
 }

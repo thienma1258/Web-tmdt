@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aoo.Controllers.Admin.PM
 {
+    [Route("[controller]/[action]")]
     [Area("PM")]
     public class BrandController : Controller
     {
@@ -17,8 +18,11 @@ namespace Aoo.Controllers.Admin.PM
         {
             return View();
         }
-
-        public IActionResult AddBrand1()
+        public IActionResult EditBrand()
+        {
+            return View();
+        }
+        public IActionResult DeleteBrand()
         {
             return View();
         }
