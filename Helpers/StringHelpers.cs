@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Helpers
 {
@@ -24,7 +25,10 @@ namespace Helpers
         }
         public static String UrlFriendLy(this String s)
         {
-            s.RemoveDiacritics()
+            var RemoveAccetString = s.RemoveDiacritics();
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[ ]{1,}", options);
+            return regex.Replace(RemoveAccetString, "-");
         }
     }
 }
