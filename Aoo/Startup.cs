@@ -15,6 +15,7 @@ using Aoo.Helpers;
 using Microsoft.AspNetCore.Mvc.Razor;
 using DAL.DataContext;
 using DAL.Model;
+using DAL;
 
 namespace Aoo
 {
@@ -43,6 +44,8 @@ namespace Aoo
             services.AddMemoryCache();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             RegisterBLLConfig.RegisterBLL(ref services);
             services.AddMvc();
 

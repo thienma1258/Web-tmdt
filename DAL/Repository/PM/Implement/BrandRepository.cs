@@ -13,12 +13,14 @@ namespace DAL.Repository.PM.Implement
         {
 
         }
+
+        
+
         public override void Delete(Brand entityToDelete,string DeletedUser)
         {
             entityToDelete.isDeleted = true;
             entityToDelete.DeletedDate = DateTime.Now;
             entityToDelete.DeletedUser = DeletedUser;
-            this.shopContext.SaveChanges();
         }
     }
 }

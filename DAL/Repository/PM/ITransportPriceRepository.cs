@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface ITransportPriceRepository :IGenericRepository<TransportPrice, string>
+    public interface ITransportPriceRepository :IGenericRepository<TransportPrice, string>
     {
     }
 }

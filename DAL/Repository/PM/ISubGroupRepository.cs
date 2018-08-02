@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface ISubGroupRepository : IGenericRepository<SubGroup, string>
+    public interface ISubGroupRepository : IGenericRepository<SubGroup, string>
     {
     }
 }

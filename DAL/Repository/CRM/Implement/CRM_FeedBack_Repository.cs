@@ -11,5 +11,6 @@ namespace DAL.Repository.CRM.Implement
         public CRM_FeedBack_Repository(ShopContext context) : base(context)
         {
         }
+       
     }
 }

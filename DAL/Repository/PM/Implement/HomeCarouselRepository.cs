@@ -16,7 +16,6 @@ namespace DAL.Repository.PM.Implement
             entityToDelete.isDeleted = true;
             entityToDelete.DeletedDate = DateTime.Now;
             entityToDelete.DeletedUser = DeletedUser;
-            this.shopContext.SaveChanges();
         }
     }
 }

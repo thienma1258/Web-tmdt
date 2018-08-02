@@ -11,5 +11,6 @@ namespace DAL.Repository.System.Implement
         public UserRepository(ShopContext context) : base(context)
         {
         }
+    
     }
 }

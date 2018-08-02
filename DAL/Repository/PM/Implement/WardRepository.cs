@@ -11,5 +11,6 @@ namespace DAL.Repository.PM.Implement
         public WardRepository(ShopContext context) : base(context)
         {
         }
+       
     }
 }
