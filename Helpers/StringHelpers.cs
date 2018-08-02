@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Helpers
 {
-
+    public static class StringExtensions
+    {
         public static String RemoveDiacritics(this String s)
         {
             String normalizedString = s.Normalize(NormalizationForm.FormD);
@@ -20,6 +21,8 @@ namespace Helpers
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-        
-        }   
+
+        }
+
+    }
 }
