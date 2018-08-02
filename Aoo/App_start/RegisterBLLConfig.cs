@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BLL;
+using BLL.BLL.PM;
+using DAL.Model.PM;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,7 @@ namespace Aoo.App_start
     {
         public static void RegisterBLL(ref IServiceCollection services)
         {
-           
+            services.AddTransient<IGenericBLL<Brand>, BrandBLL>();
         }
     }
 }
