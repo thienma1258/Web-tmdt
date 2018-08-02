@@ -8,13 +8,14 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class ProductController : BaseController
+    public class CategoryController : Controller
     {
-        public async Task<IActionResult> Index()
+       
+        public IActionResult Index()
         {
             return View();
         }
-        public async Task<IActionResult> AddProduct()
+        public IActionResult AddCategory()
         {
             return View();
         }

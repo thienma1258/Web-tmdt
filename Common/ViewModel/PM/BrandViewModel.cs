@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Common.ViewModel.PM
+{
+    public class BrandViewModel
+    {
+        public string nameBrand { get; set; }
+        public string metaDescription { get; set; }
+        public string defaultImages { get; set; }
+    }
+}
