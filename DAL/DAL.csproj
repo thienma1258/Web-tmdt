@@ -19,8 +19,5 @@
     <Folder Include="Model\Log\SM\" />
     <Folder Include="Model\Log\PM\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
 
 </Project>

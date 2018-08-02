@@ -19,5 +19,13 @@ namespace Aoo.Controllers.Admin.PM
         {
             return View();
         }
+        public IActionResult EditSubGroup()
+        {
+            return View();
+        }
+        public IActionResult DeleteSubGroup()
+        {
+            return View();
+        }
     }
 }

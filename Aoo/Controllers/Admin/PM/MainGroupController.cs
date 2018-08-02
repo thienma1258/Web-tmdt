@@ -22,7 +22,7 @@ namespace Aoo.Controllers.Admin.PM
         {
             return View();
         }
-        public IActionResult DelateMainGroup()
+        public IActionResult DeleteMainGroup()
         {
             return View();
         }

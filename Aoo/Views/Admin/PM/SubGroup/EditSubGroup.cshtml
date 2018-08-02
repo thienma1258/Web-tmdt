@@ -2,22 +2,27 @@
 
 
 @{
-    ViewData["Title"] = "AddSubGroup";
+    ViewData["Title"] = "EditSubGroup";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
 
-<h2>AddSubGroup</h2>
+<h2>EditSubGroup</h2>
 
 <h4>SubGroupViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddSubGroup">
+        <form asp-action="EditSubGroup">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">Tên Loại Sản Phẩm</label>
                 <input asp-for="nameSubGroup" class="form-control" />
                 <span asp-validation-for="nameSubGroup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Mô Tả</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Hình Ảnh</label>
@@ -30,7 +35,7 @@
                 <span asp-validation-for="typeSex" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Tạo Mới" class="btn btn-danger" />
+                <input type="submit" value="Lưu" class="btn btn-danger" />
             </div>
         </form>
     </div>

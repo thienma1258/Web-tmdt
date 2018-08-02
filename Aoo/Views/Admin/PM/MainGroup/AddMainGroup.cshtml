@@ -1,6 +1,4 @@
-﻿@model Common.ViewModel.PM.MainGroupViewModel
-
-@{
+﻿@model DAL.Model.PM.MainGroup
     ViewData["Title"] = "AddMainGroup";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
@@ -15,18 +13,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">Tên Loại Sản Phẩm</label>
-                <input asp-for="nameMainGroup" class="form-control" />
-                <span asp-validation-for="nameMainGroup" class="text-danger"></span>
+                <input class="form-control" />
+                <span class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Nhãn Hiệu</label>
-                <input asp-for="defaultImages" class="form-control" />
-                <span asp-validation-for="defaultImages" class="text-danger"></span>
+                <input  class="form-control" />
+                <span  class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Giới Tính</label>
-                <input asp-for="typeSex" class="form-control" />
-                <span asp-validation-for="typeSex" class="text-danger"></span>
+                <input  class="form-control" />
+                <span  class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-info" />

@@ -6,6 +6,7 @@ namespace Common.ViewModel.PM
 {
     public class MainGroupViewModel
     {
+        public string idMainGroup { get; set; }
         public string nameMainGroup { get; set; }
         public string Description { get; set; }
         public string defaultImages { get; set; }

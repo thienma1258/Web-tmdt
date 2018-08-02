@@ -6,6 +6,7 @@ namespace Common.ViewModel.PM
 {
     public class ProductViewModel
     {
+        public string idProduct { get; set; }
         public virtual BrandViewModel Brand { get; set; }
         public virtual CategoryViewModel Category { get; set; }
         public virtual MainGroupViewModel MainGroup { get; set; }
