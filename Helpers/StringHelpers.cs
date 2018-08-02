@@ -21,8 +21,10 @@ namespace Helpers
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-
         }
-
+        public static String UrlFriendLy(this String s)
+        {
+            s.RemoveDiacritics()
+        }
     }
 }
