@@ -20,6 +20,7 @@ namespace BLL.BLL.PM
         {
             try
             {
+                MainGroup.EditedUser = UpdatedUser;
                 MainGroup.UrlFriendly = MainGroup.Name.UrlFriendLy();
                 this.unitOfWork.MainGroupRepository.Update(MainGroup);
                 await this.unitOfWork.SaveChangeAsync();
@@ -39,10 +40,11 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<bool> Delete(MainGroup MainGroup, string UpdatedUser = "adminstrator")
+        public async Task<bool> Delete(MainGroup MainGroup, string DeletedUser = "adminstrator")
         {
             try
             {
+                MainGroup.DeletedUser = DeletedUser;
                 this.unitOfWork.MainGroupRepository.Delete(MainGroup);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
@@ -61,10 +63,11 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<bool> Add(MainGroup MainGroup, string UpdatedUser = "adminstrator")
+        public async Task<bool> Add(MainGroup MainGroup, string CreatedUser = "adminstrator")
         {
             try
             {
+                MainGroup.CreatedUser = CreatedUser;
                 this.unitOfWork.MainGroupRepository.Insert(MainGroup);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
