@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using Helpers;
 namespace BLL.BLL.PM
 {
     public class BrandBLL
@@ -64,6 +64,7 @@ namespace BLL.BLL.PM
         {
             try
             {
+                brand.UrlFriendly=brand.Name.RemoveDiacritics()
                 this.unitOfWork.BrandRepository.Insert(brand);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
@@ -74,7 +75,8 @@ namespace BLL.BLL.PM
                 {
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
+                    ModuleName = "PM->Brand",
+                    TableName="Brand"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);

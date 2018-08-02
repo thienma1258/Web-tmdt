@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
-namespace Services
+namespace Helpers
 {
-    public class StringExtension
+    public static class StringExtensions
     {
         public static String RemoveDiacritics(this String s)
         {
@@ -19,6 +21,10 @@ namespace Services
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+        public static String UrlFriendLy(this String s)
+        {
+            s.RemoveDiacritics()
         }
     }
 }
