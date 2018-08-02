@@ -6,12 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aoo.Controllers.Admin.PM
 {
+
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class CategoryController : Controller
+    public class SubGroupController : Controller
     {
-      
-        public IActionResult AddCategory()
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult AddSubGroup()
         {
             return View();
         }

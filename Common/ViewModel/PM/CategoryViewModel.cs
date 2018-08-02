@@ -7,7 +7,7 @@ namespace Common.ViewModel.PM
     public class CategoryViewModel
     {
         public string nameCategory { get; set; }
-        public string metaDescription { get; set; }
+        public string Description { get; set; }
         public string defaultImages { get; set; }
     }
 }
