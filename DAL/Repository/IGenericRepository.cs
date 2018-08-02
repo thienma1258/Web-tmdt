@@ -12,7 +12,7 @@ namespace DAL.Repository
               Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int skippage = 0, int number = 0);
         TEntity Find(T id);
         void Insert(TEntity entity);
-        void Delete(TEntity entityToDelete);
+        void Delete(TEntity entityToDelete,string DeletedUser);
         void Update(TEntity entityToUpdate);
     }
 }

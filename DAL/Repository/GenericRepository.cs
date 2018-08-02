@@ -11,7 +11,7 @@ namespace DAL.Repository
     public class GenericRepository<TEntity,T>:IGenericRepository<TEntity,T> where TEntity : class
     {
         public readonly  ShopContext shopContext;
-        private readonly  DbSet<TEntity> dbSet;
+        public readonly  DbSet<TEntity> dbSet;
 
         public GenericRepository(ShopContext context)
         {
@@ -52,15 +52,15 @@ namespace DAL.Repository
         public virtual void Delete(object id)
         {
             TEntity entityToDelete = dbSet.Find(id);
-            Delete(entityToDelete);
-        }
-
-        public virtual void Delete(TEntity entityToDelete)
-        {
             if (shopContext.Entry(entityToDelete).State == EntityState.Detached)
             {
                 dbSet.Attach(entityToDelete);
             }
+            Delete(entityToDelete,"adminstrator");
+        }
+
+        public virtual void Delete(TEntity entityToDelete,string DeletedUser)
+        {
             dbSet.Remove(entityToDelete);
         }
 

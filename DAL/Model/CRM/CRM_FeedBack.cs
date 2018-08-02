@@ -14,7 +14,7 @@ namespace DAL.Model.CRM
         public CM_Customer Customer { get; set; }
         public string FeedBack { get; set; }
         public FeedBackEnum State { get; set; }
-        public System_User ReviewUser { get; set; }
+        public string ReviewUser { get; set; }
         public DateTime ReviewDate { get; set; }
         
     }

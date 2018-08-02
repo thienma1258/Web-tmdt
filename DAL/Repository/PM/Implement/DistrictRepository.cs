@@ -13,10 +13,7 @@ namespace DAL.Repository.PM
         {
 
         }
-        public override void Delete(District entity)
-        {
-            return;
-        }
+      
 
         public override District Find(string ID)
         {

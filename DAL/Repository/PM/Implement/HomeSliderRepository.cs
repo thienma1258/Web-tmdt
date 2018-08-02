@@ -11,5 +11,12 @@ namespace DAL.Repository.PM.Implement
         public HomeSliderRepository(ShopContext context) : base(context)
         {
         }
+        public override void Delete(HomeSlider entityToDelete,string DeletedUser)
+        {
+            entityToDelete.isDeleted = true;
+            entityToDelete.DeletedDate = DateTime.Now;
+            entityToDelete.DeletedUser = DeletedUser;
+            this.shopContext.SaveChanges();
+        }
     }
 }

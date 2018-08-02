@@ -1,10 +1,15 @@
-﻿using System;
+﻿using DAL.DataContext;
+using DAL.Model.PM;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAL.Repository.PM.Implement
 {
-    class ProvinceRepository
+    public class ProvinceRepository : GenericRepository<Province, string>, IProvinceRepository
     {
+        public ProvinceRepository(ShopContext context) : base(context)
+        {
+        }
     }
 }
