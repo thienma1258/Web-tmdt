@@ -22,7 +22,6 @@ namespace BLL.BLL.PM
             try
             {
                 MainGroup.UrlFriendly = MainGroup.Name.UrlFriendLy();
-
                 this.unitOfWork.MainGroupRepository.Update(MainGroup);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
