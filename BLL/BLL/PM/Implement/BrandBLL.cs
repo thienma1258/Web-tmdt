@@ -1,28 +1,27 @@
 ﻿using DAL;
 using DAL.Model;
 using DAL.Model.PM;
-using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using Helpers;
 namespace BLL.BLL.PM
 {
-    public class MainGroupBLL
+    public class BrandBLL:GenericBLL,IGenericBLL<Brand>
     {
-        public IUnitOfWork unitOfWork;
-        public MainGroupBLL(IUnitOfWork unitOfWork)
+        public BrandBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
         }
-        public async Task<bool> Update(MainGroup MainGroup)
+
+        public async Task<bool> Update(Brand brand,string UpdatedUser="adminstrator")
         {
             try
             {
-                MainGroup.UrlFriendly = MainGroup.Name.UrlFriendLy();
-                this.unitOfWork.MainGroupRepository.Update(MainGroup);
+                brand.UrlFriendly = brand.Name.UrlFriendLy();
+                brand.EditedUser = UpdatedUser;
+                this.unitOfWork.BrandRepository.Update(brand);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -40,11 +39,11 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<bool> Delete(MainGroup MainGroup)
+        public async Task<bool> Delete(Brand brand,string DeletedUser="adminstrator")
         {
             try
             {
-                this.unitOfWork.MainGroupRepository.Delete(MainGroup);
+                this.unitOfWork.BrandRepository.Delete(brand, DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -62,11 +61,13 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<bool> Add(MainGroup MainGroup)
+        public async Task<bool> Add(Brand brand,string CreatedUser="adminstrator")
         {
             try
             {
-                this.unitOfWork.MainGroupRepository.Insert(MainGroup);
+                brand.UrlFriendly = brand.Name.UrlFriendLy();
+                brand.CreatedUser = CreatedUser;
+                this.unitOfWork.BrandRepository.Insert(brand);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -77,7 +78,7 @@ namespace BLL.BLL.PM
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
                     ModuleName = "PM->Brand",
-                    TableName = "Brand"
+                    TableName="Brand"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
@@ -85,11 +86,11 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<IEnumerable<MainGroup>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Brand>> Get(int intNumber=-1,int intSkippage=-1)
         {
             try
             {
-                return this.unitOfWork.MainGroupRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return  this.unitOfWork.BrandRepository.Get(filter:p=>p.isDeleted==false,number:intNumber,skippage:intSkippage);
 
             }
             catch (Exception objEx)
@@ -98,7 +99,7 @@ namespace BLL.BLL.PM
                 {
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->MainGroup"
+                    ModuleName = "PM->Brand"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
