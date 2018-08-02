@@ -1,10 +1,22 @@
-﻿using System;
+﻿using DAL.DataContext;
+using DAL.Model.PM;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAL.Repository.PM.Implement
 {
-    class ProductRepository
+    public class ProductRepository : GenericRepository<Product, string>, IProductRepository
     {
+        public ProductRepository(ShopContext context) : base(context)
+        {
+        }
+        public override void Delete(Product entityToDelete,string DeletedUser)
+        {
+            entityToDelete.isDeleted = true;
+            entityToDelete.DeletedDate = DateTime.Now;
+            entityToDelete.DeletedUser = DeletedUser;
+            this.shopContext.SaveChanges();
+        }
     }
 }

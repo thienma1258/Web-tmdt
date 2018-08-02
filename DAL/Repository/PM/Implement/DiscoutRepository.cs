@@ -11,5 +11,12 @@ namespace DAL.Repository.PM.Implement
         public DiscoutRepository(ShopContext context) : base(context)
         {
         }
+        public override void Delete(Discout entityToDelete,string DeletedUser)
+        {
+            entityToDelete.isDeleted = true;
+            entityToDelete.DeletedDate = DateTime.Now;
+            entityToDelete.DeletedUser = DeletedUser;
+            this.shopContext.SaveChanges();
+        }
     }
 }

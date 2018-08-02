@@ -1,10 +1,15 @@
-﻿using System;
+﻿using DAL.DataContext;
+using DAL.Model.SM;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAL.Repository.SM.Implement
 {
-    class SaleOrderRepository
+    public class SaleOrderRepository : GenericRepository<SaleOrder, string>, ISaleOrderRepository
     {
+        public SaleOrderRepository(ShopContext context) : base(context)
+        {
+        }
     }
 }

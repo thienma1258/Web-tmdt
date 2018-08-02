@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    interface IProductRatingRepository:IGenericRepository<ProductDetails, string>
+   public interface IProductRatingRepository:IGenericRepository<ProductRating, string>
     {
     }
 }

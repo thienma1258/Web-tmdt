@@ -18,7 +18,7 @@ namespace DAL.Model.SM
         public virtual Voucher Voucher { get; set; } 
         public decimal TotalPrice { get; set; }
        public int VAT { get; set; }
-        public virtual System_User ReviewBy { get; set; }
+        public string  ReviewBy { get; set; }
         public DateTime ReviewDate { get; set; } = DateTime.Now;
         public virtual ICollection<SaleOrderDetail> ListSaleOrderDetails { get; set; }
 
