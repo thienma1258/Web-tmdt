@@ -20,6 +20,7 @@ namespace BLL.BLL.PM
         {
             try
             {
+                brand.UrlFriendly = brand.Name.UrlFriendLy();
                 this.unitOfWork.BrandRepository.Update(brand);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
@@ -64,7 +65,7 @@ namespace BLL.BLL.PM
         {
             try
             {
-                brand.UrlFriendly=brand.Name.RemoveDiacritics()
+                brand.UrlFriendly = brand.Name.UrlFriendLy();
                 this.unitOfWork.BrandRepository.Insert(brand);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
