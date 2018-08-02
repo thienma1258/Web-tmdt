@@ -19,5 +19,13 @@ namespace Aoo.Controllers.Admin.PM
         {
             return View();
         }
+        public IActionResult EditCategory()
+        {
+            return View();
+        }
+        public IActionResult DeleteCategory()
+        {
+            return View();
+        }
     }
 }
