@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aoo.Controllers.Admin.PM
@@ -10,11 +12,18 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class BrandController : Controller
     {
+        private readonly IGenericBLL<Brand> BrandBLL;
+
+        public BrandController(IGenericBLL<Brand> brandBLL)
+        {
+            BrandBLL = brandBLL;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult AddBrand()
+        public async Task<IActionResult> AddBrand()
         {
             return View();
         }
