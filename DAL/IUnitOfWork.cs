@@ -34,6 +34,11 @@ namespace DAL
         ITransportPriceRepository TransportPriceRepository { get; }
         ITransportTypeRepository TransportTypeRepository { get; }
         #endregion
+        #region System
+        ISystem_Policy_Repository System_Policy_Repository { get; }
+        ISystem_Position_Repository System_Position_Repository { get; }
+
+        #endregion
         Task<int> SaveChangeAsync();
     }
 }

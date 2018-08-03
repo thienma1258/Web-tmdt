@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using DAL.DataContext;
 using DAL.Model;
 using DAL;
+using CacheHelpers;
 
 namespace Aoo
 {
@@ -45,9 +46,42 @@ namespace Aoo
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<IDataCache, CacheMemory>();
             RegisterBLLConfig.RegisterBLL(ref services);
             RegisterServicesConfig.RegisterServices(ref services);
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 6;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = false;
+            });
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = false;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                // If the LoginPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/Login.
+                options.LoginPath = "/Account/Login";
+                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/AccessDenied.
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
             services.AddMvc();
 
         }

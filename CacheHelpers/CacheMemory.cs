@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CacheHelpers
 {
-    public class CacheMemory
+    public class CacheMemory:IDataCache
     {
         private IMemoryCache _cache;
         public CacheMemory(IMemoryCache memoryCache)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL.BLL.System.Implement
 {
-    class System_Policy_BLL
+    public class System_Policy_BLL
     {
     }
 }

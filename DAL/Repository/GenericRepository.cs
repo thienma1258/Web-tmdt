@@ -76,9 +76,8 @@ namespace DAL.Repository
             shopContext.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
-        public void Delete(TEntity entityToDelete)
+        public virtual void Delete(TEntity entityToDelete)
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using DAL.DataContext;
 using DAL.Model.PM;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repository.PM
 {
@@ -20,14 +21,15 @@ namespace DAL.Repository.PM
             return this.shopContext.Districts.Find(ID);
         }
 
-        public override IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int skippage = 0, int number = 0)
+        public override IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int skippage = -1, int number = -1)
         {
-           var IQuery= this.shopContext.Districts.Where(filter);
-            if (skippage != 0)
+            var IQuery = this.shopContext.Districts.Where(filter)
+                 .Include(p => p.Province);
+            if (skippage != -1)
             {
                 IQuery.Skip(skippage * number);
             }
-            if (number != 0)
+            if (number != -1)
             {
                 IQuery.Take( number);
             }

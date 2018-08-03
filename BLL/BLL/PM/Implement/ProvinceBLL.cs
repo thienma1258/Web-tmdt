@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BLL.BLL.System.Implement
+namespace BLL.BLL.PM.Implement
 {
-    class UserRepositoryBLL
-    {
-    }
+    
 }
