@@ -31,41 +31,22 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Product",
-                    TableName = "product"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
 
-        public async Task<bool> Delete(Product product, string DeletedUser = "adminstrator")
+        public async Task<bool> Delete(string productID, string DeletedUser = "adminstrator")
         {
             try
             {
-                product.UrlFriendly = product.Model.UrlFriendLy();
-                product.DeletedUser = DeletedUser;
-                this.unitOfWork.ProductRepository.Delete(product,DeletedUser);
+                this.unitOfWork.ProductRepository.Delete(productID, DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->product"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -79,15 +60,7 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Product"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return null;
             }
         }
@@ -104,15 +77,7 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->product"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }

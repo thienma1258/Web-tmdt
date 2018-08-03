@@ -43,26 +43,17 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<bool> Delete(MainGroup MainGroup, string DeletedUser = "adminstrator")
+        public async Task<bool> Delete(string MainGroupID, string DeletedUser = "adminstrator")
         {
             try
             {
-                MainGroup.DeletedUser = DeletedUser;
-                this.unitOfWork.MainGroupRepository.Delete(MainGroup, DeletedUser);
+                this.unitOfWork.MainGroupRepository.Delete(MainGroupID, DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->MainGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -77,16 +68,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->MainGroup",
-                    TableName = "MainGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }

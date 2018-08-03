@@ -21,7 +21,7 @@ namespace BLL.BLL.PM.Implement
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(Category entity, string DeletedUser = "adminstrator")
+        public Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
         {
             throw new NotImplementedException();
         }

@@ -31,12 +31,11 @@ namespace BLL.BLL.PM
             }
         }
 
-        public async Task<bool> Delete(SubGroup SubGroup, string DeletedUser = "adminstrator")
+        public async Task<bool> Delete(string SubGroupID, string DeletedUser = "adminstrator")
         {
             try
             {
-                SubGroup.DeletedUser = DeletedUser;
-                this.unitOfWork.SubGroupRepository.Delete(SubGroup);
+                this.unitOfWork.SubGroupRepository.Delete(SubGroupID,DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }

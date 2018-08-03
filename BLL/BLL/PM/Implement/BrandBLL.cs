@@ -31,7 +31,7 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<bool> Delete(Brand brand,string DeletedUser="adminstrator")
+        public async Task<bool> Delete(string brand,string DeletedUser="adminstrator")
         {
             try
             {

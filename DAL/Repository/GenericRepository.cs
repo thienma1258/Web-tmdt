@@ -55,14 +55,14 @@ namespace DAL.Repository
             dbSet.Add(entity);
         }
 
-        public virtual void Delete(object id)
+        public virtual void Delete(T id,string DeletedUser="adminstrator")
         {
             TEntity entityToDelete = dbSet.Find(id);
             if (shopContext.Entry(entityToDelete).State == EntityState.Detached)
             {
                 dbSet.Attach(entityToDelete);
             }
-            Delete(entityToDelete,"adminstrator");
+            Delete(entityToDelete, DeletedUser);
         }
 
         public virtual void Delete(TEntity entityToDelete,string DeletedUser)

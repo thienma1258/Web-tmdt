@@ -7,5 +7,6 @@ namespace DAL.Repository.System
 {
     public interface ISystem_Policy_Repository : IGenericRepository<System_Policy, string>
     {
+
     }
 }
