@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 
 namespace Services
 {
     public interface IImageServices
     {
-        string UploadImage(byte[] bytes, string imageName,out ImageErrorModel errorModel);
+        string UploadImage(MemoryStream memoryStream, string imageName,out ImageErrorModel errorModel);
 
 
 

@@ -9,12 +9,11 @@ namespace Services
 {
     public abstract class ImageService:IImageServices
     {
-        public  bool IsValidImage(byte[] bytes,out Image image)
+        public  bool IsValidImage(MemoryStream ms,out Image image)
         {
             image = null;
             try
             {
-                using (MemoryStream ms = new MemoryStream(bytes))
                     image=Image.FromStream(ms);
             }
             catch (ArgumentException)
@@ -23,6 +22,6 @@ namespace Services
             }
             return true;
         }
-        public abstract string UploadImage(byte[] bytes, string imageName, out ImageErrorModel errorModel);
+        public abstract string UploadImage(MemoryStream bytes, string imageName, out ImageErrorModel errorModel);
     }
 }

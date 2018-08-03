@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using Services.ImageServices;
 using System.Drawing.Imaging;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Services.Implement
 {
@@ -50,15 +51,21 @@ namespace Services.Implement
         }
         public int defaultWidth=640;
         public int defaultHeight = 360;
-        public string defaultLocationImage = "~/images/";
-        public override string UploadImage(byte[] bytes, string imageName,out ImageErrorModel errorModel)
+        private IHostingEnvironment _env;
+        public LocalImageServices(IHostingEnvironment hostingEnvironment)
+        {
+            _env = hostingEnvironment;
+            defaultLocationImage = System.IO.Path.Combine(_env.WebRootPath,"uploadImage");
+        }
+        public string defaultLocationImage;
+        public override string UploadImage(MemoryStream memoryStream, string imageName,out ImageErrorModel errorModel)
         {
             string imagePath = "";
             errorModel = new ImageErrorModel();
             try
             {
                 Image image;
-                if (IsValidImage(bytes, out image))
+                if (IsValidImage(memoryStream, out image))
                 {
                     if (image.Width < defaultWidth || image.Height < defaultHeight)
                     {
@@ -66,7 +73,7 @@ namespace Services.Implement
                     }
 
                 }
-                imagePath = defaultLocationImage + imageName;
+                imagePath = defaultLocationImage +"/"+ imageName;
                 errorModel.isSuccess = true;
                 image.Save(imagePath,ImageFormat.Png);
                 return imagePath;
