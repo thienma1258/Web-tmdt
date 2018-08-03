@@ -14,7 +14,6 @@ namespace Aoo.ViewModels.PM.Brand
         public string Name { get; set; }
         [Required]
         public IFormFile DefaultImage { get; set; }
-        [MaxLength(80)]
         [MinLength(5)]
         [Required]
         [DisplayName(" Mô tả:")]

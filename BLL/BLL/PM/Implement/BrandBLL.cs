@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Helpers;
 namespace BLL.BLL.PM
 {
-    public class BrandBLL:GenericBLL,IGenericBLL<Brand>
+    public class BrandBLL:GenericBLL,IGenericBLL<Brand,string>
     {
         public BrandBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -27,15 +27,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -49,15 +41,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -73,16 +57,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand",
-                    TableName="Brand"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -95,17 +70,14 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return null;
             }
+        }
+
+        public async Task<Brand> Find(string ID)
+        {
+            return  this.unitOfWork.BrandRepository.Find(ID);
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM
 {
-    public class SubGroupBLL : GenericBLL, IGenericBLL<SubGroup>
+    public class SubGroupBLL : GenericBLL, IGenericBLL<SubGroup,string>
     {
         public SubGroupBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -26,16 +26,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->SubGroup",
-                    TableName = "SubGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -51,17 +42,14 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->SubGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
+        }
+
+        public Task<SubGroup> Find(string ID)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<SubGroup>> Get(int intNumber = -1, int intSkippage = -1)
@@ -73,15 +61,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->SubGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return null;
             }
         }

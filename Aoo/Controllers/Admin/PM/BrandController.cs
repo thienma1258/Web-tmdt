@@ -15,9 +15,9 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class BrandController : Controller
     {
-        private readonly IGenericBLL<Brand> BrandBLL;
+        private readonly IGenericBLL<Brand,string> BrandBLL;
         public readonly IImageServices ImageServices;
-        public BrandController(IGenericBLL<Brand> brandBLL,IImageServices imageServices)
+        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices)
         {
             BrandBLL = brandBLL;
             this.ImageServices = imageServices;

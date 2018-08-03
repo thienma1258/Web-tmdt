@@ -14,7 +14,7 @@ namespace Aoo.App_start
     {
         public static void RegisterBLL(ref IServiceCollection services)
         {
-            services.AddTransient<IGenericBLL<Brand>, BrandBLL>();
+            services.AddTransient<IGenericBLL<Brand,string>, BrandBLL>();
         }
     }
 }
