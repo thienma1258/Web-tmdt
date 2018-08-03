@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using CacheHelpers;
+using DAL;
 using DAL.Model;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,16 @@ namespace BLL
 {
     public class GenericBLL
     {
-        public IUnitOfWork unitOfWork;
-
+        public readonly IUnitOfWork unitOfWork;
+        public  readonly IDataCache dataCache;
         public GenericBLL(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+        public GenericBLL(IUnitOfWork unitOfWork, IDataCache DataCache)
+        {
+            this.unitOfWork = unitOfWork;
+            this.dataCache = DataCache; ;
         }
         public async Task<bool> AddError(Exception objEx)
         {

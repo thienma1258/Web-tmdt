@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using CacheHelpers;
+using DAL;
 using DAL.Model;
 using DAL.Model.PM;
 using System;
@@ -11,7 +12,7 @@ namespace BLL.BLL.PM
 {
     public class SubGroupBLL : GenericBLL, IGenericBLL<SubGroup,string>
     {
-        public SubGroupBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public SubGroupBLL(IUnitOfWork unitOfWork, IDataCache DataCache) : base(unitOfWork, DataCache)
         {
         }
 

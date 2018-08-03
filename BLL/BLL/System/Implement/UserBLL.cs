@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using CacheHelpers;
 using DAL;
 using DAL.Model;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +12,7 @@ namespace BLL.BLL.System.Implement
     public class UserBLL : GenericBLL, IUserBLL
     {
         public UserBLL(IUnitOfWork unitOfWork, UserManager<System_User> userManager,
-          SignInManager<System_User> signInManager) : base(unitOfWork)
+          SignInManager<System_User> signInManager,IDataCache dataCache) : base(unitOfWork,dataCache)
         {
         }
 

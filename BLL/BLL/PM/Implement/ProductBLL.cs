@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using CacheHelpers;
 using DAL;
 using DAL.Model;
 using DAL.Model.PM;
@@ -11,10 +12,10 @@ namespace BLL.BLL.PM.Implement
 {
     public class ProductBLL : GenericBLL,IProductBLL
     {
-        public ProductBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public ProductBLL(IUnitOfWork unitOfWork, IDataCache DataCache) : base(unitOfWork, DataCache)
         {
-
         }
+
         public async Task<Product> Find(string ID)
         {
             return this.unitOfWork.ProductRepository.Find(ID);

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Helpers;
+using CacheHelpers;
+
 namespace BLL.BLL.PM.Implement
 {
     public class CategoryBLL : GenericBLL, IGenericBLL<Category,string>
@@ -12,6 +14,7 @@ namespace BLL.BLL.PM.Implement
         public CategoryBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+
         public async Task<Category> Find(string ID)
         {
             return this.unitOfWork.CategoryRepository.Find(ID);

@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using CacheHelpers;
+using DAL;
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace BLL.BLL.PM.Implement
 {
     public class TransportPriceBLL : GenericBLL, IGenericBLL<TransportPrice, string>
     {
-        public TransportPriceBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public TransportPriceBLL(IUnitOfWork unitOfWork, IDataCache DataCache) : base(unitOfWork, DataCache)
         {
         }
 

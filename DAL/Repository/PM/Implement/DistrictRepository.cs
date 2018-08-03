@@ -23,8 +23,9 @@ namespace DAL.Repository.PM
 
         public override IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int skippage = -1, int number = -1)
         {
-            var IQuery = this.shopContext.Districts.Where(filter)
-                 .Include(p => p.Province);
+
+            var IQuery = this.shopContext.Districts
+             .Include(p => p.Province);
             if (skippage != -1)
             {
                 IQuery.Skip(skippage * number);

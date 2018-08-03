@@ -16,7 +16,8 @@ namespace DAL.Repository.PM.Implement
         }
         public override IEnumerable<Province> Get(Expression<Func<Province, bool>> filter = null, Func<IQueryable<Province>, IOrderedQueryable<Province>> orderBy = null, int skippage = -1, int number = -1)
         {
-            var IQuery = this.shopContext.Provinces.Where(filter)
+
+            var IQuery = this.shopContext.Provinces
                  .Include(p => p.Districts);
             if (skippage != -1)
             {

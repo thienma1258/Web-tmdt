@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using CacheHelpers;
 using DAL;
 using DAL.Model.PM;
 
@@ -9,7 +10,7 @@ namespace BLL.BLL.PM.Implement
 {
     public class ProductDetailsBLL : GenericBLL, IProductDetailsBLL
     {
-        public ProductDetailsBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public ProductDetailsBLL(IUnitOfWork unitOfWork, IDataCache DataCache) : base(unitOfWork, DataCache)
         {
         }
 

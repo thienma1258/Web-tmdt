@@ -10,21 +10,20 @@ namespace BLL.BLL.PM.Implement
 {
     public class DistrictBLL : GenericBLL, IDistrictBLL
     {
-        private readonly IDataCache DataCache;
-        public DistrictBLL(IUnitOfWork unitOfWork,IDataCache dataCache) : base(unitOfWork)
+  
+        public DistrictBLL(IUnitOfWork unitOfWork,IDataCache dataCache) : base(unitOfWork,dataCache)
         {
-            this.DataCache = dataCache;
+            
         }
 
        
         public async Task<IEnumerable<District>> Get()
         {
-            var listDistrict= DataCache.Get<IEnumerable<District>>(CacheKey.DistrictKey);
+            var listDistrict= dataCache.Get<IEnumerable<District>>(CacheKey.DistrictKey);
             if (listDistrict == null)
             {
                 listDistrict = this.unitOfWork.DistrictRepository.Get();
-                DataCache.Set(listDistrict, CacheKey.DistrictKey);
-               
+                dataCache.Set(listDistrict, CacheKey.DistrictKey);
             }
             return listDistrict;
         }
