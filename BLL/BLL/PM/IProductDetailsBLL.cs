@@ -5,8 +5,7 @@ using System.Text;
 
 namespace BLL.BLL.PM
 {
-    public interface IBrandBLL:IGenericBLL<Brand, string>
+    public interface IProductDetailsBLL: IGenericBLL<ProductDetails, string>
     {
-
     }
 }

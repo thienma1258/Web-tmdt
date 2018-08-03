@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Helpers;
 namespace BLL.BLL.PM.Implement
 {
     public class CategoryBLL : GenericBLL, IGenericBLL<Category,string>
@@ -16,24 +16,58 @@ namespace BLL.BLL.PM.Implement
         {
             return this.unitOfWork.CategoryRepository.Find(ID);
         }
-        public Task<bool> Add(Category entity, string CreatedUser = "adminstrator")
+        public async Task<bool> Add(Category category, string CreatedUser = "adminstrator")
         {
-            throw new NotImplementedException();
+            try
+            {
+                category.UrlFriendly = category.Name.UrlFriendLy();
+                category.CreatedUser = CreatedUser;
+                this.unitOfWork.CategoryRepository.Insert(category);
+                await this.unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return false;
+            }
         }
 
-        public Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
+        public async Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.unitOfWork.CategoryRepository.Delete(entityID, DeletedUser);
+                await this.unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return false;
+            }
         }
 
-        public Task<IEnumerable<Category>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int intSkippage = -1)
         {
-            throw new NotImplementedException();
+            return this.unitOfWork.CategoryRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
         }
 
-        public Task<bool> Update(Category entity, string UpdatedUser = "adminstrator")
+        public async Task<bool> Update(Category category, string UpdatedUser = "adminstrator")
         {
-            throw new NotImplementedException();
+            try
+            {
+                category.UrlFriendly = category.Name.UrlFriendLy();
+                category.EditedUser = UpdatedUser;
+                this.unitOfWork.CategoryRepository.Update(category);
+                await this.unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return false;
+            }
         }
     }
 }

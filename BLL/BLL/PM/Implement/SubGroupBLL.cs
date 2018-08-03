@@ -46,9 +46,9 @@ namespace BLL.BLL.PM
             }
         }
 
-        public Task<SubGroup> Find(string ID)
+        public async Task<SubGroup> Find(string ID)
         {
-            throw new NotImplementedException();
+           return this.unitOfWork.SubGroupRepository.Find(ID);
         }
 
         public async Task<IEnumerable<SubGroup>> Get(int intNumber = -1, int intSkippage = -1)
@@ -65,9 +65,20 @@ namespace BLL.BLL.PM
             }
         }
 
-        public Task<bool> Update(SubGroup entity, string UpdatedUser = "adminstrator")
+        public async Task<bool> Update(SubGroup subGroup, string UpdatedUser = "adminstrator")
         {
-            throw new NotImplementedException();
+            try
+            {
+                subGroup.EditedUser = UpdatedUser;
+                this.unitOfWork.SubGroupRepository.Update(subGroup);
+                await this.unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return false;
+            }
         }
     }
 }

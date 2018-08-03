@@ -31,7 +31,8 @@ namespace DAL
         IProvinceRepository ProvinceRepository { get; }
         IStoreRepository StoreRepository { get; }
         ISubGroupRepository SubGroupRepository { get; }
-         
+        ITransportPriceRepository TransportPriceRepository { get; }
+        ITransportTypeRepository TransportTypeRepository { get; }
         #endregion
         Task<int> SaveChangeAsync();
     }

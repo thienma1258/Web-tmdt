@@ -31,15 +31,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->MainGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return false;
             }
         }
@@ -81,15 +73,7 @@ namespace BLL.BLL.PM
             }
             catch (Exception objEx)
             {
-                ErrorLogs errorLogs = new ErrorLogs
-                {
-                    ErrorLog = objEx.ToString(),
-                    FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->MainGroup"
-
-                };
-                this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
-                await this.unitOfWork.SaveChangeAsync();
+                AddError(objEx);
                 return null;
             }
         }

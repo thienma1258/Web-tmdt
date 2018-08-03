@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Helpers;
 namespace BLL.BLL.PM
 {
-    public class BrandBLL:GenericBLL,IGenericBLL<Brand,string>
+    public class BrandBLL:GenericBLL, IBrandBLL
     {
         public BrandBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
