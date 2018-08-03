@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BLL.BLL.PM;
+using BLL.BLL.PM.Implement;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,10 @@ namespace Aoo.App_start
         public static void RegisterBLL(ref IServiceCollection services)
         {
             services.AddTransient<IGenericBLL<Brand,string>, BrandBLL>();
+            services.AddTransient<IGenericBLL<Store, string>, StoreBLL>();
+            services.AddTransient<IDistrictBLL, DistrictBLL>();
+            services.AddTransient<IProvinceBLL, ProvinceBLL>();
+
         }
     }
 }

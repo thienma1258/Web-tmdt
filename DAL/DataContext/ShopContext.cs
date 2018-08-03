@@ -15,7 +15,7 @@ namespace DAL.DataContext
 {
     public class ShopContext : IdentityDbContext<System_User>
     {
-        private string connectString = "Server=.; Database= ShopTMDT; Integrated Security=True;";
+        private string connectString = "Server=.\\SQLEXPRESS; Database= ShopTMDT; Integrated Security=True;";
         #region DBsetModel
         #region System
         public DbSet<System_Policy> System_Policies { get; set; }
@@ -64,6 +64,7 @@ namespace DAL.DataContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(connectString);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

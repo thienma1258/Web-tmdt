@@ -1,0 +1,39 @@
+﻿@model DAL.Model.PM.Store
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Store</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameStore)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameStore)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.DefaultImage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DefaultImage)
+        </dd>
+       
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

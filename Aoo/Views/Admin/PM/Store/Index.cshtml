@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DAL.Model.PM.Store>
+@inject BLL.BLL.PM.IProvinceBLL ProvinceBLL
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    IEnumerable<DAL.Model.PM.Province> districts = await ProvinceBLL.Get();
+}
+
+<h2> Danh sách cửa hàng </h2>
+
+
+<div class="editbtn">
+    <button type="button" class="btn-info fa fa-search btnsearch" aria-hidden="true"> Tìm kiếm</button>
+    <button type="button" class="btn-danger fa fa-plus btnadd"> Thêm mới</button>
+    <button type="button" class="btn-success fa fa-pencil btnedit"> Sửa</button>
+    <button type="button" class="btn-warning fa fa-trash btndel"> Xóa</button>
+</div>
+<div class="cmbbrand">
+    <select>
+        <option>Địa điểm</option>
+
+        @foreach (var item in districts)
+        {
+
+        <option>@item.Name</option>
+
+        }
+    </select>
+    <select>
+        <option>Quận/Huyện</option>
+       
+    </select>
+ 
+</div>
+<div class="title">
+    <ul>
+        <li><input type="checkbox"></li>
+        <li><h1>STT</h1></li>
+        <li><h1>Thương hiệu</h1></li>
+        <li><h1>Tên Sản Phẩm</h1></li>
+        <li><h1>Giá Sản Phẩm</h1></li>
+    </ul>
+</div>
+<table>
+    <tr>
+        <th><input type="checkbox"></th>
+        <th><h1>stt</h1></th>
+        <th><h1>stt</h1></th>
+        <th><h1>stt</h1></th>
+        <th><h1>stt</h1></th>
+    </tr>
+</table>
+
+
+
+
+
+

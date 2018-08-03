@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -13,55 +14,56 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class BrandController : Controller
+    public class StoreController : Controller
     {
-        private readonly IGenericBLL<Brand,string> BrandBLL;
+        private readonly IGenericBLL<Store,string> StoreBLL;
         public readonly IImageServices ImageServices;
-        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices)
+        public StoreController(IGenericBLL<Store, string> storeBLL, IImageServices imageServices )
         {
-            BrandBLL = brandBLL;
+            StoreBLL = storeBLL;
             this.ImageServices = imageServices;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await BrandBLL.Get(6));
+          
+            return View(await StoreBLL.Get(6));
         }
-        public async Task<IActionResult> AddBrand()
+        public async Task<IActionResult> AddStore()
         {
-            
+
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddBrand(ViewModels.PM.Brand.AddBrandViewModel addBrandViewModel)
+        public async Task<IActionResult> AddStore(ViewModels.PM.Store.AddViewStoreModel addViewStoreModel)
         {
             if (ModelState.IsValid)
             {
                 ImageErrorModel imageErrorModel;
                 MemoryStream memoryStream = new MemoryStream();
-               await  addBrandViewModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, addBrandViewModel.DefaultImage.FileName, out imageErrorModel);
+                await addViewStoreModel.DefaultImage.CopyToAsync(memoryStream);
+                string ImagePath = this.ImageServices.UploadImage(memoryStream, addViewStoreModel.DefaultImage.FileName, out imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
-                    Brand brand = new Brand()
+                    Store store = new Store()
                     {
-                        Name = addBrandViewModel.Name,
+                        NameStore = addViewStoreModel.NameStore,
                         DefaultImage = ImagePath,
-                        Description = addBrandViewModel.Description
+                        Description = addViewStoreModel.Description
 
                     };
-                    await BrandBLL.Add(brand);
+                    await StoreBLL.Add(store);
                 }
             }
-          
+
             return View();
-           
+
         }
-        public IActionResult EditBrand()
+        public IActionResult EditStore()
         {
             return View();
         }
-        public IActionResult DeleteBrand()
+        public IActionResult DeleteStore()
         {
             return View();
         }
