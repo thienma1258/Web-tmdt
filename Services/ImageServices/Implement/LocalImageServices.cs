@@ -49,13 +49,14 @@ namespace Services.Implement
             #endregion
 
         }
-        public int defaultWidth=640;
-        public int defaultHeight = 360;
+        public int defaultWidth=720;
+        public int defaultHeight = 480;
         private IHostingEnvironment _env;
+        public string subRoot = "images";
         public LocalImageServices(IHostingEnvironment hostingEnvironment)
         {
             _env = hostingEnvironment;
-            defaultLocationImage = System.IO.Path.Combine(_env.WebRootPath,"uploadImage");
+            defaultLocationImage = System.IO.Path.Combine(_env.WebRootPath, subRoot);
         }
         public string defaultLocationImage;
         public override string UploadImage(MemoryStream memoryStream, string imageName,out ImageErrorModel errorModel)
@@ -64,7 +65,7 @@ namespace Services.Implement
             errorModel = new ImageErrorModel();
             try
             {
-                Image image;
+                Image image=Image.FromStream(memoryStream);
                 if (IsValidImage(memoryStream, out image))
                 {
                     if (image.Width < defaultWidth || image.Height < defaultHeight)
@@ -73,10 +74,10 @@ namespace Services.Implement
                     }
 
                 }
-                imagePath = defaultLocationImage +"/"+ imageName;
+                imagePath = defaultLocationImage + "\\" + imageName;
+                image.Save(imagePath);
                 errorModel.isSuccess = true;
-                image.Save(imagePath,ImageFormat.Png);
-                return imagePath;
+                return "~/"+subRoot+"/"+ imageName;
             }
             catch(Exception e)
             {

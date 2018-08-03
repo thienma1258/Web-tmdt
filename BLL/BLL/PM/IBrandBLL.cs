@@ -6,5 +6,6 @@ namespace BLL.BLL.PM
 {
     public interface IBrandBLL
     {
+
     }
 }

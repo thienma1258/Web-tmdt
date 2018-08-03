@@ -47,6 +47,7 @@ namespace Aoo
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             RegisterBLLConfig.RegisterBLL(ref services);
+            RegisterServicesConfig.RegisterServices(ref services);
             services.AddMvc();
 
         }

@@ -87,6 +87,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,6 +98,12 @@
     <Folder Include="Views\Brand\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Product\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Admin\PM\Brand\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
