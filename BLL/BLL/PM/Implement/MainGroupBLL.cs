@@ -32,7 +32,7 @@ namespace BLL.BLL.PM
                 {
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
+                    ModuleName = "PM->MainGroup"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
@@ -55,7 +55,7 @@ namespace BLL.BLL.PM
                 {
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand"
+                    ModuleName = "PM->MainGroup"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
@@ -78,8 +78,8 @@ namespace BLL.BLL.PM
                 {
                     ErrorLog = objEx.ToString(),
                     FunctionName = MethodBase.GetCurrentMethod().ToString(),
-                    ModuleName = "PM->Brand",
-                    TableName = "Brand"
+                    ModuleName = "PM->MainGroup",
+                    TableName = "MainGroup"
 
                 };
                 this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);
