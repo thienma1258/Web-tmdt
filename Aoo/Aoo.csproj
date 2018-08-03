@@ -57,6 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Admin\PM\Category\Index.cshtml" />
     <None Include="wwwroot\css\bootstrap.css" />
     <None Include="wwwroot\css\dev.css" />
     <None Include="wwwroot\css\flexslider.css" />
@@ -95,12 +96,14 @@
     <Folder Include="Controllers\Admin\Log\" />
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Controllers\Admin\System\" />
-    <Folder Include="Views\Category\" />
-    <Folder Include="Views\Product\" />
+    <Folder Include="Views\MainGroup\" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Views\Admin\PM\Brand\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Admin\PM\MainGroup\AddMainGroup.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>

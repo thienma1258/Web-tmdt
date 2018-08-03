@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DAL.Model.PM.MainGroup>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DefaultImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeSex)
+                </th>
+                
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeSex)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditMainGroup", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "DeleteMainGroup", new { id=item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

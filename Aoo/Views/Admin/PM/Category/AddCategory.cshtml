@@ -1,4 +1,4 @@
-﻿@model DAL.Model.PM.Category
+﻿@model Aoo.ViewModels.PM.Category.AddCategoryViewModel
 
 @{
     ViewData["Title"] = "AddCategory";
@@ -9,25 +9,25 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddCategory">
+        <form asp-action="AddCategory" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Tên Loại</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Name" class="control-label">@Html.DisplayNameFor(model => model.Name)</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Mô tả</label>
-                <input class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Description" class="control-label">@Html.DisplayNameFor(model => model.Description)</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Ảnh</label>
-                <input class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="DefaultImage" class="control-label"> @Html.DisplayNameFor(model => model.DefaultImage)</label>
+                <input asp-for="DefaultImage" type="file" class="form-control" />
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Thêm loại" class="btn btn-danger" />
+                <input type="submit" value="Tạo mới" class="btn btn-danger" />
             </div>
         </form>
     </div>

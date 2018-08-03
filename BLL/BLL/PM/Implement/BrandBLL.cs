@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Helpers;
-namespace BLL.BLL.PM
+namespace BLL.BLL.PM.Implement
 {
     public class BrandBLL:GenericBLL, IBrandBLL
     {

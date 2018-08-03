@@ -1,4 +1,4 @@
-﻿@model Aoo.ViewModels.PM.Brand.EditBrandViewModel
+﻿@model DAL.Model.PM.Brand
 
 @{
     ViewData["Title"] = "EditBrand";
@@ -13,16 +13,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input class="form-control" />
+                <input value="@Model.Name" class="form-control" />
                 <span class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input class="form-control" />
+                <input value="@Model.Description" class="form-control"  />
                 <span class="text-danger"></span>
             </div>
             <div class="form-group">
-               <img src=@Url.Content("")>
+                <label>Ảnh Cũ</label>
+               <img width="100px" height="50px" src=@Url.Content(Model.DefaultImage)>
             </div>
             <div class="form-group">
                 <label class="control-label"> @Html.DisplayNameFor(model => model.DefaultImage)</label>

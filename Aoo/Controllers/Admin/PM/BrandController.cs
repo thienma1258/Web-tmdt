@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Aoo.ViewModels.PM.Brand;
 using BLL;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
@@ -57,20 +58,24 @@ namespace Aoo.Controllers.Admin.PM
             return View();
            
         }
-       
-       
-        public IActionResult EditBrand(string id)
+
+
+        public async Task<IActionResult> EditBrand(string id)
         {
-            return View();
+            //chưa xủ lý code
+            Brand obj = await BrandBLL.Find(id);
+            return View(obj);
         }
         [HttpPost]
         public IActionResult EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
             return View();
         }
-        public IActionResult DeleteBrand()
+        public async Task<IActionResult> DeleteBrand(string id)
         {
-            return View();
+            //chưa xử lý code
+            Brand obj = await BrandBLL.Find(id);
+            return View(obj);
         }
     }
 }

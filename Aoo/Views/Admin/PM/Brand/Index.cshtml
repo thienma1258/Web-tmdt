@@ -7,9 +7,6 @@
 
 <h2>Index</h2>
 
-<p>
-    <a  asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -26,23 +23,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-               <img width="100px" height="50px" src=@Url.Content(item.DefaultImage)>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditBrand", new { id = item.ID }) |
+                    @Html.ActionLink("Add", "AddBrand") |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "DeleteBrand", new { id = item.ID })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

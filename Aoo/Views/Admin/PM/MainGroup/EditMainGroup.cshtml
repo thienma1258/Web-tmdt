@@ -1,6 +1,5 @@
 ﻿@model DAL.Model.PM.MainGroup
 
-
 @{
     ViewData["Title"] = "EditMainGroup";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
@@ -8,34 +7,41 @@
 
 <h2>EditMainGroup</h2>
 
-<h4>MainGroupViewModel</h4>
+<h4>MainGroup</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditMainGroup">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Tên Loại Sản Phẩm</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Name" class="control-label">@Model.Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Hình Ảnh</label>
-                <input  class="form-control" />
-                <span class="text-danger"></span>
+                <label asp-for="DefaultImage" class="control-label"><img src=@Url.Content(Model.DefaultImage)/></label>
+                <input asp-for="DefaultImage" class="form-control" />
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Giới Tính</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Description" class="control-label">@Model.Description</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Lưu" class="btn btn-danger" />
+                <label asp-for="TypeSex" class="control-label">@Model.TypeSex</label>
+                <input asp-for="TypeSex" class="form-control" />
+                <span asp-validation-for="TypeSex" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div class="backtolist">
-    <input type="submit" value="Trở Về" class="btn btn-info" />
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
+

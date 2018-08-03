@@ -1,4 +1,4 @@
-﻿@model Common.ViewModel.PM.CategoryViewModel
+﻿@model DAL.Model.PM.Category
 
 @{
     ViewData["Title"] = "DeleteCategory";
@@ -7,12 +7,12 @@
 
 <h3>Bạn có muốn xóa không?</h3>
 <div class="delmodel">
-    @*<dl>
+    <dl>
             <dt>
-                @Html.DisplayNameFor(model => model.nameCategory)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.nameCategory)
+                @Html.DisplayFor(model => model.Name)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Description)
@@ -21,12 +21,12 @@
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.defaultImages)
+                @Html.DisplayNameFor(model => model.DefaultImage)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.defaultImages)
+             <img width="100px" height="50px" src=@Url.Content(Model.DefaultImage) />
             </dd>
-        </dl>*@
+        </dl>
 
     <form asp-action="DeleteCategory">
         <input type="submit" value="Xác nhận" class="btn btn-warning" /> |

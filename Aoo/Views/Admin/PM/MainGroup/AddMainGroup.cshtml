@@ -1,4 +1,6 @@
-﻿@model DAL.Model.PM.MainGroup
+﻿@model Aoo.ViewModels.PM.MainGroup.AddMainGroupViewModel
+@using Common.Enum.PM;
+
 @{
     ViewData["Title"] = "AddMainGroup";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
@@ -6,35 +8,42 @@
 
 <h2>AddMainGroup</h2>
 
-<h4>MainGroupViewModel</h4>
+<h4>AddMainGroupViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddMainGroup">
+        <form asp-action="AddMainGroup" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Tên Loại Sản Phẩm</label>
-                <input class="form-control" />
-                <span class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Nhãn Hiệu</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Giới Tính</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <label class="control-label"> @Html.DisplayNameFor(model => model.DefaultImage)</label>
+                <input asp-for="DefaultImage" type="file" class="form-control" />
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-info" />
+                <label asp-for="TypeSex" class="control-label"></label>
+                <select asp-for="TypeSex" asp-items="Html.GetEnumSelectList<TypeSexEnum>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="TypeSex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div class="backtolist">
+<div>
     <a asp-action="Index">Back to List</a>
 </div>
 

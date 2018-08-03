@@ -7,18 +7,12 @@
 
 <h3>Bạn có muốn xóa không?</h3>
 <div class="delmodel">
-    @*<dl class="dl-horizontal">
+    <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.idBrand)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.idBrand)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.nameBrand)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.nameBrand)
+                @Html.DisplayFor(model => model.Name)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Description)
@@ -27,12 +21,12 @@
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.defaultImages)
+                @Html.DisplayNameFor(model => model.DefaultImage)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.defaultImages)
+               <img with="100px" height="50px" scr=@Url.Content(Model.DefaultImage) />
             </dd>
-        </dl>*@
+        </dl>
 
     <form asp-action="DeleteBrand">
         <input type="submit" value="Delete" class="btn btn-warning" /> |
