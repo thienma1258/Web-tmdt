@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-               <img width="100" height="auto" src="@Url.Content(item.DefaultImage)" />
+               <img width="100px" height="50px" src=@Url.Content(item.DefaultImage)>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

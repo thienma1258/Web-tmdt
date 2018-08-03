@@ -57,7 +57,14 @@ namespace Aoo.Controllers.Admin.PM
             return View();
            
         }
-        public IActionResult EditBrand()
+       
+       
+        public IActionResult EditBrand(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
             return View();
         }
