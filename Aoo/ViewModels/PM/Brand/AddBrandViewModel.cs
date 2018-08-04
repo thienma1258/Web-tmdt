@@ -11,6 +11,7 @@ namespace Aoo.ViewModels.PM.Brand
     public class AddBrandViewModel
     {
         [Required]
+        //[DisplayName("Tên")]
         public string Name { get; set; }
         [Required]
         public IFormFile DefaultImage { get; set; }
