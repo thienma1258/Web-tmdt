@@ -88,5 +88,24 @@ namespace Services.Implement
             }
 
         }
+
+        public override  bool DeleteImage(string ImageName, out ImageErrorModel errorModel)
+        {
+            errorModel = new ImageErrorModel();
+            try
+            {
+                int startNameIndex = ImageName.LastIndexOf('/')+1;
+                var _imageName = ImageName.Substring(startNameIndex, ImageName.Length - startNameIndex);
+                string imagePath= defaultLocationImage+"\\"+ _imageName;
+                return true;
+            }
+            catch (Exception e)
+            {
+                errorModel.exception = e;
+                errorModel.message = "Không thể xóa";
+                errorModel.ImageUploadEnum = Common.Enum.Log.ImageUploadEnum.Local;
+                return false;
+            }
+        }
     }
 }

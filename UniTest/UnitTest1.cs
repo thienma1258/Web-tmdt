@@ -16,6 +16,9 @@ namespace UniTest
         [Fact]
         public void Test1()
         {
+            var testa = "~/abc/asd.jpg";
+            int startNameIndex = testa.LastIndexOf('/');
+            var a=testa.Substring(startNameIndex,testa.Length-startNameIndex);
             Assert.Equal(9,_localvalue);
         }
         public string Test2()

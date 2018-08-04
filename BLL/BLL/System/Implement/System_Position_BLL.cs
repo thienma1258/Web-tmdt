@@ -4,7 +4,8 @@ using System.Text;
 
 namespace BLL.BLL.System.Implement
 {
-    class System_Position_BLL
+    public class System_Position_BLL
     {
+
     }
 }

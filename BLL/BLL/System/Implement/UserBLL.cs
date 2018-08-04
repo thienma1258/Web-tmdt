@@ -6,26 +6,58 @@ using CacheHelpers;
 using DAL;
 using DAL.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace BLL.BLL.System.Implement
 {
     public class UserBLL : GenericBLL, IUserBLL
     {
+        SignInManager<System_User> signInManager;
+        UserManager<System_User> userManager;
+        private readonly ILogger _logger;
         public UserBLL(IUnitOfWork unitOfWork, UserManager<System_User> userManager,
-          SignInManager<System_User> signInManager,IDataCache dataCache) : base(unitOfWork,dataCache)
+          SignInManager<System_User> signInManager,IDataCache dataCache, ILogger logger) : base(unitOfWork,dataCache)
         {
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this._logger = logger;
         }
-
-        public Task<bool> Add(System_User entity, string CreatedUser = "adminstrator")
+        #region ResultProperty
+        public IdentityResult IdentityResult { get; set; }
+        public SignInResult SignInResult { get; set; }
+        #endregion
+        public async Task<bool> Add(System_User user,string Password,string Role)
         {
-            throw new NotImplementedException();
+            ///Add User
+            var result = await userManager.CreateAsync(user, Password);
+            if (result.Succeeded)
+            {
+                var currentUser = await userManager.FindByNameAsync(user.UserName);
+                var roleresult = await userManager.AddToRoleAsync(currentUser, Role);
+                return true;
+            }
+            else
+            {
+                IdentityResult = result;
+                return false;
+            }
         }
 
         public Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
         {
             throw new NotImplementedException();
         }
-
+        public async Task<bool> SignIn(string UserName,string Password)
+        {
+            SignInResult = await signInManager.PasswordSignInAsync(UserName, Password, true, lockoutOnFailure: true);
+            if (SignInResult.Succeeded)
+            {
+                _logger.LogInformation("User"+UserName+" logged in."+DateTime.Now);
+                return true;
+            }
+            return false;
+            
+        }
         public Task<System_User> Find(string ID)
         {
             throw new NotImplementedException();
@@ -39,6 +71,20 @@ namespace BLL.BLL.System.Implement
         public Task<bool> Update(System_User entity, string UpdatedUser = "adminstrator")
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> Lockout(string Username, bool isLock)
+        {
+            var User = await userManager.FindByNameAsync(Username);
+            if (User == null)
+            {
+                return false;
+            }
+            else
+            {
+                await userManager.SetLockoutEnabledAsync(User, isLock);
+                return true;
+            }
         }
     }
 }

@@ -33,7 +33,9 @@ namespace Aoo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ShopContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                 sqlServerOptions => sqlServerOptions.CommandTimeout(60))
+                );
             services.AddIdentity<System_User, IdentityRole>()
                 .AddEntityFrameworkStores<ShopContext>()
                 .AddDefaultTokenProviders();

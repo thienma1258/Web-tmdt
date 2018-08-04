@@ -14,9 +14,10 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180804063147_change_cm_customer")]
+    partial class change_cm_customer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +31,15 @@ namespace DAL.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("AuthenticationID");
+
                     b.Property<string>("CMNN");
 
                     b.Property<string>("ConcurrencyStamp");
 
                     b.Property<string>("ConfirmCode");
+
+                    b.Property<string>("CustomerAddress");
 
                     b.Property<string>("CustomerName");
 
@@ -53,6 +58,8 @@ namespace DAL.Migrations
                     b.Property<string>("NormalizedEmail");
 
                     b.Property<string>("NormalizedUserName");
+
+                    b.Property<string>("Password");
 
                     b.Property<string>("PasswordHash");
 
@@ -713,7 +720,7 @@ namespace DAL.Migrations
 
                     b.Property<decimal>("TotalPrice");
 
-                    b.Property<string>("TransportPriceID");
+                    b.Property<string>("TransportTypeID");
 
                     b.Property<decimal>("TransportTypePrice");
 
@@ -727,7 +734,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("TransportPriceID");
+                    b.HasIndex("TransportTypeID");
 
                     b.HasIndex("VoucherID");
 
@@ -1130,9 +1137,9 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("DAL.Model.PM.TransportPrice", "TransportPrice")
+                    b.HasOne("DAL.Model.PM.TransportType", "TransportType")
                         .WithMany()
-                        .HasForeignKey("TransportPriceID");
+                        .HasForeignKey("TransportTypeID");
 
                     b.HasOne("DAL.Model.PM.Voucher", "Voucher")
                         .WithMany()

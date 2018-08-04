@@ -14,9 +14,10 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180804081501_detailsSaleOrderLog")]
+    partial class detailsSaleOrderLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -713,7 +714,7 @@ namespace DAL.Migrations
 
                     b.Property<decimal>("TotalPrice");
 
-                    b.Property<string>("TransportPriceID");
+                    b.Property<string>("TransportTypeID");
 
                     b.Property<decimal>("TransportTypePrice");
 
@@ -727,7 +728,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("TransportPriceID");
+                    b.HasIndex("TransportTypeID");
 
                     b.HasIndex("VoucherID");
 
@@ -1130,9 +1131,9 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("DAL.Model.PM.TransportPrice", "TransportPrice")
+                    b.HasOne("DAL.Model.PM.TransportType", "TransportType")
                         .WithMany()
-                        .HasForeignKey("TransportPriceID");
+                        .HasForeignKey("TransportTypeID");
 
                     b.HasOne("DAL.Model.PM.Voucher", "Voucher")
                         .WithMany()

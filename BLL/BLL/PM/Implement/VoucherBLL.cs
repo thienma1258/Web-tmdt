@@ -7,22 +7,21 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class DiscoutBLL: GenericBLL, IGenericBLL<Discout, string>
+    public class VoucherBLL : GenericBLL, IGenericBLL<Voucher, string>
     {
-        public DiscoutBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public VoucherBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        public async Task<Discout> Find(string ID)
+        public async Task<Voucher> Find(string ID)
         {
-            return this.unitOfWork.DiscoutRepository.Find(ID);
+            return this.unitOfWork.VoucherRepository.Find(ID);
         }
-        public async Task<bool> Add(Discout discout, string CreatedUser = "adminstrator")
+        public async Task<bool> Add(Voucher voucher, string CreatedUser = "adminstrator")
         {
             try
             {
-                discout.CreatedUser = CreatedUser;
-                this.unitOfWork.DiscoutRepository.Insert(discout);
+                this.unitOfWork.VoucherRepository.Insert(voucher);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -37,7 +36,7 @@ namespace BLL.BLL.PM.Implement
         {
             try
             {
-                this.unitOfWork.DiscoutRepository.Delete(entityID, DeletedUser);
+                this.unitOfWork.VoucherRepository.Delete(entityID, DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -48,17 +47,17 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int intSkippage = -1)
         {
-            return this.unitOfWork.DiscoutRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.VoucherRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
         }
 
-        public async Task<bool> Update(Discout discout, string UpdatedUser = "adminstrator")
+        public async Task<bool> Update(Voucher voucher, string UpdatedUser = "adminstrator")
         {
             try
             {
-                discout.EditedUser = UpdatedUser;
-                this.unitOfWork.DiscoutRepository.Update(discout);
+                voucher.EditedUser = UpdatedUser;
+                this.unitOfWork.VoucherRepository.Update(voucher);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }

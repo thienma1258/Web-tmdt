@@ -31,6 +31,7 @@ namespace DAL
         #endregion
         #region Log
         private IErrorLogsRepository errorLogsRepository;
+        private ISaleOrderLogsRepository saleOrderLogsRepository;
         private IImageUploadLogRepository imageUploadLogRepository;
 
         #endregion
@@ -97,6 +98,15 @@ namespace DAL
                 if (this.errorLogsRepository == null)
                     errorLogsRepository = new ErrorLogsRepository(dataContext);
                 return errorLogsRepository;
+            }
+        }
+        public ISaleOrderLogsRepository SaleOrderLogsRepository
+        {
+            get
+            {
+                if (this.saleOrderLogsRepository == null)
+                    saleOrderLogsRepository = new SaleOrderLogsRepository(dataContext);
+                return saleOrderLogsRepository;
             }
         }
         #endregion

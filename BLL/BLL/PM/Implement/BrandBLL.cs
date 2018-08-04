@@ -49,6 +49,7 @@ namespace BLL.BLL.PM.Implement
         {
             try
             {
+               
                 brand.UrlFriendly = brand.Name.UrlFriendLy();
                 brand.CreatedUser = CreatedUser;
                 this.unitOfWork.BrandRepository.Insert(brand);

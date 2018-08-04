@@ -14,9 +14,10 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180804061249_unique_code_voucher")]
+    partial class unique_code_voucher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,16 +26,20 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Model.CM.CM_Customer", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<string>("AuthenticationID");
 
                     b.Property<string>("CMNN");
 
-                    b.Property<string>("ConcurrencyStamp");
-
                     b.Property<string>("ConfirmCode");
+
+                    b.Property<DateTime>("CreatedTime");
+
+                    b.Property<string>("CreatedUser");
+
+                    b.Property<string>("CustomerAddress");
 
                     b.Property<string>("CustomerName");
 
@@ -42,35 +47,23 @@ namespace DAL.Migrations
 
                     b.Property<int>("CustomerStateEnum");
 
-                    b.Property<string>("Email");
+                    b.Property<DateTime>("DeletedDate");
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<string>("DeletedUser");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<DateTime>("EditedDate");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<string>("EditedUser");
 
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<string>("Password");
 
                     b.Property<int>("Prestige");
 
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
                     b.Property<int>("TypeCustomerEnum");
 
-                    b.Property<string>("UserName");
+                    b.Property<bool>("isDeleted");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("CM_Customer");
                 });
@@ -691,7 +684,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("CreatedUser");
 
-                    b.Property<string>("CustomerId");
+                    b.Property<string>("CustomerID");
 
                     b.Property<DateTime>("DeletedDate");
 
@@ -713,7 +706,7 @@ namespace DAL.Migrations
 
                     b.Property<decimal>("TotalPrice");
 
-                    b.Property<string>("TransportPriceID");
+                    b.Property<string>("TransportTypeID");
 
                     b.Property<decimal>("TransportTypePrice");
 
@@ -725,9 +718,9 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerID");
 
-                    b.HasIndex("TransportPriceID");
+                    b.HasIndex("TransportTypeID");
 
                     b.HasIndex("VoucherID");
 
@@ -1128,11 +1121,11 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Model.CM.CM_Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerID");
 
-                    b.HasOne("DAL.Model.PM.TransportPrice", "TransportPrice")
+                    b.HasOne("DAL.Model.PM.TransportType", "TransportType")
                         .WithMany()
-                        .HasForeignKey("TransportPriceID");
+                        .HasForeignKey("TransportTypeID");
 
                     b.HasOne("DAL.Model.PM.Voucher", "Voucher")
                         .WithMany()

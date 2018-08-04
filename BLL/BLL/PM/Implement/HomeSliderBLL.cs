@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class DiscoutBLL: GenericBLL, IGenericBLL<Discout, string>
+    public class HomeSliderBLL : GenericBLL, IGenericBLL<HomeSlider, string>
     {
-        public DiscoutBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public HomeSliderBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        public async Task<Discout> Find(string ID)
+        public async Task<HomeSlider> Find(string ID)
         {
-            return this.unitOfWork.DiscoutRepository.Find(ID);
+            return this.unitOfWork.HomeSliderRepository.Find(ID);
         }
-        public async Task<bool> Add(Discout discout, string CreatedUser = "adminstrator")
+        public async Task<bool> Add(HomeSlider homeSlider, string CreatedUser = "adminstrator")
         {
             try
             {
-                discout.CreatedUser = CreatedUser;
-                this.unitOfWork.DiscoutRepository.Insert(discout);
+                homeSlider.CreatedUser = CreatedUser;
+                this.unitOfWork.HomeSliderRepository.Insert(homeSlider);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -37,7 +37,7 @@ namespace BLL.BLL.PM.Implement
         {
             try
             {
-                this.unitOfWork.DiscoutRepository.Delete(entityID, DeletedUser);
+                this.unitOfWork.HomeSliderRepository.Delete(entityID, DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
@@ -48,17 +48,17 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int intSkippage = -1)
         {
-            return this.unitOfWork.DiscoutRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.HomeSliderRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
         }
 
-        public async Task<bool> Update(Discout discout, string UpdatedUser = "adminstrator")
+        public async Task<bool> Update(HomeSlider homeSlider, string UpdatedUser = "adminstrator")
         {
             try
             {
-                discout.EditedUser = UpdatedUser;
-                this.unitOfWork.DiscoutRepository.Update(discout);
+                homeSlider.EditedUser = UpdatedUser;
+                this.unitOfWork.HomeSliderRepository.Update(homeSlider);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }

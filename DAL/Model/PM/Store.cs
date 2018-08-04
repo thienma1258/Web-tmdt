@@ -6,6 +6,7 @@ namespace DAL.Model.PM
 {
     public class Store:TrackingObject
     {
+        
         public string NameStore { get; set; }
         public string Description { get; set; }
         public string FAX { get; set; }
