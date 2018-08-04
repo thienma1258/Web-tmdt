@@ -9,12 +9,7 @@
 <h2> Danh sách cửa hàng </h2>
 
 
-<div class="editbtn">
-    <button type="button" class="btn-info fa fa-search btnsearch" aria-hidden="true"> Tìm kiếm</button>
-    <button type="button" class="btn-danger fa fa-plus btnadd"> Thêm mới</button>
-    <button type="button" class="btn-success fa fa-pencil btnedit"> Sửa</button>
-    <button type="button" class="btn-warning fa fa-trash btndel"> Xóa</button>
-</div>
+
 <div class="cmbbrand">
     <select>
         <option>Địa điểm</option>
@@ -22,33 +17,53 @@
         @foreach (var item in districts)
         {
 
-        <option>@item.Name</option>
+            <option>@item.Name</option>
 
         }
     </select>
     <select>
         <option>Quận/Huyện</option>
-       
+
     </select>
- 
+
 </div>
-<div class="title">
-    <ul>
-        <li><input type="checkbox"></li>
-        <li><h1>STT</h1></li>
-        <li><h1>Thương hiệu</h1></li>
-        <li><h1>Tên Sản Phẩm</h1></li>
-        <li><h1>Giá Sản Phẩm</h1></li>
-    </ul>
-</div>
-<table>
-    <tr>
-        <th><input type="checkbox"></th>
-        <th><h1>stt</h1></th>
-        <th><h1>stt</h1></th>
-        <th><h1>stt</h1></th>
-        <th><h1>stt</h1></th>
-    </tr>
+<table class="tablestore">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameStore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameStore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
+                </td>
+                <td>
+
+                    @Html.ActionLink("Add", "AddStore") |
+                    @Html.ActionLink("Edit", "EditStore", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteStore", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 
