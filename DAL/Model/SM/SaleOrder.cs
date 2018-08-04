@@ -17,7 +17,8 @@ namespace DAL.Model.SM
         public decimal TransportTypePrice { get; set; }
         public virtual Voucher Voucher { get; set; } 
         public decimal TotalPrice { get; set; }
-       public int VAT { get; set; }
+        public bool IsPay { get; set; } = false;
+        public int VAT { get; set; }
         public string  ReviewBy { get; set; }
         public DateTime ReviewDate { get; set; } = DateTime.Now;
         public virtual ICollection<SaleOrderDetail> ListSaleOrderDetails { get; set; }

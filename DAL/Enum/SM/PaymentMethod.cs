@@ -6,8 +6,10 @@ namespace Common.Enum.SM
 {
     public enum PaymentMethod
     {
-        Paypal=0,
-        Baokim=1,
-        NganLuong=2
+        GDTT=0,
+        Paypal=1,
+        Baokim=2,
+        NganLuong=3,
+
     }
 }

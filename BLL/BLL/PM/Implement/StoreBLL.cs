@@ -13,7 +13,6 @@ namespace BLL.BLL.PM.Implement
         public StoreBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-
         public async Task<bool> Add(Store store, string CreatedUser = "adminstrator")
         {
             try

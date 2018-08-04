@@ -8,6 +8,7 @@ namespace DAL.Model.PM
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
+
         public int Prestige { get; set; }
         public string Note { get; set; }
         
