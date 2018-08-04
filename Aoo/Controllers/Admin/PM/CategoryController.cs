@@ -50,6 +50,7 @@ namespace Aoo.Controllers.Admin.PM
 
                     };
                     await CategoryBLL.Add(category);
+                    return RedirectToAction("Index");
                 }
             }
             return View();

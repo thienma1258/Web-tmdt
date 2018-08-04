@@ -52,11 +52,11 @@ namespace Aoo.Controllers.Admin.PM
 
                     };
                     await BrandBLL.Add(brand);
+                    return RedirectToAction("Index");
                 }
             }
-          
             return View();
-           
+
         }
 
 
@@ -69,13 +69,45 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public IActionResult EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    ImageErrorModel imageErrorModel;
+            //    MemoryStream memoryStream = new MemoryStream();
+            //    await addBrandViewModel.DefaultImage.CopyToAsync(memoryStream);
+            //    string ImagePath = this.ImageServices.UploadImage(memoryStream, addBrandViewModel.DefaultImage.FileName, out imageErrorModel);
+            //    if (imageErrorModel.isSuccess)
+            //    {
+            //        Brand brand = new Brand()
+            //        {
+            //            Name = editBrand.Name,
+            //            DefaultImage = ImagePath,
+            //            Description = editBrand.Description
+
+            //        };
+            //        await BrandBLL.Add(brand);
+            //        return RedirectToAction("Index");
+            //    }
+            //}
+
             return View();
         }
-        public async Task<IActionResult> DeleteBrand(string id)
+        [HttpDelete("{id}")]
+        public  async Task<JsonResult> Delete(string id)
         {
-            //chưa xử lý code
-            Brand obj = await BrandBLL.Find(id);
-            return View(obj);
+            var isDelete = await BrandBLL.Delete(id);
+            if (isDelete) 
+            {
+                return Json(new { success = "true"});
+
+            }
+            return Json(new { success = "false" });
         }
+        //public async Task<IActionResult> DeleteBrand(string id)
+        //{
+        //    //chưa xử lý code
+        //    Brand obj = await BrandBLL.Find(id);
+        //    await BrandBLL.Delete(id);
+        //    return View(obj);
+        //}
     }
 }

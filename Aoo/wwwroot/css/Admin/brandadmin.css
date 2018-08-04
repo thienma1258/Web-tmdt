@@ -1,0 +1,8 @@
+﻿.tablebrand{
+    margin-top:1%;
+    width:75%;
+}
+    .tablebrand th {
+        text-align:center;
+        color:deeppink;  
+    }
