@@ -31,7 +31,6 @@ namespace Aoo.Controllers.Admin.PM
         }
         public async Task<IActionResult> AddStore()
         {
-
             return View();
         }
         [HttpPost]

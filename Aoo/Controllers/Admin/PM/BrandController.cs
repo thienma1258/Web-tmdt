@@ -14,14 +14,12 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class BrandController : Controller
+    public class BrandController : BaseController
     {
         private readonly IGenericBLL<Brand,string> BrandBLL;
-        public readonly IImageServices ImageServices;
-        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices)
+        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices):base(imageServices)
         {
             BrandBLL = brandBLL;
-            this.ImageServices = imageServices;
         }
 
         public async Task<IActionResult> Index()
@@ -38,10 +36,8 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-               await  addBrandViewModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, addBrandViewModel.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel=new ImageErrorModel();
+                string ImagePath = UploadImage(addBrandViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Brand brand = new Brand()

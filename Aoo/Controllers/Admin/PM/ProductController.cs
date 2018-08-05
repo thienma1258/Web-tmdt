@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 
 namespace Aoo.Controllers.Admin.PM
 {
@@ -10,6 +11,10 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class ProductController : BaseController
     {
+        public ProductController(IImageServices imageServices) : base(imageServices)
+        {
+        }
+
         public async Task<IActionResult> Index()
         {
             return View();
