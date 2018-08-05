@@ -6,8 +6,6 @@
 }
 
 <h2>EditMainGroup</h2>
-
-<h4>MainGroup</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,8 +17,8 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DefaultImage" class="control-label"><img src=@Url.Content(Model.DefaultImage)/></label>
-                <input asp-for="DefaultImage" class="form-control" />
+                <label asp-for="DefaultImage" class="control-label"><img src=@Url.Content(Model.DefaultImage) /></label>
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
                 <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">

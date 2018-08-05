@@ -4,13 +4,10 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
+<h2>Ngành hàng chính</h2>
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="tablebrand">
     <thead>
         <tr>
                 <th>
@@ -36,20 +33,23 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                <img src=@Url.Content(item.DefaultImage) />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeSex)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditMainGroup", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "DeleteMainGroup", new { id=item.ID })
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+                <a href="/MainGroup/AddMainGroup">Thêm</a> |
+                <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a> |
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script src="~/js/Admin/PM/scripts.js"></script>

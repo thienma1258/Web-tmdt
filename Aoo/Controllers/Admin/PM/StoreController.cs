@@ -14,14 +14,14 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class StoreController : Controller
+    public class StoreController : BaseController
     {
         private readonly IGenericBLL<Store,string> StoreBLL;
-        public readonly IImageServices ImageServices;
-        public StoreController(IGenericBLL<Store, string> storeBLL, IImageServices imageServices )
+        
+        public StoreController(IGenericBLL<Store, string> storeBLL, IImageServices imageServices ) : base(imageServices)
         {
             StoreBLL = storeBLL;
-            this.ImageServices = imageServices;
+           
         }
 
         public async Task<IActionResult> Index()
@@ -31,7 +31,6 @@ namespace Aoo.Controllers.Admin.PM
         }
         public async Task<IActionResult> AddStore()
         {
-
             return View();
         }
         [HttpPost]
@@ -39,11 +38,9 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-                ImageErrorModel imageErrorModel;
-                
-                MemoryStream memoryStream = new MemoryStream();
-                await addViewStoreModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, addViewStoreModel.DefaultImage.FileName, out imageErrorModel);
+               );
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(addViewStoreModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Store store = new Store()
@@ -79,11 +76,9 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-               
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-                await editViewStoreModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, editViewStoreModel.DefaultImage.FileName, out imageErrorModel);
+
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editViewStoreModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Store objStore = await this.StoreBLL.Find(editViewStoreModel.ID);

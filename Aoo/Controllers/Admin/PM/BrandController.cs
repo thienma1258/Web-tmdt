@@ -14,14 +14,12 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class BrandController : Controller
+    public class BrandController : BaseController
     {
         private readonly IGenericBLL<Brand,string> BrandBLL;
-        public readonly IImageServices ImageServices;
-        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices)
+        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices):base(imageServices)
         {
             BrandBLL = brandBLL;
-            this.ImageServices = imageServices;
         }
 
         public async Task<IActionResult> Index()
@@ -38,10 +36,8 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-               await  addBrandViewModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, addBrandViewModel.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel=new ImageErrorModel();
+                string ImagePath = UploadImage(addBrandViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Brand brand = new Brand()
@@ -62,33 +58,35 @@ namespace Aoo.Controllers.Admin.PM
 
         public async Task<IActionResult> EditBrand(string id)
         {
-            //chưa xủ lý code
-            Brand obj = await BrandBLL.Find(id);
-            return View(obj);
+            Brand objbrand = await this.BrandBLL.Find(id);
+            ViewModels.PM.Brand.EditBrandViewModel editViewBrandModel = new ViewModels.PM.Brand.EditBrandViewModel
+            {
+                ID=objbrand.ID,
+                Name = objbrand.Name,
+                Description = objbrand.Description,
+
+            };
+            return View(editViewBrandModel);
         }
         [HttpPost]
-        public IActionResult EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
+        public async Task<IActionResult> EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    ImageErrorModel imageErrorModel;
-            //    MemoryStream memoryStream = new MemoryStream();
-            //    await addBrandViewModel.DefaultImage.CopyToAsync(memoryStream);
-            //    string ImagePath = this.ImageServices.UploadImage(memoryStream, addBrandViewModel.DefaultImage.FileName, out imageErrorModel);
-            //    if (imageErrorModel.isSuccess)
-            //    {
-            //        Brand brand = new Brand()
-            //        {
-            //            Name = editBrand.Name,
-            //            DefaultImage = ImagePath,
-            //            Description = editBrand.Description
+            if (ModelState.IsValid)
+            {
 
-            //        };
-            //        await BrandBLL.Add(brand);
-            //        return RedirectToAction("Index");
-            //    }
-            //}
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editBrand.DefaultImage, ref imageErrorModel);
+                if (imageErrorModel.isSuccess)
+                {
+                    Brand objbrand = await this.BrandBLL.Find(editBrand.ID);
+                    objbrand.Description = editBrand.Description;
+                    objbrand.Name = editBrand.Name;
+                    objbrand.DefaultImage = ImagePath;
+                    await BrandBLL.Update(objbrand);
+                    return RedirectToAction("Index");
+                }
 
+            }
             return View();
         }
         [HttpDelete("{id}")]
