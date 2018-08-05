@@ -11,6 +11,7 @@ namespace DAL.Model.PM
         public bool isOnlineOnly { get; set; } = false;
         public int StockMin { get; set; } = 0;
         public string DefaultImage { get; set; }
+        public string Details { get; set; } = string.Empty;
 
         public string LadingPage { get; set; }
         public virtual ICollection<ProductDetails> ListProductDetails { get; set; }

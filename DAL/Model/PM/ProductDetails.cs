@@ -17,7 +17,6 @@ namespace DAL.Model.PM
         public string Specification { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
         public decimal Price { get; set; }
-        public string Details { get; set; } = string.Empty;
         public string DefaultImage { get; set; }
         public int Quality { get; set; }
         public int StockMin { get; set; }

@@ -4,8 +4,10 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
+
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2>Trang chủ thương hiệu</h2>
+
 <table class="tablebrand">
     <thead>
         <tr>
@@ -44,7 +46,9 @@
                 </td>
             </tr>
         }
-
+        <tr></tr>
     </tbody>
+
 </table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml");
 <script src="~/js/Admin/PM/scripts.js"></script>
