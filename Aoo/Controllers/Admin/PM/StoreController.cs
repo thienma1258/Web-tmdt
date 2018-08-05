@@ -38,7 +38,7 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-               );
+               
                 ImageErrorModel imageErrorModel = new ImageErrorModel();
                 string ImagePath = UploadImage(addViewStoreModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
