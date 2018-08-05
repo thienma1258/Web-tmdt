@@ -6,6 +6,9 @@
 }
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2>Ngành hàng chính</h2>
+<div class="subadd">
+    <a href="/MainGroup/AddMainGroup">Thêm</a>
+</div>
 
 <table class="tablebrand">
     <thead>
@@ -43,8 +46,9 @@
             </td>
 
             <td>
-                <a href="/MainGroup/AddMainGroup">Thêm</a> |
-                <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a> |
+                <div class="subedit">
+                    <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a>
+                </div>
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
                 @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
             </td>

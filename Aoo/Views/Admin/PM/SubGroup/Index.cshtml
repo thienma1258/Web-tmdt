@@ -5,12 +5,12 @@
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h2>Trang chủ ngành hạng phụ</h2>
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
+<div class="subadd">
+    <a href="/SubGroup/AddSubGroup">Thêm</a> 
+</div>
+<table class="tablebrand">
     <thead>
         <tr>
             <th>
@@ -25,37 +25,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.DefaultImage)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MainGroup)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeSex)
-            </td>
-            <td>
-                <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MainGroup.Name)
-            </td>
-
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeSex)
+                </td>
+                <td>
+                    <img src=@Url.Content(item.DefaultImage) />
+                </td>
+                <td>
+                    <div class="subedit">
+                        <a href="/SubGroup/EditSubGroup?id=@item.ID">Sửa</a>
+                    </div>
+                    @*@Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script src="~/js/Admin/PM/scripts.js"></script>

@@ -63,13 +63,54 @@ namespace Aoo.Controllers.Admin.PM
             }
             return View();
         }
-        public IActionResult EditSubGroup()
+        public async Task<IActionResult> EditSubGroup(string id)
         {
+            //chưa xử lý code
+            SubGroup objsubgroup = await this.SubGroupBLL.Find(id);
+            ViewModels.PM.SubGroup.EditSubGroupViewModel editSubGroupModel = new ViewModels.PM.SubGroup.EditSubGroupViewModel
+            {
+                Name = objsubgroup.Name,
+                Description = objsubgroup.Description,
+                TypeSex = objsubgroup.TypeSex,
+
+            };
+            return View(objsubgroup);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditSubGroup(ViewModels.PM.SubGroup.EditSubGroupViewModel editSubGroupViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editSubGroupViewModel.DefaultImage, ref imageErrorModel);
+                if (imageErrorModel.isSuccess)
+                {
+                    //SubGroup subGroup = new SubGroup()
+                    
+                    SubGroup objsubgroup = await this.SubGroupBLL.Find(editSubGroupViewModel.ID);
+                    objsubgroup.Description = editSubGroupViewModel.Description;
+                    objsubgroup.Name = editSubGroupViewModel.Name;
+                    objsubgroup.DefaultImage = ImagePath;
+                    objsubgroup.TypeSex = editSubGroupViewModel.TypeSex;
+                    await SubGroupBLL.Update(objsubgroup);
+                    return RedirectToAction("Index");
+                };
+
+
+            }
             return View();
         }
-        public IActionResult DeleteSubGroup()
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> Delete(string id)
         {
-            return View();
+            var isDelete = await SubGroupBLL.Delete(id);
+            if (isDelete)
+            {
+                return Json(new { success = "true" });
+
+            }
+            return Json(new { success = "false" });
         }
     }
 }

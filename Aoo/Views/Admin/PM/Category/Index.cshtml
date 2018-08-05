@@ -6,10 +6,13 @@
 }
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 
-<h2>Index</h2>
-<table class="tablebrand">
-    <thead>
-        <tr>
+<h2>Trang chủ loại sản phẩm</h2>
+<div class="subadd">
+    <a href="/Category/AddCategory">Thêm</a> 
+</div>
+    <table class="tablebrand">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
@@ -19,29 +22,31 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <img src=@Url.Content(item.DefaultImage) />
-            </td>
-            <td>
-                <a href="/Category/AddCategory">Thêm</a> |
-                <a href="/Category/EditCategory?id=@item.ID"  >Sửa</a> |
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-<script src="~/js/Admin/PM/scripts.js"></script>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img src=@Url.Content(item.DefaultImage) />
+                    </td>
+                    <td>
+                        <div class="subedit">
+                            <a href="/Category/EditCategory?id=@item.ID">Sửa</a>
+                        </div>
+                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                        @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="~/js/Admin/PM/scripts.js"></script>

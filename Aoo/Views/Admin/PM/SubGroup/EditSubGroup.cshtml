@@ -1,18 +1,22 @@
-﻿@model Aoo.ViewModels.PM.MainGroup.EditMainGroupViewModel
+﻿@model DAL.Model.PM.SubGroup
+@using Common.Enum.PM;
+@inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
 @{
-    ViewData["Title"] = "EditMainGroup";
+    ViewData["Title"] = "EditSubGroup";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    var listMainGroup = await MainGroupBLL.Get(6);
 }
 
-<h2>EditMainGroup</h2>
+
+<h2>EditSubGroup</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditMainGroup" enctype="multipart/form-data">
+        <form asp-action="EditSubGroup" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" class="form-control" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label">@Model.Name</label>
+                <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -22,24 +26,28 @@
                 <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label">@Model.Description</label>
+                <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypeSex" class="control-label">@Model.TypeSex</label>
+                <label asp-for="TypeSex" class="control-label"></label>
                 <input asp-for="TypeSex" class="form-control" />
                 <span asp-validation-for="TypeSex" class="text-danger"></span>
             </div>
-
+            <label asp-for="MainGroup" class="control-label"></label>
+            <select asp-for="MainGroup" asp-items="@(new SelectList(listMainGroup,"ID","Name"))">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <span asp-validation-for="MainGroup" class="text-danger"></span>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Lưu" class="btn btn-danger" />
             </div>
         </form>
     </div>
 </div>
 
 <div class="backtolist">
-    <a href="/MainGroup/Index">Trở lại trang quản lý</a>
+    <a href="/SubGroup/Index">Trở lại trang quản lý</a>
 </div>
 
