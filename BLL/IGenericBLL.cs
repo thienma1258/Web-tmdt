@@ -13,7 +13,5 @@ namespace BLL
         Task<bool> Add(TEntity entity, string CreatedUser = "adminstrator");
         Task<TEntity> Find(T ID);
 
-
-
     }
 }

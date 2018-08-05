@@ -4,7 +4,7 @@
 @model string;
 <button class="btn btn-warning" id="btn-confirm">Xóa</button>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="@Model">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,27 +12,27 @@
                 <h4 class="modal-title" id="myModalLabel">Xác nhận yêu cầu xóa</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-id="@Model" id="modal-btn-si">Yes</button>
-                <button type="button" class="btn btn-info" id="modal-btn-no">No</button>
+                <button type="button" class="btn btn-danger yes" data-id="@Model" id="modal-btn-si">Yes</button>
+                <button type="button" class="btn btn-info no" id="modal-btn-no">No</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     var DeleteConfirm = function (callback) {
-        $("#btn-confirm").on("click", function () {
-            $("#mi-modal").modal('show');
+        $(".btn.btn-warning").on("click", function (event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            $("#@Model").modal('show');
         });
 
-        $("#modal-btn-si").on("click", function (){
-            var id =$(this).data("id");
-            callback(true, id);
-            $("#mi-modal").modal('hide');
+        $(".btn.btn-danger.yes").on("click", function (){
+            callback(true, "@Model");
+            $("#@Model").modal('hide');
         });
 
-        $("#modal-btn-no").on("click", function () {
-            callback(false,id);
-            $("#mi-modal").modal('hide');
+        $(".btn.btn-info.no").on("click", function () {
+            $("#@Model").modal('hide');
         });
     };
 </script>
