@@ -47,7 +47,7 @@ namespace Aoo.Controllers.Admin.PM
                         DefaultImage = ImagePath,
                         Description = addMainGroupViewModel.Description,
                         TypeSex=addMainGroupViewModel.TypeSex,
-                   
+                        
 
                     };
                     await MainGroupBLL.Add(mainGroup);
