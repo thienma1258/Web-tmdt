@@ -4,9 +4,10 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 
 <h2>Index</h2>
-<table class="table">
+<table class="tablebrand">
     <thead>
         <tr>
                 <th>
@@ -18,6 +19,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,18 +29,19 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Add", "AddCategory") |
-                @Html.ActionLink("Edit", "EditCategory", new { id = item.ID }) |
+                <img src=@Url.Content(item.DefaultImage) />
+            </td>
+            <td>
+                <a href="/Category/AddCategory">Thêm</a> |
+                <a href="/Category/EditCategory?id=@item.ID"  >Sửa</a> |
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Delete", "DeleteCategory", new {id=item.ID })
+                @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script src="~/js/Admin/PM/scripts.js"></script>

@@ -34,11 +34,11 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
+                    <img src=@Url.Content(item.DefaultImage) />
                 </td>
                 <td>
                     <a href="/Brand/AddBrand">Thêm</a> |
-                    @Html.ActionLink("Sửa", "EditBrand", new { id = item.ID }) |
+                    <a href="/Brand/EditBrand?id=@item.ID">Sửa</a> |
                     @Html.ActionLink("Chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
                     @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
                 </td>
@@ -47,4 +47,3 @@
 
     </tbody>
 </table>
-<script src="~/js/Admin/PM/scripts.js"></script>

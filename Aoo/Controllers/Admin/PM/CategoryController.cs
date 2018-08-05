@@ -59,20 +59,49 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditCategory(string id)
         {
             //chưa xử lý code
-            Category obj = await CategoryBLL.Find(id);
-            return View(obj);
+            Category objcategory = await this.CategoryBLL.Find(id);
+            ViewModels.PM.Category.EditCategoryViewModel editcategory = new ViewModels.PM.Category.EditCategoryViewModel
+            {
+                ID = objcategory.ID,
+                Name = objcategory.Name,
+                Description = objcategory.Description,
+
+            };
+            return View(editcategory);
         }
         [HttpPost]
-        public async Task<IActionResult> EditCategory(ViewModels.PM.Category.AddCategoryViewModel editCategoryViewModel)
+        public async Task<IActionResult> EditCategory(ViewModels.PM.Category.EditCategoryViewModel editcategory)
         {
-          
+            if (ModelState.IsValid)
+            {
+
+                ImageErrorModel imageErrorModel;
+                MemoryStream memoryStream = new MemoryStream();
+                await editcategory.DefaultImage.CopyToAsync(memoryStream);
+                string ImagePath = this.ImageServices.UploadImage(memoryStream, editcategory.DefaultImage.FileName, out imageErrorModel);
+                if (imageErrorModel.isSuccess)
+                {
+                    Category objcategory = await this.CategoryBLL.Find(editcategory.ID);
+                    objcategory.Description = editcategory.Description;
+                    objcategory.Name = editcategory.Name;
+                    objcategory.DefaultImage = ImagePath;
+                    await CategoryBLL.Update(objcategory);
+                    return RedirectToAction("Index");
+                }
+
+            }
             return View();
         }
-        public async Task<IActionResult> DeleteCategory(string id)
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> Delete(string id)
         {
-            //chưa xử lý code
-            Category obj = await CategoryBLL.Find(id);
-            return View(obj);
+            var isDelete = await CategoryBLL.Delete(id);
+            if (isDelete)
+            {
+                return Json(new { success = "true" });
+
+            }
+            return Json(new { success = "false" });
         }
     }
 }

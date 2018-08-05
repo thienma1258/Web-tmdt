@@ -51,6 +51,7 @@ namespace Aoo.Controllers.Admin.PM
                         
                     };
                     await MainGroupBLL.Add(mainGroup);
+                    return RedirectToAction("Index");
                 }
             }
 
@@ -59,14 +60,51 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditMainGroup( string id)
         {
             //chưa xử lý code
-            MainGroup obj = await MainGroupBLL.Find(id);
-            return View(obj);
+            MainGroup objmaingroup = await this.MainGroupBLL.Find(id);
+            ViewModels.PM.MainGroup.EditMainGroupViewModel editViewMainGroupModel = new ViewModels.PM.MainGroup.EditMainGroupViewModel
+            {
+                ID = objmaingroup.ID,
+                Name = objmaingroup.Name,
+                Description = objmaingroup.Description,
+                TypeSex= objmaingroup.TypeSex
+
+            };
+            return View(editViewMainGroupModel);
         }
-        public async Task<IActionResult> DeleteMainGroup( string id)
+        [HttpPost]
+        public async Task<IActionResult> EditMainGroup(ViewModels.PM.MainGroup.EditMainGroupViewModel editViewMainGroupModel)
         {
-            //chưa xử lý code
-            MainGroup mainGroup = await MainGroupBLL.Find(id);
+            if (ModelState.IsValid)
+            {
+
+                ImageErrorModel imageErrorModel;
+                MemoryStream memoryStream = new MemoryStream();
+                await editViewMainGroupModel.DefaultImage.CopyToAsync(memoryStream);
+                string ImagePath = this.ImageServices.UploadImage(memoryStream, editViewMainGroupModel.DefaultImage.FileName, out imageErrorModel);
+                if (imageErrorModel.isSuccess)
+                {
+                    MainGroup objmaingroup = await this.MainGroupBLL.Find(editViewMainGroupModel.ID);
+                    objmaingroup.Description = editViewMainGroupModel.Description;
+                    objmaingroup.Name = editViewMainGroupModel.Name;
+                    objmaingroup.DefaultImage = ImagePath;
+                    objmaingroup.TypeSex = editViewMainGroupModel.TypeSex;
+                    await MainGroupBLL.Update(objmaingroup);
+                    return RedirectToAction("Index");
+                }
+
+            }
             return View();
+        }
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> Delete(string id)
+        {
+            var isDelete = await MainGroupBLL.Delete(id);
+            if (isDelete)
+            {
+                return Json(new { success = "true" });
+
+            }
+            return Json(new { success = "false" });
         }
     }
 }

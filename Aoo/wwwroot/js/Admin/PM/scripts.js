@@ -3,8 +3,12 @@
         case true:
             DeleteBrand(id);
         case false:
+            CloseWindow();
            
     }
+}
+function CloseWindow() {
+    window.close();
 }
 DeleteConfirm(callback);
 function DeleteBrand(id) {

@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Aoo.ViewModels.PM.Brand
+namespace Aoo.ViewModels.PM.Category
 {
-    public class EditBrandViewModel
+    public class EditCategoryViewModel
     {
         public string ID { get; set; }
         [Required]
@@ -20,6 +20,5 @@ namespace Aoo.ViewModels.PM.Brand
         [Required]
         [DisplayName(" Mô tả:")]
         public string Description { get; set; }
-
     }
 }
