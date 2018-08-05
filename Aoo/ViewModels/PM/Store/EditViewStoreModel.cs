@@ -11,7 +11,9 @@ namespace Aoo.ViewModels.PM.Store
 {
     public class EditViewStoreModel
     {
+
         public string ID { get; set; }
+        public string Address { get; set; }
         [Required]
         public string NameStore { get; set; }
         [Required]

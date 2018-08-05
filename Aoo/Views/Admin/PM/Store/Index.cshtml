@@ -1,71 +1,55 @@
 ﻿@model IEnumerable<DAL.Model.PM.Store>
-@inject BLL.BLL.PM.IProvinceBLL ProvinceBLL
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
-    IEnumerable<DAL.Model.PM.Province> districts = await ProvinceBLL.Get();
-}
-
-<h2> Danh sách cửa hàng </h2>
-
-
-
-<div class="cmbbrand">
-    <select>
-        <option>Địa điểm</option>
-
-        @foreach (var item in districts)
-        {
-
-            <option>@item.Name</option>
-
-        }
-    </select>
-    <select>
-        <option>Quận/Huyện</option>
-
-    </select>
-
-</div>
-<table class="tablestore">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameStore)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DefaultImage)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    @{
+        ViewData["Title"] = "Index";
+        Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";  
+    }
+    <h2> Danh sách cửa hàng </h2>
+    <table class="tablestore">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameStore)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
-                </td>
-                <td>
-
-                    @Html.ActionLink("Add", "AddStore") |
-                    @Html.ActionLink("Edit", "EditStore", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "DeleteStore", new { id = item.ID })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameStore)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DefaultImage)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameStore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
+                    </td>
+                    <td>
 
+                        @Html.ActionLink("Add", "AddStore") |
+                        @Html.ActionLink("Edit", "EditStore", new { id = item.ID }) |
+                     
+                        @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="~/js/Admin/PM/scripts.js"></script>
 
 
 
