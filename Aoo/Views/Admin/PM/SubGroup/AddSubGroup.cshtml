@@ -1,42 +1,53 @@
-﻿@model DAL.Model.PM.SubGroup
-
-
+﻿@model Aoo.ViewModels.PM.SubGroup.AddSubGroupViewModel
+@using Common.Enum.PM;
+@inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
 @{
     ViewData["Title"] = "AddSubGroup";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    var listMainGroup = await MainGroupBLL.Get(6);
 }
 
 <h2>AddSubGroup</h2>
-
-<h4>SubGroupViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddSubGroup">
+        <form asp-action="AddSubGroup" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Tên Loại Sản Phẩm</label>
-                <input class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Hình Ảnh</label>
-                <input  class="form-control" />
-                <span class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Giới Tính</label>
-                <input class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="TypeSex" class="control-label"></label>
+                <select asp-for="TypeSex" asp-items="Html.GetEnumSelectList<TypeSexEnum>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="TypeSex" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Tạo Mới" class="btn btn-danger" />
+                <label asp-for="DefaultImage" class="control-label"> </label>
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" }));
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
+            </div>
+            <label asp-for="MainGroup" class="control-label"></label>
+            <select asp-for="MainGroup" asp-items="@(new SelectList(listMainGroup,"ID","Name"))">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <span asp-validation-for="MainGroup" class="text-danger"></span>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div class="backtolist">
-     <a href="/Product/Index">Trở lại trang quản lý</a>
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 

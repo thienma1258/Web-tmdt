@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM
 {
-    public class MainGroupBLL : GenericBLL, IGenericBLL<MainGroup,string>
+    public class MainGroupBLL : GenericBLL, IMainGroupBLL
     {
         public MainGroupBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
