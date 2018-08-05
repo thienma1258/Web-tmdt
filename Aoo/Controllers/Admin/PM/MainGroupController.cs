@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aoo.ViewModels.PM.MainGroup;
 using BLL;
+using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -16,17 +17,17 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class MainGroupController : BaseController
     {
-        private readonly IGenericBLL<MainGroup, string> MainGroupBLL;
-       
-        public MainGroupController(IGenericBLL<MainGroup, string> maingroupdBLL, IImageServices imageServices) : base(imageServices)
+        private readonly IMainGroupBLL MainGroupBLL;
+
+        public MainGroupController(IMainGroupBLL maingroupdBLL, IImageServices imageServices) : base(imageServices)
         {
             MainGroupBLL = maingroupdBLL;
-           
-        }
+        } 
         public async Task<IActionResult> Index()
         {
             return View(await MainGroupBLL.Get(6));
         }
+
         public async Task<IActionResult> AddMainGroup()
         {
             return View();
@@ -45,8 +46,9 @@ namespace Aoo.Controllers.Admin.PM
                         Name = addMainGroupViewModel.Name,
                         DefaultImage = ImagePath,
                         Description = addMainGroupViewModel.Description,
-                        TypeSex=addMainGroupViewModel.TypeSex
-                        
+                        TypeSex=addMainGroupViewModel.TypeSex,
+                   
+
                     };
                     await MainGroupBLL.Add(mainGroup);
                     return RedirectToAction("Index");

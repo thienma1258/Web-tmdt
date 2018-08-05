@@ -20,7 +20,8 @@ namespace Aoo.App_start
             services.AddTransient<IDistrictBLL, DistrictBLL>();
             services.AddTransient<IProvinceBLL, ProvinceBLL>();
   			services.AddTransient<IGenericBLL<Category, string>, CategoryBLL>();
-            services.AddTransient<IGenericBLL<MainGroup, string>, MainGroupBLL>();
+            services.AddTransient<IMainGroupBLL, MainGroupBLL>();
+            services.AddTransient<IGenericBLL<SubGroup, string>, SubGroupBLL>();
         }
     }
 }

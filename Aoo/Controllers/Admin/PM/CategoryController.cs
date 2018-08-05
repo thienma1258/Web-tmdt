@@ -13,15 +13,15 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
+
     public class CategoryController : BaseController
     {
         private readonly IGenericBLL<Category, string> CategoryBLL;
-       
-        public CategoryController(IGenericBLL<Category, string> categoryBLL, IImageServices imageServices) : base(imageServices)
-        {
+        public CategoryController(IGenericBLL<Category, string> categoryBLL, IImageServices imageServices): base(imageServices)        {
             CategoryBLL = categoryBLL;
-           
-        }
+                  }
+
+
         public async Task<IActionResult> Index()
         {
             return View(await CategoryBLL.Get(6));
@@ -36,9 +36,9 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-                ImageErrorModel imageErrorModel = new ImageErrorModel();
-                string ImagePath = UploadImage(addCategoryViewModel.DefaultImage, ref imageErrorModel);
-                if (imageErrorModel.isSuccess)
+
+				ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(addCategoryViewModel.DefaultImage, ref imageErrorModel);                if (imageErrorModel.isSuccess)
                 {
                     Category category = new Category()
                     {
