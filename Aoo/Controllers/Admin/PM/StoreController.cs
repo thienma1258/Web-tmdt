@@ -40,6 +40,7 @@ namespace Aoo.Controllers.Admin.PM
             if (ModelState.IsValid)
             {
                 ImageErrorModel imageErrorModel;
+                
                 MemoryStream memoryStream = new MemoryStream();
                 await addViewStoreModel.DefaultImage.CopyToAsync(memoryStream);
                 string ImagePath = this.ImageServices.UploadImage(memoryStream, addViewStoreModel.DefaultImage.FileName, out imageErrorModel);
@@ -47,6 +48,7 @@ namespace Aoo.Controllers.Admin.PM
                 {
                     Store store = new Store()
                     {
+                        Address = addViewStoreModel.Address,
                         NameStore = addViewStoreModel.NameStore,
                         DefaultImage = ImagePath,
                         Description = addViewStoreModel.Description
@@ -62,8 +64,9 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditStore(string id)
         {
             Store objStore = await this.StoreBLL.Find(id);
-            ViewModels.PM.Store.EditViewStoreModel editViewStoreModel=new ViewModels.PM.Store.EditViewStoreModel
+            ViewModels.PM.Store.EditViewStoreModel editViewStoreModel = new ViewModels.PM.Store.EditViewStoreModel
             {
+                Address = objStore.Address,
                 ID=objStore.ID,
                 NameStore=objStore.NameStore,
                 Description=objStore.Description,
@@ -84,6 +87,7 @@ namespace Aoo.Controllers.Admin.PM
                 if (imageErrorModel.isSuccess)
                 {
                     Store objStore = await this.StoreBLL.Find(editViewStoreModel.ID);
+                    objStore.Address = editViewStoreModel.Address;
                     objStore.Description = editViewStoreModel.Description;
                     objStore.NameStore = editViewStoreModel.NameStore;
                     objStore.DefaultImage = ImagePath;
@@ -93,10 +97,17 @@ namespace Aoo.Controllers.Admin.PM
 
             return View();
         }
-            public IActionResult DeleteStore()
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> Delete(string id)
         {
-            return View();
+            var isDelete = await StoreBLL.Delete(id);
+            if (isDelete)
+            {
+                return Json(new { success = "true" });
+
+            }
+            return Json(new { success = "false" });
         }
-       
+
     }
 }

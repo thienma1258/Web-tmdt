@@ -10,6 +10,7 @@ namespace Aoo.ViewModels.PM.Store
 {
     public class AddViewStoreModel
     {
+        public string Address { get; set; }
         [Required]
         public string NameStore { get; set; }
         public IFormFile DefaultImage { get; set; }
