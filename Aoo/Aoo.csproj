@@ -96,6 +96,7 @@
     <Folder Include="Controllers\Admin\Log\" />
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Controllers\Admin\System\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,6 +104,9 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Admin\PM\MainGroup\AddMainGroup.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Admin\PM\Product\AddProduct.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>

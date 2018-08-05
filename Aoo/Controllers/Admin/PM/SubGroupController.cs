@@ -18,8 +18,8 @@ namespace Aoo.Controllers.Admin.PM
     public class SubGroupController : BaseController
     {
         private readonly IMainGroupBLL MainGroupBLL;
-        private readonly IGenericBLL<SubGroup, string> SubGroupBLL;
-        public SubGroupController(IGenericBLL<SubGroup, string> subGroupBLL, IImageServices imageServices, IMainGroupBLL MainGroupBLL) : base(imageServices)
+        private readonly ISubGroupBLL SubGroupBLL;
+        public SubGroupController(ISubGroupBLL subGroupBLL, IImageServices imageServices, IMainGroupBLL MainGroupBLL) : base(imageServices)
         {
             SubGroupBLL = subGroupBLL;
             this.MainGroupBLL = MainGroupBLL;

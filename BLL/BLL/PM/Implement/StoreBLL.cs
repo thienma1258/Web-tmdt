@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class StoreBLL : GenericBLL, IGenericBLL<Store, string>
+    public class StoreBLL : GenericBLL, IStoreBLL
     {
         public StoreBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

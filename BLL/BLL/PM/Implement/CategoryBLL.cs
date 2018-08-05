@@ -9,7 +9,7 @@ using CacheHelpers;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class CategoryBLL : GenericBLL, IGenericBLL<Category,string>
+    public class CategoryBLL : GenericBLL, ICategoryBLL
     {
         public CategoryBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

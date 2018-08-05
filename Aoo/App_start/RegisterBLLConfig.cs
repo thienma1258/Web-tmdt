@@ -15,13 +15,15 @@ namespace Aoo.App_start
     {
         public static void RegisterBLL(ref IServiceCollection services)
         {
-            services.AddTransient<IGenericBLL<Brand,string>, BrandBLL>();
-            services.AddTransient<IGenericBLL<Store, string>, StoreBLL>();
+            services.AddTransient<IBrandBLL, BrandBLL>();
+            services.AddTransient<IStoreBLL, StoreBLL>();
             services.AddTransient<IDistrictBLL, DistrictBLL>();
             services.AddTransient<IProvinceBLL, ProvinceBLL>();
-  			services.AddTransient<IGenericBLL<Category, string>, CategoryBLL>();
+  			services.AddTransient<ICategoryBLL, CategoryBLL>();
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
-            services.AddTransient<IGenericBLL<SubGroup, string>, SubGroupBLL>();
+            services.AddTransient<ISubGroupBLL, SubGroupBLL>();
+            services.AddTransient<IProductBLL, ProductBLL>();
+
         }
     }
 }

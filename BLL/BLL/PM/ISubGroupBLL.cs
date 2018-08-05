@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BLL.BLL.PM
 {
-    public interface IStoreBLL : IGenericBLL<Store, string>
+    public interface ISubGroupBLL : IGenericBLL<SubGroup, string>
     {
     }
 }

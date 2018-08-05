@@ -1,57 +1,89 @@
-﻿@model DAL.Model.PM.Product
-
+﻿@model Aoo.ViewModels.PM.AddProductViewModel
+@inject BLL.BLL.PM.IBrandBLL BrandBLL
+@inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
+@inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
+@inject BLL.BLL.PM.ICategoryBLL CategoryBLL
 
 @{
     ViewData["Title"] = "AddProduct";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    var listCate = await CategoryBLL.Get();
+    var listBrand = await BrandBLL.Get();
+    var listSubGroup = await SubGroupBLL.Get();
+    var listMainGroup = await MainGroupBLL.Get();
 }
 
 <h2>AddProduct</h2>
 
-<h4>ProductViewModel</h4>
+<h4>AddProductViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddProduct">
+        <form asp-action="AddProduct" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Trạng Thái</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Quảng Cáo</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="isOnlineOnly" /> @Html.DisplayNameFor(model => model.isOnlineOnly)
+                    </label>
+                </div>
             </div>
             <div class="form-group">
-                <label class="control-label">Hàng Tồn</label>
+                <label asp-for="StockMin" class="control-label"></label>
                 <input asp-for="StockMin" class="form-control" />
                 <span asp-validation-for="StockMin" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                <label asp-for="LadingPage" class="control-label"></label>
+                <input asp-for="LadingPage" class="form-control" />
+                <span asp-validation-for="LadingPage" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
-                <label class="control-label">Size</label>
-                <input  class="form-control" />
-                <span class="text-danger"></span>
+                <label asp-for="DefaultImage" class="control-label"> </label>
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="MainGroup" class="control-label"></label>
+                <select asp-for="MainGroup" asp-items="@(new SelectList(listMainGroup,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="MainGroup" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="SubGroup" class="control-label"></label>
+                <select asp-for="SubGroup" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="SubGroup" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Brand" class="control-label"></label>
+                <select asp-for="Brand" asp-items="@(new SelectList(listBrand,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" asp-items="@(new SelectList(listCate,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Giá</label>
-                <input class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Hình Ảnh</label>
-                <input class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Tạo" class="btn btn-danger" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div class="backtolist">
-    <input type="submit" value="Trở Về" class="btn btn-info" />
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 

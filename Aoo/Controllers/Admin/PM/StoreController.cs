@@ -16,9 +16,9 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class StoreController : BaseController
     {
-        private readonly IGenericBLL<Store,string> StoreBLL;
+        private readonly IStoreBLL StoreBLL;
         
-        public StoreController(IGenericBLL<Store, string> storeBLL, IImageServices imageServices ) : base(imageServices)
+        public StoreController(IStoreBLL storeBLL, IImageServices imageServices ) : base(imageServices)
         {
             StoreBLL = storeBLL;
            

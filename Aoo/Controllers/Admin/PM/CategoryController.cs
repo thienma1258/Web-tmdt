@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -16,8 +17,8 @@ namespace Aoo.Controllers.Admin.PM
 
     public class CategoryController : BaseController
     {
-        private readonly IGenericBLL<Category, string> CategoryBLL;
-        public CategoryController(IGenericBLL<Category, string> categoryBLL, IImageServices imageServices): base(imageServices)        {
+        private readonly  ICategoryBLL CategoryBLL;
+        public CategoryController(ICategoryBLL categoryBLL, IImageServices imageServices): base(imageServices)        {
             CategoryBLL = categoryBLL;
                   }
 
