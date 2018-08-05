@@ -74,10 +74,8 @@ namespace Aoo.Controllers.Admin.PM
             if (ModelState.IsValid)
             {
 
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-                await editBrand.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, editBrand.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editBrand.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Brand objbrand = await this.BrandBLL.Find(editBrand.ID);

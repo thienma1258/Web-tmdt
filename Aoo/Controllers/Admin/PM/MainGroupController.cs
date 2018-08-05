@@ -14,14 +14,14 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class MainGroupController : Controller
+    public class MainGroupController : BaseController
     {
         private readonly IGenericBLL<MainGroup, string> MainGroupBLL;
-        public readonly IImageServices ImageServices;
-        public MainGroupController(IGenericBLL<MainGroup, string> maingroupdBLL, IImageServices imageServices)
+       
+        public MainGroupController(IGenericBLL<MainGroup, string> maingroupdBLL, IImageServices imageServices) : base(imageServices)
         {
             MainGroupBLL = maingroupdBLL;
-            this.ImageServices = imageServices;
+           
         }
         public async Task<IActionResult> Index()
         {
@@ -36,10 +36,8 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-                await addMainGroupViewModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, addMainGroupViewModel.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(addMainGroupViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     MainGroup mainGroup = new MainGroup()
@@ -77,10 +75,8 @@ namespace Aoo.Controllers.Admin.PM
             if (ModelState.IsValid)
             {
 
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-                await editViewMainGroupModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, editViewMainGroupModel.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editViewMainGroupModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     MainGroup objmaingroup = await this.MainGroupBLL.Find(editViewMainGroupModel.ID);

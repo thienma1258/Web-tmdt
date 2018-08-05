@@ -28,7 +28,7 @@
         </div>*@
             <div class="form-group">
                 <label asp-for="DefaultImage" class="control-label"></label>
-                <input asp-for="DefaultImage" class="form-control" />
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" }));
                 <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">

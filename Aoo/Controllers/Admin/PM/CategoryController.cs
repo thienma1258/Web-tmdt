@@ -13,14 +13,14 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private readonly IGenericBLL<Category, string> CategoryBLL;
-        public readonly IImageServices ImageServices;
-        public CategoryController(IGenericBLL<Category, string> categoryBLL, IImageServices imageServices)
+       
+        public CategoryController(IGenericBLL<Category, string> categoryBLL, IImageServices imageServices) : base(imageServices)
         {
             CategoryBLL = categoryBLL;
-            this.ImageServices = imageServices;
+           
         }
         public async Task<IActionResult> Index()
         {
@@ -36,10 +36,8 @@ namespace Aoo.Controllers.Admin.PM
         {
             if (ModelState.IsValid)
             {
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-                await addCategoryViewModel.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, addCategoryViewModel.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(addCategoryViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Category category = new Category()
@@ -75,10 +73,8 @@ namespace Aoo.Controllers.Admin.PM
             if (ModelState.IsValid)
             {
 
-                ImageErrorModel imageErrorModel;
-                MemoryStream memoryStream = new MemoryStream();
-                await editcategory.DefaultImage.CopyToAsync(memoryStream);
-                string ImagePath = this.ImageServices.UploadImage(memoryStream, editcategory.DefaultImage.FileName, out imageErrorModel);
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editcategory.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     Category objcategory = await this.CategoryBLL.Find(editcategory.ID);
