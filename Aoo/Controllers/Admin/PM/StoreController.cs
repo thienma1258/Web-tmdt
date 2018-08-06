@@ -67,8 +67,6 @@ namespace Aoo.Controllers.Admin.PM
                 ID=objStore.ID,
                 NameStore=objStore.NameStore,
                 Description=objStore.Description,
-                DefaultImageString=objStore.DefaultImage
-
             };
             return View(editViewStoreModel);
         }

@@ -17,10 +17,13 @@ namespace Aoo.App_start
         {
             services.AddTransient<IBrandBLL, BrandBLL>();
             services.AddTransient<IStoreBLL, StoreBLL>();
+            services.AddTransient<IGenericBLL<HomeSlider, string>, HomeSliderBLL>();
             services.AddTransient<IDistrictBLL, DistrictBLL>();
             services.AddTransient<IProvinceBLL, ProvinceBLL>();
+  			
   			services.AddTransient<ICategoryBLL, CategoryBLL>();
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
+          
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
             services.AddTransient<IProductBLL, ProductBLL>();
 
