@@ -13,12 +13,12 @@ namespace BLL.BLL.SM.Implement
         public SaleOrderBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-        private async void AddError(Exception objEx,SaleOrder saleOrder)
+        private async void AddLogSaleOrder(SaleOrder saleOrder)
         {
             SaleOrderLogs saleOrderLogs = new SaleOrderLogs
             {
                 AuthenticationMethodGuid = saleOrder.AuthenticationMethodGuid,
-                Logs = objEx.ToString(),
+                Logs = "Loi o order "+saleOrder.ID,
                 IsPay = saleOrder.IsPay,
                 TotalPrice = saleOrder.TotalPrice,
                 TransportTypePrice = saleOrder.TransportPrice.Price,
@@ -39,6 +39,7 @@ namespace BLL.BLL.SM.Implement
                 saleOrder.CreatedUser = CreatedUser;
                 this.unitOfWork.SaleOrderRepository.Insert(saleOrder);
                 await this.unitOfWork.SaveChangeAsync();
+                AddLogSaleOrder( saleOrder);
                 return true;
             }
             catch (Exception objEx)
@@ -96,6 +97,7 @@ namespace BLL.BLL.SM.Implement
                 saleOrder.EditedUser = UpdatedUser;
                 this.unitOfWork.SaleOrderRepository.Update(saleOrder);
                 await this.unitOfWork.SaveChangeAsync();
+                AddLogSaleOrder(saleOrder);
                 return true;
             }
             catch (Exception objEx)

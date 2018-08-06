@@ -10,6 +10,6 @@ namespace DAL.Model.PM
         public string Name { get; set; } = string.Empty;
         public string DefaultImage { get; set; }
         public string Description { get; set; }
-     
+        public IEnumerable<Product> Products { get; set; }
     }
 }

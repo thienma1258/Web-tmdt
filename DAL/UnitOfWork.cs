@@ -53,7 +53,7 @@ namespace DAL
         private ITransportPriceRepository transportPriceRepository;
         private ITransportTypeRepository transportTypeRepository;
         private IVoucherRepository voucherRepository;
-        private IWardRepository wardRepository;
+     
 
         #endregion
         #region SM

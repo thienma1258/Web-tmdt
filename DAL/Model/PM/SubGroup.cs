@@ -14,6 +14,7 @@ namespace DAL.Model.PM
         
         public TypeSexEnum TypeSex { get; set; } = TypeSexEnum.All;
         public virtual MainGroup MainGroup { get; set; }
+        public string MainGroupID { get; set; }
     
     }
 }

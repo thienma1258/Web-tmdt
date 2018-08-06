@@ -20,5 +20,8 @@ namespace DAL.Model
         public DateTime DateOfBirth { get; set; }
 
         public virtual System_Position Position {get;set;}
+        public string PositionID { get; set; }
+        public virtual IEnumerable<System_User_Permission> System_User_Permissions { get; set; }
+
     }
 }

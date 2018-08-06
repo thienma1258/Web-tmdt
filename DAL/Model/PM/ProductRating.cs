@@ -7,6 +7,7 @@ namespace DAL.Model.PM
 {
     public class ProductRating
     {
+        public string ProductID { get; set; }
         public virtual Product Product { get; set; }
         public float RateStar { get; set; } = 0;
         public virtual CM.CM_Customer Customer { get; set; }

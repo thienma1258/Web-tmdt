@@ -9,6 +9,8 @@ namespace DAL.Model.System
         public string NamePosition { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public virtual ICollection<System_Policy> List_System_Policies { get; set; }
+
         public virtual ICollection<System_User> List_Position_Users { get; set; }
     }
 }

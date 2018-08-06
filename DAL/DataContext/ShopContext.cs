@@ -27,7 +27,7 @@ namespace DAL.DataContext
         public DbSet<Category> Categories { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Province> Provinces { get; set; }
-        public DbSet<Ward> Wards { get; set; }
+        
 
         public DbSet<HomeCarousel> HomeCarousels { get; set; }
         public DbSet<HomeSlider> HomeSliders { get; set; }
@@ -71,10 +71,10 @@ namespace DAL.DataContext
         {
             base.OnModelCreating(builder);
             #region System
-
-            builder.Entity<System_Policy>().ToTable("System_Policy");
-            builder.Entity<System_Position>().ToTable("System_Position").HasMany(p=>p.List_Position_Users).WithOne(p=>p.Position);
-            builder.Entity<System_User_Permission>().ToTable("System_User_Permission");
+            builder.Entity<System_Policy>().ToTable("System_Policy").HasOne(p => p.System_Position).WithMany(p => p.List_System_Policies).HasForeignKey(p => p.System_PositionID).HasConstraintName("FK_System_Position_Policies");
+            builder.Entity<System_User>().ToTable("System_User").HasOne(p => p.Position).WithMany(p => p.List_Position_Users).HasForeignKey(p=>p.PositionID).HasConstraintName("FK_Position_Users");
+            builder.Entity<System_Position>().ToTable("System_Position");
+            builder.Entity<System_User_Permission>().ToTable("System_User_Permission").HasOne(p => p.ReviewUser).WithMany(p => p.System_User_Permissions).HasForeignKey(p=>p.ReviewUserID).HasConstraintName("FK_User_Permission");
             #endregion
             #region CM
             builder.Entity<CM_Customer>().ToTable("CM_Customer");
@@ -85,26 +85,29 @@ namespace DAL.DataContext
             builder.Entity<HomeCarousel>().ToTable("HomeCarousel");
             builder.Entity<HomeSlider>().ToTable("HomeSlider");
             builder.Entity<MainGroup>().ToTable("MainGroup");
-            builder.Entity<SubGroup>().ToTable("SubGroup");
-            builder.Entity<Store>().ToTable("Store");
+            builder.Entity<SubGroup>().ToTable("SubGroup").HasOne(p=>p.MainGroup).WithMany(p=>p.SubGroups).HasForeignKey(p=>p.MainGroupID).HasConstraintName("FK_SubGroup_MainGroup");
+            builder.Entity<Store>().ToTable("Store").HasOne(p=>p.District).WithMany(p=>p.Stores).HasForeignKey(p=>p.DistrictID).HasConstraintName("FK_Store_District");
             builder.Entity<Province>().ToTable("Province");
             builder.Entity<District>().ToTable("District");
-            builder.Entity<Ward>().ToTable("Ward");
 
             builder.Entity<Voucher>().ToTable("Voucher");
             builder.Entity<Discout>().ToTable("Discout");
-            builder.Entity<Product>().ToTable("Product");
-            builder.Entity<ProductDetails>().ToTable("ProductDetails");
+            builder.Entity<Product>().ToTable("Product").HasOne(p=>p.Brand).WithMany(p=>p.Products).HasForeignKey(p=>p.BrandID).HasConstraintName("FK_Brand_Products");
+            builder.Entity<Product>().HasOne(p => p.Category).WithMany(p => p.Products).HasForeignKey(p => p.CategoryID).HasConstraintName("FK_Category_Products");
+
+            builder.Entity<ProductDetails>().ToTable("ProductDetails").HasOne(p=>p.Product).WithMany(p=>p.ListProductDetails).HasForeignKey(p=>p.ProductID).HasConstraintName("FK_Product_ProductDetails");
             builder.Entity<TransportType>().ToTable("TransportType");
-            builder.Entity<TransportPrice>().ToTable("TransportPrice");
+            builder.Entity<TransportPrice>().ToTable("TransportPrice").HasOne(p=>p.TransportType).WithMany(p=>p.TransportPrices).HasForeignKey(p=>p.TransportTypeID).HasConstraintName("FK_TransportType_TransportPrice");
             #endregion
             #region SM
-            builder.Entity<SaleOrder>().ToTable("SaleOrder");
-            builder.Entity<SaleOrderDetail>().ToTable("SaleOrderDetail");
+            builder.Entity<SaleOrder>().ToTable("SaleOrder").HasOne(p=>p.Voucher).WithMany(p=>p.SaleOrders).HasForeignKey(p=>p.VoucherID).HasConstraintName("FK_Voucher_SaleOrders");
+            builder.Entity<SaleOrderDetail>().ToTable("SaleOrderDetail").HasOne(p=>p.Discout).WithMany(p=>p.SaleOrderDetails).HasForeignKey(p=>p.DiscoutID).HasConstraintName("FK_Discout_SaleOrderDetails");
             #endregion
             #region Log
             builder.Entity<ErrorLogs>().ToTable("ErrorLogs");
             builder.Entity<ImageUploadLog>().ToTable("ImageUploadLog");
+            builder.Entity<ImageUploadLog>().ToTable("ImageUploadLog");
+
             #endregion
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.

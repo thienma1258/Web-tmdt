@@ -8,10 +8,12 @@ namespace DAL.Model.PM
     public class District
     {
         [Key]
-        public string DistrictID{get;set;}
+        public string DistrictID { get; set; }
         public string Name { get; set; }
         public string type { get; set; }
         public string location { get; set; }
+        public string ProvinceID { get; set; }
         public virtual Province Province { get; set; }
+        public virtual IEnumerable<Store> Stores {get;set;}
     }
 }

@@ -17,11 +17,15 @@ namespace DAL.Model.PM
         public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
         //adidas nike
         public virtual  Brand Brand { get; set; }
+        public string BrandID { get; set; }
         public virtual Category Category { get; set; }
-        //nganh hang chinh giay dep tat
-        public virtual MainGroup MainGroup { get; set; }
+        public string CategoryID { get; set; }
+     
+
         // giay the thao giay công so, giay em be
         public virtual SubGroup SubGroup { get; set; }
-       
+        public string SubGroupID { get; set; }
+
+
     }
 }

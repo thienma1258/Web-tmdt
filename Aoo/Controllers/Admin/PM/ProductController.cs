@@ -60,7 +60,7 @@ namespace Aoo.Controllers.Admin.PM
                     };
                     product.Brand = await BrandBLL.Find(addProductViewModel.Brand);
                     product.Category = await CategorytBLL.Find(addProductViewModel.Category);
-                    product.MainGroup = await MainGroupBLL.Find(addProductViewModel.MainGroup);
+                    //product.MainGroup = await MainGroupBLL.Find(addProductViewModel.MainGroup);
                     product.SubGroup = await SubGroupBLL.Find(addProductViewModel.SubGroup);
                     await  ProductBLL.Add(product);
                     return RedirectToAction("Index");

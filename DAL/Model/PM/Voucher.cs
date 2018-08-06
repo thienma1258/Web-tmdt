@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Model.SM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -11,5 +12,6 @@ namespace DAL.Model.PM
         public int UniqueCode { get; set; }
         public int DiscoutRate { get; set; }
         public DateTime ExperiedTime { get; set; }
+        public IEnumerable<SaleOrder> SaleOrders { get; set; }
     }
 }

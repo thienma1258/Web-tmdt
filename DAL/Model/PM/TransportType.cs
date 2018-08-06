@@ -11,6 +11,7 @@ namespace DAL.Model.PM
 
         public int Prestige { get; set; }
         public string Note { get; set; }
+        public IEnumerable<TransportPrice> TransportPrices { get; set; }
         
     }
 }

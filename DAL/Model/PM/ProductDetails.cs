@@ -12,6 +12,7 @@ namespace DAL.Model.PM
     {
         public TypeColorEnum TypeColor { get; set; }
         public int Size { get; set; } = 0;
+        public string ProductID { get; set; }
         public virtual Product Product { get; set; }
 
         public string Specification { get; set; } = string.Empty;

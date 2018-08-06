@@ -214,11 +214,17 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("EndTime");
 
+                    b.Property<bool>("IsUsed");
+
+                    b.Property<string>("ProductID");
+
                     b.Property<DateTime>("StartTime");
 
                     b.Property<bool>("isDeleted");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ProductID");
 
                     b.ToTable("Discout");
                 });
@@ -330,6 +336,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("MetaKey");
 
+                    b.Property<string>("MetaTitle");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("TypeSex");
@@ -364,15 +372,11 @@ namespace DAL.Migrations
 
                     b.Property<string>("Details");
 
-                    b.Property<string>("DiscoutID");
-
                     b.Property<DateTime>("EditedDate");
 
                     b.Property<string>("EditedUser");
 
                     b.Property<string>("LadingPage");
-
-                    b.Property<string>("MainGroupID");
 
                     b.Property<string>("MetaDescription");
 
@@ -397,10 +401,6 @@ namespace DAL.Migrations
                     b.HasIndex("BrandID");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("DiscoutID");
-
-                    b.HasIndex("MainGroupID");
 
                     b.HasIndex("SubGroupID");
 
@@ -660,26 +660,6 @@ namespace DAL.Migrations
                     b.ToTable("Voucher");
                 });
 
-            modelBuilder.Entity("DAL.Model.PM.Ward", b =>
-                {
-                    b.Property<string>("WardId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DistrictID");
-
-                    b.Property<string>("Location");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Type");
-
-                    b.HasKey("WardId");
-
-                    b.HasIndex("DistrictID");
-
-                    b.ToTable("Ward");
-                });
-
             modelBuilder.Entity("DAL.Model.SM.SaleOrder", b =>
                 {
                     b.Property<string>("ID")
@@ -691,7 +671,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("CreatedUser");
 
-                    b.Property<string>("CustomerId");
+                    b.Property<string>("CustomerID");
 
                     b.Property<DateTime>("DeletedDate");
 
@@ -725,7 +705,7 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerID");
 
                     b.HasIndex("TransportPriceID");
 
@@ -795,7 +775,7 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("ReviewDate");
 
-                    b.Property<string>("ReviewUserId");
+                    b.Property<string>("ReviewUserID");
 
                     b.Property<string>("System_PositionID");
 
@@ -807,7 +787,7 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ReviewUserId");
+                    b.HasIndex("ReviewUserID");
 
                     b.HasIndex("System_PositionID");
 
@@ -861,11 +841,11 @@ namespace DAL.Migrations
 
                     b.Property<string>("EditedUser");
 
-                    b.Property<string>("RerviewUserId");
-
                     b.Property<DateTime>("ReviewDate");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("ReviewUserID");
+
+                    b.Property<string>("UserID");
 
                     b.Property<string>("UserPermission");
 
@@ -875,9 +855,9 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("RerviewUserId");
+                    b.HasIndex("ReviewUserID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("System_User_Permission");
                 });
@@ -944,7 +924,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("PositionID");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("System_User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1055,6 +1035,13 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DAL.Model.PM.Discout", b =>
+                {
+                    b.HasOne("DAL.Model.PM.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID");
+                });
+
             modelBuilder.Entity("DAL.Model.PM.District", b =>
                 {
                     b.HasOne("DAL.Model.PM.Province", "Province")
@@ -1065,20 +1052,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Model.PM.Product", b =>
                 {
                     b.HasOne("DAL.Model.PM.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandID");
+                        .WithMany("Products")
+                        .HasForeignKey("BrandID")
+                        .HasConstraintName("FK_Brand_Products");
 
                     b.HasOne("DAL.Model.PM.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID");
-
-                    b.HasOne("DAL.Model.PM.Discout")
-                        .WithMany("Product")
-                        .HasForeignKey("DiscoutID");
-
-                    b.HasOne("DAL.Model.PM.MainGroup", "MainGroup")
-                        .WithMany()
-                        .HasForeignKey("MainGroupID");
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryID")
+                        .HasConstraintName("FK_Category_Products");
 
                     b.HasOne("DAL.Model.PM.SubGroup", "SubGroup")
                         .WithMany()
@@ -1089,21 +1070,24 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Model.PM.Product", "Product")
                         .WithMany("ListProductDetails")
-                        .HasForeignKey("ProductID");
+                        .HasForeignKey("ProductID")
+                        .HasConstraintName("FK_Product_ProductDetails");
                 });
 
             modelBuilder.Entity("DAL.Model.PM.Store", b =>
                 {
                     b.HasOne("DAL.Model.PM.District", "District")
-                        .WithMany()
-                        .HasForeignKey("DistrictID");
+                        .WithMany("Stores")
+                        .HasForeignKey("DistrictID")
+                        .HasConstraintName("FK_Store_District");
                 });
 
             modelBuilder.Entity("DAL.Model.PM.SubGroup", b =>
                 {
                     b.HasOne("DAL.Model.PM.MainGroup", "MainGroup")
                         .WithMany("SubGroups")
-                        .HasForeignKey("MainGroupID");
+                        .HasForeignKey("MainGroupID")
+                        .HasConstraintName("FK_SubGroup_MainGroup");
                 });
 
             modelBuilder.Entity("DAL.Model.PM.TransportPrice", b =>
@@ -1113,37 +1097,33 @@ namespace DAL.Migrations
                         .HasForeignKey("DistrictID");
 
                     b.HasOne("DAL.Model.PM.TransportType", "TransportType")
-                        .WithMany()
-                        .HasForeignKey("TransportTypeID");
-                });
-
-            modelBuilder.Entity("DAL.Model.PM.Ward", b =>
-                {
-                    b.HasOne("DAL.Model.PM.District", "District")
-                        .WithMany()
-                        .HasForeignKey("DistrictID");
+                        .WithMany("TransportPrices")
+                        .HasForeignKey("TransportTypeID")
+                        .HasConstraintName("FK_TransportType_TransportPrice");
                 });
 
             modelBuilder.Entity("DAL.Model.SM.SaleOrder", b =>
                 {
                     b.HasOne("DAL.Model.CM.CM_Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerID");
 
                     b.HasOne("DAL.Model.PM.TransportPrice", "TransportPrice")
                         .WithMany()
                         .HasForeignKey("TransportPriceID");
 
                     b.HasOne("DAL.Model.PM.Voucher", "Voucher")
-                        .WithMany()
-                        .HasForeignKey("VoucherID");
+                        .WithMany("SaleOrders")
+                        .HasForeignKey("VoucherID")
+                        .HasConstraintName("FK_Voucher_SaleOrders");
                 });
 
             modelBuilder.Entity("DAL.Model.SM.SaleOrderDetail", b =>
                 {
                     b.HasOne("DAL.Model.PM.Discout", "Discout")
-                        .WithMany()
-                        .HasForeignKey("DiscoutID");
+                        .WithMany("SaleOrderDetails")
+                        .HasForeignKey("DiscoutID")
+                        .HasConstraintName("FK_Discout_SaleOrderDetails");
 
                     b.HasOne("DAL.Model.PM.Product", "Product")
                         .WithMany()
@@ -1158,29 +1138,32 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Model.System_User", "ReviewUser")
                         .WithMany()
-                        .HasForeignKey("ReviewUserId");
+                        .HasForeignKey("ReviewUserID");
 
                     b.HasOne("DAL.Model.System.System_Position", "System_Position")
-                        .WithMany()
-                        .HasForeignKey("System_PositionID");
+                        .WithMany("List_System_Policies")
+                        .HasForeignKey("System_PositionID")
+                        .HasConstraintName("FK_System_Position_Policies");
                 });
 
             modelBuilder.Entity("DAL.Model.System.System_User_Permission", b =>
                 {
-                    b.HasOne("DAL.Model.System_User", "RerviewUser")
-                        .WithMany()
-                        .HasForeignKey("RerviewUserId");
+                    b.HasOne("DAL.Model.System_User", "ReviewUser")
+                        .WithMany("System_User_Permissions")
+                        .HasForeignKey("ReviewUserID")
+                        .HasConstraintName("FK_User_Permission");
 
                     b.HasOne("DAL.Model.System_User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("DAL.Model.System_User", b =>
                 {
                     b.HasOne("DAL.Model.System.System_Position", "Position")
                         .WithMany("List_Position_Users")
-                        .HasForeignKey("PositionID");
+                        .HasForeignKey("PositionID")
+                        .HasConstraintName("FK_Position_Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
