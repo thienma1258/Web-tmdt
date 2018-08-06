@@ -55,8 +55,6 @@ namespace Aoo.Controllers.Admin.PM
                         StockMin = addProductViewModel.StockMin,
                         Details=addProductViewModel.Details
                         //LadingPage = addProductViewModel.LadingPage,
-
-
                     };
                     product.BrandID = addProductViewModel.Brand;
                     product.CategoryID = addProductViewModel.Category;

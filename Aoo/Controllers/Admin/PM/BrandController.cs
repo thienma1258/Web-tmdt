@@ -17,6 +17,7 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class BrandController : BaseController
     {
+        
         private readonly IBrandBLL BrandBLL;
         public BrandController(IBrandBLL brandBLL,IImageServices imageServices):base(imageServices)
         {

@@ -1,6 +1,5 @@
 ﻿.tablebrand{
-    margin-top:1%;
-
+    margin-top:5%;
 }
     .tablebrand th {
         text-align:center;
@@ -15,7 +14,7 @@ img{
 }
 .subadd {
     opacity: 0.8;
-    width: 6%;
+    width: 7%;
     float: right;
     border-radius: 5px;
     font-size: 22px;
