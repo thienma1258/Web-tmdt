@@ -52,14 +52,13 @@
 
 <div class="uploader">
     <img src="~/images/Graphicloads-100-Flat-Upload.ico" id="UploadIconImages" />
-    <img id="imagereview" src="@defaultImage" />
+    <img id="imagereview" src="@Url.Content(defaultImage)" />
     <input type="file" name="@Model.Name" id="filePhoto" />
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        if ($('#imagereview').val() == "") {
+        if ($('#imagereview').attr('src') == "") {
             $('#imagereview').css('display', 'none');
-
 
         }
 

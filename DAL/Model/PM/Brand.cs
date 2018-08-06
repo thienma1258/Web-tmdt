@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Model.PM
 {
-    public class Brand:TrackingObject
+    public class Brand:SeoObject
     {
      
         public string Name { get; set; } = string.Empty;
@@ -13,11 +13,6 @@ namespace DAL.Model.PM
         public string DefaultImage { get; set; }
 
 
-        #region SEO
-        public string MetaTitle { get; set; }
-        public string MetaKey { get; set; }
-        public string MetaDescription { get; set; }
-        public string UrlFriendly { get; set; }
-        #endregion
+       
     }
 }

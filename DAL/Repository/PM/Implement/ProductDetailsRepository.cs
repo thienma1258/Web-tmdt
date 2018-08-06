@@ -6,17 +6,12 @@ using System.Text;
 
 namespace DAL.Repository.PM.Implement
 {
-    public class ProductDetailsRepository : GenericRepository<ProductDetails, string>, IProductDetailsRepository
+    public class ProductDetailsRepository :TrackingObjectRepository<ProductDetails>, IProductDetailsRepository
     {
         public ProductDetailsRepository(ShopContext context) : base(context)
         {
         }
 
-        public override void Delete(ProductDetails entityToDelete,string DeletedUser)
-        {
-            entityToDelete.isDeleted = true;
-            entityToDelete.DeletedDate = DateTime.Now;
-            entityToDelete.DeletedUser = DeletedUser;
-        }
+     
     }
 }

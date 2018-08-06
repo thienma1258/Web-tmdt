@@ -6,16 +6,11 @@ using System.Text;
 
 namespace DAL.Repository.PM.Implement
 {
-    public class MainGroupRepository : GenericRepository<MainGroup, string>, IMainGroupRepository
+    public class MainGroupRepository :SeoRepository<MainGroup>, IMainGroupRepository
     {
         public MainGroupRepository(ShopContext context) : base(context)
         {
         }
-        public override void Delete(MainGroup entityToDelete,string DeletedUser)
-        {
-            entityToDelete.isDeleted = true;
-            entityToDelete.DeletedDate = DateTime.Now;
-            entityToDelete.DeletedUser = DeletedUser;
-        }
+        
     }
 }

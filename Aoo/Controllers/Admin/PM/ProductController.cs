@@ -16,7 +16,7 @@ namespace Aoo.Controllers.Admin.PM
     public class ProductController : BaseController
     {
         private readonly IProductBLL ProductBLL;
-        private readonly IGenericBLL<Brand, string> BrandBLL;
+        private readonly IBrandBLL BrandBLL;
         private readonly ICategoryBLL CategorytBLL;
         private readonly IMainGroupBLL MainGroupBLL;
         private readonly ISubGroupBLL SubGroupBLL;

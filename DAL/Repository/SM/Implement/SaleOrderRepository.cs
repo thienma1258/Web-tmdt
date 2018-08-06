@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAL.Repository.SM.Implement
 {
-    public class SaleOrderRepository : GenericRepository<SaleOrder, string>, ISaleOrderRepository
+    public class SaleOrderRepository : TrackingObjectRepository<SaleOrder>, ISaleOrderRepository
     {
         public SaleOrderRepository(ShopContext context) : base(context)
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aoo.ViewModels.PM.Brand;
 using BLL;
+using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -16,8 +17,8 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class BrandController : BaseController
     {
-        private readonly IGenericBLL<Brand,string> BrandBLL;
-        public BrandController(IGenericBLL<Brand,string> brandBLL,IImageServices imageServices):base(imageServices)
+        private readonly IBrandBLL BrandBLL;
+        public BrandController(IBrandBLL brandBLL,IImageServices imageServices):base(imageServices)
         {
             BrandBLL = brandBLL;
         }

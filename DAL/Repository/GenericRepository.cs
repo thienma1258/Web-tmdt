@@ -79,5 +79,10 @@ namespace DAL.Repository
         public virtual void Delete(TEntity entityToDelete)
         {
         }
+
+        public virtual int Cout()
+        {
+            return dbSet.Count();
+        }
     }
 }

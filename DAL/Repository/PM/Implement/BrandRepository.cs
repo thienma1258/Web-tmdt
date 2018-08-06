@@ -7,7 +7,7 @@ using DAL.DataContext;
 using DAL.Model.PM;
 namespace DAL.Repository.PM.Implement
 {
-    public class BrandRepository : GenericRepository<Brand, string>, IBrandRepository
+    public class BrandRepository :SeoRepository<Brand>, IBrandRepository
     {
         public BrandRepository(ShopContext context) : base(context)
         {
@@ -16,11 +16,6 @@ namespace DAL.Repository.PM.Implement
 
         
 
-        public override void Delete(Brand entityToDelete,string DeletedUser)
-        {
-            entityToDelete.isDeleted = true;
-            entityToDelete.DeletedDate = DateTime.Now;
-            entityToDelete.DeletedUser = DeletedUser;
-        }
+    
     }
 }

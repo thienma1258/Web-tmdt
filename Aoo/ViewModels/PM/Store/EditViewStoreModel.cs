@@ -18,6 +18,7 @@ namespace Aoo.ViewModels.PM.Store
         public string NameStore { get; set; }
         [Required]
         public IFormFile DefaultImage { get; set; }
+        public string DefaultImageString { get; set; }
         [MaxLength(80)]
         [MinLength(5)]
         [Required]

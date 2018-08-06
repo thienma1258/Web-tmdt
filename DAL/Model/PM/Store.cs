@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 namespace DAL.Model.PM
 {
-    public class Store:TrackingObject
+    public class Store:SeoObject
     {
         
         public string NameStore { get; set; }
@@ -15,11 +15,6 @@ namespace DAL.Model.PM
         public float Lat { get; set; }
         public float Lng { get; set; }
         public string DefaultImage { get; set; }
-        #region SEO
-        public string MetaTitle { get; set; }
-        public string MetaKey { get; set; }
-        public string MetaDescription { get; set; }
-        public string UrlFriendly { get; set; }
-        #endregion
+      
     }
 }

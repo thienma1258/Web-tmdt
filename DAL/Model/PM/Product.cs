@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Model.PM
 {
-   public  class Product:TrackingObject
+   public  class Product:SeoObject
     {
         public string Model { get; set; } = string.Empty;
         public bool isOnlineOnly { get; set; } = false;
@@ -22,11 +22,6 @@ namespace DAL.Model.PM
         public virtual MainGroup MainGroup { get; set; }
         // giay the thao giay công so, giay em be
         public virtual SubGroup SubGroup { get; set; }
-        #region SEO
-        public string MetaTitle { get; set; }
-        public string MetaKey { get; set; }
-        public string MetaDescription { get; set; }
-        public string UrlFriendly { get; set; }
-        #endregion
+       
     }
 }

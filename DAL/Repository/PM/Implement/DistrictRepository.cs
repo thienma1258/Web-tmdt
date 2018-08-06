@@ -44,8 +44,6 @@ namespace DAL.Repository.PM
 
   
 
-      
-
         public override void Insert(District entity)
         {
             return ;
