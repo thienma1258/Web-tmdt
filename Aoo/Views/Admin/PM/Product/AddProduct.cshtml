@@ -39,10 +39,10 @@
                 <span asp-validation-for="StockMin" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="LadingPage" class="control-label"></label>
-                <input asp-for="LadingPage" class="form-control" />
-                <span asp-validation-for="LadingPage" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="LadingPage" class="control-label"></label>
+                    <input asp-for="LadingPage" class="form-control" />
+                    <span asp-validation-for="LadingPage" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="DefaultImage" class="control-label"> </label>
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
@@ -76,6 +76,9 @@
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
+            <div>
+                <textarea name="Details"  style="width:100%;height:400px" id="editor"></textarea>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -86,4 +89,14 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+
 

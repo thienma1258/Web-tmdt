@@ -53,6 +53,7 @@ namespace Aoo.Controllers.Admin.PM
                         DefaultImage = ImagePath,
                         isOnlineOnly = addProductViewModel.isOnlineOnly,
                         StockMin = addProductViewModel.StockMin,
+                        Details=addProductViewModel.Details
                         //LadingPage = addProductViewModel.LadingPage,
 
 
