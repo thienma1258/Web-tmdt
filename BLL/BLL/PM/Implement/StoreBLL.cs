@@ -34,7 +34,7 @@ namespace BLL.BLL.PM.Implement
 
         public int Cout()
         {
-            throw new NotImplementedException();
+            return this.unitOfWork.BrandRepository.Cout();
         }
 
         public async Task<bool> Delete(string storeID, string DeletedUser = "adminstrator")

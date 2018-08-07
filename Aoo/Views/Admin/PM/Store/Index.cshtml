@@ -1,55 +1,54 @@
 ﻿@model IEnumerable<DAL.Model.PM.Store>
-    @{
-        ViewData["Title"] = "Index";
-        Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";  
-    }
-    <h2> Danh sách cửa hàng </h2>
-    <table class="tablestore">
-        <thead>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+<h2> Danh sách cửa hàng </h2>
+<table class="tablestore">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameStore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NameStore)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DefaultImage)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NameStore)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
-                    </td>
-                    <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameStore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
+                </td>
+                <td>
 
-                        @Html.ActionLink("Add", "AddStore") |
-                        @Html.ActionLink("Edit", "EditStore", new { id = item.ID }) |
-                     
-                        @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <script src="~/js/Admin/PM/scripts.js"></script>
+                    @Html.ActionLink("Add", "AddStore") |
+                    @Html.ActionLink("Edit", "EditStore", new { id = item.ID }) |
+                    @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
 <script src="~/js/Admin/PM/scripts.js"></script>
 
 

@@ -29,9 +29,11 @@ namespace Aoo.Controllers.Admin.PM
         //    return listMainGroup;
 
         //}
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await SubGroupBLL.Get(6));
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(SubGroupBLL.Cout());
+            return View(await SubGroupBLL.Get(numberPerPage, page));
         }
         public async Task<IActionResult> AddSubGroup()
         {

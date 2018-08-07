@@ -13,7 +13,6 @@
     var listMainGroup = await MainGroupBLL.Get();
 }
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
-<link href="~/css/Admin/admindev.css" rel="stylesheet" />
 @*<body>
     <!-- morris JavaScript -->
     <script>
@@ -102,7 +101,10 @@
         });
     </script>
 </body>>*@
+
+
 <h2 class="titlename">Danh Sách Sản Phẩm</h2>
+<input type="text" placeholder="Bạn muốn tìm gì" />
 <div class="editbtn">
     <button type="button" class="btn-info fa fa-search btnsearch" aria-hidden="true"> Tìm kiếm</button>
     <button type="button" class="btn-danger fa fa-plus btnadd" onclick="window.location.href='/Product/AddProduct'"> Thêm mới</button>
@@ -193,14 +195,15 @@
                 <div class="suabtn">
                     <button type="button" class="btn-success fa fa-pencil btnedit"> Sửa</button>
                 </div>
+                <div class="delbtn fa fa-trash">
                     @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                </div>
             </th>
         </tr>
     }
 </table>
 @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage });
 <script src="~/js/Admin/PM/scripts.js"></script>
-
 
 
 

@@ -1,5 +1,6 @@
 ﻿.tablebrand{
     margin-top:5%;
+    width:99%;
 }
     .tablebrand th {
         text-align:center;
@@ -20,6 +21,19 @@
     cursor: pointer;
 }
 .tabledisplay .notdisplay{
+}
+.tabledisplay .delbtn{
+    width: 70%;
+    margin: -16.5% 0% 0px 70px;
+}
+.tabledisplay .delbtn button {
+    width:48%;
+    margin-top:-54px;
+}
+.fa-trash:before{
+    position:absolute;
+    margin:-1.6em 0 0 0.3em;
+    color:#fff;
 }
 img {
     padding: 10px;

@@ -20,32 +20,33 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <th>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Name)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Description)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <img src=@Url.Content(item.DefaultImage) />
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <div class="subedit">
                             <a href="/Category/EditCategory?id=@item.ID">Sửa</a>
                         </div>
                         @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
                         @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
-                    </th>
+                    </td>
                 </tr>
             }
         </tbody>
 </table>
-@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage });
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
 
 <script src="~/js/Admin/PM/scripts.js"></script>

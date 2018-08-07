@@ -8,7 +8,7 @@
 <h2>Trang chủ ngành hạng phụ</h2>
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <div class="subadd">
-    <a href="/SubGroup/AddSubGroup">Thêm</a> 
+    <a href="/SubGroup/AddSubGroup">Thêm</a>
 </div>
 <table class="tablebrand">
     <thead>
@@ -55,4 +55,5 @@
         }
     </tbody>
 </table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
 <script src="~/js/Admin/PM/scripts.js"></script>

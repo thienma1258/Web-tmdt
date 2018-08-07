@@ -12,14 +12,8 @@
     <Compile Remove="Views\HomeSlider\**" />
     <Compile Remove="Views\SubGroup\**" />
     <Compile Remove="wwwroot\js\Shop\**" />
-    <Content Remove="Views\HomeSlider\**" />
-    <Content Remove="Views\SubGroup\**" />
     <Content Remove="wwwroot\js\Shop\**" />
-    <EmbeddedResource Remove="Views\HomeSlider\**" />
-    <EmbeddedResource Remove="Views\SubGroup\**" />
     <EmbeddedResource Remove="wwwroot\js\Shop\**" />
-    <None Remove="Views\HomeSlider\**" />
-    <None Remove="Views\SubGroup\**" />
     <None Remove="wwwroot\js\Shop\**" />
   </ItemGroup>
 
@@ -103,6 +97,7 @@
     <Folder Include="Controllers\Admin\CM\" />
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Controllers\Admin\System\" />
+    <Folder Include="Views\SubGroup\" />
   </ItemGroup>
 
   <ItemGroup>

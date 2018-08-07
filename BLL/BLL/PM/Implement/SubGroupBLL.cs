@@ -34,11 +34,6 @@ namespace BLL.BLL.PM
             }
         }
 
-        public int Cout()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> Delete(string SubGroupID, string DeletedUser = "adminstrator")
         {
             try
@@ -89,6 +84,10 @@ namespace BLL.BLL.PM
                 AddError(objEx);
                 return false;
             }
+        }
+        public int Cout()
+        {
+            return this.unitOfWork.BrandRepository.Cout();
         }
     }
 }
