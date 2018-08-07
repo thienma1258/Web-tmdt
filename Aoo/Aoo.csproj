@@ -97,6 +97,7 @@
     <Folder Include="Controllers\Admin\CM\" />
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Controllers\Admin\System\" />
+    <Folder Include="Views\Product\" />
     <Folder Include="Views\SubGroup\" />
   </ItemGroup>
 

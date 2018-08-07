@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-
+@model IEnumerable<DAL.Model.PM.Brand>
 <!DOCTYPE html>
 
 <html>
@@ -13,9 +13,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="keywords" content="Groovy Apparel a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
     @*<script src="https://pagead2.googlesyndication.com/pagead/js/r20180723/r20180604/osd.js"></script>
-    <script src="https://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-7733626117287363.js"></script>
-    <script async="" src="//www.google-analytics.com/analytics.js"></script>
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>*@
+        <script src="https://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-7733626117287363.js"></script>
+        <script async="" src="//www.google-analytics.com/analytics.js"></script>
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>*@
     <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css" media="all">
     <!-- Index-Page-CSS -->
     <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all">
@@ -34,35 +34,34 @@
     <!-- TTF -->
     <link rel="stylesheet" href="~/fonts/fontawesome-webfont.ttf" type="text/css" media="all">
     <!-- //Font-Awesome-File-Links -->
-
     @*<script id="_bsa_srv-CKYI627U_0" type="text/javascript" src="https://srv.buysellads.com/ads/CKYI627U.json?callback=_bsa_go&amp;segment=placement:w3layoutscom"></script>
-    <script id="_bsa_srv-CKYI653J_1" type="text/javascript" src="https://srv.buysellads.com/ads/CKYI653J.json?callback=_bsa_go&amp;segment=placement:w3layoutscom"></script>
-    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script async="" src="//eboundservices.com/ads/country.php"></script>
-    <style type="text/css">
-        .eboundDynamicAdsbygoogle {
-            display: none !important;
-        }
-    </style>
-    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script async="" src="//eboundservices.com/ads/country.php"></script>
-    <style type="text/css">
-        .eboundDynamicAdsbygoogle {
-            display: none !important;
-        }
-    </style>
-    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script async="" src="//eboundservices.com/ads/country.php"></script>
-    <style type="text/css">
-        .eboundDynamicAdsbygoogle {
-            display: none !important;
-        }
-    </style>
-    <link rel="preload" href="https://adservice.google.com.vn/adsid/integrator.js?domain=p.w3layouts.com" as="script">
-    <script type="text/javascript" src="https://adservice.google.com.vn/adsid/integrator.js?domain=p.w3layouts.com"></script>
-    <link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=p.w3layouts.com" as="script">
-    <script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=p.w3layouts.com"></script>
-    <script id="_bsa_srv-CKYDL2JN_2" type="text/javascript" src="https://srv.buysellads.com/ads/CKYDL2JN.json?callback=_bsa_go&amp;segment=placement:demo"></script>*@
+        <script id="_bsa_srv-CKYI653J_1" type="text/javascript" src="https://srv.buysellads.com/ads/CKYI653J.json?callback=_bsa_go&amp;segment=placement:w3layoutscom"></script>
+        <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script async="" src="//eboundservices.com/ads/country.php"></script>
+        <style type="text/css">
+            .eboundDynamicAdsbygoogle {
+                display: none !important;
+            }
+        </style>
+        <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script async="" src="//eboundservices.com/ads/country.php"></script>
+        <style type="text/css">
+            .eboundDynamicAdsbygoogle {
+                display: none !important;
+            }
+        </style>
+        <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script async="" src="//eboundservices.com/ads/country.php"></script>
+        <style type="text/css">
+            .eboundDynamicAdsbygoogle {
+                display: none !important;
+            }
+        </style>
+        <link rel="preload" href="https://adservice.google.com.vn/adsid/integrator.js?domain=p.w3layouts.com" as="script">
+        <script type="text/javascript" src="https://adservice.google.com.vn/adsid/integrator.js?domain=p.w3layouts.com"></script>
+        <link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=p.w3layouts.com" as="script">
+        <script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=p.w3layouts.com"></script>
+        <script id="_bsa_srv-CKYDL2JN_2" type="text/javascript" src="https://srv.buysellads.com/ads/CKYDL2JN.json?callback=_bsa_go&amp;segment=placement:demo"></script>*@
 </head>
 <body>
     <!-- Header -->
@@ -86,14 +85,14 @@
                 <div id="bs-megadropdown-tabs" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="mens.html" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> MEN </span></a>
+                            <a href="~/Product/Index" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> MEN </span></a>
                             <ul class="dropdown-menu aits-w3 multi multi1">
                                 <div class="row">
 
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
                                             <li class="heading">FEATURED</li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
+                                            <li><a href="~/Shop/MenShop">SHOP MEN</a></li>
                                             <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
                                             <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
                                             <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
@@ -104,7 +103,7 @@
 
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
                                         <p>TORSO</p>
-                                        <a href="mens.html"><img src="~/images/men-nav-1.jpg" alt="Groovy Apparel"></a>
+                                        <a href="~/Product/Index"><img src="~/images/men-nav-1.jpg" alt="Groovy Apparel"></a>
                                     </div>
 
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-3">
@@ -132,7 +131,7 @@
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
                                             <li class="heading">FEATURED</li>
-                                            <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
+                                            <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
                                             <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
                                             <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
                                             <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
@@ -171,7 +170,7 @@
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
                                             <li class="heading">FEATURED</li>
-                                            <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
+                                            <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
                                             <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
                                             <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
                                             <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
@@ -210,7 +209,7 @@
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
                                             <li class="heading">FEATURED</li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
+                                            <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
                                             <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
                                             <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
                                             <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
@@ -251,15 +250,15 @@
                         </li>
                         <li class="wthreecartaits wthreecartaits2 cart cart box_1">
                             <form action="#" method="post" class="last">
-                                
-                                    <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="display" value="1" />
-                                    
-                                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="display" value="1" />
+
+                                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
                             </form>
-                            
+
                         </li>
-                        
+
                     </ul>
 
                 </div>

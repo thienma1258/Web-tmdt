@@ -1,0 +1,80 @@
+﻿@model Aoo.ViewModels.PM.Product.EditProductViewModel
+@inject BLL.BLL.PM.IBrandBLL BrandBLL
+@*@inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL*@
+@inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
+@inject BLL.BLL.PM.ICategoryBLL CategoryBLL
+
+@{
+    ViewData["Title"] = "EditProduct";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    var listCate = await CategoryBLL.Get();
+    var listBrand = await BrandBLL.Get();
+    var listSubGroup = await SubGroupBLL.Get();
+    /*var listMainGroup = await MainGroupBLL.Get();*/
+}
+<h2>EditProduct</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditProduct">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="isOnlineOnly" /> @Html.DisplayNameFor(model => model.isOnlineOnly)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="StockMin" class="control-label"></label>
+                <input asp-for="StockMin" class="form-control" />
+                <span asp-validation-for="StockMin" class="text-danger"></span>
+            </div>
+            <div style="width:250%">
+                <textarea name="Details" style="width:100%;height:400px" id="editor"></textarea>
+            </div>
+            <div>
+                <label asp-for="SubGroup" class="control-label"></label>
+                <select asp-for="SubGroup" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="SubGroup" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <label asp-for="Brand" class="control-label"></label>
+                <select asp-for="Brand" asp-items="@(new SelectList(listBrand,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" asp-items="@(new SelectList(listCate,"ID","Name"))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultImage" class="control-label"> </label>
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage",DefaultImage=Model.OldImage})
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

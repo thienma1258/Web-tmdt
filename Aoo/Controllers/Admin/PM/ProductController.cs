@@ -81,6 +81,50 @@ namespace Aoo.Controllers.Admin.PM
             }
             return View();
         }
+        public async Task<IActionResult> EditProduct(string id)
+        {
+
+            Product objproduct = await this.ProductBLL.Find(id);
+            ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
+            {
+                Model=objproduct.Model,
+                Details=objproduct.Details,
+                isOnlineOnly=objproduct.isOnlineOnly,
+                StockMin=objproduct.StockMin,
+                OldImage = objproduct.DefaultImage
+            };
+            return View(editProductViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(ViewModels.PM.Product.EditProductViewModel editProductViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ImageErrorModel imageErrorModel = new ImageErrorModel();
+                string ImagePath = UploadImage(editProductViewModel.DefaultImage, ref imageErrorModel);
+                if (imageErrorModel.isSuccess)
+                {
+                    Product product = new Product()
+                    {
+                        
+                        Model = editProductViewModel.Model,
+                        DefaultImage=ImagePath,
+                        isOnlineOnly = editProductViewModel.isOnlineOnly,
+                        StockMin = editProductViewModel.StockMin,
+                        Details = editProductViewModel.Details
+                    };
+
+                    product.BrandID = editProductViewModel.Brand;
+                    product.CategoryID = editProductViewModel.Category;
+                    product.SubGroupID = editProductViewModel.SubGroup;
+                    await ProductBLL.Update(product);
+                    return RedirectToAction("Index");
+                }
+              
+            }
+            return View();
+        }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)
         {

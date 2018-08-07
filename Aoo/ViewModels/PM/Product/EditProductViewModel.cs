@@ -1,14 +1,13 @@
-﻿using DAL.Model.PM;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Aoo.ViewModels.PM
+namespace Aoo.ViewModels.PM.Product
 {
-    public class AddProductViewModel
+    public class EditProductViewModel
     {
         [Required]
         [MinLength(5)]
@@ -18,8 +17,6 @@ namespace Aoo.ViewModels.PM
         [Required]
         public IFormFile DefaultImage { get; set; }
         public string Details { get; set; }
-        //public string LadingPage { get; set; }
-        //public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
         //adidas nike
         public string Brand { get; set; }
         public string Category { get; set; }
