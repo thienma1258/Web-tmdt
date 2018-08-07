@@ -95,7 +95,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Admin\CM\" />
-    <Folder Include="Controllers\Admin\Log\" />
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Controllers\Admin\System\" />
     <Folder Include="Views\SubGroup\" />
