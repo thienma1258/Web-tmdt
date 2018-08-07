@@ -28,13 +28,23 @@ namespace Aoo.Controllers.Admin.PM
             this.CategorytBLL = categoryBLL;
             this.SubGroupBLL = subGrouptBLL;
         }
-
-        public async Task<IActionResult> Index(int page=1)
+        
+        public async Task<IActionResult> Index(int page=1,string contain=null)
         {
             ViewBag.currentPage = page;
             ViewBag.totalPage = TotalPage(ProductBLL.Cout());
+            if (contain != null)
+            { 
+                var ListResult = await ProductBLL.Get(numberPerPage,page,filter: p => p.Model.Contains(contain));
+                ViewBag.currentPage = page;
+                ViewBag.totalPage = TotalPage(ProductBLL.Cout(filter: p => p.Model.Contains(contain)));
+                return View(ListResult);
+            }
             return View(await ProductBLL.Get(numberPerPage, page));
+            
+           
         }
+      
         public async Task<IActionResult> AddProduct()
         {
             return View();
