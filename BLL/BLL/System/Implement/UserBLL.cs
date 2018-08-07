@@ -14,13 +14,13 @@ namespace BLL.BLL.System.Implement
     {
         SignInManager<System_User> signInManager;
         UserManager<System_User> userManager;
-        private readonly ILogger _logger;
-        public UserBLL(IUnitOfWork unitOfWork, UserManager<System_User> userManager,
-          SignInManager<System_User> signInManager,IDataCache dataCache, ILogger logger) : base(unitOfWork,dataCache)
+        RoleManager<IdentityRole> roleManager;
+        public UserBLL(IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager, UserManager<System_User> userManager,
+          SignInManager<System_User> signInManager,IDataCache dataCache) : base(unitOfWork,dataCache)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
-            this._logger = logger;
+            this.roleManager = roleManager;
         }
         #region ResultProperty
         public IdentityResult IdentityResult { get; set; }
@@ -28,17 +28,35 @@ namespace BLL.BLL.System.Implement
         #endregion
         public async Task<bool> Add(System_User user,string Password,string Role)
         {
-            ///Add User
-            var result = await userManager.CreateAsync(user, Password);
-            if (result.Succeeded)
+            try
             {
-                var currentUser = await userManager.FindByNameAsync(user.UserName);
-                var roleresult = await userManager.AddToRoleAsync(currentUser, Role);
-                return true;
-            }
-            else
-            {
+                bool roleExists = await roleManager.RoleExistsAsync(Role);
+                if (!roleExists)
+                {
+
+                    // first we create Admin rool    
+                    var role = new IdentityRole();
+                    role.Name = Role;
+                    await roleManager.CreateAsync(role);
+                }
+                    ///Add User
+                var result = await userManager.CreateAsync(user, Password);
+
                 IdentityResult = result;
+                if (result.Succeeded)
+                {
+                    var currentUser = await userManager.FindByNameAsync(user.UserName);
+                    var roleresult = await userManager.AddToRoleAsync(currentUser, Role);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception objEx)
+            {
+                await AddError(objEx);
                 return false;
             }
         }
@@ -52,7 +70,7 @@ namespace BLL.BLL.System.Implement
             SignInResult = await signInManager.PasswordSignInAsync(UserName, Password, true, lockoutOnFailure: true);
             if (SignInResult.Succeeded)
             {
-                _logger.LogInformation("User"+UserName+" logged in."+DateTime.Now);
+            //    _logger.LogInformation("User"+UserName+" logged in."+DateTime.Now);
                 return true;
             }
             return false;

@@ -29,7 +29,12 @@ namespace Aoo.Controllers
 
             return View();
         }
+        public async Task<IActionResult> Login()
+        {
+            ViewData["Message"] = "Your application description page.";
 
+            return View();
+        }
         public async Task<IActionResult>  Contact()
         {
             ViewData["Message"] = "Your contact page.";

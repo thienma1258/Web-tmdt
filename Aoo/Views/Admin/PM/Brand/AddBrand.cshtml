@@ -26,6 +26,11 @@
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
             </div>
             <div class="form-group">
+                @await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", "test")
+
+
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-danger" />
             </div>
         </form>

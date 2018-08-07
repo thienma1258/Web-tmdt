@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Aoo.Models.AccountViewModels.LoginViewModel
+@{
     ViewData["Title"] = "Login";
     Layout = null;
 }
@@ -13,16 +14,19 @@
         <div class="circle-w3layouts"></div>
         <h2>Login</h2>
         <form method="post">
+            <div asp-validation-summary="All" style="color:red" class="text-danger"></div>
+
             <div class="inputs-w3ls">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <input type="text" name="Username" placeholder="Username" required="">
+
             </div>
             <div class="inputs-w3ls">
                 <i class="fa fa-key" aria-hidden="true"></i>
                 <input type="password" name="Password" placeholder="Password" required="">
             </div>
-            <div class="inputs-w3ls">
-                <input type="checkbox"  name="RememberMe" />             
+            <div class="inputs-w3ls" style="margin-left:-40%">
+                <input type="checkbox" name="RememberMe" />   <label>Remember Me</label>
             </div>
             <input type="submit" value="LOGIN">
             <div class="wthree-text">

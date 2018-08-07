@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aoo.Controllers.Manage
 {
-    public class AdminController : Controller
-    {
-        [Route("[controller]/[action]")]
-        public async Task<IActionResult> Admin()
-        {
-            return View();
-        }
-    }
+    //[Route("[controller]/[action]")]
+    //public class AdminController : Controller
+    //{
+      
+    //    public async Task<IActionResult> Login()
+    //    {
+    //        return View();
+    //    }
+    //}
 }

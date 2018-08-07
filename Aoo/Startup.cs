@@ -17,6 +17,7 @@ using DAL.DataContext;
 using DAL.Model;
 using DAL;
 using CacheHelpers;
+using Microsoft.Extensions.Logging;
 
 namespace Aoo
 {
@@ -46,6 +47,7 @@ namespace Aoo
             });
             services.AddMemoryCache();
             services.AddTransient<IEmailSender, EmailSender>();
+
             //  services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDataCache, CacheMemory>();
@@ -56,9 +58,9 @@ namespace Aoo
             {
                 // Password settings
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 7;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredUniqueChars = 6;
 
@@ -101,6 +103,7 @@ namespace Aoo
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+           
 
             app.UseStaticFiles();
 

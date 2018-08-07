@@ -3,10 +3,13 @@ using BLL.BLL.Log;
 using BLL.BLL.Log.Implement;
 using BLL.BLL.PM;
 using BLL.BLL.PM.Implement;
+using BLL.BLL.System;
+using BLL.BLL.System.Implement;
 using DAL.Model.PM;
 using DAL.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +31,8 @@ namespace Aoo.App_start
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
             services.AddTransient<IProductBLL, ProductBLL>();
+            services.AddTransient<IUserBLL, UserBLL>();
+
             services.AddTransient<IErrorLogsBLL, ErrorLogsBLL>();
             services.AddTransient<IProductDetailsBLL, ProductDetailsBLL>();
 
