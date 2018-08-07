@@ -32,7 +32,7 @@ namespace DAL.Repository
             if (number != -1)
             {
                 if (currentPage != -1)
-                    query = query.Skip(number * currentPage - 1);
+                    query = query.Skip(number * (currentPage - 1));
                 query = query.Take(number);
             }
             if (orderBy != null)
