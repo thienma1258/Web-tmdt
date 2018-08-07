@@ -73,9 +73,9 @@ namespace Aoo.Controllers.Admin.PM
                 Name = objsubgroup.Name,
                 Description = objsubgroup.Description,
                 TypeSex = objsubgroup.TypeSex,
-
+                OldImage= objsubgroup.DefaultImage
             };
-            return View(objsubgroup);
+            return View(editSubGroupModel);
         }
         [HttpPost]
         public async Task<IActionResult> EditSubGroup(ViewModels.PM.SubGroup.EditSubGroupViewModel editSubGroupViewModel)

@@ -22,5 +22,6 @@ namespace Aoo.ViewModels.PM.MainGroup
         [DisplayName(" Mô tả:")]
         public string Description { get; set; }
         public TypeSexEnum TypeSex { get; set; } = TypeSexEnum.All;
+        public string OldImage { get; set; }
     }
 }

@@ -66,6 +66,7 @@ namespace Aoo.Controllers.Admin.PM
                         isOnlineOnly = addProductViewModel.isOnlineOnly,
                         StockMin = addProductViewModel.StockMin,
                         Details=addProductViewModel.Details
+
                         //LadingPage = addProductViewModel.LadingPage,
                     };
                     product.BrandID = addProductViewModel.Brand;

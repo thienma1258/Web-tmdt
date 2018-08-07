@@ -23,5 +23,6 @@ namespace Aoo.ViewModels.PM.SubGroup
         [EnumDataType(typeof(TypeSexEnum))]
         public Common.Enum.PM.TypeSexEnum TypeSex { get; set; } = Common.Enum.PM.TypeSexEnum.All;
         public string MainGroup { get; set; }
+        public string OldImage { get; set; }
     }
 }

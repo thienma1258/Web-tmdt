@@ -14,6 +14,11 @@
 }
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2 class="titlename">Danh Sách Sản Phẩm</h2>
+<input type="text" id="myInput"  class="filpro" onkeyup="myFunction()" placeholder="Search for names..">
+<div class="editbtn">
+    <button type="button" class="btn-info fa fa-search btnsearch" aria-hidden="true"> Tìm kiếm</button>
+    <button type="button" class="btn-danger fa fa-plus btnadd" onclick="window.location.href='/Product/AddProduct'"> Thêm mới</button>
+</div>
 <form>
     <input id="inputsearch" name="contain" type="text" placeholder="Bạn muốn tìm gì" /> 
     <button type="submit" class="btn btn-success pull-right" style="width:10em"> Tìm kiếm</button>
@@ -83,7 +88,7 @@
         </tr>
     </table>
 </div>
-<table class="tabledisplay">
+<table id="myTable" class="tabledisplay">
     @foreach (var item in Model)
     {
         <tr>
@@ -113,7 +118,7 @@
         </tr>
     }
 </table>
-@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage });
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
 <script src="~/js/Admin/PM/scripts.js"></script>
 
 

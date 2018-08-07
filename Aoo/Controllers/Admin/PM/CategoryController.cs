@@ -66,6 +66,7 @@ namespace Aoo.Controllers.Admin.PM
                 ID = objcategory.ID,
                 Name = objcategory.Name,
                 Description = objcategory.Description,
+                OldImage = objcategory.DefaultImage
 
             };
             return View(editcategory);
