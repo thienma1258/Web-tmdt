@@ -2,6 +2,8 @@
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,10 +49,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int currentPage = -1)
-        {
-            return this.unitOfWork.VoucherRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
-        }
+     
 
         public async Task<bool> Update(Voucher voucher, string UpdatedUser = "adminstrator")
         {
@@ -71,6 +70,20 @@ namespace BLL.BLL.PM.Implement
         public int Cout()
         {
             throw new NotImplementedException();
+        }
+
+        public  async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Voucher, bool>> filter = null, Func<IQueryable<Voucher>, IOrderedQueryable<Voucher>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.VoucherRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
     }
 }

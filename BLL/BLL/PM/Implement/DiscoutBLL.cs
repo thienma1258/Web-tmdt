@@ -2,6 +2,8 @@
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,10 +50,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int currentPage = -1)
-        {
-            return  this.unitOfWork.DiscoutRepository.Get( number: intNumber, currentPage: currentPage);
-        }
+      
 
         public async Task<bool> Update(Discout discout, string UpdatedUser = "adminstrator")
         {
@@ -72,6 +71,20 @@ namespace BLL.BLL.PM.Implement
         public int Cout()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Discout, bool>> filter = null, Func<IQueryable<Discout>, IOrderedQueryable<Discout>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.DiscoutRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
     }
 }

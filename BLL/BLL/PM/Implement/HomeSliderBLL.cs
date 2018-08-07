@@ -2,6 +2,8 @@
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,10 +50,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int currentPage = -1)
-        {
-            return this.unitOfWork.HomeSliderRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
-        }
+       
 
         public async Task<bool> Update(HomeSlider homeSlider, string UpdatedUser = "adminstrator")
         {
@@ -72,6 +71,20 @@ namespace BLL.BLL.PM.Implement
         public int Cout()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeSlider, bool>> filter = null, Func<IQueryable<HomeSlider>, IOrderedQueryable<HomeSlider>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.HomeSliderRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,19 +54,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Product>> Get(int intNumber = -1, int currentPage = -1)
-        {
-            try
-            {
-                return unitOfWork.ProductRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
-
-            }
-            catch (Exception objEx)
-            {
-                AddError(objEx);
-                return null;
-            }
-        }
+      
 
         public async Task<bool> Update(Product product, string UpdatedUser = "adminstrator")
         {
@@ -86,6 +76,22 @@ namespace BLL.BLL.PM.Implement
         public int Cout()
         {
             throw new NotImplementedException();
+        }
+
+      
+
+        public async Task<IEnumerable<Product>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.ProductRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
     }
 }

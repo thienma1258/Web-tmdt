@@ -7,6 +7,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Helpers;
+using System.Linq;
+using System.Linq.Expressions;
+
 namespace BLL.BLL.PM.Implement
 {
     public class BrandBLL:GenericBLL, IBrandBLL
@@ -62,19 +65,7 @@ namespace BLL.BLL.PM.Implement
                 return false;
             }
         }
-        public async Task<IEnumerable<Brand>> Get(int intNumber=-1,int currentPage = -1)
-        {
-            try
-            {
-                return  this.unitOfWork.BrandRepository.Get(number:intNumber, currentPage: currentPage);
-
-            }
-            catch (Exception objEx)
-            {
-                AddError(objEx);
-                return null;
-            }
-        }
+      
 
         public async Task<Brand> Find(string ID)
         {
@@ -84,6 +75,20 @@ namespace BLL.BLL.PM.Implement
         public int Cout()
         {
             return this.unitOfWork.BrandRepository.Cout();
+        }
+
+        public async Task<IEnumerable<Brand>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Brand, bool>> filter = null, Func<IQueryable<Brand>, IOrderedQueryable<Brand>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.BrandRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ using DAL.Model.PM;
 using Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,11 +67,18 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public async Task<IEnumerable<MainGroup>> Get(int intNumber = -1, int intSkippage = -1)
+       
+
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<MainGroup>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<MainGroup, bool>> filter = null, Func<IQueryable<MainGroup>, IOrderedQueryable<MainGroup>> orderBy = null)
         {
             try
             {
-                return this.unitOfWork.MainGroupRepository.Get( number: intNumber, currentPage: intSkippage);
+                return unitOfWork.MainGroupRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
 
             }
             catch (Exception objEx)
@@ -77,11 +86,6 @@ namespace BLL.BLL.PM
                 AddError(objEx);
                 return null;
             }
-        }
-
-        public int Cout()
-        {
-            throw new NotImplementedException();
         }
     }
 }

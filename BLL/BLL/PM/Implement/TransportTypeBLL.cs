@@ -2,6 +2,8 @@
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,9 +57,20 @@ namespace BLL.BLL.PM.Implement
 
         }
 
-        public async Task<IEnumerable<TransportType>> Get(int intNumber = -1, int currentPage = -1)
+      
+
+        public async Task<IEnumerable<TransportType>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<TransportType, bool>> filter = null, Func<IQueryable<TransportType>, IOrderedQueryable<TransportType>> orderBy = null)
         {
-            return this.unitOfWork.TransportTypeRepository.Get( number: intNumber, currentPage: currentPage);
+            try
+            {
+                return unitOfWork.TransportTypeRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
 
         public async Task<bool> Update(TransportType transportType, string UpdatedUser = "adminstrator")

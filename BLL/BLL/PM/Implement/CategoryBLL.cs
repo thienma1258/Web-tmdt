@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Helpers;
 using CacheHelpers;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace BLL.BLL.PM.Implement
 {
@@ -76,6 +78,20 @@ namespace BLL.BLL.PM.Implement
         public int Cout()
         {
             return this.unitOfWork.CategoryRepository.Cout();
+        }
+
+        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Category, bool>> filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.CategoryRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
     }
 }

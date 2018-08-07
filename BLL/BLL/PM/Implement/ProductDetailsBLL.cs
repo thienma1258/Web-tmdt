@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using CacheHelpers;
@@ -50,6 +52,20 @@ namespace BLL.BLL.PM.Implement
             try
             {
                 return unitOfWork.ProductDetailsRepository.Get( number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<ProductDetails, bool>> filter = null, Func<IQueryable<ProductDetails>, IOrderedQueryable<ProductDetails>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.ProductDetailsRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
 
             }
             catch (Exception objEx)
