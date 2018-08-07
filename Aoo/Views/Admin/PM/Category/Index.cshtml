@@ -8,46 +8,43 @@
 
 <h2>Trang chủ loại sản phẩm</h2>
 <div class="subadd">
-    <a href="/Category/AddCategory">Thêm</a>
+    <a href="/Category/AddCategory">Thêm</a> 
 </div>
-<table class="tablebrand">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DefaultImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="tablebrand">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <img src=@Url.Content(item.DefaultImage) />
-                </td>
-                <td>
-                    <div class="subedit">
-                        <a href="/Category/EditCategory?id=@item.ID">Sửa</a>
-                    </div>
-                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                    @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </th>
+                    <th>
+                        <img src=@Url.Content(item.DefaultImage) />
+                    </th>
+                    <th>
+                        <div class="subedit">
+                            <a href="/Category/EditCategory?id=@item.ID">Sửa</a>
+                        </div>
+                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                        @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                    </th>
+                </tr>
+            }
+        </tbody>
 </table>
 @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage });
 

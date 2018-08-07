@@ -13,9 +13,7 @@
     var listMainGroup = await MainGroupBLL.Get();
 }
 
-<h2>AddProduct</h2>
-
-<h4>AddProductViewModel</h4>
+<h2>Thêm sản phẩm</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -39,10 +37,10 @@
                 <span asp-validation-for="StockMin" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                    <label asp-for="LadingPage" class="control-label"></label>
-                    <input asp-for="LadingPage" class="form-control" />
-                    <span asp-validation-for="LadingPage" class="text-danger"></span>
-                </div>*@
+            <label asp-for="LadingPage" class="control-label"></label>
+            <input asp-for="LadingPage" class="form-control" />
+            <span asp-validation-for="LadingPage" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="DefaultImage" class="control-label"> </label>
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
@@ -55,6 +53,7 @@
                 </select>
                 <span asp-validation-for="MainGroup" class="text-danger"></span>
             </div>
+            <br />
             <div>
                 <label asp-for="SubGroup" class="control-label"></label>
                 <select asp-for="SubGroup" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
@@ -62,6 +61,7 @@
                 </select>
                 <span asp-validation-for="SubGroup" class="text-danger"></span>
             </div>
+            <br />
             <div>
                 <label asp-for="Brand" class="control-label"></label>
                 <select asp-for="Brand" asp-items="@(new SelectList(listBrand,"ID","Name"))">
@@ -69,6 +69,7 @@
                 </select>
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
+            <br />
             <div>
                 <label asp-for="Category" class="control-label"></label>
                 <select asp-for="Category" asp-items="@(new SelectList(listCate,"ID","Name"))">
@@ -76,18 +77,20 @@
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <div>
-                <textarea name="Details"  style="width:100%;height:400px" id="editor"></textarea>
+            <br />
+            <div style="width:250%">
+                <textarea name="Details" style="width:100%;height:400px" id="editor"></textarea>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Tạo mới" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="backtolist">
+    <a href="/Product/Index">Trở lại trang quản lý</a>
 </div>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>

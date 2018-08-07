@@ -31,7 +31,8 @@ namespace Aoo.Controllers.Admin.PM
 
         public async Task<IActionResult> Index()
         {
-            return View();
+
+            return View(await ProductBLL.Get());
         }
         public async Task<IActionResult> AddProduct()
         {
@@ -62,7 +63,9 @@ namespace Aoo.Controllers.Admin.PM
                     product.SubGroupID = addProductViewModel.SubGroup;
                     await  ProductBLL.Add(product);
                     return RedirectToAction("Index");
+
                 }
+               
             }
             return View();
         }

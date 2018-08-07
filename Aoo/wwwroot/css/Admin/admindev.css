@@ -3,7 +3,8 @@
 }
 
 .titlename {
-    margin-left: 19%;
+    font-weight:600;
+    margin-left: 35%;
     margin-top: 7%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -15,9 +16,9 @@
 .title ul {
     color: white;
     opacity: 0.8;
+    width:73.3%;
     background: #1494e2;
     border: 2px solid #ccc;
-    margin-left: 20%;
     margin-top: 30px;
     margin-bottom: 0px;
     display: inline-flex;
@@ -25,7 +26,7 @@
 }
 
     .title ul h1 {
-        color: black;
+        color: #fff;
         font-size: 20px;
         text-align: center;
     }
@@ -62,7 +63,8 @@
 
 .editbtn {
     float: right;
-    width: 12%;
+    width: 14%;
+    margin: 1.5% -16% 0 0;
 }
 
 .wrapper {
@@ -70,7 +72,7 @@
 }
 
 .cmbbrand {
-    margin: 3% 0px 0 20%;
+    margin: 3.5% 0 0 0;
 }
 
     .cmbbrand select {
@@ -104,6 +106,44 @@ table {
       text-align:center;
     }
 table tr th input[type=checkbox]{
-    margin:5px 0 0 85px;
+    margin:5px 0 0 0;
+}
+.mainindex {
+    color: darkorange;
+}
+.subindex {
+    color: darkorange;
+    margin: -4.8% 0 0 16%;
+}
+.subsel {
+    margin-left: 16%;
+    width:100%;
+}
+.brandindex {
+    color: darkorange;
+    margin: -4.8% 0 0 33%;
+}
+.brandsel {
+    margin-left: 33%;
+    width: 100%;
+}
+.cateindex {
+    color: darkorange;
+    margin: -4.8% 0 0 50%;
+}
+.catesel {
+    margin-left: 50%;
+    width: 100%;
+}
+.suabtn {
+    width: 50%;
+    margin: 1.5% -16% 0 0;
+}
+.delbtn {
+    width: 50%;
+    margin: -15.5% 0% 0px 70px;
+}
+#stockmin .form-control{
+    margin-top:2px;
 }
 

@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model string;
-<button class="btn btn-warning" id="btn-confirm">Xóa</button>
+<button class="btn btn-warning" id="@(Model)d">Xóa</button>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="@Model">
     <div class="modal-dialog modal-sm">
@@ -12,27 +12,33 @@
                 <h4 class="modal-title" id="myModalLabel">Xác nhận yêu cầu xóa</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger yes" data-id="@Model" id="modal-btn-si">Yes</button>
+                <button type="button" class="btn btn-danger yes" data-id="@Model"  id="m@(Model)">Yes</button>
                 <button type="button" class="btn btn-info no" id="modal-btn-no">No</button>
             </div>
         </div>
     </div>
 </div>
 <script>
-    var DeleteConfirm = function (callback) {
-        $(".btn.btn-warning").on("click", function (event) {
+    var DeleteConfirm = function (model, callback) {
+        var idModel = model+"d";
+        $('#' + idModel).on("click", function (event) {
+            $('#'+model).modal('show');
             event.stopPropagation();
             event.stopImmediatePropagation();
-            $("#@Model").modal('show');
+         
         });
-
-        $(".btn.btn-danger.yes").on("click", function (){
-            callback(true, "@Model");
-            $("#@Model").modal('hide');
+        var mModel = "m" + model;
+        $('#' + mModel).on("click", function () {
+            var id = $(this).attr("data-id");
+            callback(true, model);
+            $('#' + model).modal('hide');
         });
 
         $(".btn.btn-info.no").on("click", function () {
-            $("#@Model").modal('hide');
+            $('#' + model).modal('hide');
         });
     };
+    $(document).ready(function () {
+        DeleteConfirm("@(Model)",callback);
+    })
 </script>

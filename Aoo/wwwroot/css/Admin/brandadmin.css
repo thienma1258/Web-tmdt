@@ -5,9 +5,25 @@
         text-align:center;
         color:deeppink;  
     }
-img{
-    padding:10px;
-    width:25%;
+.tabledisplay th{
+
+    text-align:center;
+}
+    .tabledisplay th a {
+        color: #000000;
+    }
+.tabledisplay th img{
+    width:70%;
+}
+.tabledisplay th a:hover {
+    color: yellow;
+    cursor: pointer;
+}
+.tabledisplay .notdisplay{
+}
+img {
+    padding: 10px;
+    width: 25%;
 }
 .tablebrand th td{
     color:initial;

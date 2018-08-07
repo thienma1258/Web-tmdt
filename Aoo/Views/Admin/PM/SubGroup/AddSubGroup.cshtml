@@ -31,7 +31,10 @@
                 <span asp-validation-for="TypeSex" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <span asp-validation-for="DefaultImage" class="text-danger"></span>            </div>
+                <label class="control-label"> @Html.DisplayNameFor(model => model.DefaultImage)</label>
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
+            </div>
             <div>
             <label asp-for="MainGroup" class="control-label"></label>
             <select asp-for="MainGroup" asp-items="@(new SelectList(listMainGroup,"ID","Name"))">

@@ -18,8 +18,8 @@ namespace Aoo.ViewModels.PM
         [Required]
         public IFormFile DefaultImage { get; set; }
         public string Details { get; set; }
-        public string LadingPage { get; set; }
-        public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
+        //public string LadingPage { get; set; }
+        //public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
         //adidas nike
         public string Brand { get; set; }
         public string Category { get; set; }
