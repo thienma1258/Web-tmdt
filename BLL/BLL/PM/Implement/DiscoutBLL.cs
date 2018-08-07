@@ -68,9 +68,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<Discout, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return this.unitOfWork.DiscoutRepository.Cout(filter);
         }
 
         public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Discout, bool>> filter = null, Func<IQueryable<Discout>, IOrderedQueryable<Discout>> orderBy = null)

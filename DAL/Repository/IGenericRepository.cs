@@ -15,6 +15,6 @@ namespace DAL.Repository
         void Delete(T entityToDelete,string DeletedUser="adminstrator");
 
         void Update(TEntity entityToUpdate);
-        int Cout();
+        int Cout(Expression<Func<TEntity, bool>> filter = null);
     }
 }

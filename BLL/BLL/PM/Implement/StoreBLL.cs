@@ -32,9 +32,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<Store, bool>> filter = null)
         {
-            return this.unitOfWork.BrandRepository.Cout();
+            return this.unitOfWork.StoreRepository.Cout(filter);
         }
 
         public async Task<bool> Delete(string storeID, string DeletedUser = "adminstrator")

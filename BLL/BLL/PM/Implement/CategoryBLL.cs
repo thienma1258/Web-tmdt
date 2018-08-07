@@ -53,10 +53,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1)
-        {
-            return this.unitOfWork.CategoryRepository.Get( number: intNumber, currentPage: currentPage);
-        }
+       
 
         public async Task<bool> Update(Category category, string UpdatedUser = "adminstrator")
         {
@@ -75,9 +72,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<Category, bool>> filter = null)
         {
-            return this.unitOfWork.CategoryRepository.Cout();
+            return this.unitOfWork.CategoryRepository.Cout(filter);
         }
 
         public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Category, bool>> filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null)

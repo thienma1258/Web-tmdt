@@ -32,9 +32,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<TransportPrice, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return this.unitOfWork.TransportPriceRepository.Cout(filter);
         }
 
         public async Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")

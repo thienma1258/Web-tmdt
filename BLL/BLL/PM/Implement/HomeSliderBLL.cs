@@ -68,9 +68,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<HomeSlider, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeSlider, bool>> filter = null, Func<IQueryable<HomeSlider>, IOrderedQueryable<HomeSlider>> orderBy = null)

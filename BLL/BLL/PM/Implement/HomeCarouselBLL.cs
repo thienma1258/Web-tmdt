@@ -68,7 +68,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<HomeCarousel, bool>> filter = null)
         {
             throw new NotImplementedException();
         }

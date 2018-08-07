@@ -7,5 +7,6 @@ namespace DAL.Repository.Log
 {
     public interface IErrorLogsRepository : IGenericRepository<ErrorLogs, string>
     {
+        bool DeleteAll();
     }
 }

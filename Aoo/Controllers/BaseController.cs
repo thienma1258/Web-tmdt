@@ -20,7 +20,7 @@ namespace Aoo.Controllers
         {
             this.ImageServices = imageServices;
         }
-        public int TotalPage(int totalCout)
+        protected int TotalPage(int totalCout)
         {
             int page = totalCout/ numberPerPage;
             if (totalCout % numberPerPage != 0)
@@ -28,7 +28,7 @@ namespace Aoo.Controllers
             return page;
         }
 
-        public  string UploadImage(IFormFile file, ref ImageErrorModel imageErrorModel)
+        protected string UploadImage(IFormFile file, ref ImageErrorModel imageErrorModel)
         {
             MemoryStream memoryStream = new MemoryStream();
              file.CopyTo(memoryStream);

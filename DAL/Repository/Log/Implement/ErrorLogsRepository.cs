@@ -11,6 +11,15 @@ namespace DAL.Repository.Log.Implement
         public ErrorLogsRepository(ShopContext context) : base(context)
         {
         }
-       
+        
+        public bool DeleteAll()
+        {
+            foreach(var row in dbSet)
+            {
+                dbSet.Remove(row);
+            }
+            this.shopContext.SaveChanges();
+            return true;
+        }
     }
 }

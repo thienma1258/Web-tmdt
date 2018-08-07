@@ -1,4 +1,6 @@
 ﻿using BLL;
+using BLL.BLL.Log;
+using BLL.BLL.Log.Implement;
 using BLL.BLL.PM;
 using BLL.BLL.PM.Implement;
 using DAL.Model.PM;
@@ -26,8 +28,11 @@ namespace Aoo.App_start
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
             services.AddTransient<IProductBLL, ProductBLL>();
+            services.AddTransient<IErrorLogsBLL, ErrorLogsBLL>();
             services.AddTransient<IProductDetailsBLL, ProductDetailsBLL>();
 
         }
     }
 }
+
+       

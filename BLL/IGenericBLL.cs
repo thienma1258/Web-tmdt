@@ -14,7 +14,7 @@ namespace BLL
         Task<bool> Delete(T entityID, string DeletedUser = "adminstrator");
         Task<bool> Add(TEntity entity, string CreatedUser = "adminstrator");
         Task<TEntity> Find(T ID);
-        int Cout();
+        int Cout(Expression<Func<TEntity, bool>> filter = null);
 
     }
 }

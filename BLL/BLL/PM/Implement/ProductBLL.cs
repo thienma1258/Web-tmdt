@@ -73,9 +73,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<Product, bool>> filter = null)
         {
-            return this.unitOfWork.ProductRepository.Cout();
+            return this.unitOfWork.ProductRepository.Cout(filter);
         }
 
       

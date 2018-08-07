@@ -80,8 +80,10 @@ namespace DAL.Repository
         {
         }
 
-        public virtual int Cout()
+        public virtual int Cout(Expression<Func<TEntity, bool>> filter = null)
         {
+            if (filter != null)
+                return dbSet.Where(filter).Count();
             return dbSet.Count();
         }
     }

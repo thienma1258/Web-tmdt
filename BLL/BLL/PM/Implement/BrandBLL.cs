@@ -72,9 +72,9 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.BrandRepository.Find(ID);
         }
 
-        public int Cout()
+        public int Cout(Expression<Func<Brand, bool>> filter = null)
         {
-            return this.unitOfWork.BrandRepository.Cout();
+            return this.unitOfWork.BrandRepository.Cout(filter);
         }
 
         public async Task<IEnumerable<Brand>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Brand, bool>> filter = null, Func<IQueryable<Brand>, IOrderedQueryable<Brand>> orderBy = null)

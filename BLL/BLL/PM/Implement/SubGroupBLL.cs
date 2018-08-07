@@ -85,9 +85,9 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-        public int Cout()
+        public int Cout(Expression<Func<SubGroup, bool>> filter = null)
         {
-            return this.unitOfWork.BrandRepository.Cout();
+            return this.unitOfWork.SubGroupRepository.Cout(filter);
         }
     }
 }

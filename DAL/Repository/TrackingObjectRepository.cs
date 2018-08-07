@@ -48,8 +48,10 @@ namespace DAL.Repository
             entityToDelete.DeletedDate = DateTime.Now;
             entityToDelete.DeletedUser = DeletedUser;
         }
-        public override int Cout()
+        public override int Cout(Expression<Func<TTrackingObject, bool>> filter = null)
         {
+            if (filter != null)
+                return dbSet.Where(p => p.isDeleted == false).Where(filter).Count();
           return  dbSet.Where(p => p.isDeleted == false).Count();
         }
     }
