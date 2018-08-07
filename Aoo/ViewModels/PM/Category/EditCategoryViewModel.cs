@@ -20,5 +20,6 @@ namespace Aoo.ViewModels.PM.Category
         [Required]
         [DisplayName(" Mô tả:")]
         public string Description { get; set; }
+        public string OldImage { get; set; }
     }
 }

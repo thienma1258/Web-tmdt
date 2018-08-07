@@ -18,5 +18,6 @@ namespace Aoo.ViewModels.PM.HomeSlider
         public string Description { get; set; }
         [Required]
         public int OrderIndex { get; set; }
+        public string OldImage { get; set; }
     }
 }

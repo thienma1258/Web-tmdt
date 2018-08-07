@@ -69,7 +69,8 @@ namespace Aoo.Controllers.Admin.PM
                 ID = objmaingroup.ID,
                 Name = objmaingroup.Name,
                 Description = objmaingroup.Description,
-                TypeSex= objmaingroup.TypeSex
+                TypeSex= objmaingroup.TypeSex,
+                OldImage = objmaingroup.DefaultImage
 
             };
             return View(editViewMainGroupModel);

@@ -75,3 +75,15 @@ img {
     .subedit a {
         color: #fff;
     }
+#myInput {
+    height: 40px;
+    margin-top: 10px;
+    width: 93%;
+   
+}
+    #myInput.filpro {
+        background-image: url(../../images/search.png);
+        background-position: 945px 1px;
+        background-size: 34px 34px;
+        background-repeat: no-repeat;
+    }
