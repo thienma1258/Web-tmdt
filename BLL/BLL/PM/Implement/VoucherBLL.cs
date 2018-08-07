@@ -47,9 +47,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int currentPage = -1)
         {
-            return this.unitOfWork.VoucherRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.VoucherRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
         }
 
         public async Task<bool> Update(Voucher voucher, string UpdatedUser = "adminstrator")
@@ -66,6 +66,11 @@ namespace BLL.BLL.PM.Implement
                 AddError(objEx);
                 return false;
             }
+        }
+
+        public int Cout()
+        {
+            throw new NotImplementedException();
         }
     }
 }

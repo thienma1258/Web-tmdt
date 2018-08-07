@@ -22,7 +22,6 @@ namespace Aoo.Controllers.Admin.PM
         public SubGroupController(ISubGroupBLL subGroupBLL, IImageServices imageServices, IMainGroupBLL MainGroupBLL) : base(imageServices)
         {
             SubGroupBLL = subGroupBLL;
-            this.MainGroupBLL = MainGroupBLL;
         }
         //public async Task<IEnumerable<MainGroup>> GetMainGroup()
         //{     
@@ -55,7 +54,7 @@ namespace Aoo.Controllers.Admin.PM
                         TypeSex = addSubGroupViewModel.TypeSex,
                 
                     };
-                    subGroup.MainGroup =await  MainGroupBLL.Find(addSubGroupViewModel.MainGroup);
+                    subGroup.MainGroupID =addSubGroupViewModel.MainGroup;
                     await SubGroupBLL.Add(subGroup);
                     return RedirectToAction("Index");
                 }

@@ -14,10 +14,18 @@ namespace Aoo.Controllers
     {
         public string BASE_ADMIN_URL = "~/Views/Admin/";
         public readonly IImageServices ImageServices;
+        public int numberPerPage = 1;
 
         public BaseController( IImageServices imageServices)
         {
             this.ImageServices = imageServices;
+        }
+        public int TotalPage(int totalCout)
+        {
+            int page = totalCout/ numberPerPage;
+            if (totalCout % numberPerPage != 0)
+                page++;
+            return page;
         }
 
         public  string UploadImage(IFormFile file, ref ImageErrorModel imageErrorModel)

@@ -30,6 +30,11 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Delete(string storeID, string DeletedUser = "adminstrator")
         {
             try
@@ -50,9 +55,9 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.StoreRepository.Find(ID);
         }
 
-        public async Task<IEnumerable<Store>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Store>> Get(int intNumber = -1, int currentPage = -1)
         {
-            return this.unitOfWork.StoreRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.StoreRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
 
         }
 

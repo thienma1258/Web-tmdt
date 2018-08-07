@@ -69,7 +69,7 @@ namespace BLL.BLL.PM
         {
             try
             {
-                return this.unitOfWork.MainGroupRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return this.unitOfWork.MainGroupRepository.Get( number: intNumber, currentPage: intSkippage);
 
             }
             catch (Exception objEx)
@@ -77,6 +77,11 @@ namespace BLL.BLL.PM
                 AddError(objEx);
                 return null;
             }
+        }
+
+        public int Cout()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -48,9 +48,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int currentPage = -1)
         {
-            return this.unitOfWork.HomeSliderRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.HomeSliderRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
         }
 
         public async Task<bool> Update(HomeSlider homeSlider, string UpdatedUser = "adminstrator")
@@ -67,6 +67,11 @@ namespace BLL.BLL.PM.Implement
                 AddError(objEx);
                 return false;
             }
+        }
+
+        public int Cout()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace DAL.Repository
         }
         public virtual IEnumerable<TEntity> Get(
           Expression<Func<TEntity, bool>> filter = null,
-              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int skippage = -1, int number = -1)
+              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int currentPage = -1, int number = -1)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -31,8 +31,8 @@ namespace DAL.Repository
             
             if (number != -1)
             {
-                if (skippage != -1)
-                    query = query.Skip(number * skippage);
+                if (currentPage != -1)
+                    query = query.Skip(number * currentPage - 1);
                 query = query.Take(number);
             }
             if (orderBy != null)

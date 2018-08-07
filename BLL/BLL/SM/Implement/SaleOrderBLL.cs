@@ -77,11 +77,11 @@ namespace BLL.BLL.SM.Implement
             }
         }
 
-        public async Task<IEnumerable<SaleOrder>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<SaleOrder>> Get(int intNumber = -1, int currentPage = -1)
         {
             try
             {
-                return this.unitOfWork.SaleOrderRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return this.unitOfWork.SaleOrderRepository.Get( number: intNumber, currentPage: currentPage);
             }
             catch (Exception objEx)
             {

@@ -30,6 +30,11 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
         {
             throw new NotImplementedException();
@@ -40,11 +45,11 @@ namespace BLL.BLL.PM.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int currentPage = -1)
         {
             try
             {
-                return unitOfWork.ProductDetailsRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return unitOfWork.ProductDetailsRepository.Get( number: intNumber, currentPage: currentPage);
 
             }
             catch (Exception objEx)

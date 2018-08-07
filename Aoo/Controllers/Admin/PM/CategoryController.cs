@@ -23,9 +23,11 @@ namespace Aoo.Controllers.Admin.PM
                   }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await CategoryBLL.Get(6));
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(CategoryBLL.Cout());
+            return View(await CategoryBLL.Get(numberPerPage, page));
         }
 
         public async Task<IActionResult> AddCategory()

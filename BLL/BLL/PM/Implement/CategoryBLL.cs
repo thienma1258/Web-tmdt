@@ -51,9 +51,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1)
         {
-            return this.unitOfWork.CategoryRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.CategoryRepository.Get( number: intNumber, currentPage: currentPage);
         }
 
         public async Task<bool> Update(Category category, string UpdatedUser = "adminstrator")
@@ -71,6 +71,11 @@ namespace BLL.BLL.PM.Implement
                 AddError(objEx);
                 return false;
             }
+        }
+
+        public int Cout()
+        {
+            return this.unitOfWork.CategoryRepository.Cout();
         }
     }
 }

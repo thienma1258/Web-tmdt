@@ -29,6 +29,11 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
         {
             try
@@ -50,9 +55,9 @@ namespace BLL.BLL.PM.Implement
 
         }
 
-        public async Task<IEnumerable<TransportType>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<TransportType>> Get(int intNumber = -1, int currentPage = -1)
         {
-            return this.unitOfWork.TransportTypeRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.TransportTypeRepository.Get( number: intNumber, currentPage: currentPage);
         }
 
         public async Task<bool> Update(TransportType transportType, string UpdatedUser = "adminstrator")

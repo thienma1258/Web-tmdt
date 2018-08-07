@@ -23,9 +23,11 @@ namespace Aoo.Controllers.Admin.PM
             BrandBLL = brandBLL;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            return View(await BrandBLL.Get(6));
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(BrandBLL.Cout());
+            return View(await BrandBLL.Get(numberPerPage,page));
         }
         public async Task<IActionResult> AddBrand()
         {

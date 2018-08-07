@@ -52,11 +52,11 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Product>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Product>> Get(int intNumber = -1, int currentPage = -1)
         {
             try
             {
-                return unitOfWork.ProductRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return unitOfWork.ProductRepository.Get(filter: p => p.isDeleted == false, number: intNumber, currentPage: currentPage);
 
             }
             catch (Exception objEx)
@@ -81,6 +81,11 @@ namespace BLL.BLL.PM.Implement
                 AddError(objEx);
                 return false;
             }
+        }
+
+        public int Cout()
+        {
+            throw new NotImplementedException();
         }
     }
 }

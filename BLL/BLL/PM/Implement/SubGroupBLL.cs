@@ -32,6 +32,11 @@ namespace BLL.BLL.PM
             }
         }
 
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Delete(string SubGroupID, string DeletedUser = "adminstrator")
         {
             try
@@ -56,7 +61,7 @@ namespace BLL.BLL.PM
         {
             try
             {
-                return this.unitOfWork.SubGroupRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return this.unitOfWork.SubGroupRepository.Get( number: intNumber, currentPage: intSkippage);
 
             }
             catch (Exception objEx)
