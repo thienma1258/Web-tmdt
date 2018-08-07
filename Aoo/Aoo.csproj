@@ -98,7 +98,6 @@
     <Folder Include="Controllers\Admin\System\" />
     <Folder Include="Views\Product\" />
     <Folder Include="Views\SubGroup\" />
-    <Folder Include="Views\HomeSlider\" />
   </ItemGroup>
 
   <ItemGroup>

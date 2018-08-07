@@ -1,20 +1,17 @@
-﻿@model Aoo.ViewModels.PM.HomeSlider.AddHomeSliderModel
- @{
-        ViewData["Title"] = "Add";
-        Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
-   
-    }
+﻿@model Aoo.ViewModels.PM.HomeCarousel.EditHomeCarouselModel
+
 @{
-    ViewData["Title"] = "AddHomeSlider";
+    ViewData["Title"] = "EditHomeCarousel";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
 
-<h2>Tạo Slider mới</h2>
+<h2>EditHomeCarousel</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddHomeSlider" enctype="multipart/form-data">
+        <form asp-action="EditHomeCarousel" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" class="form-control" />
             <div class="form-group">
                 <label asp-for="ImagePath" class="control-label"></label>
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "ImagePath" })
@@ -30,9 +27,16 @@
                 <input asp-for="OrderIndex" class="form-control" />
                 <span asp-validation-for="OrderIndex" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsHiding" /> @Html.DisplayNameFor(model => model.IsHiding)
+                    </label>
+                </div>
+            </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DAL.Model.PM.HomeCarousel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
+<h2>Home Carousel</h2>
+<div class="subadd">
+    <a href="/HomeCarousel/AddHomeCarousel">Thêm</a>
+</div>
+<table class="tablescarousel">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.OrderIndex)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderIndex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <img width="100px" height="50px" src=@Url.Content(item.ImagePath) />
+            </td>
+            <td>
+                <div class="subedit">
+                    <a href="/HomeCarousel/EditHomeCarousel?id=@item.ID">Sửa</a> 
+                </div>
+                @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml",new Aoo.ViewModels.Component.PaginationModel { currentPage=1,totalPage=2});
+<script src="~/js/Admin/PM/scripts.js"></script>

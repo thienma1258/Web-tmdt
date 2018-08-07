@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Aoo.ViewModels.PM.Brand;
+using Aoo.ViewModels.PM.HomeSlider;
 using BLL;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;

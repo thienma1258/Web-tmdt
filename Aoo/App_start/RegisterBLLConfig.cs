@@ -20,8 +20,8 @@ namespace Aoo.App_start
             services.AddTransient<IGenericBLL<HomeSlider, string>, HomeSliderBLL>();
             services.AddTransient<IDistrictBLL, DistrictBLL>();
             services.AddTransient<IProvinceBLL, ProvinceBLL>();
-  			
-  			services.AddTransient<ICategoryBLL, CategoryBLL>();
+            services.AddTransient<IGenericBLL<HomeCarousel,string>, HomeCarouselBLL> ();
+            services.AddTransient<ICategoryBLL, CategoryBLL>();
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
           
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
