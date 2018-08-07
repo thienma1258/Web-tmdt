@@ -10,6 +10,8 @@ namespace Services
     public interface IImageServices
     {
         string UploadImage(MemoryStream memoryStream, string imageName,out ImageErrorModel errorModel);
+       
+
 
 
 

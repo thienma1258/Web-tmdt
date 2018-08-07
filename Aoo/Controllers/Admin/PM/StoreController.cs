@@ -24,10 +24,11 @@ namespace Aoo.Controllers.Admin.PM
            
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-          
-            return View(await StoreBLL.Get(6));
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(StoreBLL.Cout());
+            return View(await StoreBLL.Get(numberPerPage, page));
         }
         public async Task<IActionResult> AddStore()
         {

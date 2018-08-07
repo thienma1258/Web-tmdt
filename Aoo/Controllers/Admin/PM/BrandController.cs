@@ -17,15 +17,21 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class BrandController : BaseController
     {
+        
         private readonly IBrandBLL BrandBLL;
         public BrandController(IBrandBLL brandBLL,IImageServices imageServices):base(imageServices)
         {
             BrandBLL = brandBLL;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            return View(await BrandBLL.Get(6));
+            ViewBag.currentPage = page;
+            int totalcout = BrandBLL.Cout();
+            ViewBag.totalPage = TotalPage(totalcout);
+            var ListBrand = await BrandBLL.Get(numberPerPage, page);
+            //var ListBrandFilter = await BrandBLL.Get(filter: p => p.Name.Contains());
+            return View(ListBrand);
         }
         public async Task<IActionResult> AddBrand()
         {
@@ -59,12 +65,14 @@ namespace Aoo.Controllers.Admin.PM
 
         public async Task<IActionResult> EditBrand(string id)
         {
+          
             Brand objbrand = await this.BrandBLL.Find(id);
             ViewModels.PM.Brand.EditBrandViewModel editViewBrandModel = new ViewModels.PM.Brand.EditBrandViewModel
             {
                 ID=objbrand.ID,
                 Name = objbrand.Name,
                 Description = objbrand.Description,
+                OldImage=objbrand.DefaultImage
 
             };
             return View(editViewBrandModel);

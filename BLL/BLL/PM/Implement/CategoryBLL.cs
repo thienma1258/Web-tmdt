@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Helpers;
 using CacheHelpers;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace BLL.BLL.PM.Implement
 {
@@ -51,9 +53,9 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1)
         {
-            return this.unitOfWork.CategoryRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+            return this.unitOfWork.CategoryRepository.Get( number: intNumber, currentPage: currentPage);
         }
 
         public async Task<bool> Update(Category category, string UpdatedUser = "adminstrator")
@@ -70,6 +72,25 @@ namespace BLL.BLL.PM.Implement
             {
                 AddError(objEx);
                 return false;
+            }
+        }
+
+        public int Cout()
+        {
+            return this.unitOfWork.CategoryRepository.Cout();
+        }
+
+        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Category, bool>> filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.CategoryRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
             }
         }
     }

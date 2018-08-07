@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using CacheHelpers;
@@ -30,6 +32,11 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> Delete(string entityID, string DeletedUser = "adminstrator")
         {
             throw new NotImplementedException();
@@ -40,11 +47,25 @@ namespace BLL.BLL.PM.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int intSkippage = -1)
+        public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int currentPage = -1)
         {
             try
             {
-                return unitOfWork.ProductDetailsRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return unitOfWork.ProductDetailsRepository.Get( number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<ProductDetails, bool>> filter = null, Func<IQueryable<ProductDetails>, IOrderedQueryable<ProductDetails>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.ProductDetailsRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
 
             }
             catch (Exception objEx)

@@ -88,7 +88,8 @@ namespace Services.Implement
             }
 
         }
-
+        //ListUpLoadImage
+      
         public override  bool DeleteImage(string ImageName, out ImageErrorModel errorModel)
         {
             errorModel = new ImageErrorModel();

@@ -13,47 +13,49 @@
 <table class="tablebrand">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DefaultImage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TypeSex)
-                </th>
-                
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeSex)
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <img src=@Url.Content(item.DefaultImage) />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeSex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src=@Url.Content(item.DefaultImage) />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeSex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
 
-            <td>
-                <div class="subedit">
-                    <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a>
-                </div>
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
-            </td>
-        </tr>
-}
+                <td>
+                    <div class="subedit">
+                        <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a>
+                    </div>
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage });
 <script src="~/js/Admin/PM/scripts.js"></script>

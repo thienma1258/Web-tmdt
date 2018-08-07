@@ -14,10 +14,18 @@ namespace Aoo.Controllers
     {
         public string BASE_ADMIN_URL = "~/Views/Admin/";
         public readonly IImageServices ImageServices;
+        public int numberPerPage = 6;
 
         public BaseController( IImageServices imageServices)
         {
             this.ImageServices = imageServices;
+        }
+        public int TotalPage(int totalCout)
+        {
+            int page = totalCout/ numberPerPage;
+            if (totalCout % numberPerPage != 0)
+                page++;
+            return page;
         }
 
         public  string UploadImage(IFormFile file, ref ImageErrorModel imageErrorModel)
@@ -27,6 +35,18 @@ namespace Aoo.Controllers
              string ImagePath = this.ImageServices.UploadImage(memoryStream, file.FileName, out imageErrorModel);
             return ImagePath;
         }
+        public List<string> UploadListImage(List<IFormFile> listfile, ref List<ImageErrorModel> imageErrorModels)
+        {
+            List<string> ListImagePath = new List<string>();
+            for(int i = 0; i < listfile.Count; i++)
+            {
+                ImageErrorModel imageErrorModel=new ImageErrorModel();
+                string ImagePath=UploadImage(listfile[i], ref imageErrorModel);
+                imageErrorModels.Add(imageErrorModel);
+                ListImagePath.Add(ImagePath);
+            }
+            return ListImagePath;
+        }   
 
     }
 }

@@ -3,6 +3,8 @@ using DAL.Model.PM;
 using Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +32,11 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
+        public int Cout()
+        {
+            return this.unitOfWork.BrandRepository.Cout();
+        }
+
         public async Task<bool> Delete(string storeID, string DeletedUser = "adminstrator")
         {
             try
@@ -50,10 +57,20 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.StoreRepository.Find(ID);
         }
 
-        public async Task<IEnumerable<Store>> Get(int intNumber = -1, int intSkippage = -1)
-        {
-            return this.unitOfWork.StoreRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+      
 
+        public async Task<IEnumerable<Store>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Store, bool>> filter = null, Func<IQueryable<Store>, IOrderedQueryable<Store>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.StoreRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
+            }
         }
 
         public async Task<bool> Update(Store store, string UpdatedUser = "adminstrator")

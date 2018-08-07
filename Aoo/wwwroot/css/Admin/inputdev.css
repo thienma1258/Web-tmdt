@@ -1,15 +1,13 @@
 ﻿.row{
     margin-top:1%;
-    margin-left:20%!important;
 }
 .backtolist {
-    margin-left: 21%;
     margin-top: 2%;
     background: #1990ec;
     color: #fff!important;
     padding: 9px;
     font-size: 16px;
-    width:12%;
+    width:15%;
     border: 1px solid transparent;
     border-radius: 5px;
 }

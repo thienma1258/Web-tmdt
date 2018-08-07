@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\HomeSlider\**" />
+    <Compile Remove="Views\SubGroup\**" />
     <Compile Remove="wwwroot\js\Shop\**" />
     <Content Remove="wwwroot\js\Shop\**" />
     <EmbeddedResource Remove="wwwroot\js\Shop\**" />
@@ -93,10 +95,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Admin\CM\" />
-    <Folder Include="Controllers\Admin\Log\" />
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Controllers\Admin\System\" />
-    <Folder Include="Views\Product\" />
     <Folder Include="Views\SubGroup\" />
   </ItemGroup>
 
@@ -108,6 +108,9 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Admin\PM\Product\AddProduct.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Admin\PM\Product\Index.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>

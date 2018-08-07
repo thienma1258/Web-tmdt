@@ -7,6 +7,6 @@ namespace BLL.BLL.PM
 {
     public interface IBrandBLL:IGenericBLL<Brand, string>
     {
-
+        
     }
 }

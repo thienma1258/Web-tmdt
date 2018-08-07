@@ -2,6 +2,8 @@
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,10 +50,7 @@ namespace BLL.BLL.PM.Implement
             }
         }
 
-        public async Task<IEnumerable<HomeCarousel>> Get(int intNumber = -1, int intSkippage = -1)
-        {
-            return this.unitOfWork.HomeCarouselRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
-        }
+     
 
         public async Task<bool> Update(HomeCarousel homeCarousel, string UpdatedUser = "adminstrator")
         {
@@ -66,6 +65,25 @@ namespace BLL.BLL.PM.Implement
             {
                 AddError(objEx);
                 return false;
+            }
+        }
+
+        public int Cout()
+        {
+            throw new NotImplementedException();
+        }
+
+        public  async Task<IEnumerable<HomeCarousel>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeCarousel, bool>> filter = null, Func<IQueryable<HomeCarousel>, IOrderedQueryable<HomeCarousel>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.HomeCarouselRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                AddError(objEx);
+                return null;
             }
         }
     }

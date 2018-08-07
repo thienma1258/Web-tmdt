@@ -4,6 +4,8 @@ using DAL.Model;
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,11 +54,13 @@ namespace BLL.BLL.PM
            return this.unitOfWork.SubGroupRepository.Find(ID);
         }
 
-        public async Task<IEnumerable<SubGroup>> Get(int intNumber = -1, int intSkippage = -1)
+       
+
+        public async Task<IEnumerable<SubGroup>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SubGroup, bool>> filter = null, Func<IQueryable<SubGroup>, IOrderedQueryable<SubGroup>> orderBy = null)
         {
             try
             {
-                return this.unitOfWork.SubGroupRepository.Get(filter: p => p.isDeleted == false, number: intNumber, skippage: intSkippage);
+                return unitOfWork.SubGroupRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
 
             }
             catch (Exception objEx)
@@ -80,6 +84,10 @@ namespace BLL.BLL.PM
                 AddError(objEx);
                 return false;
             }
+        }
+        public int Cout()
+        {
+            return this.unitOfWork.BrandRepository.Cout();
         }
     }
 }

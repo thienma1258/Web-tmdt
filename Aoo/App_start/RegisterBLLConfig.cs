@@ -2,6 +2,7 @@
 using BLL.BLL.PM;
 using BLL.BLL.PM.Implement;
 using DAL.Model.PM;
+using DAL.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,9 +24,9 @@ namespace Aoo.App_start
             services.AddTransient<IGenericBLL<HomeCarousel,string>, HomeCarouselBLL> ();
             services.AddTransient<ICategoryBLL, CategoryBLL>();
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
-          
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
             services.AddTransient<IProductBLL, ProductBLL>();
+            services.AddTransient<IProductDetailsBLL, ProductDetailsBLL>();
 
         }
     }

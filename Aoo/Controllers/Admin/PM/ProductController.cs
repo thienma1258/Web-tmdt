@@ -29,9 +29,11 @@ namespace Aoo.Controllers.Admin.PM
             this.SubGroupBLL = subGrouptBLL;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            return View();
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(ProductBLL.Cout());
+            return View(await ProductBLL.Get(numberPerPage, page));
         }
         public async Task<IActionResult> AddProduct()
         {
@@ -55,18 +57,29 @@ namespace Aoo.Controllers.Admin.PM
                         StockMin = addProductViewModel.StockMin,
                         Details=addProductViewModel.Details
                         //LadingPage = addProductViewModel.LadingPage,
-
-
                     };
-                    product.Brand = await BrandBLL.Find(addProductViewModel.Brand);
-                    product.Category = await CategorytBLL.Find(addProductViewModel.Category);
+                    product.BrandID = addProductViewModel.Brand;
+                    product.CategoryID = addProductViewModel.Category;
                     //product.MainGroup = await MainGroupBLL.Find(addProductViewModel.MainGroup);
-                    product.SubGroup = await SubGroupBLL.Find(addProductViewModel.SubGroup);
+                    product.SubGroupID = addProductViewModel.SubGroup;
                     await  ProductBLL.Add(product);
                     return RedirectToAction("Index");
+
                 }
+               
             }
             return View();
+        }
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> Delete(string id)
+        {
+            var isDelete = await ProductBLL.Delete(id);
+            if (isDelete)
+            {
+                return Json(new { success = "true" });
+
+            }
+            return Json(new { success = "false" });
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Aoo
             });
             services.AddMemoryCache();
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
+            //  services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDataCache, CacheMemory>();
             RegisterBLLConfig.RegisterBLL(ref services);
