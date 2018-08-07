@@ -87,6 +87,3 @@ img {
         background-size: 34px 34px;
         background-repeat: no-repeat;
     }
-::placeholder { 
-    color: red;
-}
