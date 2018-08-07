@@ -67,12 +67,6 @@ namespace BLL.BLL.PM
                 return false;
             }
         }
-       
-
-        public int Cout()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<IEnumerable<MainGroup>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<MainGroup, bool>> filter = null, Func<IQueryable<MainGroup>, IOrderedQueryable<MainGroup>> orderBy = null)
         {
@@ -86,6 +80,12 @@ namespace BLL.BLL.PM
                 AddError(objEx);
                 return null;
             }
+        }
+
+
+        public int Cout()
+        {
+            return this.unitOfWork.MainGroupRepository.Cout();
         }
     }
 }

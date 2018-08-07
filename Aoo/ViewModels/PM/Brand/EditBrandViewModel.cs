@@ -20,6 +20,7 @@ namespace Aoo.ViewModels.PM.Brand
         [Required]
         [DisplayName(" Mô tả:")]
         public string Description { get; set; }
+        public string OldImage { get; set; }
 
     }
 }

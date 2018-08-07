@@ -12,13 +12,13 @@ using System.Linq.Expressions;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class BrandBLL:GenericBLL, IBrandBLL
+    public class BrandBLL : GenericBLL, IBrandBLL
     {
         public BrandBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        public async Task<bool> Update(Brand brand,string UpdatedUser="adminstrator")
+        public async Task<bool> Update(Brand brand, string UpdatedUser = "adminstrator")
         {
             try
             {
@@ -34,7 +34,7 @@ namespace BLL.BLL.PM.Implement
                 return false;
             }
         }
-        public async Task<bool> Delete(string brand,string DeletedUser="adminstrator")
+        public async Task<bool> Delete(string brand, string DeletedUser = "adminstrator")
         {
             try
             {
@@ -48,11 +48,11 @@ namespace BLL.BLL.PM.Implement
                 return false;
             }
         }
-        public async Task<bool> Add(Brand brand,string CreatedUser="adminstrator")
+        public async Task<bool> Add(Brand brand, string CreatedUser = "adminstrator")
         {
             try
             {
-               
+
                 brand.UrlFriendly = brand.Name.UrlFriendLy();
                 brand.CreatedUser = CreatedUser;
                 this.unitOfWork.BrandRepository.Insert(brand);
@@ -65,11 +65,11 @@ namespace BLL.BLL.PM.Implement
                 return false;
             }
         }
-      
+
 
         public async Task<Brand> Find(string ID)
         {
-            return  this.unitOfWork.BrandRepository.Find(ID);
+            return this.unitOfWork.BrandRepository.Find(ID);
         }
 
         public int Cout()

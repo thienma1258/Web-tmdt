@@ -29,10 +29,11 @@ namespace Aoo.Controllers.Admin.PM
             this.SubGroupBLL = subGrouptBLL;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-
-            return View(await ProductBLL.Get());
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(ProductBLL.Cout());
+            return View(await ProductBLL.Get(numberPerPage, page));
         }
         public async Task<IActionResult> AddProduct()
         {
@@ -68,6 +69,17 @@ namespace Aoo.Controllers.Admin.PM
                
             }
             return View();
+        }
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> Delete(string id)
+        {
+            var isDelete = await ProductBLL.Delete(id);
+            if (isDelete)
+            {
+                return Json(new { success = "true" });
+
+            }
+            return Json(new { success = "false" });
         }
     }
 }

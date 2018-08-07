@@ -26,6 +26,7 @@ namespace Aoo.App_start
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
             services.AddTransient<IProductBLL, ProductBLL>();
+            services.AddTransient<IProductDetailsBLL, ProductDetailsBLL>();
 
         }
     }

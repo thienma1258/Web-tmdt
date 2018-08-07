@@ -13,7 +13,8 @@
     var listMainGroup = await MainGroupBLL.Get();
 }
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
-<body>
+<link href="~/css/Admin/admindev.css" rel="stylesheet" />
+@*<body>
     <!-- morris JavaScript -->
     <script>
         $(document).ready(function () {
@@ -100,7 +101,7 @@
 
         });
     </script>
-</body>>
+</body>>*@
 <h2 class="titlename">Danh Sách Sản Phẩm</h2>
 <div class="editbtn">
     <button type="button" class="btn-info fa fa-search btnsearch" aria-hidden="true"> Tìm kiếm</button>
@@ -111,7 +112,7 @@
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mainindex">
-            <label  class="control-label">Ngành hàng chính</label>
+            <label class="control-label">Ngành hàng chính</label>
         </div>
         <select asp-items="@(new SelectList(listMainGroup,"ID","Name"))">
             <option selected="selected" value="">Please select</option>
@@ -126,28 +127,28 @@
                 <option selected="selected" value="">Please select</option>
             </select>
         </div>
-            <span  class="text-danger"></span>
-       
-            <div class="brandindex">
-                <label  class="control-label">Thương hiệu</label>
-            </div>
-            <div class="brandsel">
-                <select  asp-items="@(new SelectList(listBrand,"ID","Name"))">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-            </div>
-            <span  class="text-danger"></span>
-       
-            <div class="cateindex">
-                <label  class="control-label">Loại</label>
-            </div>
-            <div class="catesel" >
-                <select asp-items="@(new SelectList(listCate,"ID","Name"))">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-            </div>
-            <span  class="text-danger"></span>
-       
+        <span class="text-danger"></span>
+
+        <div class="brandindex">
+            <label class="control-label">Thương hiệu</label>
+        </div>
+        <div class="brandsel">
+            <select asp-items="@(new SelectList(listBrand,"ID","Name"))">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <span class="text-danger"></span>
+
+        <div class="cateindex">
+            <label class="control-label">Loại</label>
+        </div>
+        <div class="catesel">
+            <select asp-items="@(new SelectList(listCate,"ID","Name"))">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <span class="text-danger"></span>
+
     </form>
 </div>
 <div class="tablebrand">
@@ -172,33 +173,33 @@
 <table class="tabledisplay">
     @foreach (var item in Model)
     {
-    <tr>
-        <th>
-            <a>  @Html.DisplayFor(modelItem => item.Model)</a>
-        </th>
-        <th>
-            @Html.DisplayFor(modelItem => item.StockMin)
-        </th>
-        <th>
-            <div class="notdisplay">
-                @Html.DisplayFor(modelItem => item.isOnlineOnly)
-            </div>
+        <tr>
+            <th>
+                <a>  @Html.DisplayFor(modelItem => item.Model)</a>
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.StockMin)
+            </th>
+            <th>
+                <div class="notdisplay">
+                    @Html.DisplayFor(modelItem => item.isOnlineOnly)
+                </div>
 
-        </th>
-        <th>
-            <img src=@Url.Content(item.DefaultImage) />
-        </th>
-        <th>
-            <div class="suabtn">
-                <button type="button" class="btn-success fa fa-pencil btnedit"> Sửa</button>
-            </div>
-            <div class="delbtn">
-                <button type="button" class="btn-warning fa fa-trash btndel"> Xóa</button>
-            </div>
-        </th>
-    </tr>
+            </th>
+            <th>
+                <img src=@Url.Content(item.DefaultImage) />
+            </th>
+            <th>
+                <div class="suabtn">
+                    <button type="button" class="btn-success fa fa-pencil btnedit"> Sửa</button>
+                </div>
+                    @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+            </th>
+        </tr>
     }
 </table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage });
+<script src="~/js/Admin/PM/scripts.js"></script>
 
 
 

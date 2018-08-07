@@ -23,9 +23,12 @@ namespace Aoo.Controllers.Admin.PM
         {
             MainGroupBLL = maingroupdBLL;
         } 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            return View(await MainGroupBLL.Get(6));
+
+            ViewBag.currentPage = page;
+            ViewBag.totalPage = TotalPage(MainGroupBLL.Cout());
+            return View(await MainGroupBLL.Get(numberPerPage, page));
         }
 
         public async Task<IActionResult> AddMainGroup()

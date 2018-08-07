@@ -35,6 +35,18 @@ namespace Aoo.Controllers
              string ImagePath = this.ImageServices.UploadImage(memoryStream, file.FileName, out imageErrorModel);
             return ImagePath;
         }
+        public List<string> UploadListImage(List<IFormFile> listfile, ref List<ImageErrorModel> imageErrorModels)
+        {
+            List<string> ListImagePath = new List<string>();
+            for(int i = 0; i < listfile.Count; i++)
+            {
+                ImageErrorModel imageErrorModel=new ImageErrorModel();
+                string ImagePath=UploadImage(listfile[i], ref imageErrorModel);
+                imageErrorModels.Add(imageErrorModel);
+                ListImagePath.Add(ImagePath);
+            }
+            return ListImagePath;
+        }   
 
     }
 }

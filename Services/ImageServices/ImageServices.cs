@@ -25,5 +25,7 @@ namespace Services
         public abstract string UploadImage(MemoryStream bytes, string imageName, out ImageErrorModel errorModel);
 
         public abstract bool DeleteImage(string ImageName, out ImageErrorModel errorModel);
+
+      
     }
 }
