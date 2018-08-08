@@ -19,9 +19,9 @@ namespace DAL.Model.PM
         public string Note { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string DefaultImage { get; set; }
-        public int Quatity { get; set; }
+        public int Quantity { get; set; }
         public int StockMin { get; set; }
-        public int MaxQualityBuy { get; set; }
+        public int MaxQuantityBuy { get; set; }
 
         [Column]
         public string listImages { get; set; }
