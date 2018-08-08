@@ -27,7 +27,7 @@ namespace Aoo.Controllers.Admin.PM
         {
             ViewBag.currentPage = page;
             ViewBag.totalPage = TotalPage(CategoryBLL.Cout());
-            return View(await CategoryBLL.Get(numberPerPage, page));
+            return View(await CategoryBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate)));
         }
 
         public async Task<IActionResult> AddCategory()
@@ -75,7 +75,7 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditCategory(ViewModels.PM.Category.EditCategoryViewModel editcategory)
         {
             ImageErrorModel imageErrorModel = new ImageErrorModel();
-            string ImagePath;
+            string ImagePath=null;
             if (editcategory.DefaultImage == null)
             {
                 ImagePath = editcategory.OldImage;
@@ -86,18 +86,14 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {      
-                if (imageErrorModel.isSuccess)
-                {
                     Category objcategory = await this.CategoryBLL.Find(editcategory.ID);
                     objcategory.Description = editcategory.Description;
                     objcategory.Name = editcategory.Name;
                     objcategory.DefaultImage = ImagePath;
                     await CategoryBLL.Update(objcategory);
                     return RedirectToAction("Index");
-                }
-
             }
-            return View();
+            return RedirectToAction("Index");
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)

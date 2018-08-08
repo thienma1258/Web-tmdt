@@ -40,7 +40,7 @@ namespace Aoo.Controllers.Admin.PM
                 ViewBag.totalPage = TotalPage(ProductBLL.Cout(filter: p => p.Model.Contains(contain)));
                 return View(ListResult);
             }
-            return View(await ProductBLL.Get(numberPerPage, page));
+            return View(await ProductBLL.Get(numberPerPage, page,orderBy:p=>p.OrderByDescending(x=>x.EditedDate)));
             
            
         }
@@ -116,8 +116,6 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {
-                if (imageErrorModel.isSuccess)
-                {
                      Product objproduct = new Product
                     {
                         ID=editProductViewModel.ID,
@@ -132,7 +130,6 @@ namespace Aoo.Controllers.Admin.PM
                     objproduct.SubGroupID = editProductViewModel.SubGroup;
                     await ProductBLL.Update(objproduct);
                     return RedirectToAction("Index");
-                }
               
             }
             return RedirectToAction("Index");

@@ -33,7 +33,7 @@ namespace Aoo.Controllers.Admin.PM
         {
             ViewBag.currentPage = page;
             ViewBag.totalPage = TotalPage(SubGroupBLL.Cout());
-            return View(await SubGroupBLL.Get(numberPerPage, page));
+            return View(await SubGroupBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate)));
         }
         public async Task<IActionResult> AddSubGroup()
         {
@@ -81,7 +81,7 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditSubGroup(ViewModels.PM.SubGroup.EditSubGroupViewModel editSubGroupViewModel)
         {
             ImageErrorModel imageErrorModel = new ImageErrorModel();
-            string ImagePath;
+            string ImagePath=null;
             if (editSubGroupViewModel.DefaultImage == null)
             {
                 ImagePath = editSubGroupViewModel.OldImage;
@@ -92,10 +92,6 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {
-                if (imageErrorModel.isSuccess)
-                {
-                    //SubGroup subGroup = new SubGroup()
-                    
                     SubGroup objsubgroup = await this.SubGroupBLL.Find(editSubGroupViewModel.ID);
                     objsubgroup.Description = editSubGroupViewModel.Description;
                     objsubgroup.Name = editSubGroupViewModel.Name;
@@ -103,11 +99,9 @@ namespace Aoo.Controllers.Admin.PM
                     objsubgroup.TypeSex = editSubGroupViewModel.TypeSex;
                     await SubGroupBLL.Update(objsubgroup);
                     return RedirectToAction("Index");
-                };
-
 
             }
-            return View();
+            return RedirectToAction("Index");
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)

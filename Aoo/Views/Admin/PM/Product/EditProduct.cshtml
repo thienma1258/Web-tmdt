@@ -69,6 +69,9 @@
             </div>
             <br />
             <div class="form-group">
+                <input type="hidden" asp-for="@Model.OldImage" class="form-control" />
+            </div>
+            <div class="form-group">
                 <label asp-for="DefaultImage" class="control-label"></label>
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage", DefaultImage = Model.OldImage })
                 <span asp-validation-for="DefaultImage" class="text-danger"></span>

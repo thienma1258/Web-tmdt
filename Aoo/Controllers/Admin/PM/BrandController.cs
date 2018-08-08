@@ -29,7 +29,7 @@ namespace Aoo.Controllers.Admin.PM
             ViewBag.currentPage = page;
             int totalcout = BrandBLL.Cout();
             ViewBag.totalPage = TotalPage(totalcout);
-            var ListBrand = await BrandBLL.Get(numberPerPage, page);
+            var ListBrand = await BrandBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate));
             //var ListBrandFilter = await BrandBLL.Get(filter: p => p.Name.Contains());
             return View(ListBrand);
         }
@@ -80,8 +80,8 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
+            string ImagePath = null;
             ImageErrorModel imageErrorModel = new ImageErrorModel();
-            string ImagePath;
             if (editBrand.DefaultImage == null)
             {
                 ImagePath = editBrand.OldImage;
@@ -92,18 +92,16 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {          
-                if (imageErrorModel.isSuccess)
-                {
                     Brand objbrand = await this.BrandBLL.Find(editBrand.ID);
                     objbrand.Description = editBrand.Description;
                     objbrand.Name = editBrand.Name;
                     objbrand.DefaultImage = ImagePath;
                     await BrandBLL.Update(objbrand);
                     return RedirectToAction("Index");
-                }
+                
 
             }
-            return View();
+            return RedirectToAction("Index");
         }
         [HttpDelete("{id}")]
         public  async Task<JsonResult> Delete(string id)

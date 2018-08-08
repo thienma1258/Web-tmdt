@@ -28,7 +28,7 @@ namespace Aoo.Controllers.Admin.PM
 
             ViewBag.currentPage = page;
             ViewBag.totalPage = TotalPage(MainGroupBLL.Cout());
-            return View(await MainGroupBLL.Get(numberPerPage, page));
+            return View(await MainGroupBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate)));
         }
 
         public async Task<IActionResult> AddMainGroup()
@@ -80,10 +80,11 @@ namespace Aoo.Controllers.Admin.PM
         {
 
             ImageErrorModel imageErrorModel = new ImageErrorModel();
-            string ImagePath;
+            string ImagePath=null;
             if (editViewMainGroupModel.DefaultImage == null)
             {
                 ImagePath = editViewMainGroupModel.OldImage;
+                
             }
             else
             {
@@ -91,8 +92,6 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {
-                if (imageErrorModel.isSuccess)
-                {
                     MainGroup objmaingroup = await this.MainGroupBLL.Find(editViewMainGroupModel.ID);
                     objmaingroup.Description = editViewMainGroupModel.Description;
                     objmaingroup.Name = editViewMainGroupModel.Name;
@@ -100,10 +99,8 @@ namespace Aoo.Controllers.Admin.PM
                     objmaingroup.TypeSex = editViewMainGroupModel.TypeSex;
                     await MainGroupBLL.Update(objmaingroup);
                     return RedirectToAction("Index");
-                }
-
             }
-            return View();
+            return RedirectToAction("Index");
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)
