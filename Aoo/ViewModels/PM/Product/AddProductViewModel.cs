@@ -17,16 +17,19 @@ namespace Aoo.ViewModels.PM
         public int StockMin { get; set; } = 0;
         [Required]
         public IFormFile DefaultImage { get; set; }
+        [Required]
         public string Details { get; set; }
         //public string LadingPage { get; set; }
         //public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
         //adidas nike
+        [Required]
         public string Brand { get; set; }
+        [Required]
         public string Category { get; set; }
         //nganh hang chinh giay dep tat
         public string MainGroup { get; set; }
         // giay the thao giay công so, giay em be
+        [Required]
         public string SubGroup { get; set; }
-        public string OldImage { get; set; }
     }
 }

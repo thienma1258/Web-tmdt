@@ -87,11 +87,16 @@ namespace Aoo.Controllers.Admin.PM
             Product objproduct = await this.ProductBLL.Find(id);
             ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
             {
+                ID=objproduct.ID,
                 Model=objproduct.Model,
                 Details=objproduct.Details,
                 isOnlineOnly=objproduct.isOnlineOnly,
                 StockMin=objproduct.StockMin,
-                OldImage = objproduct.DefaultImage
+                OldImage = objproduct.DefaultImage,
+                SubGroup = objproduct.SubGroupID,
+                Category = objproduct.CategoryID,
+                Brand = objproduct.BrandID
+
             };
             return View(editProductViewModel);
         }
@@ -105,9 +110,10 @@ namespace Aoo.Controllers.Admin.PM
                 string ImagePath = UploadImage(editProductViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
-                    Product product = new Product()
-                    {
-                        
+                    
+                     Product objProduct = new Product
+                   {
+                        ID=editProductViewModel.ID,
                         Model = editProductViewModel.Model,
                         DefaultImage=ImagePath,
                         isOnlineOnly = editProductViewModel.isOnlineOnly,
@@ -115,15 +121,15 @@ namespace Aoo.Controllers.Admin.PM
                         Details = editProductViewModel.Details
                     };
 
-                    product.BrandID = editProductViewModel.Brand;
-                    product.CategoryID = editProductViewModel.Category;
-                    product.SubGroupID = editProductViewModel.SubGroup;
-                    await ProductBLL.Update(product);
+                    objProduct.BrandID = editProductViewModel.Brand;
+                    objProduct.CategoryID = editProductViewModel.Category;
+                    objProduct.SubGroupID = editProductViewModel.SubGroup;
+                    await ProductBLL.Update(objProduct);
                     return RedirectToAction("Index");
                 }
               
             }
-            return View();
+            return View(editProductViewModel);
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)

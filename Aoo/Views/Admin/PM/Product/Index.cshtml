@@ -15,7 +15,7 @@
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2 class="titlename">Danh Sách Sản Phẩm</h2>
 <form>
-    <input id="myInput"  class="filpro" onkeyup="myFunction()" name="contain" type="text" placeholder="Bạn muốn tìm gì" /> 
+    <input id="myInput" value=""  class="filpro" onkeyup="myFunction()" name="contain" type="text" placeholder="Bạn muốn tìm gì" /> 
     <div class="editbtn">
         <button type="button" class="btn-danger fa fa-plus btnadd" onclick="window.location.href='/Product/AddProduct'"> Thêm mới</button>
         <button type="submit" class="btn btn-info fa fa-search"> Tìm kiếm</button>
@@ -28,16 +28,14 @@
         <div id="maingroup" class="mainindex">
             <label class="control-label">Ngành hàng chính</label>
         </div>
-        <select asp-items="@(new SelectList(listMainGroup,"ID","Name"))">
+        @*<select asp-items="@(new SelectList(listMainGroup,"ID","Name"))">
             <option selected="selected" value="">Please select</option>
-        </select>
-
-
+        </select>*@
         <div id="subgroup" class="subindex">
             <label class="control-label">Ngành hàng phụ</label>
         </div>
         <div class="subsel">
-            <select asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
+            <select id="SubItem" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
                 <option selected="selected" value="">Please select</option>
             </select>
         </div>

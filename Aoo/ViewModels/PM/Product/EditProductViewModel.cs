@@ -9,6 +9,7 @@ namespace Aoo.ViewModels.PM.Product
 {
     public class EditProductViewModel
     {
+        public string ID { get; set; }
         [Required]
         [MinLength(5)]
         public string Model { get; set; } = string.Empty;
