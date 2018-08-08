@@ -117,8 +117,8 @@ namespace Aoo.Controllers.Admin.PM
             if (ModelState.IsValid)
             {
                 if (imageErrorModel.isSuccess)
-                {              
-                     Product objProduct = new Product
+                {
+                     Product objproduct = new Product
                     {
                         ID=editProductViewModel.ID,
                         Model = editProductViewModel.Model,
@@ -127,7 +127,6 @@ namespace Aoo.Controllers.Admin.PM
                         StockMin = editProductViewModel.StockMin,
                         Details = editProductViewModel.Details
                     };
-                    product.SubGroupID = editProductViewModel.SubGroup;
                     objproduct.BrandID = editProductViewModel.Brand;
                     objproduct.CategoryID = editProductViewModel.Category;
                     objproduct.SubGroupID = editProductViewModel.SubGroup;
