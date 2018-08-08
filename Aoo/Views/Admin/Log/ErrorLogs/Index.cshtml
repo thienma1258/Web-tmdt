@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DAL.Model.ErrorLogs>
+@{
+    ViewData["Title"] = "AddBrand";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+<link rel="stylesheet" href="~/css/Log/errorlog.css" type="text/css" />
+<h2>Error Log Manager</h2>
+<div class="subadd">
+    <div id="wrap">
+        <form action="" autocomplete="on">
+            <input id="search" name="SearchText" type="text" placeholder="What're we looking for ?"><input id="search_submit" value="Search" type="submit">
+
+        </form>
+    </div>
+</div>
+<a class="btn btn-danger pull-right btn-block mt-1 mb-1" asp-action="DeleteAll">Delete</a>
+
+
+<table class="tablebrand">
+    <thead>
+        <tr>
+            <th>
+              
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TableName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ErrorLog)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FunctionName)
+
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TableName)
+                </td>
+                <td>
+                    @if (item.ErrorLog.Length > 120)
+                    {
+
+                        @(item.ErrorLog.Substring(0, 100) + "...");
+                    }
+                    else
+                    {
+
+                        @item.ErrorLog
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FunctionName)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
