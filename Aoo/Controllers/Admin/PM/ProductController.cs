@@ -87,7 +87,7 @@ namespace Aoo.Controllers.Admin.PM
            
             ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
             {
-                ID=objproduct.ID,
+                ID = objproduct.ID,  
                 Model=objproduct.Model,
                 Details=objproduct.Details,
                 isOnlineOnly=objproduct.isOnlineOnly,
@@ -119,7 +119,7 @@ namespace Aoo.Controllers.Admin.PM
                 if (imageErrorModel.isSuccess)
                 {              
                      Product objProduct = new Product
-                   {
+                    {
                         ID=editProductViewModel.ID,
                         Model = editProductViewModel.Model,
                         DefaultImage=ImagePath,
@@ -127,11 +127,11 @@ namespace Aoo.Controllers.Admin.PM
                         StockMin = editProductViewModel.StockMin,
                         Details = editProductViewModel.Details
                     };
-
-                    objProduct.BrandID = editProductViewModel.Brand;
-                    objProduct.CategoryID = editProductViewModel.Category;
-                    objProduct.SubGroupID = editProductViewModel.SubGroup;
-                    await ProductBLL.Update(objProduct);
+                    product.SubGroupID = editProductViewModel.SubGroup;
+                    objproduct.BrandID = editProductViewModel.Brand;
+                    objproduct.CategoryID = editProductViewModel.Category;
+                    objproduct.SubGroupID = editProductViewModel.SubGroup;
+                    await ProductBLL.Update(objproduct);
                     return RedirectToAction("Index");
                 }
               

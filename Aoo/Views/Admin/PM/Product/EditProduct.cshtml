@@ -13,13 +13,14 @@
     var OldCategory = await CategoryBLL.Find(Model.Category);
     var OldSubGroup = await SubGroupBLL.Find(Model.SubGroup);
 }
-<h2>EditProduct</h2>
+<h2>Chỉnh Sửa Sản Phẩm</h2>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditProduct" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" class="form-control" />
             <div class="form-group">
                 <label asp-for="Model" class="control-label"></label>
                 <input asp-for="Model" class="form-control" />
@@ -40,8 +41,9 @@
                 <span asp-validation-for="StockMin" class="text-danger"></span>
             </div>
             <div style="width:250%">
-                <textarea name="Details"  style="width:100%;height:50px" id="editor">@Model.Details</textarea>
+                <textarea name="Details" style="width:100%;height:200px" id="editor"></textarea>
             </div>
+            <br />
             <div>
                 <label asp-for="SubGroup" class="control-label"></label>
                 <select asp-for="SubGroup" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
@@ -65,19 +67,19 @@
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="DefaultImage" class="control-label"></label>
-                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage", DefaultImage = Model.OldImage })
+                
                 <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Lưu" class="btn btn-danger" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="backtolist">
+    <a href="/Product/Index">Trở lại trang quản lý</a>
 </div>
 
