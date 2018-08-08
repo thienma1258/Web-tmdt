@@ -21,6 +21,8 @@ namespace DAL.DataContext
         public DbSet<System_Policy> System_Policies { get; set; }
         public DbSet<System_Position> System_Positions { get; set; }
         public DbSet<System_User_Permission> System_User_Permissions { get; set; }
+       public DbSet<System_Permission> System_Permissions { get; set; }
+
         #endregion
         #region PM
         public DbSet<Brand> Brands { get; set; }
@@ -74,7 +76,11 @@ namespace DAL.DataContext
             builder.Entity<System_Policy>().ToTable("System_Policy").HasOne(p => p.System_Position).WithMany(p => p.List_System_Policies).HasForeignKey(p => p.System_PositionID).HasConstraintName("FK_System_Position_Policies");
             builder.Entity<System_User>().ToTable("System_User").HasOne(p => p.Position).WithMany(p => p.List_Position_Users).HasForeignKey(p=>p.PositionID).HasConstraintName("FK_Position_Users");
             builder.Entity<System_Position>().ToTable("System_Position");
-            builder.Entity<System_User_Permission>().ToTable("System_User_Permission").HasOne(p => p.ReviewUser).WithMany(p => p.System_User_Permissions).HasForeignKey(p=>p.ReviewUserID).HasConstraintName("FK_User_Permission");
+
+            builder.Entity<System_Permission>().ToTable("System_Permission").HasIndex(p=>p.PermissionName).IsUnique();
+
+            builder.Entity<System_User_Permission>().ToTable("Systemm_User_Permission").HasOne(p=>p.System_Permission).WithMany(p=>p.System_User_Permissions).HasForeignKey(p => p.System_PermissionID).HasConstraintName("FK_UserPermission_SystemPermission");
+
             #endregion
             #region CM
             builder.Entity<CM_Customer>().ToTable("CM_Customer");

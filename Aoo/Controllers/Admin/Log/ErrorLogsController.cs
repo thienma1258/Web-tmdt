@@ -22,6 +22,7 @@ namespace Aoo.Controllers.Admin.Log
         [Route("")]
         public   IActionResult Index(string SearchText)
         {
+
             return View(this.errorLogsBLL.Get(p=>p.FunctionName.Contains(SearchText)||p.ModuleName.Contains(SearchText)));
         }
         [Route("DeleteAll")]

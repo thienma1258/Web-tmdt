@@ -11,5 +11,6 @@ namespace DAL.Repository
         public SeoRepository(ShopContext context) : base(context)
         {
         }
+
     }
 }

@@ -14,9 +14,10 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180808050602_them_bang_system_permission")]
+    partial class them_bang_system_permission
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -360,8 +361,6 @@ namespace DAL.Migrations
 
                     b.Property<string>("CategoryID");
 
-                    b.Property<string>("CommentArea");
-
                     b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("CreatedUser");
@@ -387,8 +386,6 @@ namespace DAL.Migrations
                     b.Property<string>("MetaTitle");
 
                     b.Property<string>("Model");
-
-                    b.Property<string>("Specification");
 
                     b.Property<int>("StockMin");
 
@@ -438,7 +435,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("ProductID");
 
-                    b.Property<int>("Quatity");
+                    b.Property<int>("Quality");
 
                     b.Property<int>("Size");
 
@@ -782,13 +779,11 @@ namespace DAL.Migrations
 
                     b.Property<string>("PermissionName");
 
+                    b.Property<string>("PermissionValue");
+
                     b.Property<bool>("isDeleted");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("PermissionName")
-                        .IsUnique()
-                        .HasFilter("[PermissionName] IS NOT NULL");
 
                     b.ToTable("System_Permission");
                 });
@@ -884,6 +879,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("System_PermissionID");
 
+                    b.Property<string>("System_UserId");
+
                     b.Property<string>("UserName");
 
                     b.Property<bool>("isDeleted");
@@ -891,6 +888,8 @@ namespace DAL.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("System_PermissionID");
+
+                    b.HasIndex("System_UserId");
 
                     b.ToTable("Systemm_User_Permission");
                 });
@@ -1185,6 +1184,10 @@ namespace DAL.Migrations
                         .WithMany("System_User_Permissions")
                         .HasForeignKey("System_PermissionID")
                         .HasConstraintName("FK_UserPermission_SystemPermission");
+
+                    b.HasOne("DAL.Model.System_User")
+                        .WithMany("System_User_Permissions")
+                        .HasForeignKey("System_UserId");
                 });
 
             modelBuilder.Entity("DAL.Model.System_User", b =>

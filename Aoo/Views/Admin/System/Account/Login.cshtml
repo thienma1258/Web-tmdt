@@ -7,13 +7,13 @@
 <link href="css/font-awesome.css" rel="stylesheet"><!-- Font-awesome-CSS -->
 <link href="css/style.css" rel='stylesheet' type='text/css' /><!-- style.css -->
 <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-
 <div class="main-agile" style="margin-top:100px">
     <div class="alert-close"> </div>
     <div class="content-wthree">
         <div class="circle-w3layouts"></div>
         <h2>Login</h2>
         <form method="post">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="All" style="color:red" class="text-danger"></div>
 
             <div class="inputs-w3ls">

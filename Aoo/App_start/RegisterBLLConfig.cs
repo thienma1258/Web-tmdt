@@ -35,6 +35,8 @@ namespace Aoo.App_start
 
             services.AddTransient<IErrorLogsBLL, ErrorLogsBLL>();
             services.AddTransient<IProductDetailsBLL, ProductDetailsBLL>();
+            services.AddTransient<ISystem_User_PermissionBLL, System_User_Permission_BLL>();
+            services.AddTransient<ITransportTypeBLL, TransportTypeBLL>();
 
         }
     }

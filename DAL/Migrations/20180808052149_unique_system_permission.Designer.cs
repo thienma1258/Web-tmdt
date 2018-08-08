@@ -14,9 +14,10 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180808052149_unique_system_permission")]
+    partial class unique_system_permission
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -360,8 +361,6 @@ namespace DAL.Migrations
 
                     b.Property<string>("CategoryID");
 
-                    b.Property<string>("CommentArea");
-
                     b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("CreatedUser");
@@ -387,8 +386,6 @@ namespace DAL.Migrations
                     b.Property<string>("MetaTitle");
 
                     b.Property<string>("Model");
-
-                    b.Property<string>("Specification");
 
                     b.Property<int>("StockMin");
 
@@ -438,7 +435,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("ProductID");
 
-                    b.Property<int>("Quatity");
+                    b.Property<int>("Quality");
 
                     b.Property<int>("Size");
 

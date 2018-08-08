@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class TransportTypeBLL : GenericBLL, IGenericBLL<TransportType, string>
+    public class TransportTypeBLL : GenericBLL, ITransportTypeBLL
     {
         public TransportTypeBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
