@@ -83,8 +83,8 @@ namespace Aoo.Controllers.Admin.PM
         }
         public async Task<IActionResult> EditProduct(string id)
         {
-
             Product objproduct = await this.ProductBLL.Find(id);
+           
             ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
             {
                 ID=objproduct.ID,
@@ -93,6 +93,7 @@ namespace Aoo.Controllers.Admin.PM
                 isOnlineOnly=objproduct.isOnlineOnly,
                 StockMin=objproduct.StockMin,
                 OldImage = objproduct.DefaultImage,
+                //DefaultImage=objproduct.DefaultImage,
                 SubGroup = objproduct.SubGroupID,
                 Category = objproduct.CategoryID,
                 Brand = objproduct.BrandID
@@ -103,14 +104,20 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditProduct(ViewModels.PM.Product.EditProductViewModel editProductViewModel)
         {
+            string ImagePath = null; ;
+           ImageErrorModel imageErrorModel = new ImageErrorModel();
+            if (editProductViewModel.DefaultImage == null)
+            {
+                ImagePath = editProductViewModel.OldImage;
+            }
+            else
+            {
+                ImagePath = UploadImage(editProductViewModel.DefaultImage, ref imageErrorModel);
+            }
             if (ModelState.IsValid)
             {
-
-                ImageErrorModel imageErrorModel = new ImageErrorModel();
-                string ImagePath = UploadImage(editProductViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
-                {
-                    
+                {              
                      Product objProduct = new Product
                    {
                         ID=editProductViewModel.ID,
@@ -129,7 +136,7 @@ namespace Aoo.Controllers.Admin.PM
                 }
               
             }
-            return View(editProductViewModel);
+            return RedirectToAction("Index");
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)

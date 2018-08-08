@@ -78,11 +78,19 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditMainGroup(ViewModels.PM.MainGroup.EditMainGroupViewModel editViewMainGroupModel)
         {
+
+            ImageErrorModel imageErrorModel = new ImageErrorModel();
+            string ImagePath;
+            if (editViewMainGroupModel.DefaultImage == null)
+            {
+                ImagePath = editViewMainGroupModel.OldImage;
+            }
+            else
+            {
+                ImagePath = UploadImage(editViewMainGroupModel.DefaultImage, ref imageErrorModel);
+            }
             if (ModelState.IsValid)
             {
-
-                ImageErrorModel imageErrorModel = new ImageErrorModel();
-                string ImagePath = UploadImage(editViewMainGroupModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     MainGroup objmaingroup = await this.MainGroupBLL.Find(editViewMainGroupModel.ID);

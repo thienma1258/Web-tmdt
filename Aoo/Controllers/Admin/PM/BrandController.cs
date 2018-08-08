@@ -80,11 +80,18 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
-            if (ModelState.IsValid)
+            ImageErrorModel imageErrorModel = new ImageErrorModel();
+            string ImagePath;
+            if (editBrand.DefaultImage == null)
             {
-
-                ImageErrorModel imageErrorModel = new ImageErrorModel();
-                string ImagePath = UploadImage(editBrand.DefaultImage, ref imageErrorModel);
+                ImagePath = editBrand.OldImage;
+            }
+            else
+            {
+                ImagePath = UploadImage(editBrand.DefaultImage, ref imageErrorModel);
+            }
+            if (ModelState.IsValid)
+            {          
                 if (imageErrorModel.isSuccess)
                 {
                     Brand objbrand = await this.BrandBLL.Find(editBrand.ID);

@@ -80,11 +80,18 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditSubGroup(ViewModels.PM.SubGroup.EditSubGroupViewModel editSubGroupViewModel)
         {
+            ImageErrorModel imageErrorModel = new ImageErrorModel();
+            string ImagePath;
+            if (editSubGroupViewModel.DefaultImage == null)
+            {
+                ImagePath = editSubGroupViewModel.OldImage;
+            }
+            else
+            {
+                ImagePath = UploadImage(editSubGroupViewModel.DefaultImage, ref imageErrorModel);
+            }
             if (ModelState.IsValid)
             {
-
-                ImageErrorModel imageErrorModel = new ImageErrorModel();
-                string ImagePath = UploadImage(editSubGroupViewModel.DefaultImage, ref imageErrorModel);
                 if (imageErrorModel.isSuccess)
                 {
                     //SubGroup subGroup = new SubGroup()

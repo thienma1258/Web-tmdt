@@ -74,11 +74,18 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditCategory(ViewModels.PM.Category.EditCategoryViewModel editcategory)
         {
-            if (ModelState.IsValid)
+            ImageErrorModel imageErrorModel = new ImageErrorModel();
+            string ImagePath;
+            if (editcategory.DefaultImage == null)
             {
-
-                ImageErrorModel imageErrorModel = new ImageErrorModel();
-                string ImagePath = UploadImage(editcategory.DefaultImage, ref imageErrorModel);
+                ImagePath = editcategory.OldImage;
+            }
+            else
+            {
+                ImagePath = UploadImage(editcategory.DefaultImage, ref imageErrorModel);
+            }
+            if (ModelState.IsValid)
+            {      
                 if (imageErrorModel.isSuccess)
                 {
                     Category objcategory = await this.CategoryBLL.Find(editcategory.ID);
