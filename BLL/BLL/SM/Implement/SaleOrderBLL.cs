@@ -44,7 +44,7 @@ namespace BLL.BLL.SM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return false;
             }
         }
@@ -59,7 +59,7 @@ namespace BLL.BLL.SM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return false;
             }
         }
@@ -71,8 +71,9 @@ namespace BLL.BLL.SM.Implement
                return  this.unitOfWork.SaleOrderRepository.Find(saleOrderID);
                
             }
-            catch(Exception e)
+            catch(Exception objEx)
             {
+                await AddError(objEx);
                 return null;
             }
         }
@@ -85,7 +86,7 @@ namespace BLL.BLL.SM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return null;
             }
         }

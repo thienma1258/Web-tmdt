@@ -3,8 +3,28 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 <link href="~/css/Component/pagination.css" rel=" stylesheet" type="text/css" />
-@{ 
-    int StartNumber =Model.currentPage/5 ;
+@{
+    string prefix = "?";
+    var ListOldQuery = Context.Request.Query.ToList();
+    foreach (var Query in ListOldQuery)
+    {
+        switch (Query.Key)
+        {
+            case "page":
+
+                break;
+            case "?":
+                break;
+            default:
+                var Key = Query.Key;
+                
+                prefix +=  Key + "=" + Query.Value + "&";
+                break;
+
+        }
+    }
+
+    int StartNumber = Model.currentPage / 5;
     StartNumber = StartNumber * 5;
     List<int> listPagination = new List<int>();
     int LowerLimit = 3;
@@ -13,7 +33,7 @@
     {
         Model.totalPage = 1;
     }
-    for(int i = 1; i < LowerLimit; i++)
+    for (int i = 1; i < LowerLimit; i++)
     {
         int page = Model.currentPage - LowerLimit + i;
         if (page >= 1)
@@ -26,8 +46,8 @@
     listPagination.Add(Model.currentPage);
     for (int i = 1; i < UpperLimit; i++)
     {
-        int page = Model.currentPage  + i;
-        if (page <Model.totalPage)
+        int page = Model.currentPage + i;
+        if (page < Model.totalPage)
         {
             listPagination.Add(page);
 
@@ -35,30 +55,31 @@
 
     }
 }
+@foreach (var  a  in ListOldQuery)
+{
 
+}
 <div class="pagination pull-right">
     @if (Model.currentPage > 1)
-    {
+        {
         <a href="?page=1">&laquo;</a>
 
     }
-    @foreach (var pagenumber in listPagination)
-    {
+        @foreach (var pagenumber in listPagination)
+        {
 
-        <a href="?page=@pagenumber" class="@(Model.currentPage==pagenumber?"active":"")">@pagenumber</a>
+        <a href="@(prefix)page=@pagenumber" class="@(Model.currentPage==pagenumber?"active":"")">@pagenumber</a>
     }
-    @if (listPagination[listPagination.Count-1] + 1 < Model.totalPage)
+    @if (listPagination[listPagination.Count - 1] + 1 < Model.totalPage)
     {
-        <a href="?page=@(listPagination[listPagination.Count-1] + 1)">...</a>
+        <a href="@(prefix)page=@(listPagination[listPagination.Count-1] + 1)">...</a>
 
     }
     @if (Model.currentPage != Model.totalPage && Model.totalPage != 0)
     {
-        <a href="?page=@Model.totalPage">@Model.totalPage</a>
-        <a href="?page=@Model.totalPage">&raquo;</a>
+        <a href="@(prefix)page=@Model.totalPage">@Model.totalPage</a>
+        <a href="@(prefix)page=@Model.totalPage">&raquo;</a>
     }
-
-
 
 </div>
 

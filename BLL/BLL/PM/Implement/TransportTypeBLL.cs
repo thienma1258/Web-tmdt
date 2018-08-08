@@ -26,7 +26,7 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return false;
             }
         }
@@ -47,7 +47,7 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return false;
             }
         }
@@ -69,7 +69,7 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return null;
             }
         }
@@ -85,7 +85,7 @@ namespace BLL.BLL.PM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return false;
             }
         }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aoo.Models.AccountViewModels;
 using BLL.BLL.System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -46,11 +48,41 @@ namespace Aoo.Controllers.Admin.System
             else return UserBLL.IdentityResult.Errors.ToString();
         }
         [HttpPost]
-        public IActionResult Login(Aoo.Models.AccountViewModels.LoginViewModel loginViewModel)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                return View();
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var IsSuccess = await UserBLL.SignIn(model.Username, model.Password, model.RememberMe);
+                if (!IsSuccess)
+                {
+                    ModelState.AddModelError(string.Empty, "Username or Password doesn't correct");
+                    return View();
+                }
+
+                var result = UserBLL.SignInResult;
+                if (result.Succeeded)
+                {
+                    return Redirect(returnUrl);
+                }
+                if (result.RequiresTwoFactor)
+                {
+                   // return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+                }
+                if (result.IsLockedOut)
+                {
+                 //   _logger.LogWarning("User account locked out.");
+               //     return RedirectToAction(nameof(Lockout));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
             }
             return View();
         }

@@ -65,9 +65,9 @@ namespace BLL.BLL.System.Implement
         {
             throw new NotImplementedException();
         }
-        public async Task<bool> SignIn(string UserName,string Password)
+        public async Task<bool> SignIn(string UserName,string Password,bool RememberMe)
         {
-            SignInResult = await signInManager.PasswordSignInAsync(UserName, Password, true, lockoutOnFailure: true);
+            SignInResult = await signInManager.PasswordSignInAsync(UserName, Password, RememberMe, lockoutOnFailure: true);
             if (SignInResult.Succeeded)
             {
             //    _logger.LogInformation("User"+UserName+" logged in."+DateTime.Now);

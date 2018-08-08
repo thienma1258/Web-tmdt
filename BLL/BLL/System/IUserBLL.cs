@@ -18,6 +18,6 @@ namespace BLL.BLL.System
         Task<bool> Lockout(string Username, bool isLock);
          IdentityResult IdentityResult { get; set; }
          SignInResult SignInResult { get; set; }
-
+        Task<bool> SignIn(string UserName, string Password, bool RememberMe);
     }
 }

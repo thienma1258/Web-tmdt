@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.BLL.Log;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
 namespace Aoo.Controllers.Admin.Log
 {
-    [Route("[controller]/[action]")]
+    [Authorize]
+    [Route("Error")]
     [Area("Log")]
     public class ErrorLogsController : BaseController
     {
@@ -17,12 +19,12 @@ namespace Aoo.Controllers.Admin.Log
         {
             this.errorLogsBLL = errorLogs;
         }
-
+        [Route("")]
         public   IActionResult Index(string SearchText)
         {
             return View(this.errorLogsBLL.Get(p=>p.FunctionName.Contains(SearchText)||p.ModuleName.Contains(SearchText)));
         }
-
+        [Route("DeleteAll")]
         public IActionResult DeleteAll()
         {
             if(this.errorLogsBLL.DeleteAll())
