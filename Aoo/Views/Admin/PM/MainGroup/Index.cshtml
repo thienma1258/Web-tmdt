@@ -32,28 +32,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <img src=@Url.Content(item.DefaultImage) />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeSex)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img src=@Url.Content(item.DefaultImage) />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeSex)
+            </td>
 
-                <td>
-                    <div class="subedit">
-                        <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a>
-                    </div>
-                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                    @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
-                </td>
-            </tr>
+            <td>
+                <div class="subedit">
+                    <a href="/MainGroup/EditMainGroup?id=@item.ID">Sửa</a>
+                </div>
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

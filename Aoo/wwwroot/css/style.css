@@ -1916,7 +1916,23 @@ h1.w3wthreeheadingaits {
         color: #65b3e2;
         cursor: pointer;
     }
-
+    .women
+    {
+        font-size:30px;
+    }
+    .cbp-pgoptsize .cbp-pgopttoolti1p .women span{
+        display: block;
+        text-indent: 0;
+        background: url('../images/women-shoe-front-view.png') no-repeat center center;
+        /*background: url(../images/shoesimages.png) no-repeat center center;*/
+        background-size: 100%;
+        margin: 0 -8px 4px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #65b3e2;
+        cursor: pointer;
+    }
 .cbp-pgoptsize .cbp-pgopttooltip span:hover {
 	color: #0968a1;
 	-webkit-transform: scale(1.1);
