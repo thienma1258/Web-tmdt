@@ -16,6 +16,7 @@ namespace DAL.Repository
         protected override IQueryable<TTrackingObject> filterObject(Expression<Func<TTrackingObject, bool>> filter = null, int currentPage = -1, int number = -1)
         {
             IQueryable<TTrackingObject> Query= base.filterObject(filter, currentPage, number);
+            Query = Query.Where(p => p.isDeleted == false);
             return Query;
         }
         public override IEnumerable<TTrackingObject> Get(Expression<Func<TTrackingObject, bool>> filter = null, Func<IQueryable<TTrackingObject>, IOrderedQueryable<TTrackingObject>> orderBy = null, int currentPage = -1, int number = -1)

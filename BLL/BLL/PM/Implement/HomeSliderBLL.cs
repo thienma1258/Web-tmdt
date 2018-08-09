@@ -78,7 +78,7 @@ namespace BLL.BLL.PM.Implement
 
         public int Cout(Expression<Func<HomeSlider, bool>> filter = null)
         {
-            throw new NotImplementedException();
+       
             return this.unitOfWork.HomeSliderRepository.Cout();
         }
 
