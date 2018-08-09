@@ -8,23 +8,14 @@ namespace DAL.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_SaleOrder_TransportPrice_TransportPriceID",
-                table: "SaleOrder");
-
+          
             migrationBuilder.AddColumn<decimal>(
                 name: "CurrentTransportPrice",
                 table: "SaleOrder",
                 nullable: false,
                 defaultValue: 0m);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_SaleOrder_TransportType_TransportPriceID",
-                table: "SaleOrder",
-                column: "TransportPriceID",
-                principalTable: "TransportType",
-                principalColumn: "ID",
-                onDelete: ReferentialAction.Restrict);
+          
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
