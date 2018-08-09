@@ -23,10 +23,10 @@ namespace Aoo.App_start
         {
             services.AddTransient<IBrandBLL, BrandBLL>();
             services.AddTransient<IStoreBLL, StoreBLL>();
-            services.AddTransient<IGenericBLL<HomeSlider, string>, HomeSliderBLL>();
+            services.AddTransient<IHomeSliderBLL, HomeSliderBLL>();
             services.AddTransient<IDistrictBLL, DistrictBLL>();
             services.AddTransient<IProvinceBLL, ProvinceBLL>();
-            services.AddTransient<IGenericBLL<HomeCarousel,string>, HomeCarouselBLL> ();
+            services.AddTransient<IHomeCarouselBLL, HomeCarouselBLL>();
             services.AddTransient<ICategoryBLL, CategoryBLL>();
             services.AddTransient<IMainGroupBLL, MainGroupBLL>();
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();

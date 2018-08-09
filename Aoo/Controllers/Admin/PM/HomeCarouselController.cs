@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aoo.ViewModels.PM.HomeCarousel;
 using BLL;
+using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -15,14 +16,19 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class HomeCarouselController : BaseController
     {
-        private readonly IGenericBLL<HomeCarousel, string> HomeCarouselBLL;
-        public HomeCarouselController(IGenericBLL<HomeCarousel, string> homecarouselBLL, IImageServices imageServices) : base(imageServices)
+        private readonly IHomeCarouselBLL HomeCarouselBLL;
+        public HomeCarouselController(IHomeCarouselBLL homecarouselBLL, IImageServices imageServices) : base(imageServices)
         {
             HomeCarouselBLL = homecarouselBLL;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await HomeCarouselBLL.Get(6));
+            ViewBag.currentPage = page;
+            int totalcout = HomeCarouselBLL.Cout();
+            ViewBag.totalPage = TotalPage(totalcout);
+            var ListHomeCarousel = await HomeCarouselBLL.Get(numberPerPage, page);
+            //var ListBrandFilter = await BrandBLL.Get(filter: p => p.Name.Contains());
+            return View(ListHomeCarousel);
         }
         public async Task<IActionResult> AddHomeCarousel()
         {
@@ -63,7 +69,7 @@ namespace Aoo.Controllers.Admin.PM
                 ID = objCarousel.ID,
                 Description = objCarousel.Description,
                 IsHiding = objCarousel.IsHiding,
-                
+                OldImage = objCarousel.ImagePath
 
             };
             return View(editHomeCarouselModel);

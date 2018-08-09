@@ -7,20 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 using Aoo.Models;
 using DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
+using DAL.Model.PM;
+using Services;
+using BLL.BLL.PM.Implement;
+using BLL.BLL.PM;
 
 namespace Aoo.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        
+        private readonly IHomeSliderBLL HomeSliderBLL;
         private readonly ShopContext shopContext;
-        public HomeController(ShopContext shopContext)
+        public HomeController(ShopContext shopContext,IHomeSliderBLL homeSliderBLL,IImageServices imageServices):base(imageServices)
         {
+            HomeSliderBLL = homeSliderBLL;
             this.shopContext = shopContext;
         }
         public async Task<IActionResult> Index()
         {
          
-            return View();
+            return View(await HomeSliderBLL.Get());
         }
        
         public async Task<IActionResult> About()

@@ -24,5 +24,6 @@ namespace Aoo.ViewModels.PM.Store
         [Required]
         [DisplayName("Mô tả")]
         public string Description { get; set; }
+        
     }
 }

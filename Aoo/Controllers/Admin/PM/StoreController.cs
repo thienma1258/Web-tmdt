@@ -27,8 +27,11 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> Index(int page = 1)
         {
             ViewBag.currentPage = page;
-            ViewBag.totalPage = TotalPage(StoreBLL.Cout());
-            return View(await StoreBLL.Get(numberPerPage, page));
+            int totalcout = StoreBLL.Cout();
+            ViewBag.totalPage = TotalPage(totalcout);
+            var ListStore = await StoreBLL.Get(numberPerPage, page);
+            //var ListBrandFilter = await BrandBLL.Get(filter: p => p.Name.Contains());
+            return View(ListStore);
         }
         public async Task<IActionResult> AddStore()
         {
@@ -53,6 +56,7 @@ namespace Aoo.Controllers.Admin.PM
 
                     };
                     await StoreBLL.Add(store);
+                    return RedirectToAction("Index");
                 }
             }
 
@@ -68,6 +72,7 @@ namespace Aoo.Controllers.Admin.PM
                 ID=objStore.ID,
                 NameStore=objStore.NameStore,
                 Description=objStore.Description,
+                DefaultImageString = objStore.DefaultImage
             };
             return View(editViewStoreModel);
         }
@@ -87,6 +92,7 @@ namespace Aoo.Controllers.Admin.PM
                     objStore.NameStore = editViewStoreModel.NameStore;
                     objStore.DefaultImage = ImagePath;
                     await StoreBLL.Update(objStore);
+                    return RedirectToAction("Index");
                 }
             }
 

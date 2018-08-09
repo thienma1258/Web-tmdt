@@ -4,10 +4,16 @@
     font-size: 14px;
     color: white;
 }
-
-    .creditly-wrapper .credit-card-wrapper {
-        padding: 0;
-    }
+html, body{
+    background:initial!important;
+}
+.w3slideraits {
+    position: relative;
+    height: 200px !important;
+}
+.creditly-wrapper .credit-card-wrapper {
+    padding: 0;
+}
 
     .creditly-wrapper input.has-error {
         outline: none;

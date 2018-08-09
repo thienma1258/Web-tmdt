@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aoo.ViewModels.PM.HomeSlider;
 using BLL;
+using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -16,14 +17,19 @@ namespace Aoo.Controllers.Admin.PM
     [Area("PM")]
     public class HomeSliderController : BaseController
     {
-        private readonly IGenericBLL<HomeSlider, string> HomeSliderBLL;
-        public HomeSliderController(IGenericBLL<HomeSlider, string> homesliderBLL, IImageServices imageServices) : base(imageServices)
+        private readonly IHomeSliderBLL HomeSliderBLL;
+        public HomeSliderController(IHomeSliderBLL homesliderBLL, IImageServices imageServices) : base(imageServices)
         {
             HomeSliderBLL = homesliderBLL;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            return View(await HomeSliderBLL.Get(6));
+            ViewBag.currentPage = page;
+            int totalcout = HomeSliderBLL.Cout();
+            ViewBag.totalPage = TotalPage(totalcout);
+            var ListHomeSlider = await HomeSliderBLL.Get(numberPerPage, page);
+            //var ListBrandFilter = await BrandBLL.Get(filter: p => p.Name.Contains());
+            return View(ListHomeSlider);
         }
         public async Task<IActionResult> AddHomeSlider()
         {
@@ -67,7 +73,7 @@ namespace Aoo.Controllers.Admin.PM
                 OrderIndex = objSlider.OrderIndex,
                 ID = objSlider.ID,
                 Description = objSlider.Description,
-
+                OldImage = objSlider.ImagePath
             };
             return View(editHomeSliderModel);
         }
@@ -86,6 +92,7 @@ namespace Aoo.Controllers.Admin.PM
                     objSlider.OrderIndex = editHomeSliderModel.OrderIndex;
                     objSlider.ImagePath = defaultImage1;
                     await HomeSliderBLL.Update(objSlider);
+                    return RedirectToAction("Index");
                 }
             }
 

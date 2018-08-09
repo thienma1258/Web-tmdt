@@ -1,15 +1,18 @@
-﻿using DAL;
+﻿using DAL.Model;
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Helpers;
+using System.Linq;
+using System.Linq.Expressions;
+using DAL;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class HomeCarouselBLL : GenericBLL, IGenericBLL<HomeCarousel, string>
+    public class HomeCarouselBLL : GenericBLL, IHomeCarouselBLL
     {
         public HomeCarouselBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -70,7 +73,7 @@ namespace BLL.BLL.PM.Implement
 
         public int Cout(Expression<Func<HomeCarousel, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return this.unitOfWork.HomeCarouselRepository.Cout();
         }
 
         public  async Task<IEnumerable<HomeCarousel>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeCarousel, bool>> filter = null, Func<IQueryable<HomeCarousel>, IOrderedQueryable<HomeCarousel>> orderBy = null)

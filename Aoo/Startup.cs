@@ -17,6 +17,7 @@ using DAL.DataContext;
 using DAL.Model;
 using DAL;
 using CacheHelpers;
+
 using Microsoft.Extensions.Logging;
 
 namespace Aoo
@@ -37,6 +38,7 @@ namespace Aoo
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                  sqlServerOptions => sqlServerOptions.CommandTimeout(60))
                 );
+       
             services.AddIdentity<System_User, IdentityRole>()
                 .AddEntityFrameworkStores<ShopContext>()
                 .AddDefaultTokenProviders();
@@ -47,13 +49,12 @@ namespace Aoo
             });
             services.AddMemoryCache();
             services.AddTransient<IEmailSender, EmailSender>();
-
             //  services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDataCache, CacheMemory>();
             RegisterBLLConfig.RegisterBLL(ref services);
             RegisterServicesConfig.RegisterServices(ref services);
-
+           
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings

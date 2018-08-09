@@ -15,7 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.OrderIndex)
             </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -36,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <img width="100px" height="50px" src=@Url.Content(item.ImagePath) />
+                    <img src=@Url.Content(item.ImagePath) />
                 </td>
                 <td>
 
@@ -49,5 +48,5 @@
         }
     </tbody>
 </table>
-@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = 1, totalPage = 2 });
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
 <script src="~/js/Admin/PM/scripts.js"></script>

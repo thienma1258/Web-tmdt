@@ -684,9 +684,9 @@ a:focus, a:hover {
 
 	.w3slideraits {
 		position: relative;
-		height: 800px;
+		height: 200px;
 	}
-
+    
 	#back_to_fluid_dg {
 		background: rgba(2,2,2,.5);
 		clear: both;
@@ -697,15 +697,15 @@ a:focus, a:hover {
 		position: relative;
 		z-index: 1;
 	}
-
 	.fluid_container {
 		bottom: 0;
 		height: 100%;
 		left: 0;
-		position: fixed;
+        margin-bottom: 0!important;
+		position: absolute;
 		right: 0;
 		top: 0;
-		z-index: 0;
+		
 	}
 
 	#fluid_dg_wrap_4 {
@@ -713,14 +713,14 @@ a:focus, a:hover {
 		height: 100%;
 		left: 0;
 		margin-bottom: 0!important;
-		position: absolute;
 		right: 0;
 		top: 0;
 	}
 
-	.fluid_dg_bar {
-		z-index: 2;
-	}
+
+.fluid_dg_bar {
+    z-index: 2;
+}
 
 	.fluid_dg_thumbs {
 		display: none;

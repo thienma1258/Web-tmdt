@@ -14,7 +14,7 @@
             <input asp-for="ID" type="hidden" class="form-control" />
             <div class="form-group">
                 <label asp-for="ImagePath" class="control-label"></label>
-                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "ImagePath" })
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "ImagePath", DefaultImage = Model.OldImage })
                 <span asp-validation-for="ImagePath" class="text-danger"></span>
             </div>
             <div class="form-group">

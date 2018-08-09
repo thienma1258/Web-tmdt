@@ -3,8 +3,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2> Danh sách cửa hàng </h2>
-<table class="tablestore">
+<div class="subadd">
+    <a href="/Store/AddStore">Thêm</a>
+</div>
+<table class="tablestore" >
     <thead>
         <tr>
             <th>
@@ -39,9 +43,9 @@
                     <img width="100px" height="50px" src=@Url.Content(item.DefaultImage) />
                 </td>
                 <td>
-
-                    @Html.ActionLink("Add", "AddStore") |
-                    @Html.ActionLink("Edit", "EditStore", new { id = item.ID }) |
+                    <div class="subedit">
+                        <a href="/Store/EditStore?id=@item.ID">Sửa</a>
+                    </div>
                     @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
                 </td>
             </tr>

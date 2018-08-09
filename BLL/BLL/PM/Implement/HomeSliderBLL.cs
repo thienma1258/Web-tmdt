@@ -1,15 +1,20 @@
-﻿using DAL;
+﻿using DAL.Model;
 using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Helpers;
+using System.Linq;
+using System.Linq.Expressions;
+using DAL;
+using Services.ImageServices;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class HomeSliderBLL : GenericBLL, IGenericBLL<HomeSlider, string>
+    public class HomeSliderBLL : GenericBLL, IHomeSliderBLL
+        
     {
         public HomeSliderBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -49,8 +54,11 @@ namespace BLL.BLL.PM.Implement
                 return false;
             }
         }
+        private string UploadImage(string imagePath, ref ImageErrorModel imageErrorModel)
+        {
+            throw new NotImplementedException();
+        }
 
-       
 
         public async Task<bool> Update(HomeSlider homeSlider, string UpdatedUser = "adminstrator")
         {
@@ -70,7 +78,8 @@ namespace BLL.BLL.PM.Implement
 
         public int Cout(Expression<Func<HomeSlider, bool>> filter = null)
         {
-            return 0;
+            throw new NotImplementedException();
+            return this.unitOfWork.HomeSliderRepository.Cout();
         }
 
         public async Task<IEnumerable<HomeSlider>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeSlider, bool>> filter = null, Func<IQueryable<HomeSlider>, IOrderedQueryable<HomeSlider>> orderBy = null)

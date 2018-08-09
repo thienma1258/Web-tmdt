@@ -19,5 +19,6 @@ namespace Aoo.ViewModels.PM.HomeCarousel
         [Required]
         public int OrderIndex { get; set; }
         public bool IsHiding { get; set; }
+        public string OldImage { get; set; }
     }
 }

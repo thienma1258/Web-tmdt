@@ -1,8 +1,10 @@
-﻿@{
+﻿@model IEnumerable<DAL.Model.PM.HomeSlider>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
 }
 <!-- Model-Slider -->
+<link href="~/css/dev.css" rel="stylesheet" />
 <div class="agileheader" id="agileitshome">
 
     <!-- Navigation -->
@@ -215,8 +217,8 @@
                         <input type="password" Name="Password" placeholder="Password" required="">
                         <ul class="tick w3layouts agileinfo">
                             <li>
-                                <input type="checkbox" id="brand1" value="">
-                                <label for="brand1"><span></span>Remember me</label>
+                                <input type="checkbox" id="back_to_fluid_dg" value="">
+                                <label for="homeslider"><span></span>Remember me</label>
                             </li>
                             <li>
                                 <a href="#">Forgot Password?</a>
@@ -248,18 +250,27 @@
     </div>
     <!-- //Header-Top-Bar-(Hidden) -->
     <!-- Header-Slider -->
-    <div class="w3slideraits">
-        <div class="fluid_dg_wrap fluid_dg_emboss pattern_1 fluid_dg_white_skin" id="fluid_dg_wrap_4">
-            <div data-thumb="images/slide-1-small.jpg" data-src="images/slide-1.jpg"></div>
-            <div data-thumb="images/slide-2-small.jpg" data-src="images/slide-2.jpg"></div>
-            <div data-thumb="images/slide-3-small.jpg" data-src="images/slide-3.jpg"></div>
-            <div data-thumb="images/slide-4-small.jpg" data-src="images/slide-4.jpg"></div>
-            <div data-thumb="images/slide-5-small.jpg" data-src="images/slide-5.jpg"></div>
-        </div>
-    </div>
     <!-- //Header-Slider -->
 
 </div>
+<style>
+    .w3slideraits .fluid_dg_bar span.fluid_dg_bar_cont {
+        position: initial !important;
+    }
+
+        .w3slideraits .fluid_dg_bar span.fluid_dg_bar_cont span {
+            position: initial !important;
+        }
+</style>
+@foreach (var item in Model)
+{
+    <div class="w3slideraits">
+        <div class="fluid_dg_wrap fluid_dg_emboss pattern_1 fluid_dg_white_skin" id="fluid_dg_wrap_4" style="display:initial!important">
+            <div data-src="@Url.Content(item.ImagePath)"></div>
+
+        </div>
+    </div>
+}
 <div class="agileheader" id="agileheadermens">
 
     <!-- Navigation -->
@@ -474,7 +485,7 @@
                         <input type="password" Name="Password" placeholder="Password" required="">
                         <ul class="tick w3layouts agileinfo">
                             <li>
-                                <input type="checkbox" id="brand1" value="">
+
                                 <label for="brand1"><span></span>Remember me</label>
                             </li>
                             <li>
@@ -511,18 +522,15 @@
 </div>
 <div class="agilemodel-slider">
     <div id='film_roll_1'>
-        <div><img src="images/model_slide-1.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-2.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-3.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-4.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-5.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-6.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-7.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-8.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-9.jpg" alt="Groovy Apparel"></div>
-        <div><img src="images/model_slide-10.jpg" alt="Groovy Apparel"></div>
+     
+        <div><img src="~/images/bbbb.jpg" alt="Groovy Apparel"></div>
+        <div><img src="~/images/eeeeee.jpg" alt="Groovy Apparel"></div>
+        <div><img src="~/images/fffff.jpg" alt="Groovy Apparel"></div>
+        <div><img src="~/images/ggggg.jpg" alt="Groovy Apparel"></div>
+
     </div>
 </div>
+
 <!-- //Model-Slider -->
 <!-- Latest-Arrivals -->
 <div class="wthreehome-latest">
