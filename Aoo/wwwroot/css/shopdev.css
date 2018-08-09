@@ -1,0 +1,51 @@
+﻿.cover {
+    width: 33%;
+    padding: 75px;
+    display: inline-block;
+}
+.cover ul{
+    list-style:none;
+}
+    .cover img {
+        width: 180px;
+        margin: 30px;
+        height: 200px;
+    }
+.coverimg {
+    text-align: center;
+    border: 3px solid #d80027;
+}
+.letter {
+    border: 3px solid #d80027;
+}
+.letter li{
+    font-size:20px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.cbp-pgoptions {
+    height: 60px;
+    width: 100%;
+    border: 3px solid #d80027;
+    border-top: initial !important;
+}
+.pricemodel {
+    border: 3px solid #d80027;
+    border-top: none;
+    text-align: left;
+    color: black;
+    font-size: 26px;
+    font-family: 'Times New Roman';
+    font-weight: 600;
+}
+.pricemodel a{
+    color:black;
+}
+.pricemodel ul li a:hover{
+    color:chartreuse;
+}
+.price {
+    float: right;
+    font-size:26px;
+    margin: -35px 15px 0 0;
+    color:dodgerblue!important;
+}

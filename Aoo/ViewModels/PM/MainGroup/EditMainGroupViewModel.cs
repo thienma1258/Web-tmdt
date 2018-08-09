@@ -21,7 +21,8 @@ namespace Aoo.ViewModels.PM.MainGroup
         [Required]
         [DisplayName(" Mô tả:")]
         public string Description { get; set; }
-        public TypeSexEnum TypeSex { get; set; } = TypeSexEnum.All;
+        [EnumDataType(typeof(TypeSexEnum))]
+        public Common.Enum.PM.TypeSexEnum TypeSex { get; set; } = Common.Enum.PM.TypeSexEnum.All;
         public string OldImage { get; set; }
     }
 }

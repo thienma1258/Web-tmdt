@@ -2,7 +2,6 @@
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
 @inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
 @inject BLL.BLL.PM.ICategoryBLL CategoryBLL
-
 @{
     ViewData["Title"] = "EditProduct";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
@@ -46,7 +45,7 @@
             <br />
             <div>
                 <label asp-for="SubGroup" class="control-label"></label>
-                <select asp-for="SubGroup" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
+                <select asp-for="SubGroup" class="form-control" asp-items="@(new SelectList(listSubGroup,"ID","Name"))">
                     <option selected="selected" value="OldSubGroup"></option>
                 </select>
                 <span asp-validation-for="SubGroup" class="text-danger"></span>
@@ -54,7 +53,7 @@
             <br />
             <div>
                 <label asp-for="Brand" class="control-label"></label>
-                <select asp-for="Brand" asp-items="@(new SelectList(listBrand,"ID","Name"))">
+                <select asp-for="Brand" class="form-control" asp-items="@(new SelectList(listBrand,"ID","Name"))">
                     <option selected="selected" value="OldBrand"></option>
                 </select>
                 <span asp-validation-for="Brand" class="text-danger"></span>
@@ -62,7 +61,7 @@
             <br />
             <div>
                 <label asp-for="Category" class="control-label"></label>
-                <select asp-for="Category" asp-items="@(new SelectList(listCate,"ID","Name"))">
+                <select asp-for="Category" class="form-control" asp-items="@(new SelectList(listCate,"ID","Name"))">
                     <option selected="selected" value="OldCategory"></option>
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>

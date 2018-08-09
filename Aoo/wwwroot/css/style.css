@@ -1680,7 +1680,7 @@ h1.w3wthreeheadingaits {
 }
 
 .cbp-pggrid > li {
-	display: inline-block;
+    display:inline-block;
 	vertical-align: top;
 	position: relative;
 	width: 33%;
@@ -1823,11 +1823,12 @@ h1.w3wthreeheadingaits {
 }
 
 .cbp-pgoptions li:before, .cbp-pgoptions li > span {
-	font-size: 22px;
-	line-height: 60px;
-	text-indent: 0;
-	text-align: center;
-	color: #c41228;
+    font-size: 22px;
+    line-height: 60px;
+    text-indent: 0;
+    text-align: center;
+    color: #230aff;
+    font-weight:600;
 }
 
 .cbp-pgoptions li.cbp-pgoptsize > span {
@@ -1903,18 +1904,18 @@ h1.w3wthreeheadingaits {
 	margin-left: -50px;
 }
 
-.cbp-pgoptsize .cbp-pgopttooltip span {
-	display: block;
-	text-indent: 0;
-	background: url(../images/tshirt.svg) no-repeat center center;
-	background-size: 100%;
-	margin: 0 auto 4px;
-	text-align: center;
-	font-size: 12px;
-	font-weight: 700;
-	color: #65b3e2;
-	cursor: pointer;
-}
+    .cbp-pgoptsize .cbp-pgopttooltip span {
+        display: block;
+        text-indent: 0;
+        background: url(../images/shoesimages.png) no-repeat center center;
+        background-size: 100%;
+        margin: 0 -8px 4px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #65b3e2;
+        cursor: pointer;
+    }
 
 .cbp-pgoptsize .cbp-pgopttooltip span:hover {
 	color: #0968a1;
@@ -1923,11 +1924,12 @@ h1.w3wthreeheadingaits {
 	transform: scale(1.1);
 }
 
-.cbp-pgoptsize .cbp-pgopttooltip span[data-size="XL"] {
-	width: 44px;
-	height: 44px;
-	line-height: 44px;
-}
+        .cbp-pgoptsize .cbp-pgopttooltip span[data-size="XL"] {
+            width: 65px;
+            height: 48px;
+            color: #230aff;
+            line-height: 54px;
+        }
 
 .cbp-pgoptsize .cbp-pgopttooltip span[data-size="L"] {
 	width: 40px;
