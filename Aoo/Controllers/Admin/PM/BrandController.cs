@@ -80,8 +80,8 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditBrand(ViewModels.PM.Brand.EditBrandViewModel editBrand)
         {
-            string ImagePath = null;
             ImageErrorModel imageErrorModel = new ImageErrorModel();
+            string ImagePath=null;
             if (editBrand.DefaultImage == null)
             {
                 ImagePath = editBrand.OldImage;

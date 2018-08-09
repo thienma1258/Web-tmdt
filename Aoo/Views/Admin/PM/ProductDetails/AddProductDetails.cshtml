@@ -1,16 +1,17 @@
 ﻿@model Aoo.ViewModels.PM.ProductDetails.AddProductDetailsViewModel
 @inject BLL.BLL.PM.IProductBLL IProductBLL
-
+@using Common.Enum.PM;
 @{
     ViewData["Title"] = "AddProductDetails";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
     var listProduct = await IProductBLL.Get();
+    var listSize = new List<int>();
+    for(int i = 34; i < 45; i++)
+    {
+        listSize.Add(i);
+    }
 }
-<h2>AddProductDetail</h2>
-
-<h4>
-    AddProductDetailsViewModel;
-</h4>
+<h2>Tạo Thương Hiệu Mới</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,12 +19,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TypeColor" class="control-label"></label>
-                <input asp-for="TypeColor" class="form-control" />
+                <select asp-for="TypeColor" asp-items="Html.GetEnumSelectList<TypeColorEnum>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
                 <span asp-validation-for="TypeColor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
+                <select asp-for="Size" asp-items="@(new SelectList(listSize))">
+                    <option selected="selected" value="">Please select</option>
+                </select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div>
@@ -33,11 +38,11 @@
                 </select>
                 <span asp-validation-for="Product" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Specification" class="control-label"></label>
-                <input asp-for="Specification" class="form-control" />
-                <span asp-validation-for="Specification" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="Specification" class="control-label"></label>
+            <input asp-for="Specification" class="form-control" />
+            <span asp-validation-for="Specification" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="Note" class="control-label"></label>
                 <input asp-for="Note" class="form-control" />
@@ -45,13 +50,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+                @await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", "Price")
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Quality" class="control-label"></label>
-                <input asp-for="Quality" class="form-control" />
-                <span asp-validation-for="Quality" class="text-danger"></span>
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StockMin" class="control-label"></label>
@@ -59,16 +64,17 @@
                 <span asp-validation-for="StockMin" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaxQualityBuy" class="control-label"></label>
-                <input asp-for="MaxQualityBuy" class="form-control" />
-                <span asp-validation-for="MaxQualityBuy" class="text-danger"></span>
+                <label asp-for="MaxQuantityBuy" class="control-label"></label>
+                <input asp-for="MaxQuantityBuy" class="form-control" />
+                <span asp-validation-for="MaxQuantityBuy" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div id="upform" class="form-group">
                 <label asp-for="ListDefaultImage" class="control-label"> </label>
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "ListDefaultImage" })
                 <span asp-validation-for="ListDefaultImage" class="text-danger"></span>
+                @*<input asp-for="ListDefaultImage" type="file" class="form-control" />*@
             </div>
-
+            <input type="button" onclick="addForm()" value="More Image" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -79,4 +85,21 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script type="text/javascript">
+    function addElement(parentId, elementTag, elementId, html) {
+        // Adds an element to the document
+        var p = document.getElementById(parentId);
+        var newElement = document.createElement(elementTag);
+        newElement.setAttribute('id', elementId);
+        newElement.innerHTML = html;
+        p.appendChild(newElement);
+    }
+    var fileID = 0;
+    function addForm()
+    {
+        fileID++;
+        var html ='<input type="file" class="form-control" id="ListDefaultImage" name="ListDefaultImage">'
+        addElement('upform','p', 'file-' + fileID, html);
+    }
+</script>
 

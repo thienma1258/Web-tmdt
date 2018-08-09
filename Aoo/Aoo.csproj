@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <Compile Remove="Views\HomeSlider\**" />
+    <Compile Remove="Views\Product\**" />
     <Compile Remove="Views\SubGroup\**" />
     <Compile Remove="wwwroot\js\Shop\**" />
+    <Content Remove="Views\Product\**" />
     <Content Remove="wwwroot\js\Shop\**" />
+    <EmbeddedResource Remove="Views\Product\**" />
     <EmbeddedResource Remove="wwwroot\js\Shop\**" />
+    <None Remove="Views\Product\**" />
     <None Remove="wwwroot\js\Shop\**" />
   </ItemGroup>
 

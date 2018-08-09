@@ -14,13 +14,12 @@ namespace Aoo.ViewModels.PM.ProductDetails
         public TypeColorEnum TypeColor { get; set; }
         public int Size { get; set; } = 0;
         public string Product { get; set; }
-
         public string Specification { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public List<IFormFile> ListDefaultImage { get; set; }
-        public int Quality { get; set; }
+        public int Quantity { get; set; }
         public int StockMin { get; set; }
-        public int MaxQualityBuy { get; set; }
+        public int MaxQuantityBuy { get; set; }
     }
 }

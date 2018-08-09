@@ -19,9 +19,10 @@ namespace Aoo.Controllers.Admin.PM
         private readonly IProductBLL ProductBLL;
         private readonly IProductDetailsBLL ProductDetailsBLL;
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list = await ProductDetailsBLL.Get();
+            return View(list);
         }
         public ProductDetailsController(IProductBLL productBLL, IProductDetailsBLL productDetailsBLL, IImageServices imageServices) : base(imageServices)
         {
@@ -37,7 +38,7 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> AddProductDetails(Aoo.ViewModels.PM.ProductDetails.AddProductDetailsViewModel addProductDetailsViewModel)
         {
             List<ImageErrorModel> imageErrorModels = new List<ImageErrorModel>();
-            List<string> ListImagePath = UploadListImage(addProductDetailsViewModel.ListDefaultImage,ref imageErrorModels);
+            List<string> ListImagePath = UploadListImage(addProductDetailsViewModel.ListDefaultImage, ref imageErrorModels);
             ProductDetails productDetails = new ProductDetails()
             {
                 TypeColor=addProductDetailsViewModel.TypeColor,
@@ -45,8 +46,8 @@ namespace Aoo.Controllers.Admin.PM
                 Specification=addProductDetailsViewModel.Specification,
                 Note=addProductDetailsViewModel.Note,
                 Price=addProductDetailsViewModel.Price,
-                Quantity=addProductDetailsViewModel.Quality,
-                MaxQuantityBuy=addProductDetailsViewModel.MaxQualityBuy
+                Quantity=addProductDetailsViewModel.Quantity,
+                MaxQuantityBuy=addProductDetailsViewModel.MaxQuantityBuy
             };
             Product product = await ProductBLL.Find(addProductDetailsViewModel.Product);
             productDetails.Product = product;
@@ -54,7 +55,12 @@ namespace Aoo.Controllers.Admin.PM
             productDetails.ListImages = ListImagePath;
             await ProductDetailsBLL.Add(productDetails);
             //chua kiem tra issuccess
-            return View();
+            return RedirectToAction("Index");
+        }
+        public async Task<ActionResult> Details(string id)
+        {
+            var result = await ProductDetailsBLL.Find(id);
+            return View(result);
         }
     }
 }

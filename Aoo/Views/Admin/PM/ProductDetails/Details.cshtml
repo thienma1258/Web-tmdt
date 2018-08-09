@@ -1,0 +1,141 @@
+﻿@model DAL.Model.PM.ProductDetails
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeColor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TypeColor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Specification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Specification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DefaultImage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DefaultImage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StockMin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StockMin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxQuantityBuy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxQuantityBuy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.listImages)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.listImages)
+            @{
+                string[] images = Model.listImages.Split(new string[] { "," }, StringSplitOptions.None);
+            }
+            @foreach (var i in images)
+            {
+                <img width="100px" height="50px" src=@Url.Content(i)>
+                <br>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.isDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.isDeleted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EditedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EditedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EditedUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EditedUser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeletedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeletedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeletedUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeletedUser)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

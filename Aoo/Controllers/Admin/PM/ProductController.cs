@@ -20,13 +20,15 @@ namespace Aoo.Controllers.Admin.PM
         private readonly ICategoryBLL CategorytBLL;
         private readonly IMainGroupBLL MainGroupBLL;
         private readonly ISubGroupBLL SubGroupBLL;
-        public ProductController(IProductBLL productBLL, ISubGroupBLL subGrouptBLL, IMainGroupBLL mainGroupBL, IBrandBLL brandBLL,ICategoryBLL  categoryBLL, IImageServices imageServices) : base(imageServices)
+        private readonly IProductDetailsBLL ProductDetailsBLL;
+        public ProductController(IProductBLL productBLL, IProductDetailsBLL productDetailsBLL, ISubGroupBLL subGrouptBLL, IMainGroupBLL mainGroupBL, IBrandBLL brandBLL,ICategoryBLL  categoryBLL, IImageServices imageServices) : base(imageServices)
         {
             ProductBLL = productBLL;
             this.MainGroupBLL = mainGroupBL;
             this.BrandBLL = brandBLL;
             this.CategorytBLL = categoryBLL;
             this.SubGroupBLL = subGrouptBLL;
+            this.ProductDetailsBLL = productDetailsBLL;
         }
         
         public async Task<IActionResult> Index(int page=1,string contain=null)
@@ -144,6 +146,6 @@ namespace Aoo.Controllers.Admin.PM
 
             }
             return Json(new { success = "false" });
-        }
+        }      
     }
 }

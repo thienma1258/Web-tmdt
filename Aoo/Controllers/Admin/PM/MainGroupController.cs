@@ -78,7 +78,6 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditMainGroup(ViewModels.PM.MainGroup.EditMainGroupViewModel editViewMainGroupModel)
         {
-
             ImageErrorModel imageErrorModel = new ImageErrorModel();
             string ImagePath=null;
             if (editViewMainGroupModel.DefaultImage == null)

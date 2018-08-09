@@ -10,4 +10,5 @@ namespace Common.Enum.PM
         Female = 2,
         All=0
     }
+    
 }

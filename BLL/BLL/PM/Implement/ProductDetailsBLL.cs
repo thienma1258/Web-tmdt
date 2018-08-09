@@ -42,9 +42,9 @@ namespace BLL.BLL.PM.Implement
             throw new NotImplementedException();
         }
 
-        public Task<ProductDetails> Find(string ID)
+        public async Task<ProductDetails> Find(string ID)
         {
-            throw new NotImplementedException();
+            return this.unitOfWork.ProductDetailsRepository.Find(ID);
         }
 
         public async Task<IEnumerable<ProductDetails>> Get(int intNumber = -1, int currentPage = -1)

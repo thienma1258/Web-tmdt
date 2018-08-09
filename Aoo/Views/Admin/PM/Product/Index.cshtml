@@ -3,6 +3,7 @@
 @inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
 @inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
 @inject BLL.BLL.PM.ICategoryBLL CategoryBLL
+@inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
 
 @{
     ViewData["Title"] = "View";
@@ -86,8 +87,21 @@
     @foreach (var item in Model)
     {
         <tr>
+            
             <th>
                 <a>  @Html.DisplayFor(modelItem => item.Model)</a>
+                @{
+                    var listColor = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
+                    foreach(var i in listColor) { 
+                       <a href="/ProductDetails/Details?id=@i.ID"> @(i.TypeColor.ToString())</a>          
+                    }
+                }
+
+                @*<div class="form-group">
+            <select asp-items="@(new SelectList(listColor))">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>*@
             </th>
             <th>
                 @Html.DisplayFor(modelItem => item.StockMin)
