@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                @await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", "Price")
+                @await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", new Aoo.ViewModels.Component.CurrencyInputModel { Name= "Price", Price=1000}) 
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
