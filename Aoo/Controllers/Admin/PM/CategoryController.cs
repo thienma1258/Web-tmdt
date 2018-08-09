@@ -74,8 +74,8 @@ namespace Aoo.Controllers.Admin.PM
         [HttpPost]
         public async Task<IActionResult> EditCategory(ViewModels.PM.Category.EditCategoryViewModel editcategory)
         {
+            string ImagePath = null;
             ImageErrorModel imageErrorModel = new ImageErrorModel();
-            string ImagePath=null;
             if (editcategory.DefaultImage == null)
             {
                 ImagePath = editcategory.OldImage;
@@ -93,7 +93,7 @@ namespace Aoo.Controllers.Admin.PM
                     await CategoryBLL.Update(objcategory);
                     return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(editcategory);
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)

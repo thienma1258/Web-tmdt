@@ -23,8 +23,15 @@ namespace Aoo.Controllers.Shop
         }
         public async Task<IActionResult> MenShop()
         {
-
             return View(await ProductBLL.Get(filter:p=>p.SubGroup.MainGroup.TypeSex==Common.Enum.PM.TypeSexEnum.Male));
+        }
+        public async Task<IActionResult> WomenShop()
+        {
+            return View(await ProductBLL.Get(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female));
+        }
+        public async Task<IActionResult> ShopAll()
+        {
+            return View(await ProductBLL.Get());
         }
         public IActionResult Detail()
         {

@@ -14,7 +14,6 @@ namespace Aoo.ViewModels.PM.MainGroup
         public string ID { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
         public IFormFile DefaultImage { get; set; }
         [MaxLength(80)]
         [MinLength(5)]
