@@ -21,7 +21,7 @@ namespace DAL.Model.PM
         public string BrandID { get; set; }
         public virtual Category Category { get; set; }
         public string CategoryID { get; set; }
-     
+        public bool IsAllowComment { get; set; }
         public string CommentArea { get; set; }
         // giay the thao giay công so, giay em be
         public virtual SubGroup SubGroup { get; set; }

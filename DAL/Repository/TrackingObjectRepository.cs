@@ -13,21 +13,14 @@ namespace DAL.Repository
         public TrackingObjectRepository(ShopContext context) : base(context)
         {
         }
+        protected override IQueryable<TTrackingObject> filterObject(Expression<Func<TTrackingObject, bool>> filter = null, int currentPage = -1, int number = -1)
+        {
+            IQueryable<TTrackingObject> Query= base.filterObject(filter, currentPage, number);
+            return Query;
+        }
         public override IEnumerable<TTrackingObject> Get(Expression<Func<TTrackingObject, bool>> filter = null, Func<IQueryable<TTrackingObject>, IOrderedQueryable<TTrackingObject>> orderBy = null, int currentPage = -1, int number = -1)
         {
-            IQueryable<TTrackingObject> query = dbSet;
-            query=query.Where(p => p.isDeleted == false);
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            if (number != -1)
-            {
-                if (currentPage != -1)
-                    query = query.Skip(number * (currentPage - 1));
-                query = query.Take(number);
-            }
+            var query=filterObject(filter, currentPage, number);
             if (orderBy != null)
             {
                 return orderBy(query).ToList();

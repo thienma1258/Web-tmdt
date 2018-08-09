@@ -18,6 +18,24 @@ namespace DAL.Repository
             this.shopContext = context;
             this.dbSet = context.Set<TEntity>();
         }
+        protected virtual IQueryable<TEntity> filterObject(Expression<Func<TEntity, bool>> filter = null, int currentPage = -1, int number = -1)
+        {
+            IQueryable<TEntity> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (number != -1)
+            {
+                if (currentPage != -1)
+                    query = query.Skip(number * (currentPage - 1));
+                query = query.Take(number);
+            }
+            return query;
+        }
+
         public virtual IEnumerable<TEntity> Get(
           Expression<Func<TEntity, bool>> filter = null,
               Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int currentPage = -1, int number = -1)
