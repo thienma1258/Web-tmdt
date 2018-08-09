@@ -98,6 +98,8 @@
     <Folder Include="Controllers\Admin\SM\" />
     <Folder Include="Views\Product\" />
     <Folder Include="Views\SubGroup\" />
+    <Folder Include="Views\TransportType\" />
+    <Folder Include="wwwroot\js\Admin\PM\TransportType\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -86,7 +86,7 @@ namespace Aoo
                 options.SlidingExpiration = true;
             });
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); 
 
         }
 

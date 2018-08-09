@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL.PM.Implement
 {
-    public class TransportPriceBLL : GenericBLL, IGenericBLL<TransportPrice, string>
+    public class TransportPriceBLL : GenericBLL, ITransportPriceBLL
     {
         public TransportPriceBLL(IUnitOfWork unitOfWork, IDataCache DataCache) : base(unitOfWork, DataCache)
         {

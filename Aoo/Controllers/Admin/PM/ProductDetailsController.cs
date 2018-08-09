@@ -46,7 +46,7 @@ namespace Aoo.Controllers.Admin.PM
                 Note=addProductDetailsViewModel.Note,
                 Price=addProductDetailsViewModel.Price,
                 Quantity=addProductDetailsViewModel.Quality,
-                MaxQualityBuy=addProductDetailsViewModel.MaxQuantityBuy
+                MaxQuantityBuy=addProductDetailsViewModel.MaxQualityBuy
             };
             Product product = await ProductBLL.Find(addProductDetailsViewModel.Product);
             productDetails.Product = product;

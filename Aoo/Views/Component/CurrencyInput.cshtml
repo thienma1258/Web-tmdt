@@ -1,9 +1,9 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model string;
+@model Aoo.ViewModels.Component.CurrencyInputModel;
 <input type="text" id="price" class="form-control"  />
-<input type="number" id="output" disabled style="display:none" name="@Model" />
+<input type="hidden" id="output"  style="display:none" name="@Model" />
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/4.1.0/autoNumeric.min.js">
 
 </script>
@@ -32,10 +32,11 @@
             suffixText: 'VND' ,
             roundingMethod: AutoNumeric.options.roundingMethod.halfUpSymmetric,
         };
-        var autoNumericInstance = new AutoNumeric('#price', 0, { suffixText: 'VND' });
+        var autoNumericInstance = new AutoNumeric('#price', @Model.Price, { suffixText: 'VND' });
         autoNumericInstance.update({ minimumValue: 0 });
         autoNumericInstance.update({ decimalPlaces: 0 });
-        $('#search').on('keyup', function () {
+
+        $('#price').on('keyup', function () {
             // Retrieve instance numeric string value
             $('#output').val(autoNumericInstance.getNumericString());
         });

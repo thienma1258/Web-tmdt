@@ -9,7 +9,7 @@ namespace DAL.Model.PM
         public string Name { get; set; }
         public decimal Price { get; set; }
 
-        public int Prestige { get; set; }
+        public int Prestige { get; set; } = 0;
         public string Note { get; set; }
         public IEnumerable<TransportPrice> TransportPrices { get; set; }
         

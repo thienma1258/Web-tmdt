@@ -11,6 +11,7 @@ namespace DAL.Repository.PM.Implement
         public TransportTypeRepository(ShopContext context) : base(context)
         {
         }
+
        
     }
 }

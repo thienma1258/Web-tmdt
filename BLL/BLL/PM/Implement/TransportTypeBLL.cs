@@ -41,7 +41,7 @@ namespace BLL.BLL.PM.Implement
         {
             try
             {
-                this.unitOfWork.TransportPriceRepository.Delete(entityID, DeletedUser);
+                this.unitOfWork.TransportTypeRepository.Delete(entityID, DeletedUser);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }

@@ -12,8 +12,9 @@ namespace DAL.Model.SM
         public string CustomerID { get; set; }
         public virtual CM.CM_Customer Customer { get; set; }
         public StateConfirmEnum State { get; set; } = StateConfirmEnum.Pending;
-        public virtual TransportPrice TransportPrice { get; set; }
+        public virtual TransportType TransportPrice { get; set; }
         public string TransportPriceID { get; set; }
+        public decimal CurrentTransportPrice{ get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
         public string AuthenticationMethodGuid { get; set; }
