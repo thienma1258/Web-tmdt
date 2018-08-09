@@ -59,7 +59,7 @@ namespace Aoo.Controllers.Admin.PM
         }
         public async Task<ActionResult> Details(string id)
         {
-            var result = await ProductDetailsBLL.Find(id);
+            var result = await ProductDetailsBLL.Get(filter:p=>p.ID==id);
             return View(result);
         }
     }
