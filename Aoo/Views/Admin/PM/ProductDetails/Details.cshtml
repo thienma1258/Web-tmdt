@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<DAL.Model.PM.ProductDetails>
 
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
@@ -35,31 +36,35 @@
                         @Html.DisplayFor(modelIem => item.Product.Model)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelIem =>item.TypeColor)
+                        @Html.DisplayFor(modelIem => item.TypeColor)
                     </td>
 
                     <td>
                         @Html.DisplayFor(modelIem => item.Size)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => item.Price)
+                        @Html.DisplayFor(modelIem => item.Price)
+                        <div class="form-group">
+                            @*@await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", "Price")*@
+                        </div>
                     </td>
                     <td>
-                        @{
-                            string[] images = item.listImages.Split(new string[] { "," }, StringSplitOptions.None);
-                        }
-                        @foreach (var i in images)
-                        {
-                            <img width="100px" height="50px" src=@Url.Content(i)>
-                            <br>
-                        }
+                        <div class="imgpro">
+                            @{
+                                string[] images = item.listImages.Split(new string[] { "," }, StringSplitOptions.None);
+                            }
+                            @foreach (var i in images)
+                            {
+                                <img  src=@Url.Content(i)>
+                                <br>
+                            }
+                        </div>
                     </td>
                 </tr>
             }
         <tbody>
     </table>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div class="backtolist">
+    <a href="/Product/Index">Trở lại trang chủ</a>
 </div>

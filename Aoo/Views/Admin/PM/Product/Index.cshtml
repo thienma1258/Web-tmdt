@@ -93,7 +93,7 @@
                 @{
                     var listColor = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
                     foreach(var i in listColor) { 
-                       <a href="/ProductDetails/Details?id=@i.ID"> @(i.TypeColor.ToString())</a>          
+                       <a href="/ProductDetails/Details?id=@item.ID&color=@i.TypeColor.ToString()"> @(i.TypeColor.ToString())</a>          
                     }
                 }
 
