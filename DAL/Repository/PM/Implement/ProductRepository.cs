@@ -28,7 +28,11 @@ namespace DAL.Repository.PM.Implement
                 return query.ToList(); ;
             }
         }
+        public override Product Find(string id)
+        {
+          return  this.dbSet.Include(p => p.Brand).Include(p => p.SubGroup).Include(p => p.Category).FirstOrDefault(p => p.ID == id);
+        }
 
-       
+
     }
 }
