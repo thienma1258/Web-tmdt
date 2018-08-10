@@ -57,9 +57,11 @@ namespace Aoo.Controllers.Admin.PM
             //chua kiem tra issuccess
             return RedirectToAction("Index");
         }
-        public async Task<ActionResult> Details(string id,string color)
+        public async Task<ActionResult> Details(string id, string color)
         {
-            var result = await ProductDetailsBLL.Get(filter:p=>p.ProductID==id && p.TypeColor.ToString()==color);
+            var re = await ProductDetailsBLL.Get(filter: p => p.ProductID == id);
+            var list = re.GroupBy(p => p.TypeColor.ToString());
+            var result = await ProductDetailsBLL.Get(filter: p => p.ProductID==id && p.TypeColor.ToString() == color);
             return View(result);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aoo.ViewModels.PM.ProductDetails;
 using BLL.BLL.PM;
 using DAL.DataContext;
 using Microsoft.AspNetCore.Mvc;
@@ -37,8 +38,29 @@ namespace Aoo.Controllers.Shop
         }
         public async Task<IActionResult> Detail(string id, string color)
         {
+
             var result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id && p.TypeColor.ToString() == color);
-            return View(result);
+            var pro = await ProductBLL.Find(id);
+            decimal price = 0;
+            string listImage = null;
+            List<string> listSize = new List<string>();
+            foreach (var i in result)
+            {
+                listImage = i.listImages;
+                price =i.Price;
+                listSize.Add(i.Size.ToString());
+            }
+            LoadDetailsViewModel temp = new LoadDetailsViewModel()
+            {
+                ListSize=listSize,
+                Color=color,
+                Model=pro.Model,
+                Price=price.ToString(),
+                ListImage=listImage,
+                Descrtiption=pro.Details
+
+            };
+            return View(temp);
         }
         public IActionResult CartItem()
         {

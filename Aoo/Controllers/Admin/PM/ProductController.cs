@@ -66,6 +66,7 @@ namespace Aoo.Controllers.Admin.PM
                         Model = addProductViewModel.Model,
                         DefaultImage = ImagePath,
                         isOnlineOnly = addProductViewModel.isOnlineOnly,
+                        IsAllowComment=addProductViewModel.IsAllowComment,
                         StockMin = addProductViewModel.StockMin,
                         Details=addProductViewModel.Details
 

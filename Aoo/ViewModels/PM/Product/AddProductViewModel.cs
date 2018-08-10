@@ -31,5 +31,7 @@ namespace Aoo.ViewModels.PM
         // giay the thao giay công so, giay em be
         [Required]
         public string SubGroup { get; set; }
+        [Required]
+        public bool IsAllowComment { get; set; }
     }
 }

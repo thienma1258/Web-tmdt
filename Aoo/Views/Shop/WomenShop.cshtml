@@ -3,12 +3,14 @@
 @inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
 @inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
+@inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
 @{
     ViewData["Title"] = "WomenShop";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listSubGroup = await SubGroupBLL.Get();
     var listMainGroup = await MainGroupBLL.Get();
     var listBrand = await BrandBLL.Get();
+    var lishProductDetails = await ProductDetailsBLL.Get();
 }
 <img src="~/images/MAVEN46-gigi-hadid-style-feature2.jpg" />
 <h1 class="w3wthreeheadingaits">WOMEN'S SHOES</h1>
@@ -117,7 +119,15 @@
             <ul>
                 <li><a href="/Shop/Detail?id=@item.ID"><span>@item.Model</span></a></li>
                 <li><span class="price">$25</span></li>
+
             </ul>
+            @{
+                var listColor = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
+                foreach (var i in listColor)
+                {
+                    <a href="/Shop/Detail?id=@item.ID&color=@i.TypeColor.ToString()"> @(i.TypeColor.ToString())</a>
+                }
+            }
 
         </div>
     </div>

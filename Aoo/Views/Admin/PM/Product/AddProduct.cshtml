@@ -32,6 +32,13 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsAllowComment" /> @Html.DisplayNameFor(model => model.IsAllowComment)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
                 <label asp-for="StockMin" class="control-label"></label>
                 <input asp-for="StockMin" class="form-control" />
                 <span asp-validation-for="StockMin" class="text-danger"></span>
@@ -71,6 +78,7 @@
             </div>
             <br />
             <div style="width:250%">
+                <label asp-for="Details" class="control-label"></label>
                 <textarea name="Details" style="width:100%;height:200px" id="editor"></textarea>
             </div>
             <br />

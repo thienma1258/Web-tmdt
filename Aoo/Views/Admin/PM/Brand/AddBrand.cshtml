@@ -15,10 +15,8 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label"> @Html.DisplayNameFor(model => model.Description)</label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+            <div style="width:250%">
+                <textarea name="Description" style="width:100%;height:200px" id="editor"></textarea>
             </div>
             <div class="form-group">
                 <label class="control-label"> @Html.DisplayNameFor(model => model.DefaultImage)</label>
@@ -38,4 +36,15 @@
 <div class="backtolist">
     <a href="/Brand/Index">Trở lại trang quản lý</a>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+
+
+
 

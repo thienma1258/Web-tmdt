@@ -13,9 +13,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" class="form-control" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label">@Model.Name/label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Name" class="control-label">
+                    @Model.Name/label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="@Model.OldImage" class="form-control" />
@@ -25,10 +26,9 @@
                 @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage", DefaultImage = Model.OldImage })
                 <span asp-validation-for="DefaultImage" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+            <label asp-for="Description" class="control-label"></label>
+            <div style="width:250%">
+                <textarea name="Description" style="width:100%;height:200px" id="editor"></textarea>
             </div>
             <div class="form-group">
                 <label>Giới Tính</label>
@@ -41,10 +41,19 @@
                 <input type="submit" value="Lưu" class="btn btn-danger" />
             </div>
         </form>
-    </div>
+</div>
 </div>
 
 <div class="backtolist">
     <a href="/MainGroup/Index">Trở lại trang quản lý</a>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+
 
