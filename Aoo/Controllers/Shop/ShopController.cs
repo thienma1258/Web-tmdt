@@ -13,13 +13,15 @@ namespace Aoo.Controllers.Shop
     public class ShopController : BaseController
     {
         private readonly IProductBLL ProductBLL;
+        private readonly IProductDetailsBLL ProductDetailsBLL;
         private readonly IMainGroupBLL MainGroupBLL;
         private readonly ISubGroupBLL SubGroupBLL;
-        public ShopController(IProductBLL productBLL, IImageServices imageServices, IMainGroupBLL mainGroupBLL, ISubGroupBLL subGroupBLL):base(imageServices)
+        public ShopController(IProductBLL productBLL, IImageServices imageServices, IMainGroupBLL mainGroupBLL, ISubGroupBLL subGroupBLL, IProductDetailsBLL productDetailsBLL):base(imageServices)
         {
             ProductBLL = productBLL;
             MainGroupBLL = mainGroupBLL;
             SubGroupBLL = subGroupBLL;
+            ProductDetailsBLL = productDetailsBLL;
         }
         public async Task<IActionResult> MenShop()
         {
@@ -33,9 +35,10 @@ namespace Aoo.Controllers.Shop
         {
             return View(await ProductBLL.Get());
         }
-        public IActionResult Detail()
+        public async Task<IActionResult> Detail(string id, string color)
         {
-            return View();
+            var result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id && p.TypeColor.ToString() == color);
+            return View(result);
         }
         public IActionResult CartItem()
         {

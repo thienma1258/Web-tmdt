@@ -522,11 +522,13 @@
 </div>
 <div class="agilemodel-slider">
     <div id='film_roll_1'>
-     
-        <div><img src="~/images/bbbb.jpg" alt="Groovy Apparel"></div>
-        <div><img src="~/images/eeeeee.jpg" alt="Groovy Apparel"></div>
-        <div><img src="~/images/fffff.jpg" alt="Groovy Apparel"></div>
-        <div><img src="~/images/ggggg.jpg" alt="Groovy Apparel"></div>
+     @foreach (var slider in Model)
+     {
+        <div><img src="@Url.Content(slider.ImagePath)" alt="Groovy Apparel"></div>
+     }
+        <div><img src="~/images/s11.jpg" alt="Groovy Apparel"></div>
+        <div><img src="~/images/product-2.jpg" alt="Groovy Apparel"></div>
+        <div><img src="~/images/product-11.jpg" alt="Groovy Apparel"></div>
 
     </div>
 </div>

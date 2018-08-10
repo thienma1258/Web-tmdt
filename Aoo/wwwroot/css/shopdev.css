@@ -49,3 +49,8 @@
     margin: -35px 15px 0 0;
     color:dodgerblue!important;
 }
+.single-price input[type="text"], input[type="password"], input.email.aitsw3ls, textarea.text{
+
+    height:100%;
+    background-color:darkkhaki;
+}

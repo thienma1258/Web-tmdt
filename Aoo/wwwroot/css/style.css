@@ -1916,11 +1916,7 @@ h1.w3wthreeheadingaits {
         color: #65b3e2;
         cursor: pointer;
     }
-    .women
-    {
-        font-size:30px;
-    }
-    .cbp-pgoptsize .cbp-pgopttoolti1p .women span{
+    .cbp-pgoptsize .cbp-pgopttooltip .women span{
         display: block;
         text-indent: 0;
         background: url('../images/women-shoe-front-view.png') no-repeat center center;
@@ -1946,6 +1942,12 @@ h1.w3wthreeheadingaits {
             color: #230aff;
             line-height: 54px;
         }
+    .cbp-pgoptsize .cbp-pgopttooltip .women span[data-size="XL"] {
+        width: 50px;
+        height: 48px;
+        color: #d109ae;
+        line-height: 50px;
+    }
 
 .cbp-pgoptsize .cbp-pgopttooltip span[data-size="L"] {
 	width: 40px;
