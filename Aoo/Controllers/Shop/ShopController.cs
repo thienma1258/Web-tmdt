@@ -61,6 +61,10 @@ namespace Aoo.Controllers.Shop
             };
             return View(temp);
         }
+        public async Task<IActionResult> Specification(string ID)
+        {
+            return View(await ProductBLL.Find(ID));
+        }
         public IActionResult CartItem()
         {
             return View();

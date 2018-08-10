@@ -1,0 +1,13 @@
+﻿@model DAL.Model.PM.Product
+
+@{
+    ViewData["Title"] = "Specification";
+    Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
+}
+<link href="~/css/shopdev.css" rel="stylesheet" />
+<h2>Đặc Điểm Sản Phẩm</h2>
+
+<div class="specification">
+    <img src="@Url.Content(Model.DefaultImage)" />
+</div>
+    <h3>@Model.Specification</h3>

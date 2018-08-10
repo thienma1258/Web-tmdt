@@ -22,6 +22,7 @@ namespace Aoo.ViewModels.PM
         //public string LadingPage { get; set; }
         //public virtual ICollection<ProductDetails> ListProductDetails { get; set; }
         //adidas nike
+        public string Specification { get; set; }
         [Required]
         public string Brand { get; set; }
       

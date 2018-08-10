@@ -90,11 +90,7 @@ namespace Aoo.Controllers.Admin.PM
 
             ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
             {
-                ID = objproduct.ID,
-                Model = objproduct.Model,
-                Details = objproduct.Details,
-                isOnlineOnly = objproduct.isOnlineOnly,
-                StockMin = objproduct.StockMin,
+                
                 OldImage = objproduct.DefaultImage,
                 //DefaultImage=objproduct.DefaultImage,
                 SubGroup = objproduct.SubGroupID,
@@ -124,6 +120,7 @@ namespace Aoo.Controllers.Admin.PM
                      Product objproduct = new Product
                     {
                         ID=editProductViewModel.ID,
+                        Specification=editProductViewModel.OldSpecification,
                         Model = editProductViewModel.Model,
                         DefaultImage=ImagePath,
                         isOnlineOnly = editProductViewModel.isOnlineOnly,
@@ -132,7 +129,8 @@ namespace Aoo.Controllers.Admin.PM
                          IsAllowComment = editProductViewModel.IsAllowComment,
                          CreatedTime = editProductViewModel.CreateTime
 
-                     };
+                        
+                    };
                     objproduct.BrandID = editProductViewModel.Brand;
                     objproduct.CategoryID = editProductViewModel.Category;
                     objproduct.SubGroupID = editProductViewModel.SubGroup;
