@@ -3,14 +3,11 @@
 @inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
 @inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
-@inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
 @{
     ViewData["Title"] = "Giày dành cho  nam";
-    Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listSubGroup = await SubGroupBLL.Get();
     var listMainGroup = await MainGroupBLL.Get();
     var listBrand = await BrandBLL.Get();
-    var lishProductDetails = await ProductDetailsBLL.Get();
 }
 <img src="~/images/1240x-bighb-2015-mh-038-1980x1346px.jpg" />
 <h1 class="w3wthreeheadingaits">MEN'S SHOES</h1>
@@ -82,13 +79,13 @@
                 </div>
             </li>
         </ul>
-
+       
         <ul class="cbp-pgoptions w3l">
             <li style="color:black" class="cbp-pgoptcompare">
                 @{
                     var listimgbrand = await BrandBLL.Find(item.BrandID);
                     <img style="width:50px;height:50px;margin:-10px" src="@Url.Content(listimgbrand.DefaultImage)" />
-                }
+                 }
 
             </li>
             <li class="cbp-pgoptsize agile">
@@ -115,17 +112,9 @@
 
         <div class="pricemodel">
             <ul>
-                <li><a href="/Shop/Detail?id=@item.ID"><span>@item.Model</span></a></li>
+                <li><a href="#"><span>@item.Model</span></a></li>
                 <li><span class="price">$25</span></li>
-
             </ul>
-            @{
-                var listColor = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
-                foreach (var i in listColor)
-                {
-                    <a href="/Shop/Detail?id=@item.ID&color=@i.TypeColor.ToString()"> @(i.TypeColor.ToString())</a>
-                }
-            }
 
         </div>
     </div>

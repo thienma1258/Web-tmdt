@@ -1,0 +1,51 @@
+﻿@model DAL.Model.PM.Category;
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@inject BLL.BLL.PM.IProductBLL IProductBLL ;
+@{ 
+    var listProduct = await IProductBLL.Get(6, 1, filter: p => p.CategoryID == Model.ID);
+}
+<style>
+    .brand-content {
+        width: 100%;
+        position: relative;
+    }
+        .brand-content > div > img#representimage {
+            width: 100%;
+            margin-top: 3em;
+            transition: all 1s ease;
+        }
+         .brand-content > div > img#representimage:hover {
+             cursor:grab;
+                -webkit-transform: scale(1.3);
+                -ms-transform: scale(1.3);
+                transform: scale(1.3);
+                -webkit-transition: opacity .25s ease-in-out;
+                -moz-transition: opacity .25s ease-in-out;
+                -o-transition: opacity .25s ease-in-out;
+                transition: opacity .25s ease-in-out;
+            }
+    .brand-content>div>h2{
+        color:black;
+        margin-top:2em;
+    }
+    .product-grid{
+        margin-top:20em;
+    }
+</style>
+<div class="brand-content">
+    <div class="col-md-3" >
+        <img id="representimage" src="@Url.Content(Model.DefaultImage)" />
+    </div>
+    <div class="col-md-9">
+        <div>
+            <h1>@Model.Name</h1>
+            <h2>@Model.Description</h2>
+        </div>
+    </div>
+</div>
+<div class="product-grid">
+    @await Html.PartialAsync("~/Views/Shared/ListProduct.cshtml", listProduct);
+</div>

@@ -18,6 +18,7 @@ namespace DAL.Repository.PM.Implement
         public override IEnumerable<Product> Get(Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null, int currentPage = -1, int number = -1)
         {
             var query = filterObject(filter, currentPage, number);
+            query = query.Include(p => p.Brand).Include(p => p.SubGroup).Include(p => p.Category);
             if (orderBy != null)
             {
                 return orderBy(query).ToList();
@@ -28,9 +29,6 @@ namespace DAL.Repository.PM.Implement
             }
         }
 
-        public Task<Product> SearchByUrl(string url)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

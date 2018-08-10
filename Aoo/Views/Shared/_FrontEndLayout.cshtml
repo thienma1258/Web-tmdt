@@ -1,15 +1,18 @@
 ﻿@{
     Layout = null;
+    string Title = ViewBag.Title==null?(ViewBag.Name==null?"Bán giày Buôn Mê thuột":ViewBag.Name):ViewBag.Title;
+    string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>Groovy Apparel a E-Commerce &amp; Fashion Category Bootstrap Responsive Website Template | Men's :: W3layouts</title>
+    <title>@Title</title>
 
     <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="@Keyword">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta property="fb:app_id" content="1425936334136017" />
     <meta property="og:url" content="URL" />

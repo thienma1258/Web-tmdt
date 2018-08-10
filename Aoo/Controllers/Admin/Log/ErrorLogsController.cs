@@ -10,7 +10,7 @@ using Services;
 namespace Aoo.Controllers.Admin.Log
 {
     [Authorize]
-    [Route("Error")]
+    [Route("ErrorLog")]
     [Area("Log")]
     public class ErrorLogsController : BaseController
     {

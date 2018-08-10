@@ -90,5 +90,10 @@ namespace BLL.BLL.PM.Implement
                 return null;
             }
         }
+
+        public Category SearchByUrl(string url)
+        {
+            return this.unitOfWork.CategoryRepository.SearchByUrl(url);
+        }
     }
 }

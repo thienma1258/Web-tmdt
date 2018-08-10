@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    public interface IStoreRepository : IGenericRepository<Store, string>
+    public interface IStoreRepository : ISeoRepository<Store>
     {
     }
 }

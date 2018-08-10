@@ -8,6 +8,6 @@ namespace DAL.Repository
 {
     public interface ISeoRepository<TEntity> : ITrackingObjectRepository<TEntity> where TEntity : SeoObject
     {
-        Task<TEntity> SearchByUrl(string url);
+        TEntity SearchByUrl(string url);
     }
 }

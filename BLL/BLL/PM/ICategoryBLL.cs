@@ -7,5 +7,7 @@ namespace BLL.BLL.PM
 {
     public interface ICategoryBLL:IGenericBLL<Category,string>
     {
+        Category SearchByUrl(string url);
+
     }
 }

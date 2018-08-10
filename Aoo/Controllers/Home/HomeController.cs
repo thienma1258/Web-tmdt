@@ -11,6 +11,7 @@ using DAL.Model.PM;
 using Services;
 using BLL.BLL.PM.Implement;
 using BLL.BLL.PM;
+using Aoo.Helpers;
 
 namespace Aoo.Controllers
 {
@@ -18,11 +19,22 @@ namespace Aoo.Controllers
     {
         
         private readonly IHomeSliderBLL HomeSliderBLL;
-        private readonly ShopContext shopContext;
-        public HomeController(ShopContext shopContext,IHomeSliderBLL homeSliderBLL,IImageServices imageServices):base(imageServices)
+
+        private readonly IBrandBLL brandBLL;
+        private readonly ISubGroupBLL subGroupBLL;
+        private readonly ICategoryBLL categoryBLL;
+        private readonly IViewRenderService viewRenderService;
+        public HomeController(IViewRenderService viewRenderService, IBrandBLL brandBLL,IHomeSliderBLL homeSliderBLL,
+            IImageServices imageServices
+            , ISubGroupBLL subGroupBLL,
+            ICategoryBLL categoryBLL
+            ) :base(imageServices)
         {
+            this.subGroupBLL = subGroupBLL;
             HomeSliderBLL = homeSliderBLL;
-            this.shopContext = shopContext;
+            this.categoryBLL = categoryBLL;
+            this.viewRenderService = viewRenderService;
+            this.brandBLL = brandBLL;
         }
         public async Task<IActionResult> Index()
         {
@@ -36,5 +48,53 @@ namespace Aoo.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet("/{urlType}")]
+        public async Task<IActionResult> Seo(string urlType=null,int page=1)
+        {
+            ViewBag.html = "";
+            ViewBag.page = page;
+            if (urlType == null)
+                return RedirectToAction("Error");
+            //check Brand
+            #region Brand
+            Brand objBrand = this.brandBLL.SearchByUrl(urlType);
+           
+            if (objBrand != null)
+            {
+                ViewBag.html = await viewRenderService.RenderToStringAsync("Component/BrandComponent", objBrand);
+                ViewBag.Title = objBrand.MetaTitle;
+                ViewBag.Name = objBrand.Name;
+                ViewBag.Keyword = objBrand.MetaDescription;
+                return View();
+            }
+            #endregion
+            #region Subgroup
+            SubGroup objSubGroup = this.subGroupBLL.SearchByUrl(urlType);
+            if (objSubGroup != null)
+            {
+                ViewBag.html = await viewRenderService.RenderToStringAsync("Component/SubGroupComponent", objSubGroup);
+                ViewBag.Title = objSubGroup.MetaTitle;
+                ViewBag.Name = objSubGroup.Name;
+                ViewBag.Keyword = objSubGroup.MetaDescription;
+                return View();
+            }
+            #endregion
+            #region Categoryfilter
+            Category objCategory = this.categoryBLL.SearchByUrl(urlType);
+            if (objCategory != null)
+            {
+                ViewBag.html = await viewRenderService.RenderToStringAsync("Component/CategoryComponent", objCategory);
+                ViewBag.Title = objCategory.MetaTitle;
+                ViewBag.Name = objCategory.Name;
+                ViewBag.Keyword = objCategory.MetaDescription;
+                return View();
+            }
+
+            #endregion
+            //
+            return NotFound();
+        }
+
     }
 }

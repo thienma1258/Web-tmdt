@@ -13,9 +13,6 @@ namespace DAL.Repository.PM.Implement
         {
         }
 
-        public Task<MainGroup> SearchByUrl(string url)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

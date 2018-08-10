@@ -87,5 +87,10 @@ namespace BLL.BLL.PM
         {
             return this.unitOfWork.MainGroupRepository.Cout(filter);
         }
+
+        public MainGroup SearchByUrl(string url)
+        {
+            return this.SearchByUrl(url);
+        }
     }
 }

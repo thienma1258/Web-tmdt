@@ -7,5 +7,7 @@ namespace BLL.BLL.PM
 {
     public interface IProductBLL:IGenericBLL<Product,string>
     {
+        Product SearchByUrl(string url);
+
     }
 }

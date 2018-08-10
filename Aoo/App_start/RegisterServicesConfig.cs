@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Aoo.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.Implement;
 using System;
@@ -13,6 +14,7 @@ namespace Aoo.App_start
         public static void RegisterServices(ref IServiceCollection services)
         {
             services.AddTransient<IImageServices, LocalImageServices>();
+            services.AddSingleton<IViewRenderService, RenderView>();
         }
     }
 }

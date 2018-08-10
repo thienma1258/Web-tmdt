@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    public interface ITransportTypeRepository : IGenericRepository<TransportType, string>
+    public interface ITransportTypeRepository : ITrackingObjectRepository<TransportType>
     {
     }
 }

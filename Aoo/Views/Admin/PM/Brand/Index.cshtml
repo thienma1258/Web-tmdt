@@ -7,9 +7,11 @@
 
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2>Trang chủ thương hiệu</h2>
+
 <div class="subadd">
     <a href="/Brand/AddBrand">Thêm</a>
 </div>
+
 <table class="tablebrand">
     <thead>
         <tr>
@@ -42,7 +44,7 @@
                 </td>
                 <td>
                     <div class="subedit">
-                    <a href="/Brand/EditBrand?id=@item.ID">Sửa</a> 
+                        <a href="/Brand/EditBrand?id=@item.ID">Sửa</a>
                     </div>
                     @await Html.PartialAsync("~/Views/Component/ConfirmPopup.cshtml", item.ID)
                 </td>
@@ -51,5 +53,5 @@
         <tr></tr>
     </tbody>
 </table>
-@await Html.PartialAsync("~/Views/Component/Pagination.cshtml",new Aoo.ViewModels.Component.PaginationModel { currentPage=ViewBag.currentPage,totalPage=ViewBag.totalPage})
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
 <script src="~/js/Admin/PM/scripts.js"></script>

@@ -7,5 +7,6 @@ namespace BLL.BLL.PM
 {
     public interface IMainGroupBLL: IGenericBLL<MainGroup, string>
     {
+        MainGroup SearchByUrl(string url);
     }
 }

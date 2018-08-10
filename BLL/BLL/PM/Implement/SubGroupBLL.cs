@@ -2,6 +2,7 @@
 using DAL;
 using DAL.Model;
 using DAL.Model.PM;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace BLL.BLL.PM
         {
             try
             {
+                SubGroup.UrlFriendly = SubGroup.Name.UrlFriendLy();
                 SubGroup.CreatedUser = CreatedUser;
                 this.unitOfWork.SubGroupRepository.Insert(SubGroup);
                 await this.unitOfWork.SaveChangeAsync();
@@ -75,6 +77,7 @@ namespace BLL.BLL.PM
             try
             {
                 subGroup.EditedUser = UpdatedUser;
+                subGroup.UrlFriendly = subGroup.Name.UrlFriendLy();
                 this.unitOfWork.SubGroupRepository.Update(subGroup);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
@@ -88,6 +91,11 @@ namespace BLL.BLL.PM
         public int Cout(Expression<Func<SubGroup, bool>> filter = null)
         {
             return this.unitOfWork.SubGroupRepository.Cout(filter);
+        }
+
+        public SubGroup SearchByUrl(string url)
+        {
+            return this.unitOfWork.SubGroupRepository.SearchByUrl(url);
         }
     }
 }

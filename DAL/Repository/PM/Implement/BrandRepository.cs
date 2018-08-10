@@ -15,9 +15,6 @@ namespace DAL.Repository.PM.Implement
 
         }
 
-        public async Task<Brand> SearchByUrl(string url)
-        {
-            return null;
-        }
+       
     }
 }

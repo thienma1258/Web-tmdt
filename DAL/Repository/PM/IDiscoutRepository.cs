@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    public interface IDiscoutRepository:IGenericRepository<Discout,string>
+    public interface IDiscoutRepository:ITrackingObjectRepository<Discout>
     {
     }
 }
