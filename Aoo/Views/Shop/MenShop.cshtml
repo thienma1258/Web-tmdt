@@ -195,3 +195,20 @@
 <!-- //Custom-JavaScript-File-Links -->
 <!-- Bootstrap-JavaScript -->
 <script src="js/bootstrap.js"></script>
+@*<div class="fbshare">
+    <a href="http%3A%2F%2Fthienma1258.somee.com%2F&layout=button_count&size=small&mobile_iframe=true&width=0&height=0&appId">aaaaaaaaaa</a>
+</div>*@
+<script>
+    function renderFbLike() {
+        var PageLink = "set page link";
+        var parent = document.getElementById('fblikediv');
+        var child = document.getElementById('fblikeimg');
+        parent.removeChild(child);
+
+        var html2 = " <iframe src=\"http://www.facebook.com/plugins/like.php?href =" + "http://thienma1258.somee.com" + " &send=false&layout =standard&width =225&show_faces =false&font =arial&colorscheme =light&action =like&height =35\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; width:250px; height:35px;\" allowTransparency=\"true\"></iframe>";
+
+        document.getElementById('fblikediv').innerHTML = html2;
+    }
+</script>
+<div id="fblikediv" style="width:930px; margin:auto;">
+<img src="~/images/arrow_up.png" id="fblikeimg" onMouseOver="return renderFbLike();"></div>
