@@ -87,19 +87,21 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditProduct(string id)
         {
             Product objproduct = await this.ProductBLL.Find(id);
-           
+
             ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
             {
-                ID = objproduct.ID,  
-                Model=objproduct.Model,
-                Details=objproduct.Details,
-                isOnlineOnly=objproduct.isOnlineOnly,
-                StockMin=objproduct.StockMin,
+                ID = objproduct.ID,
+                Model = objproduct.Model,
+                Details = objproduct.Details,
+                isOnlineOnly = objproduct.isOnlineOnly,
+                StockMin = objproduct.StockMin,
                 OldImage = objproduct.DefaultImage,
                 //DefaultImage=objproduct.DefaultImage,
                 SubGroup = objproduct.SubGroupID,
                 Category = objproduct.CategoryID,
-                Brand = objproduct.BrandID
+                Brand = objproduct.BrandID,
+                IsAllowComment = objproduct.IsAllowComment,
+                CreateTime = objproduct.CreatedTime
 
             };
             return View(editProductViewModel);
@@ -126,8 +128,11 @@ namespace Aoo.Controllers.Admin.PM
                         DefaultImage=ImagePath,
                         isOnlineOnly = editProductViewModel.isOnlineOnly,
                         StockMin = editProductViewModel.StockMin,
-                        Details = editProductViewModel.Details
-                    };
+                        Details = editProductViewModel.Details,
+                         IsAllowComment = editProductViewModel.IsAllowComment,
+                         CreatedTime = editProductViewModel.CreateTime
+
+                     };
                     objproduct.BrandID = editProductViewModel.Brand;
                     objproduct.CategoryID = editProductViewModel.Category;
                     objproduct.SubGroupID = editProductViewModel.SubGroup;

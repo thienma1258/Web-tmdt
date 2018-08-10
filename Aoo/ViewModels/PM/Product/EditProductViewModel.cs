@@ -24,5 +24,8 @@ namespace Aoo.ViewModels.PM.Product
         // giay the thao giay công so, giay em be
         public string SubGroup { get; set; }
         public string OldImage { get; set; }
+        [Required]
+        public bool IsAllowComment { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

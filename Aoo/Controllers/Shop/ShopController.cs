@@ -58,7 +58,6 @@ namespace Aoo.Controllers.Shop
                 Price=price.ToString(),
                 ListImage=listImage,
                 Descrtiption=pro.Details
-
             };
             return View(temp);
         }

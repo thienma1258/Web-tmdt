@@ -26,7 +26,13 @@
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <input asp-for="ID" type="hidden" class="form-control" />
-
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsAllowComment" /> @Html.DisplayNameFor(model => model.IsAllowComment)
+                    </label>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="checkbox">
                     <label>

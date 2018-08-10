@@ -12,6 +12,7 @@ using Services;
 using BLL.BLL.PM.Implement;
 using BLL.BLL.PM;
 using Aoo.Helpers;
+using Aoo.ViewModels.PM.ProductDetails;
 
 namespace Aoo.Controllers
 {
@@ -24,12 +25,19 @@ namespace Aoo.Controllers
         private readonly ISubGroupBLL subGroupBLL;
         private readonly ICategoryBLL categoryBLL;
         private readonly IViewRenderService viewRenderService;
+        private readonly IProductDetailsBLL productDetailsBLL;
+        private readonly IProductBLL productBLL;
+
         public HomeController(IViewRenderService viewRenderService, IBrandBLL brandBLL,IHomeSliderBLL homeSliderBLL,
             IImageServices imageServices
             , ISubGroupBLL subGroupBLL,
-            ICategoryBLL categoryBLL
+            ICategoryBLL categoryBLL,
+            IProductDetailsBLL productDetailsBLL,
+            IProductBLL productBLL
             ) :base(imageServices)
         {
+            this.productBLL = productBLL;
+            this.productDetailsBLL = productDetailsBLL;
             this.subGroupBLL = subGroupBLL;
             HomeSliderBLL = homeSliderBLL;
             this.categoryBLL = categoryBLL;
@@ -94,6 +102,39 @@ namespace Aoo.Controllers
             #endregion
             //
             return NotFound();
+        }
+        [HttpGet("/{urlSubgroup}/{name}/{color}")]
+        public async Task<IActionResult> Detail(string urlSubgroup,string name, string color)
+        {
+
+            var result = await productDetailsBLL.Get(filter: p => p.Product.UrlFriendly == name && p.TypeColor.ToString() == color);
+            if (result.Count() == 0)
+                return Redirect("/Not-found");
+            var pro= this.productBLL.SearchByUrl(name);
+            decimal price = 0;
+            string listImage = null;
+            List<string> listSize = new List<string>();
+            foreach (var i in result)
+            {
+                listImage = i.listImages;
+                price = i.Price;
+                listSize.Add(i.Size.ToString());
+            }
+            LoadDetailsViewModel temp = new LoadDetailsViewModel()
+            {
+                ListSize = listSize,
+                Color = color,
+                Model = pro.Model,
+                Price = price.ToString(),
+                ListImage = listImage,
+                Descrtiption = pro.Details,
+                IsAllowFacebookComment = pro.IsAllowComment
+               
+            };
+            ViewBag.Title = pro.MetaTitle;
+            ViewBag.Name = pro.Model+"-"+ color;
+            ViewBag.Keyword = pro.MetaDescription;
+            return View("~/Views/Shop/Detail.cshtml",temp);
         }
 
     }
