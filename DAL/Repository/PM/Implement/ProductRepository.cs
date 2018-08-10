@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+
 namespace DAL.Repository.PM.Implement
 {
     public class ProductRepository :SeoRepository<Product>, IProductRepository
@@ -24,6 +26,11 @@ namespace DAL.Repository.PM.Implement
             {
                 return query.ToList(); ;
             }
+        }
+
+        public Task<Product> SearchByUrl(string url)
+        {
+            throw new NotImplementedException();
         }
     }
 }

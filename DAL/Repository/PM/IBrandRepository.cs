@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Repository.PM
 {
-    public interface IBrandRepository:IGenericRepository<Brand,string>
+    public interface IBrandRepository:ISeoRepository<Brand>
     {
     }
 }

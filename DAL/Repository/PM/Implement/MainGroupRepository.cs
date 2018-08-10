@@ -3,6 +3,7 @@ using DAL.Model.PM;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DAL.Repository.PM.Implement
 {
@@ -11,6 +12,10 @@ namespace DAL.Repository.PM.Implement
         public MainGroupRepository(ShopContext context) : base(context)
         {
         }
-        
+
+        public Task<MainGroup> SearchByUrl(string url)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

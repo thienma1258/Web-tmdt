@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class TrackingObjectRepository<TTrackingObject> : GenericRepository<TTrackingObject, string>, IGenericRepository<TTrackingObject, string> where TTrackingObject : TrackingObject
+    public class TrackingObjectRepository<TTrackingObject> : GenericRepository<TTrackingObject, string>, ITrackingObjectRepository<TTrackingObject> where TTrackingObject : TrackingObject
     {
         public TrackingObjectRepository(ShopContext context) : base(context)
         {

@@ -29,25 +29,8 @@ namespace Aoo.Controllers
          
             return View(await HomeSliderBLL.Get());
         }
-       
-        public async Task<IActionResult> About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-        public async Task<IActionResult> Login()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-        public async Task<IActionResult>  Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+        
+        
 
         public async Task<IActionResult> Error()
         {

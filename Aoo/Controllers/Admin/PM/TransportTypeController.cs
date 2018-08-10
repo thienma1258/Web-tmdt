@@ -57,13 +57,13 @@ namespace Aoo.Controllers.Admin.PM
 
             if (ModelState.IsValid)
             {
-                TransportType objTransportType = new TransportType
-                {
-                    ID = EditTransportType.ID,
-                    Name = EditTransportType.Name,
-                    Note = EditTransportType.Note,
-                    Price = EditTransportType.Price
-                };
+                TransportType objTransportType = await TransportTypeBLL.Find(EditTransportType.ID);
+
+                objTransportType.Name = EditTransportType.Name;
+                objTransportType.Note = EditTransportType.Note;
+                objTransportType.Price = EditTransportType.Price;
+                await TransportTypeBLL.Update(objTransportType);
+                
                 return RedirectToAction("Index");
             }
             return View(EditTransportType);

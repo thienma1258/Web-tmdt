@@ -91,7 +91,7 @@
             var price = $('#output').val();
             if (price == "")
                 alert("Mời nhập vào giá");
-            else if ($scope.selectedDistrict == "")
+            if ($scope.selectedDistrict == undefined)
                 alert("Chọn địa điểm");
             else
             {

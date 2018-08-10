@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.DataContext;
 using DAL.Model.PM;
 namespace DAL.Repository.PM.Implement
@@ -14,8 +15,9 @@ namespace DAL.Repository.PM.Implement
 
         }
 
-        
-
-    
+        public async Task<Brand> SearchByUrl(string url)
+        {
+            return null;
+        }
     }
 }
