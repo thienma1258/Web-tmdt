@@ -20,7 +20,7 @@ namespace Aoo.Controllers.Admin.Log
             this.errorLogsBLL = errorLogs;
         }
         [Route("")]
-        public   IActionResult Index(string SearchText)
+        public   IActionResult Index(string SearchText="")
         {
 
             return View(this.errorLogsBLL.Get(p=>p.FunctionName.Contains(SearchText)||p.ModuleName.Contains(SearchText)));

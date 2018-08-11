@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Aoo.ViewModels.PM.ProductDetails;
 using BLL.BLL.PM;
 using DAL.DataContext;
+using DAL.Model.PM;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -26,15 +27,14 @@ namespace Aoo.Controllers.Shop
         }
         public async Task<IActionResult> MenShop(string men,string women)
         {
-            if (Common.Enum.PM.TypeSexEnum.Male.ToString() == "Male")
-            {
+            IEnumerable<Product> listProducts = await ProductBLL.Get(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Male || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
 
-            }
-            return View(await ProductBLL.Get(filter:p=>p.SubGroup.MainGroup.TypeSex==Common.Enum.PM.TypeSexEnum.Male));
+            return View(listProducts);
         }
         public async Task<IActionResult> WomenShop()
         {
-            return View(await ProductBLL.Get(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female));
+            IEnumerable<Product> listProducts = await ProductBLL.Get(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
+            return View(listProducts);
         }
         public async Task<IActionResult> ShopAll()
         {

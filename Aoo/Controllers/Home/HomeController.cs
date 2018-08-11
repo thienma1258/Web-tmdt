@@ -60,6 +60,9 @@ namespace Aoo.Controllers
         [HttpGet("/{urlType}")]
         public async Task<IActionResult> Seo(string urlType=null,int page=1)
         {
+
+            if (urlType == "Not-found" || urlType == null || urlType == "undefined") 
+                return null;
             ViewBag.html = "";
             ViewBag.page = page;
             if (urlType == null)
@@ -70,33 +73,32 @@ namespace Aoo.Controllers
            
             if (objBrand != null)
             {
-                ViewBag.html = await viewRenderService.RenderToStringAsync("Component/BrandComponent", objBrand);
                 ViewBag.Title = objBrand.MetaTitle;
                 ViewBag.Name = objBrand.Name;
                 ViewBag.Keyword = objBrand.MetaDescription;
-                return View();
+                return PartialView("~/Views/Component/BrandComponent.cshtml",objBrand);
             }
             #endregion
             #region Subgroup
             SubGroup objSubGroup = this.subGroupBLL.SearchByUrl(urlType);
             if (objSubGroup != null)
             {
-                ViewBag.html = await viewRenderService.RenderToStringAsync("Component/SubGroupComponent", objSubGroup);
                 ViewBag.Title = objSubGroup.MetaTitle;
                 ViewBag.Name = objSubGroup.Name;
                 ViewBag.Keyword = objSubGroup.MetaDescription;
-                return View();
+                return PartialView("~/Views/Component/SubGroupComponent.cshtml", objSubGroup);
+
             }
             #endregion
             #region Categoryfilter
             Category objCategory = this.categoryBLL.SearchByUrl(urlType);
             if (objCategory != null)
             {
-                ViewBag.html = await viewRenderService.RenderToStringAsync("Component/CategoryComponent", objCategory);
                 ViewBag.Title = objCategory.MetaTitle;
                 ViewBag.Name = objCategory.Name;
                 ViewBag.Keyword = objCategory.MetaDescription;
-                return View();
+                return PartialView("~/Views/Component/CategoryComponent.cshtml", objCategory);
+
             }
 
             #endregion
@@ -107,7 +109,7 @@ namespace Aoo.Controllers
         public async Task<IActionResult> Detail(string urlSubgroup,string name, string color)
         {
 
-            var result = await productDetailsBLL.Get(filter: p => p.Product.UrlFriendly == name && p.TypeColor.ToString() == color);
+            var result = await productDetailsBLL.Get(filter: p => p.Product.UrlFriendly == name && p.TypeColor.ToString().ToLower() == color.ToLower());
             if (result.Count() == 0)
                 return Redirect("/Not-found");
             var pro= this.productBLL.SearchByUrl(name);
@@ -136,6 +138,6 @@ namespace Aoo.Controllers
             ViewBag.Keyword = pro.MetaDescription;
             return View("~/Views/Shop/Detail.cshtml",temp);
         }
-
+        
     }
 }

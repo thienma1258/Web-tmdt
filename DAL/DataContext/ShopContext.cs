@@ -86,14 +86,14 @@ namespace DAL.DataContext
             builder.Entity<CM_Customer>().ToTable("CM_Customer");
             #endregion
             #region PM
-            builder.Entity<Brand>().ToTable("Brand").HasIndex(p=>p.Name).IsUnique(true);
-            builder.Entity<Category>().ToTable("Category").HasIndex(p => p.Name).IsUnique(true); ;
+            builder.Entity<Brand>().ToTable("Brand").HasIndex(p=>p.UrlFriendly).IsUnique(true);
+            builder.Entity<Category>().ToTable("Category").HasIndex(p => p.UrlFriendly).IsUnique(true); ;
             builder.Entity<HomeCarousel>().ToTable("HomeCarousel");
             builder.Entity<HomeSlider>().ToTable("HomeSlider");
             builder.Entity<MainGroup>().ToTable("MainGroup").HasIndex(p=>p.Name).IsUnique(true);
 
             builder.Entity<SubGroup>().ToTable("SubGroup").HasOne(p=>p.MainGroup).WithMany(p=>p.SubGroups).HasForeignKey(p=>p.MainGroupID).HasConstraintName("FK_SubGroup_MainGroup");
-            builder.Entity<SubGroup>().HasIndex(p => p.Name).IsUnique(true);
+            builder.Entity<SubGroup>().HasIndex(p => p.UrlFriendly).IsUnique(true);
             builder.Entity<Store>().ToTable("Store").HasOne(p=>p.District).WithMany(p=>p.Stores).HasForeignKey(p=>p.DistrictID).HasConstraintName("FK_Store_District");
             builder.Entity<Province>().ToTable("Province");
             builder.Entity<District>().ToTable("District");
@@ -103,7 +103,7 @@ namespace DAL.DataContext
             builder.Entity<Product>().ToTable("Product").HasOne(p=>p.Brand).WithMany(p=>p.Products).HasForeignKey(p=>p.BrandID).HasConstraintName("FK_Brand_Products");
 
             builder.Entity<Product>().HasOne(p => p.Category).WithMany(p => p.Products).HasForeignKey(p => p.CategoryID).HasConstraintName("FK_Category_Products");
-            builder.Entity<Product>().HasIndex(p => p.Model).IsUnique(true);
+            builder.Entity<Product>().HasIndex(p => p.UrlFriendly).IsUnique(true);
 
             builder.Entity<ProductDetails>().ToTable("ProductDetails").HasOne(p=>p.Product).WithMany(p=>p.ListProductDetails).HasForeignKey(p=>p.ProductID).HasConstraintName("FK_Product_ProductDetails");
             builder.Entity<TransportType>().ToTable("TransportType");

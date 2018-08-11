@@ -11,8 +11,10 @@ namespace Aoo.App_start
     {
         public static void RegisterRoutes(ref IApplicationBuilder app)
         {
-            
+
             app.UseMvc(routes =>
+
+           
             {
             routes.MapRoute(
             name: "default_route",

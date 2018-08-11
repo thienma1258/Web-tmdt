@@ -5,7 +5,12 @@
 
 @inject BLL.BLL.PM.IProductBLL IProductBLL ;
 @{ 
-    var listProduct = await IProductBLL.Get(6, 1, filter: p => p.CategoryID == Model.ID);
+    Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
+    int currentPage = ViewBag.page;
+
+    var listProduct = await IProductBLL.Get(6, currentPage, filter: p => p.CategoryID == Model.ID);
+    int totalPage = IProductBLL.Cout(filter: p => p.CategoryID == Model.ID);
+
 }
 <style>
     .brand-content {
@@ -48,4 +53,8 @@
 </div>
 <div class="product-grid">
     @await Html.PartialAsync("~/Views/Shared/ListProduct.cshtml", listProduct);
+</div>
+<div class="" style="margin-bottom:10em">
+    @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = currentPage, totalPage = totalPage })
+
 </div>

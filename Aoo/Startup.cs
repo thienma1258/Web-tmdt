@@ -19,6 +19,7 @@ using DAL;
 using CacheHelpers;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace Aoo
 {
@@ -107,11 +108,39 @@ namespace Aoo
            
 
             app.UseStaticFiles();
-
+            app.UseMiddleware<IgnoreRouteMiddleware>();
             app.UseAuthentication();
 
             RouteConfig.RegisterRoutes(ref app);
           
         }
+    }
+}
+public class IgnoreRouteMiddleware
+{
+
+    private readonly RequestDelegate next;
+
+    // You can inject a dependency here that gives you access
+    // to your ignored route configuration.
+    public IgnoreRouteMiddleware(RequestDelegate next)
+    {
+        this.next = next;
+    }
+
+    public async Task Invoke(HttpContext context)
+    {
+        if (context.Request.Path.HasValue &&
+            context.Request.Path.Value.Contains("Not-found"))
+        {
+
+            context.Response.StatusCode = 404;
+
+            Console.WriteLine("Ignored!");
+
+            return;
+        }
+
+        await next.Invoke(context);
     }
 }

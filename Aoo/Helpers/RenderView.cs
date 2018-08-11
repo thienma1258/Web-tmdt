@@ -37,6 +37,7 @@ namespace Aoo.Helpers
         public async Task<string> RenderToStringAsync(string viewName, object model)
         {
             var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
+
             var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
             using (var sw = new StringWriter())
