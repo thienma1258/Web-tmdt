@@ -138,6 +138,56 @@ namespace Aoo.Controllers
             ViewBag.Keyword = pro.MetaDescription;
             return View("~/Views/Shop/Detail.cshtml",temp);
         }
-        
+        [HttpGet("/{urlSubgroup}/{name}")]
+        public async Task<IActionResult> Specification(string urlSubgroup,string name)
+        {
+
+            //choose default image if have
+            var pro = this.productBLL.SearchByUrl(name);
+            string listImage = null;
+            var result = await this.productDetailsBLL.Get(filter:p=>p.ProductID==pro.ID);
+           
+            if (pro == null)
+                return NotFound();
+            decimal price = 0;
+            string SelectedColor = null;
+            List<string> listSize = new List<string>();
+            List<string> listColor = new List<string>();
+            if (result.Count() > 0)
+            {
+                var selectedColor = result.FirstOrDefault().TypeColor;
+                result = result.Where(p => p.TypeColor == selectedColor).ToList();
+                foreach (var i in result)
+                {
+                    if (listColor.FirstOrDefault(p => p == i.TypeColor.ToString()) == null)
+                    {
+                        listColor.Add(i.TypeColor.ToString());
+                    }
+                    listImage += i.listImages;
+                    price = i.Price;
+                    listSize.Add(i.Size.ToString());
+                }
+                SelectedColor = selectedColor.ToString();
+
+            }
+            
+
+         
+            LoadDetailsViewModel temp = new LoadDetailsViewModel()
+            {
+                ID = pro.ID,
+                DefaultImages = pro.DefaultImage,
+                Model = pro.Model,
+                ListImage= listImage,
+                ListSize= listSize,
+                SelectedColor= SelectedColor,
+                Price = price==0?"Chưa có hàng":price.ToString(),
+                Descrtiption = pro.Details,
+                IsAllowFacebookComment = pro.IsAllowComment
+
+            };
+            return View("~/Views/Shop/Detail.cshtml", temp);
+
+        }
     }
 }
