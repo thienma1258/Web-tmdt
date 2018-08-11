@@ -40,31 +40,55 @@ namespace Aoo.Controllers.Shop
         {
             return View(await ProductBLL.Get());
         }
-        public async Task<IActionResult> Detail(string id, string color)
+        public async Task<IActionResult> Detail(string id, string color=null)
         {
-
-            var result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id && p.TypeColor.ToString() == color);
+            IEnumerable<ProductDetails> result;
+            if (color != null)
+                result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id && p.TypeColor.ToString() == color);
+            else
+                result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id);
             var pro = await ProductBLL.Find(id);
             if (pro == null)
                 return NotFound();
             decimal price = 0;
-            string listImage = null;
+            string SelectedColor = null;
             List<string> listSize = new List<string>();
-            foreach (var i in result)
+            List<string> listColor = new List<string>();
+            string listImage = null;
+            if (result.Count() > 0)
             {
-                listImage = i.listImages;
-                price =i.Price;
-                listSize.Add(i.Size.ToString());
+                foreach (var i in result)
+                {
+                    if (listColor.FirstOrDefault(p => p == i.TypeColor.ToString()) == null)
+                    {
+                        listColor.Add(i.TypeColor.ToString());
+                    }
+                }
+                var selectedColor = result.FirstOrDefault().TypeColor;
+                result = result.Where(p => p.TypeColor == selectedColor).ToList();
+                foreach (var i in result)
+                {
+                   
+                    listImage = listImage+","+ i.listImages;
+                    price = i.Price;
+                    listSize.Add(i.Size.ToString());
+                }
+                SelectedColor = selectedColor.ToString();
+
             }
             LoadDetailsViewModel temp = new LoadDetailsViewModel()
             {
                
                 ListSize=listSize,
                 Color=color,
-                Model=pro.Model,
-                Price=price.ToString(),
-                ListImage=listImage,
-                Descrtiption=pro.Details
+                DefaultImages = pro.DefaultImage,
+                Model = pro.Model,
+                ListImage = listImage,
+                ListColor=listColor,
+                SelectedColor = SelectedColor,
+                Price = price == 0 ? "Chưa có hàng" : price.ToString(),
+                Descrtiption = pro.Details,
+                IsAllowFacebookComment = pro.IsAllowComment
             };
             return View(temp);
         }

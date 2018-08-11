@@ -123,13 +123,14 @@ namespace Aoo.Controllers
                 listSize.Add(i.Size.ToString());
             }
             LoadDetailsViewModel temp = new LoadDetailsViewModel()
-            {
+            {   
                 ListSize = listSize,
                 Color = color,
                 Model = pro.Model,
                 Price = price.ToString(),
                 ListImage = listImage,
                 Descrtiption = pro.Details,
+                Specification=pro.Specification,
                 IsAllowFacebookComment = pro.IsAllowComment
                
             };
@@ -156,13 +157,18 @@ namespace Aoo.Controllers
             if (result.Count() > 0)
             {
                 var selectedColor = result.FirstOrDefault().TypeColor;
-                result = result.Where(p => p.TypeColor == selectedColor).ToList();
                 foreach (var i in result)
                 {
                     if (listColor.FirstOrDefault(p => p == i.TypeColor.ToString()) == null)
                     {
                         listColor.Add(i.TypeColor.ToString());
                     }
+                }
+            
+                    result = result.Where(p => p.TypeColor == selectedColor).ToList();
+                foreach (var i in result)
+                {
+                   
                     listImage += i.listImages;
                     price = i.Price;
                     listSize.Add(i.Size.ToString());

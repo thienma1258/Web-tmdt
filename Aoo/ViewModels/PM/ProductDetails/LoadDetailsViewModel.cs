@@ -18,6 +18,7 @@ namespace Aoo.ViewModels.PM.ProductDetails
         public string ID { get; set; }
         public string Quantity { get; set; }
         public string SelectedColor { get; set; }
+        public string Specification { get; set; }
         public bool IsAllowFacebookComment { get; set; } = false;
     }
 }

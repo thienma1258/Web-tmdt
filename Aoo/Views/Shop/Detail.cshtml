@@ -1,10 +1,18 @@
 ﻿@model Aoo.ViewModels.PM.ProductDetails.LoadDetailsViewModel
+@inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
+@inject BLL.BLL.PM.IProductBLL ProductBLL
 @{
 
     ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listImage = Model.ListImage;
-    string[] images = listImage.Split(new string[] { "," }, StringSplitOptions.None);
+    List<string> images = new List<string>();
+    if (listImage != null)
+    {
+        images = listImage.Split(new string[] { "," }, StringSplitOptions.None).ToList();
+    }
+    var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
+    var productspecification = await ProductBLL.Find(Model.ID);
 }
 <div id="fb-root"></div>
 <script>
@@ -26,11 +34,15 @@
                     <div class="col-md-6 single-top-left">
                         <div class="flexslider">
                             <ul class="slides">
-                                @{foreach (var item in images) {
-                                <li data-thumb=@Url.Content(item)>
-                                    <div class="thumb-image detail_images"> <img src=@Url.Content(item) data-imagezoom="true" class="img-responsive" alt="Groovy Apparel"></div>
+                                <li data-thumb=@Url.Content(Model.DefaultImages)>
+                                    <div class="thumb-image detail_images"> <img src=@Url.Content(Model.DefaultImages) data-imagezoom="true" class="img-responsive" alt="Groovy Apparel"></div>
                                 </li>
-                                }
+                                @{foreach (var item in images)
+                                    {
+                                        <li data-thumb=@Url.Content(item)>
+                                            <div class="thumb-image detail_images"> <img src=@Url.Content(item) data-imagezoom="true" class="img-responsive" alt="Groovy Apparel"></div>
+                                        </li>
+                                    }
                                 }
                             </ul>
                         </div>
@@ -56,7 +68,7 @@
 
                         <div class="single-price">
                             <ul>
-                                <li>@(string.Format("{0:N}", Model.Price))<small>10% Off</small></li>                     
+                                <li>@(string.Format("{0:N}", Model.Price))<small>10% Off</small></li>
                             </ul>
                             <label>Size:</label>
                             <select>
@@ -67,10 +79,15 @@
 
                                 }
                             </select>
+                            <br />
+                            <select asp-for="Color" class="form-control" onselect="window.location.href='Shop/Detail/id?=@Model.ID'" asp-items="@(new SelectList(Model.ListColor))">
+                                <option selected="selected" value="">Lựa chọn màu sắc</option>
+                            </select>
                             @*<li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i>Apply Coupon</a></li>*@
-
                         </div>
-
+                        <div>
+                            @Html.Raw(Model.Specification)
+                        </div>
                         <p class="single-price-text">Fusce a egestas nibh, eget ornare erat. Proin placerat, urna et consequat efficitur, sem odio blandit enim, sit amet euismod turpis est mattis lectus. Vestibulum maximus quam et quam egestas imperdiet. In dignissim auctor viverra.</p>
                         <div class="cbp-pgcontent aitssinglew3" id="mens_single">
                             <button class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>
@@ -104,7 +121,7 @@
                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body panel_text">
                                 <div class="scrollbar" id="style-2">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                                    @Html.Raw(Model.Descrtiption)
                                 </div>
                             </div>
                         </div>
@@ -131,21 +148,21 @@
                         </div>
                     </div>
 
-                        </div>
-                        </div>
-
-                        </div>
+                </div>
+            </div>
 
         </div>
+
+    </div>
 
 </div>
 @if (Model.IsAllowFacebookComment)
 {
-<div class="facebook-comment">
-    <div class="fb-comments" data-width="100%" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path)) " data-numposts="5"></div>
-<span class="fb-comments-count" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path))"></span>
-    Comment
-</div>
+    <div class="facebook-comment">
+        <div class="fb-comments" data-width="100%" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path)) " data-numposts="5"></div>
+        <span class="fb-comments-count" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path))"></span>
+        Comment
+    </div>
 }
 <!-- //Single-Product-View -->
 <!-- Custom-JavaScript-File-Links -->
