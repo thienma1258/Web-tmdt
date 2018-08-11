@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<DAL.Model.PM.ProductDetails>
 
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
@@ -12,6 +11,9 @@
     <hr />
     <table class="tablebrand">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Brand)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product.Model)
             </th>
@@ -31,36 +33,39 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelIem => item.Product.Model)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelIem => item.TypeColor)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Product.Brand.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelIem => item.Product.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelIem => item.TypeColor)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelIem => item.Size)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelIem => item.Price)
-                        <div class="form-group">
-                            @*@await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", "Price")*@
-                        </div>
-                    </td>
-                    <td>
-                        <div class="imgpro">
-                            @{
-                                string[] images = item.listImages.Split(new string[] { "," }, StringSplitOptions.None);
-                            }
-                            @foreach (var i in images)
-                            {
-                                <img  src=@Url.Content(i)>
-                                <br>
-                            }
-                        </div>
-                    </td>
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelIem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelIem => item.Price)
+                    <div class="form-group">
+                        @*@await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", "Price")*@
+                    </div>
+                </td>
+                <td>
+                    <div class="imgpro">
+                        @{
+                            string[] images = item.listImages.Split(new string[] { "," }, StringSplitOptions.None);
+                        }
+                        @foreach (var i in images)
+                        {
+                            <img src=@Url.Content(i)>
+                            <br>
+                        }
+                    </div>
+                </td>
+            </tr>
             }
         <tbody>
     </table>

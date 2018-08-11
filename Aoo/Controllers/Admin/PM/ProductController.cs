@@ -120,7 +120,7 @@ namespace Aoo.Controllers.Admin.PM
                      Product objproduct = new Product
                     {
                         ID=editProductViewModel.ID,
-                        Specification=editProductViewModel.OldSpecification,
+                        Specification=editProductViewModel.Specification,
                         Model = editProductViewModel.Model,
                         DefaultImage=ImagePath,
                         isOnlineOnly = editProductViewModel.isOnlineOnly,

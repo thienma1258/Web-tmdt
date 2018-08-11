@@ -24,8 +24,12 @@ namespace Aoo.Controllers.Shop
             SubGroupBLL = subGroupBLL;
             ProductDetailsBLL = productDetailsBLL;
         }
-        public async Task<IActionResult> MenShop()
+        public async Task<IActionResult> MenShop(string men,string women)
         {
+            if (Common.Enum.PM.TypeSexEnum.Male.ToString() == "Male")
+            {
+
+            }
             return View(await ProductBLL.Get(filter:p=>p.SubGroup.MainGroup.TypeSex==Common.Enum.PM.TypeSexEnum.Male));
         }
         public async Task<IActionResult> WomenShop()
@@ -41,6 +45,8 @@ namespace Aoo.Controllers.Shop
 
             var result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id && p.TypeColor.ToString() == color);
             var pro = await ProductBLL.Find(id);
+            if (pro == null)
+                return NotFound();
             decimal price = 0;
             string listImage = null;
             List<string> listSize = new List<string>();
@@ -52,6 +58,7 @@ namespace Aoo.Controllers.Shop
             }
             LoadDetailsViewModel temp = new LoadDetailsViewModel()
             {
+               
                 ListSize=listSize,
                 Color=color,
                 Model=pro.Model,
@@ -61,9 +68,32 @@ namespace Aoo.Controllers.Shop
             };
             return View(temp);
         }
-        public async Task<IActionResult> Specification(string ID)
+        public async Task<IActionResult> Specification(string id,string color)
         {
-            return View(await ProductBLL.Find(ID));
+            var result = await ProductDetailsBLL.Get();
+            var pro = await ProductBLL.Find(id);
+            if (pro == null)
+                return NotFound();
+            decimal price = 0;
+            List<string> listSize = new List<string>();
+            foreach (var i in result)
+            {
+                price = i.Price;
+                listSize.Add(i.Size.ToString());
+            }
+            LoadDetailsViewModel temp = new LoadDetailsViewModel()
+            {
+                ID = pro.ID,
+                ListSize = listSize,
+                Color = color,
+                DefaultImages=pro.DefaultImage,
+                Model = pro.Model,
+                Price = price.ToString(),
+                Descrtiption = pro.Details
+
+            };
+            return View(temp);
+
         }
         public IActionResult CartItem()
         {

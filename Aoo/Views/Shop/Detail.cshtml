@@ -1,6 +1,7 @@
 ﻿@model Aoo.ViewModels.PM.ProductDetails.LoadDetailsViewModel
 @{
- 
+
+    ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listImage = Model.ListImage;
     string[] images = listImage.Split(new string[] { "," }, StringSplitOptions.None);
@@ -130,12 +131,12 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
+                        </div>
+                        </div>
+
+                        </div>
 
         </div>
-
-    </div>
 
 </div>
 @if (Model.IsAllowFacebookComment)

@@ -55,19 +55,24 @@
     background-color:darkkhaki;
 }
 .fbshare {
-    width: 8%;
+    /*width: 8%;
     height: 50px;
-    /* margin-top: -24px; */
+     margin-top: -24px; 
     background-size: 100px 50px;
     background-repeat: no-repeat;
-    /* border: 5px solid red; */
+     border: 5px solid red; 
+       
     display: list-item;
-    background-image: url(../images/fb.png);
+    background-image: url(../images/fb.png);*/
+    background-color: #4267b2;
+    width:5%;
+    margin-left:20px;
+    border-radius:3px;
 }
-.fbshare a{
-    color:white;
-    opacity:0;
-}
+    .fbshare a {
+        margin-left:5px;
+        color: white;
+    }
 .specification{
     
 }
