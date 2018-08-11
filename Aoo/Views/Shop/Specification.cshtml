@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
     var productspecification = await ProductBLL.Find(Model.ID);
+    
 
 }
 <div id="fb-root"></div>
@@ -59,7 +60,7 @@
                             </ul>
                             <br />
 
-                            <select asp-for="Color" class="form-control" onselect="" asp-items="@(new SelectList(listcolor, "ID", "TypeColor"))">
+                            <select asp-for="Color" class="form-control" onselect="window.location.href='Shop/Detail/id?=@Model.ID'" asp-items="@(new SelectList(Model.ListColor))">
                                 <option selected="selected" value="">Lựa chọn màu sắc</option>
                             </select>
 

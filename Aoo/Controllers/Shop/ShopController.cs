@@ -70,7 +70,7 @@ namespace Aoo.Controllers.Shop
         }
         public async Task<IActionResult> Specification(string id,string color)
         {
-            var result = await ProductDetailsBLL.Get();
+            var result = await ProductDetailsBLL.Get(filter:p=>p.ProductID==id);
             var pro = await ProductBLL.Find(id);
             if (pro == null)
                 return NotFound();
@@ -81,14 +81,23 @@ namespace Aoo.Controllers.Shop
                 price = i.Price;
                 listSize.Add(i.Size.ToString());
             }
+            List<string> listColor = new List<string>();
+            foreach(var productdetail in result)
+            {
+                if (listColor.FirstOrDefault(p=>p==productdetail.TypeColor.ToString())==null)
+                {
+                    listColor.Add(productdetail.TypeColor.ToString());
+                }
+            }
             LoadDetailsViewModel temp = new LoadDetailsViewModel()
             {
                 ID = pro.ID,
                 ListSize = listSize,
                 Color = color,
                 DefaultImages=pro.DefaultImage,
+                ListColor= listColor,
                 Model = pro.Model,
-                Price = price.ToString(),
+                Price = price==0?"Chua co hang":price.ToString(),
                 Descrtiption = pro.Details
 
             };
