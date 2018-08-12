@@ -9,12 +9,13 @@
     {
         images = listImage.Split(new string[] { "," }, StringSplitOptions.None).ToList();
     }
+    var currencolor = Model.Color;
     var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
     var productspecification = await ProductBLL.Find(Model.ID);
     List<string> morecolor = new List<string>();
-    foreach(var item in listcolor)
+    foreach (var item in listcolor)
     {
-        if (listcolor.Count() > 0 && item != listcolor.First())
+        if (listcolor.Count() > 0 && item.TypeColor.ToString() != currencolor)
         {
             string a = item.TypeColor.ToString();
             morecolor.Add(a);
@@ -81,44 +82,55 @@
 
                         <div id="info" class="single-price">
                             <ul>
-                                <li>@(string.Format("{0:N}", Model.Price))<small>10% Off</small></li>
+                                <li>@(string.Format("{0:N}", Model.Price))</li>
                             </ul>
                             <label>Size:</label>
 
-                            @foreach (var item in Model.ListSize)
-                            {
-                                <input type="button" value="@item" />
-                            }
+                            <select class="form-control" asp-items="@(new SelectList(Model.ListSize))">
+                                <option selected="selected" value="">Please select</option>
+                            </select>
 
-                            
-                          
-                            </div>
+
+
+
+                        </div>
                         <div style="margin-top:15px">
-                            <label>Color:</label>
+                            <h3>Color:</h3>
                             @foreach (var item in Model.ListColor)
                             {
-                                <div class="myColor">
-                                <a  id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
-                                    <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
-                                </a>                                   
-                                    </div>
-
-                            }
-                            
-                            @foreach(var item in morecolor)
-                            {
-                               @if (item != listcolor.First().ToString()) { 
                                 <div class="myColor">
                                     <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
                                         <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
                                     </a>
                                 </div>
-                               }
-
                             }
+                            @{ 
+                                if (morecolor.Count > 0)
+                                {
+                                    List<string>
+                                    l = new List<string>();
+                                    l.Add(morecolor.First());
+                                    foreach (var item in morecolor)
+                                    {
+                                        if (item != l.First())
+                                        {
+                                            l.Add(item);
 
+                                        }
 
-                            <br />
+                                    }
+                                    foreach (var item in l)
+                                    {
+                                            <div class="myColor">
+                                                <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
+                                                 <h3>More Color:</h3>
+                                                 <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                    <br />
                         </div>
                         <div>
                             @Html.Raw(Model.Specification)
@@ -349,7 +361,7 @@
 
         /* Style the active class (and buttons on mouse-over) */
     .myColor .active{
-        border:2px solid white!important;
+        border:2px solid none;
     }
 </style>
 <script>
