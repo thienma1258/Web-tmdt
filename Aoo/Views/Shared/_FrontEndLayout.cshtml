@@ -349,10 +349,10 @@
                     <h2>Subscribe to our Newsletter</h2>
                 </div>
                 <div class="col-md-7 w3lsnewsletter-grid w3lsnewsletter-grid-2 email-form">
-                    <form action="#" method="post">
-                        <input class="email" type="email" name="Email" placeholder="Email Address" required="">
-                        <input type="submit" class="submit" value="SUBSCRIBE">
-                    </form>
+
+                    <input class="email" type="email" name="Email" placeholder="Email Address" id="EmailValue" required="">
+                    <input type="submit" class="submit" value="SUBSCRIBE" id="SUBSCRIBEEMAIL">
+
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -394,6 +394,21 @@
                     </ul>
                 </address>
             </div>
+            <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid3">
+                <div class="simple-subscription-form">
+                    <form>
+                        <h4>Subscribe</h4>
+                        <p>Receive updates and latest news direct from our team. Simply enter your email below :</p>
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <input class="input-group-field" type="email" placeholder="Email" required>
+                            <button class="button">Sign up now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="clearfix"></div>
 
         </div>
@@ -404,17 +419,7 @@
         <div class="col-md-8 w3lscopyrightaitsgrid w3lscopyrightaitsgrid1">
             <p>© 2017 Groovy Apparel. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="=_blank"> W3layouts </a></p>
         </div>
-        <div class="col-md-4 w3lscopyrightaitsgrid w3lscopyrightaitsgrid2">
-            <div class="agilesocialwthree">
-                <ul class="social-icons">
-                    <li><a href="#" class="facebook w3ls" title="Go to Our Facebook Page"><i class="fa w3ls fa-facebook-square" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="twitter w3l" title="Go to Our Twitter Account"><i class="fa w3l fa-twitter-square" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="googleplus w3" title="Go to Our Google Plus Account"><i class="fa w3 fa-google-plus-square" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="instagram wthree" title="Go to Our Instagram Account"><i class="fa wthree fa-instagram" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="youtube w3layouts" title="Go to Our Youtube Channel"><i class="fa w3layouts fa-youtube-square" aria-hidden="true"></i></a></li>
-                </ul>
-            </div>
-        </div>
+
         <div class="clearfix"></div>
     </div>
 
@@ -428,7 +433,6 @@
     <script src="js/minicart.js"></script>
     <script>
         w3l.render();
-
         w3l.cart.on('w3agile_checkout', function (evt) {
             var items, len, i;
 
@@ -516,7 +520,7 @@
     <!-- Bootstrap-JavaScript -->
     <script src="js/bootstrap.js"></script>
 
-
+    <script src="~/js/subscribeEmail.js"></script>
     <!--//Copyright-->
 </body>
 </html>

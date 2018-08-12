@@ -14,9 +14,10 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180812032728_subscribe-email")]
+    partial class subscribeemail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,8 +402,6 @@ namespace DAL.Migrations
                     b.Property<string>("MetaTitle");
 
                     b.Property<string>("Model");
-
-                    b.Property<decimal>("Price");
 
                     b.Property<string>("Specification");
 

@@ -53,7 +53,8 @@ namespace DAL
         private ITransportPriceRepository transportPriceRepository;
         private ITransportTypeRepository transportTypeRepository;
         private IVoucherRepository voucherRepository;
-     
+        private ISubscribeEmailRepository subscribeEmailRepository;
+
 
         #endregion
         #region SM
@@ -257,6 +258,15 @@ namespace DAL
                 if (this.voucherRepository == null)
                     voucherRepository = new VoucherRepository(dataContext);
                 return voucherRepository;
+            }
+        }
+        public ISubscribeEmailRepository SubscribeEmailRepository
+        {
+            get
+            {
+                if (this.subscribeEmailRepository == null)
+                    subscribeEmailRepository = new SubscribeEmailRepository(dataContext);
+                return subscribeEmailRepository;
             }
         }
         #endregion

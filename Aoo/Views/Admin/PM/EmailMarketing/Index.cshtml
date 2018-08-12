@@ -1,0 +1,93 @@
+﻿@model IEnumerable<DAL.Model.PM.SubscribeEmail>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+<style>
+    #messageEditor > .content-header > input {
+        margin: 2em;
+    }
+</style>
+
+<div class="" style="margin-top:5em" id="list-person">
+    <div id="listSelectedEmail">
+        <a class="btn btn-success btn-lg pull-right" id="sendMessage">Send Message</a>
+        <div class="table-wrapper" id="selectedMessage">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+
+                            <input type="checkbox" id="selectedAll" value="" style="margin-left:5px">
+
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreateTime)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td style="width:5%"> <input type="checkbox" data-id="@item.Email" name="inputSelected" id="selectedAll" value=""></td>
+                            <td>
+                                <label id="@item.Email">@Html.DisplayFor(modelItem => item.Email)</label>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateTime)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="messageEditor" style="display:none;">
+        <div class="content-header">
+            <label>Tiêu đề</label> <input type="text" class="form-control" placeholder="Title" />
+            <label>Subject</label><input type="text" class="form-control" placeholder="Subject" />
+        </div>
+        <div class="content">
+            <textarea id="editor"></textarea>
+            <button id="sendEmail"></button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    window.onload = function () {
+        $('#selectedMessage').css('display ', 'inline-block');
+        $("#selectedAll").change(function () {
+            if (this.checked) {
+                $('input[name=inputSelected]').prop('checked', true);
+            }
+            else {
+                $('input[name=inputSelected]').prop('checked', false);
+
+            }
+        });
+        $('#sendMessage').click(function () {
+            if ($('input[name=inputSelected]').length == 0) {
+                alert("mời bạn chọn");
+                return;
+
+            }
+            $('#listSelectedEmail').css('display ', 'none');
+
+            $('#messageEditor').css('display', 'block');
+
+        });
+    }
+</script>
+<script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>

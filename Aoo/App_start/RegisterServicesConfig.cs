@@ -1,6 +1,7 @@
 ﻿using Aoo.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
+using Services.EmailServices;
 using Services.Implement;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Aoo.App_start
         {
             services.AddTransient<IImageServices, LocalImageServices>();
             services.AddSingleton<IViewRenderService, RenderView>();
+            services.AddSingleton<IMailchimpServices, MailchimpSErvices>();
         }
     }
 }

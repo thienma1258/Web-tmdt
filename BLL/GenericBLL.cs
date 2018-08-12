@@ -29,7 +29,7 @@ namespace BLL
             ErrorLogs errorLogs = new ErrorLogs
             {
                 ErrorLog = objEx.ToString(),
-                FunctionName = stackTrace.GetFrame(5).GetMethod().Name,
+                FunctionName = stackTrace.GetFrame(1).GetMethod().Name,
                 ModuleName = "BLL/"+this.GetType().Name,
             };
             this.unitOfWork.ErrorLogsRepository.Insert(errorLogs);

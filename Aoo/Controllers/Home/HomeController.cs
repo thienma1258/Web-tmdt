@@ -106,9 +106,10 @@ namespace Aoo.Controllers
             return NotFound();
         }
         [HttpGet("/{urlSubgroup}/{name}/{color}")]
-        public async Task<IActionResult> Detail(string urlSubgroup,string name, string color)
+        public async Task<IActionResult> Detail(string urlSubgroup=null,string name=null, string color=null)
         {
-
+            if (name == "Not-found" || name == null || name == "undefined")
+                return null;
             var result = await productDetailsBLL.Get(filter: p => p.Product.UrlFriendly == name && p.TypeColor.ToString().ToLower() == color.ToLower());
             if (result.Count() == 0)
                 return Redirect("/Not-found");
@@ -140,9 +141,10 @@ namespace Aoo.Controllers
             return View("~/Views/Shop/Detail.cshtml",temp);
         }
         [HttpGet("/{urlSubgroup}/{name}")]
-        public async Task<IActionResult> Specification(string urlSubgroup,string name)
+        public async Task<IActionResult> Specification(string urlSubgroup=null,string name=null)
         {
-
+            if (name == "Not-found" || name == null || name == "undefined")
+                return null;
             //choose default image if have
             var pro = this.productBLL.SearchByUrl(name);
             string listImage = null;

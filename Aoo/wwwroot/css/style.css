@@ -1,10 +1,4 @@
-/*--
-	Author: W3Layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
---*/ 
-/*-- Reset-Code --*/ 
+
 body {
 	padding: 0;
 	margin: 0;
@@ -5491,6 +5485,17 @@ p.single-price-text {
 		height:175px;
 	}
 }
+.simple-subscription-form {
+    background: #0c3e5f;
+    color: #fefefe;
+    padding: 2rem;
+    border-radius: 0;
+    position:fixed;
+}
 
+    .simple-subscription-form .button {
+        margin-bottom: 0;
+        border-radius: 0 0 0 0;
+    }
 /*--- Responsive Code ---*/
 /*-- //Responsive-Code --*/

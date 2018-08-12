@@ -36,6 +36,7 @@ namespace DAL
         ITransportPriceRepository TransportPriceRepository { get; }
         ITransportTypeRepository TransportTypeRepository { get; }
         IVoucherRepository VoucherRepository { get; }
+        ISubscribeEmailRepository SubscribeEmailRepository { get; }
         #endregion
         #region SM
         ISaleOrderRepository SaleOrderRepository { get; }

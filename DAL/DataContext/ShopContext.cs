@@ -29,7 +29,8 @@ namespace DAL.DataContext
         public DbSet<Category> Categories { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Province> Provinces { get; set; }
-        
+        public DbSet<SubscribeEmail> SubscribeEmails { get; set; }
+
 
         public DbSet<HomeCarousel> HomeCarousels { get; set; }
         public DbSet<HomeSlider> HomeSliders { get; set; }
@@ -101,7 +102,7 @@ namespace DAL.DataContext
             builder.Entity<Voucher>().ToTable("Voucher");
             builder.Entity<Discout>().ToTable("Discout");
             builder.Entity<Product>().ToTable("Product").HasOne(p=>p.Brand).WithMany(p=>p.Products).HasForeignKey(p=>p.BrandID).HasConstraintName("FK_Brand_Products");
-
+            builder.Entity<SubscribeEmail>().ToTable("SubscribeEmail");
             builder.Entity<Product>().HasOne(p => p.Category).WithMany(p => p.Products).HasForeignKey(p => p.CategoryID).HasConstraintName("FK_Category_Products");
             builder.Entity<Product>().HasIndex(p => p.UrlFriendly).IsUnique(true);
 
