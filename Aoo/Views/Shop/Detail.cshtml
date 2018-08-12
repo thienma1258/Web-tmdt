@@ -2,8 +2,6 @@
 @inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
 @inject BLL.BLL.PM.IProductBLL ProductBLL
 @{
-
-    ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listImage = Model.ListImage;
     List<string> images = new List<string>();
@@ -31,7 +29,7 @@
         <div class="products">
             <div class="single-page">
                 <div class="single-page-row" id="detail-21">
-                    <div class="col-md-6 single-top-left">
+                    <div id="listimage" class="col-md-6 single-top-left">
                         <div class="flexslider">
                             <ul class="slides">
                                 <li data-thumb=@Url.Content(Model.DefaultImages)>
@@ -66,31 +64,40 @@
                             </span>
                         </div>
 
-                        <div class="single-price">
+                        <div id="info" class="single-price">
                             <ul>
                                 <li>@(string.Format("{0:N}", Model.Price))<small>10% Off</small></li>
                             </ul>
                             <label>Size:</label>
-                            <select>
-                                @foreach (var item in Model.ListSize)
-                                {
 
-                                    <option>@item</option>
+                            @foreach (var item in Model.ListSize)
+                            {
+                                <input type="button" value="@item" />
+                            }
 
-                                }
-                            </select>
+                            
+                          
+                            </div>
+                        <div style="margin-top:15px">
+                            <label>Color:</label>
+                            @foreach (var item in Model.ListColor)
+                            {
+                                <div class="myColor">
+                                <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
+                                    <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
+                                </a>
+                                    </div>
+
+                            }
+
                             <br />
-                            <select asp-for="Color" class="form-control" onselect="window.location.href='Shop/Detail/id?=@Model.ID'" asp-items="@(new SelectList(Model.ListColor))">
-                                <option selected="selected" value="">Lựa chọn màu sắc</option>
-                            </select>
-                            @*<li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i>Apply Coupon</a></li>*@
                         </div>
                         <div>
                             @Html.Raw(Model.Specification)
                         </div>
                         <p class="single-price-text">Fusce a egestas nibh, eget ornare erat. Proin placerat, urna et consequat efficitur, sem odio blandit enim, sit amet euismod turpis est mattis lectus. Vestibulum maximus quam et quam egestas imperdiet. In dignissim auctor viverra.</p>
                         <div class="cbp-pgcontent aitssinglew3" id="mens_single">
-                            <button class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>
+                            <button onclick="AddTocart('ListCart','ID','STANMITH','RED','39','1')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Add To Cart</button>
                             <div class="clearfix"></div>
                         </div>
 
@@ -142,7 +149,7 @@
                                 </div>
                                 <div class="ac-img">
                                     <a href="#"><img src="~/images/product-2.jpg" alt="Groovy Apparel"></a>
-                                </div>
+                                </div>ad
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -238,3 +245,99 @@
 <!-- //Custom-JavaScript-File-Links -->
 <!-- Bootstrap-JavaScript -->
 <script src="~/js/bootstrap.js"></script>
+<!-- Cookies Function -->
+<script>
+    function Item(ID, Model, Price, Color, CurrentSize, Quantity) {
+        this.ID = ID;
+        this.Model = Model;
+        this.Price = Price;
+        this.Color = Color;
+        this.CurrentSize = CurrentSize;
+        this.Quantity = Quantity;
+        return this;
+    }
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    function IsEmpty(name) {
+        if (getCookie(name) == "")
+            return null;     
+    }
+    var key = "ListItem";
+    function AddTocart(name, id, model, color, currentsize, quantity)
+    {  
+        if (getCookie('ListItem') == "") {
+            var ListItem = new Array();
+            var item = new Item(
+                ID = id,
+                Model = model,
+                Color = color,
+                CurrentSize = currentsize,
+                Quantity = quantity
+            );
+            ListItem.push(item);
+            setCookie(key, JSON.stringify(ListItem), 60);
+        }
+        else
+        {
+            var ListResult = JSON.parse(getCookie('ListItem'));
+            ListResult.forEach(function (e) { 
+                if (e.ID == id) {
+                    e.Quantity++;
+                }
+            });
+            setCookie('ListItem', JSON.stringify(ListResult), 60);
+            console.Log(ListResult);
+        }
+     }
+</script>
+<style>
+    .currentColor {
+        border: none;
+        outline: none;
+        padding: 10px 16px;
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+        /* Style the active class (and buttons on mouse-over) */
+        .active, .currentColor:hover {
+            background-color: #666;
+            color: white;
+        }
+    .myColor .active{
+        border:2px solid white!important;
+    }
+</style>
+<script>
+    var btnContainer = document.getElementById("myColor");
+
+    // Get all buttons with class="btn" inside the container
+    var btns = btnContainer.getElementsByClassName("currentColor");
+
+    // Loop through the buttons and add the active class to the current/clicked button
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+    }
+</script>

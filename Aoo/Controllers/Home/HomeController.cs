@@ -186,7 +186,6 @@ namespace Aoo.Controllers
                 Model = pro.Model,
                 ListImage= listImage,
                 ListSize= listSize,
-                SelectedColor= SelectedColor,
                 Price = price==0?"Chưa có hàng":price.ToString(),
                 Descrtiption = pro.Details,
                 IsAllowFacebookComment = pro.IsAllowComment

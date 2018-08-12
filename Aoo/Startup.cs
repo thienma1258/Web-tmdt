@@ -39,7 +39,7 @@ namespace Aoo
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                  sqlServerOptions => sqlServerOptions.CommandTimeout(60))
                 );
-       
+             
             services.AddIdentity<System_User, IdentityRole>()
                 .AddEntityFrameworkStores<ShopContext>()
                 .AddDefaultTokenProviders();
@@ -48,6 +48,16 @@ namespace Aoo
             {
                 o.ViewLocationExpanders.Add(new CustomViewEngine());
             });
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
+
             services.AddMemoryCache();
             services.AddTransient<IEmailSender, EmailSender>();
             //  services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
@@ -110,7 +120,7 @@ namespace Aoo
             app.UseStaticFiles();
             app.UseMiddleware<IgnoreRouteMiddleware>();
             app.UseAuthentication();
-
+            app.UseSession();
             RouteConfig.RegisterRoutes(ref app);
           
         }
