@@ -11,6 +11,16 @@
     }
     var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
     var productspecification = await ProductBLL.Find(Model.ID);
+    List<string> morecolor = new List<string>();
+    foreach(var item in listcolor)
+    {
+        if (listcolor.Count() > 0 && item != listcolor.First())
+        {
+            string a = item.TypeColor.ToString();
+            morecolor.Add(a);
+        }
+
+    }
 }
 <head>
     <meta property="og:url" content="http://thienma1258.somee.com/" />
@@ -88,12 +98,25 @@
                             @foreach (var item in Model.ListColor)
                             {
                                 <div class="myColor">
-                                <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
+                                <a  id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
                                     <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
-                                </a>
+                                </a>                                   
                                     </div>
 
                             }
+                            
+                            @foreach(var item in morecolor)
+                            {
+                               @if (item != listcolor.First().ToString()) { 
+                                <div class="myColor">
+                                    <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
+                                        <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
+                                    </a>
+                                </div>
+                               }
+
+                            }
+
 
                             <br />
                         </div>
@@ -154,7 +177,7 @@
                                 </div>
                                 <div class="ac-img">
                                     <a href="#"><img src="~/images/product-2.jpg" alt="Groovy Apparel"></a>
-                                </div>ad
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -325,10 +348,6 @@
     }
 
         /* Style the active class (and buttons on mouse-over) */
-        .active, .currentColor:hover {
-            background-color: #666;
-            color: white;
-        }
     .myColor .active{
         border:2px solid white!important;
     }
