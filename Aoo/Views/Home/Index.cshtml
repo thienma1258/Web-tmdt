@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<DAL.Model.PM.HomeSlider>
+@inject BLL.BLL.PM.IHomeCarouselBLL HomeCarouselBLL
 @{
-    
+    var listimages = await HomeCarouselBLL.Get();
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
 }
 <!-- Model-Slider -->
@@ -254,23 +255,24 @@
 
 </div>
 <style>
-    .w3slideraits .fluid_dg_bar span.fluid_dg_bar_cont {
-        position: initial !important;
-    }
-
-        .w3slideraits .fluid_dg_bar span.fluid_dg_bar_cont span {
-            position: initial !important;
+        .w3slideraits .fluid_dg_bar span.fluid_dg_bar_cont {
+            position: absolute !important;
         }
-</style>
-@foreach (var item in Model)
-{
-    <div class="w3slideraits">
-        <div class="fluid_dg_wrap fluid_dg_emboss pattern_1 fluid_dg_white_skin" id="fluid_dg_wrap_4" style="display:initial!important">
-            <div data-src="@Url.Content(item.ImagePath)"></div>
 
-        </div>
+            .w3slideraits .fluid_dg_bar span.fluid_dg_bar_cont span {
+                position: initial !important;
+            }
+    </style>
+@*<div class="w3slideraits" style="margin-top:20%">
+    <div class="fluid_dg_wrap fluid_dg_emboss pattern_1 fluid_dg_white_skin" id="fluid_dg_wrap_4">
+        <div data-src="images/slide-1.jpg"></div>
+        <div  data-src="images/slide-2.jpg"></div>
+        <div  data-src="images/slide-3.jpg"></div>
+        <div  data-src="images/slide-4.jpg"></div>
+        <div  data-src="images/slide-5.jpg"></div>
     </div>
-}
+</div>*@
+
 <div class="agileheader" id="agileheadermens">
 
     <!-- Navigation -->
@@ -522,13 +524,13 @@
 </div>
 <div class="agilemodel-slider">
     <div id='film_roll_1'>
-     @foreach (var slider in Model)
-     {
-        <div><img src="@Url.Content(slider.ImagePath)" alt="Groovy Apparel"></div>
-     }
-        <div><img src="~/images/s11.jpg" alt="Groovy Apparel"></div>
-        <div><img src="~/images/product-2.jpg" alt="Groovy Apparel"></div>
-        <div><img src="~/images/product-11.jpg" alt="Groovy Apparel"></div>
+        @foreach (var slider in Model)
+        {
+            <div><img style="height:550px;width:800px;" src="@Url.Content(slider.ImagePath)" alt="Groovy Apparel"></div>
+        }
+        @*<div><img src="~/images/s11.jpg" alt="Groovy Apparel"></div>
+            <div><img src="~/images/product-2.jpg" alt="Groovy Apparel"></div>
+            <div><img src="~/images/product-11.jpg" alt="Groovy Apparel"></div>*@
 
     </div>
 </div>

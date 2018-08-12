@@ -12,15 +12,20 @@
     var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
     var productspecification = await ProductBLL.Find(Model.ID);
 }
+<head>
+    <meta property="og:url" content="http://thienma1258.somee.com/" />
+    <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
+</head>
 <div id="fb-root"></div>
 <script>
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=1436884009706757&autoLogAppEvents=1';
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-href="http://thienma1258.somee.com/" data-layout="button_count"></div>
 <link rel=" stylesheet" href="~/css/flexslider.css" />
 <link rel=" stylesheet" href="~/css/shopdev.css" />
 <!-- Single-Product-View -->
@@ -33,12 +38,12 @@
                         <div class="flexslider">
                             <ul class="slides">
                                 <li data-thumb=@Url.Content(Model.DefaultImages)>
-                                    <div class="thumb-image detail_images"> <img src=@Url.Content(Model.DefaultImages) data-imagezoom="true" class="img-responsive" alt="Groovy Apparel"></div>
+                                    <div class="thumb-image detail_images"> <img src=@Url.Content(Model.DefaultImages) data-imagezoom="true" class="img-responsive" ></div>
                                 </li>
                                 @{foreach (var item in images)
                                     {
                                         <li data-thumb=@Url.Content(item)>
-                                            <div class="thumb-image detail_images"> <img src=@Url.Content(item) data-imagezoom="true" class="img-responsive" alt="Groovy Apparel"></div>
+                                            <div class="thumb-image detail_images"> <img src=@Url.Content(item) data-imagezoom="true" class="img-responsive"></div>
                                         </li>
                                     }
                                 }
@@ -163,6 +168,7 @@
     </div>
 
 </div>
+
 @if (Model.IsAllowFacebookComment)
 {
     <div class="facebook-comment">
@@ -171,6 +177,7 @@
         Comment
     </div>
 }
+
 <!-- //Single-Product-View -->
 <!-- Custom-JavaScript-File-Links -->
 <!-- Default-JavaScript -->

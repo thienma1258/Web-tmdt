@@ -10,7 +10,6 @@
 }
 <img src="~/images/1240x-bighb-2015-mh-038-1980x1346px.jpg" />
 <h1 class="w3wthreeheadingaits">MEN'S SHOES</h1>
-<link href="~/css/shopdev.css" rel="stylesheet" />
 @*@foreach (var item in Model)
     {
         <div class="wthreeproductdisplay" style="display:flex">
@@ -84,18 +83,38 @@
                 @{
                     var listimgbrand = await BrandBLL.Find(item.BrandID);
                     <img style="width:50px;height:50px;margin:-10px" src="@Url.Content(listimgbrand.DefaultImage)" />
-                 }
+                }
 
             </li>
-            <li class="cbp-pgoptsize agile">
-                <span data-size="XL">39</span>
-                <div class="cbp-pgopttooltip">
-                    <span data-size="XL">43</span>
-                    <span data-size="XL">42</span>
-                    <span data-size="XL">41</span>
-                    <span data-size="XL">40</span>
-                </div>
-            </li>
+            @{
+                var listsubgroup = await SubGroupBLL.Find(item.SubGroupID);
+                @if (listsubgroup.TypeSex.ToString() == "Male")
+                {
+                    <li class="cbp-pgoptsize agile">
+                        <span data-size="XL">39</span>
+                        <div class="cbp-pgopttooltip">
+                            <span data-size="XL">43</span>
+                            <span data-size="XL">42</span>
+                            <span data-size="XL">41</span>
+                            <span data-size="XL">40</span>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="cbp-pgoptsize agile">
+                        <span style="color:#d109ae" data-size="XL">35</span>
+                        <div class="cbp-pgopttooltip">
+                            <div class="women">
+                                <span data-size="XL">39</span>
+                                <span data-size="XL">38</span>
+                                <span data-size="XL">37</span>
+                                <span data-size="XL">36</span>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
             <li class="cbp-pgoptcart">
                 <form action="#" method="post">
                     <input type="hidden" name="cmd" value="_cart">
