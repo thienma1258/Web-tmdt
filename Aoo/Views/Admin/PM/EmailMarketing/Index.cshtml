@@ -51,12 +51,12 @@
     </div>
     <div id="messageEditor" style="display:none;">
         <div class="content-header">
-            <label>Tiêu đề</label> <input type="text" class="form-control" placeholder="Title" />
-            <label>Subject</label><input type="text" class="form-control" placeholder="Subject" />
+            <label>Tiêu đề</label> <input type="text" class="form-control" id="title" placeholder="Title" />
+            <label>Subject</label><input type="text" class="form-control" id="subject" placeholder="Subject" />
         </div>
         <div class="content">
             <textarea id="editor"></textarea>
-            <button id="sendEmail"></button>
+            <button id="sendEmail" class="btn btn-success btn-lg" >Send Email</button>
         </div>
     </div>
 </div>
@@ -64,7 +64,7 @@
 
 <script>
     window.onload = function () {
-        $('#selectedMessage').css('display ', 'inline-block');
+ 
         $("#selectedAll").change(function () {
             if (this.checked) {
                 $('input[name=inputSelected]').prop('checked', true);
@@ -74,17 +74,56 @@
 
             }
         });
+      
+        var listEmail;
         $('#sendMessage').click(function () {
-            if ($('input[name=inputSelected]').length == 0) {
+             listEmail = new Array();
+            var allinputSelector = $('input[name=inputSelected]:checked');
+            console.log(allinputSelector);
+           
+            if (allinputSelector.length == 0) {
                 alert("mời bạn chọn");
                 return;
 
             }
-            $('#listSelectedEmail').css('display ', 'none');
-
+          
+            $('#listSelectedEmail').css('display','none');
             $('#messageEditor').css('display', 'block');
-
+            allinputSelector.each(function (index) {
+                listEmail.push($(this).attr("data-id"))
+            })
         });
+        $('#sendEmail').click(function () {
+            var title = $('#title').val();
+            var subject = $('#subject').val();
+            var body = CKEDITOR.instances.editor.getData();
+            if (title.trim() == "" || subject.trim() == "" || body == "") {
+                alert("mời nhập dữ liệu");
+                return;
+
+            }
+            console.log(body);
+            var postdata = {
+                'Title': title,
+                'Subject': subject,
+                'Body': body,
+                'listEmail': listEmail
+            };
+            $.ajax({
+                url: '/EmailMarketing/SendEmail',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data)
+                    if (data.success == "true")
+                        alert("Gửi Email thành công");
+                    else
+                        alert(data.message);
+                },
+                data: JSON.stringify(postdata)
+            });
+        })
     }
 </script>
 <script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>

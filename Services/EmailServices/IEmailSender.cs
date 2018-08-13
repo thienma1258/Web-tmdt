@@ -7,7 +7,7 @@ namespace Services.EmailServices
 {
     public interface IEmailSender
     {
-        Task SendEmailAsync(string email, List<string> listToEmail, string body, string subject, string message);
+        Task SendEmailAsync( List<string> listToEmail, string body, string subject, string message);
 
 
     }

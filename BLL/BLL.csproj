@@ -8,6 +8,7 @@
     <ProjectReference Include="..\CacheHelpers\CacheHelpers.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\PayPalCore\PayPalCore.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 

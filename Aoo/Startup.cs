@@ -20,6 +20,8 @@ using CacheHelpers;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using Services.EmailServices;
+using BLL.PayMentBLL.ConfigOptions;
 
 namespace Aoo
 {
@@ -59,13 +61,13 @@ namespace Aoo
             });
 
             services.AddMemoryCache();
-            services.AddTransient<IEmailSender, EmailSender>();
             //  services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDataCache, CacheMemory>();
             RegisterBLLConfig.RegisterBLL(ref services);
             RegisterServicesConfig.RegisterServices(ref services);
-           
+            services.Configure<PayPalAuthOptions>(Configuration);
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings

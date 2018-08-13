@@ -11,8 +11,8 @@ namespace Services.EmailServices
  
     public class MailchimpSErvices: IMailchimpServices
     {
-        private const string ApiKey = "2a992a0f1cdfe9cf3fe85f3fc27b07b8-us19";
-        private const string ListId = "6c378d9e39";
+        private const string ApiKey = "d8dd245d5bcca1efdeb604b33c14e330-us19";
+        private const string ListId = "87bb7de1dc";
         private const int TemplateId = 2117; // (your template id)
         private MailChimpManager _mailChimpManager = new MailChimpManager(ApiKey);
         private Setting _campaignSettings = new Setting

@@ -1,4 +1,7 @@
 ﻿using Aoo.Helpers;
+using BLL.PayMentBLL;
+using BLL.PayMentBLL.ConfigOptions;
+using BLL.PayMentBLL.Implement;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.EmailServices;
@@ -17,6 +20,10 @@ namespace Aoo.App_start
             services.AddTransient<IImageServices, LocalImageServices>();
             services.AddSingleton<IViewRenderService, RenderView>();
             services.AddSingleton<IMailchimpServices, MailchimpSErvices>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+            services.AddSingleton<IPaypalServices, PaypalServices>();
+
         }
     }
 }
