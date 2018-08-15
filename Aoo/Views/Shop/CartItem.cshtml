@@ -7,8 +7,12 @@
 <link rel="stylesheet" href="~/fonts/Shop/FjallaOne-Regular.ttf" type="text/css" media="all">
 <link rel="stylesheet" href="~/fonts/Shop/OpenSans-Regular.ttf" type="text/css" media="all">
 <link rel="stylesheet" href="~/js/bootstrap.js" />
+<script type="text/javascript" src="~/js/Cookie.js"></script>
 <div class="container">
     <!-- Mainbar-Starts-Here -->
+    @*<div>
+        <button type="button" onclick="LoadItem()">Check</button>
+    </div>*@
     <div class="main-bar">
         <div class="product">
             <h3>Product</h3>
@@ -24,37 +28,14 @@
     <!-- //Mainbar-Ends-Here -->
     <!-- Items-Starts-Here -->
     <div class="items">
-       @{ for (int i=0;i<3;i++) {
         <!-- Item1-Starts-Here -->
-        <div class="item1">
-            <div class="close1">
-                <!-- Remove-Item --><div class="alert-close1"> </div><!-- //Remove-Item -->
-                <div class="image1">
-                    <img src="~/images/item1.png" alt="item1">
-                </div>
-                <div class="title1">
-                    <p>Gucci Gg1078/S 4Uavk Grey Wayfarer</p>
-                </div>
-                <div class="quantity1">
-                    <form >
-                        <input type="number" name="quantity" min="1" max="10" value="1">
-                    </form>
-                </div>
-                <div class="price1">
-                    <p>$ 210</p>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
         <!-- //Item1-Ends-Here -->
-               }
-           }
     </div>
     <!-- //Items-Ends-Here -->
     <!-- Total-Price-Starts-Here -->
     <div class="total">
         <div class="total1">Total Price</div>
-        <div class="total2">$ 924</div>
+        <div class="total2"></div>
         <div class="clear"></div>
     </div>
     <!-- //Total-Price-Ends-Here -->
@@ -103,4 +84,12 @@ $(document).ready(function(c) {
 		});
 	});
 </script>
+<script>
+    $(document).ready(function () {
+
+        LoadItem();
+        
+    });
+</script>
+
 <!-- //Remove-Item-JavaScript -->

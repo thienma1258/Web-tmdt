@@ -35,5 +35,7 @@ namespace Aoo.ViewModels.PM
         public string SubGroup { get; set; }
         [Required]
         public bool IsAllowComment { get; set; }
+        [Required] 
+        public decimal Price { get; set; }
     }
 }

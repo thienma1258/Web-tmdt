@@ -69,14 +69,13 @@ namespace Aoo.Controllers.Admin.PM
                         isOnlineOnly = addProductViewModel.isOnlineOnly,
                         IsAllowComment = addProductViewModel.IsAllowComment,
                         StockMin = addProductViewModel.StockMin,
-                        Details = addProductViewModel.Details
                         //LadingPage = addProductViewModel.LadingPage,
                     };
                     product.BrandID = addProductViewModel.Brand;
                     product.CategoryID = addProductViewModel.Category;
                     //product.MainGroup = await MainGroupBLL.Find(addProductViewModel.MainGroup);
                     product.SubGroupID = addProductViewModel.SubGroup;
-                    await ProductBLL.Add(product);
+             
                     return RedirectToAction("Index");
 
                 }
@@ -118,6 +117,7 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {
+                     
                 Product objProduct = await this.ProductBLL.Find(editProductViewModel.ID);
                 objProduct.ID = editProductViewModel.ID;
                 objProduct.Specification = editProductViewModel.Specification;

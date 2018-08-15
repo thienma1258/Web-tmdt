@@ -51,12 +51,14 @@ namespace Aoo.Controllers.Shop
             else
                 result = await ProductDetailsBLL.Get(filter: p => p.ProductID == id);
             var pro = await ProductBLL.Find(id);
+            var spe = pro.Specification;
             if (pro == null)
                 return NotFound();
-            decimal price = 0;
-            string IDtemp = id;
+            decimal price = pro.Price;
+            //string IDtemp = id;
             List<string> listSize = new List<string>();
             List<string> listColor = new List<string>();
+            List<string> listIdDetail = new List<string>();
             string listImage = null;
             if (result.Count() > 0)
             {
@@ -69,19 +71,23 @@ namespace Aoo.Controllers.Shop
                 }
                 var selectedColor = result.FirstOrDefault().TypeColor;
                 result = result.Where(p => p.TypeColor == selectedColor).ToList();
+              
                 foreach (var i in result)
                 {
 
                     listImage = listImage + "," + i.listImages;
                     price = i.Price;
                     listSize.Add(i.Size.ToString());
+                    listIdDetail.Add(i.ID);
                 }
+                
 
             }
             LoadDetailsViewModel temp = new LoadDetailsViewModel()
             {
-                ID = IDtemp,
+                ListIDDetails=listIdDetail,
                 ListSize = listSize,
+                ID=pro.ID,
                 Color = color,
                 DefaultImages = pro.DefaultImage,
                 Model = pro.Model,
@@ -90,7 +96,10 @@ namespace Aoo.Controllers.Shop
                 Price = price == 0 ? "Chưa có hàng" : price.ToString(),
                 Descrtiption = pro.Details,
                 Specification=pro.Specification,
-                IsAllowFacebookComment = pro.IsAllowComment
+                IsAllowFacebookComment = pro.IsAllowComment,
+                Quantity = 0,
+                CurrentSize = "chua co",
+                ImagePath = pro.DefaultImage
             };
             return View(temp);
 
@@ -133,6 +142,7 @@ namespace Aoo.Controllers.Shop
         public IActionResult CartItem()
         {
             return View();
-        }      
+        }   
+     
     }
 }

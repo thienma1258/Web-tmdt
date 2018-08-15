@@ -9,6 +9,7 @@
     {
         images = listImage.Split(new string[] { "," }, StringSplitOptions.None).ToList();
     }
+    //Model.ImagePath = images[0];
     var currencolor = Model.Color;
     var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
     var productspecification = await ProductBLL.Find(Model.ID);
@@ -22,10 +23,12 @@
             morecolor.Add(a);
         }
     }
+
 }
 <head>
     <meta property="og:url" content="http://thienma1258.somee.com/" />
     <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
+    <script type="text/javascript" src="~/js/Cookie.js"></script>
 </head>
 <div id="fb-root"></div>
 <script>
@@ -93,17 +96,17 @@
                             </ul>
                             <br />
                             <label>Size giày:</label><br />
-                            @{
-                                <select class="form-control" asp-items="@(new SelectList(Model.ListSize))">
-                                    <option selected="selected" value="">Please select</option>
-                                </select>
+                                                     <select id="currentSize">
+                                                         {
+                                                         @{for (int i = 0; i < Model.ListSize.Count; i++)
+                                                             {
+                                                                 <option value="@Model.ListIDDetails[i]">@Model.ListSize[i]</option>
 
-                            }
+                                                             }
+                                                         }
+                                                     </select>}
 
-
-
-
-                        </div>
+                            </div>
                         <div style="margin-top:15px;">
                             <h3>Color:</h3>
                             @foreach (var item in Model.ListColor)
@@ -133,12 +136,12 @@
                                     <h3>More Color:</h3><br />
                                     foreach (var item in l)
                                     {
-                                    <div class="myColor" style="display:inline-flex">
-                                        <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
-
-                                            <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
-                                        </a>
-                                    </div>
+                                        <div class="myColor">
+                                            <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
+                                                <h3>More Color:</h3>
+                                                <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
+                                            </a>
+                                        </div>
                                     }
                                 }
                             }
@@ -148,7 +151,8 @@
 
                         <p class="single-price-text">@Html.Raw(Model.Specification)</p>
                         <div class="cbp-pgcontent aitssinglew3" id="mens_single">
-                            <button onclick="AddTocart('ListCart','ID','STANMITH','RED','39','1')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>
+                            @*<button onclick="AddToCart('@Model.ID','@Model.ImagePath','@Model.Model','@Model.Price','@Model.Color','@Model.CurrentSize','@Model.Quantity')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>*@
+                            <button onclick="AddToCart('@Model.ImagePath','@Model.Model',@pricedefau,'@Model.Color')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>
                             <div class="clearfix"></div>
                         </div>
 
@@ -253,91 +257,8 @@
 <script src="~/js/bootstrap.js"></script>
 <!-- Cookies Function -->
 <script>
-    function Item(ID, Model, Price, Color, CurrentSize, Quantity) {
-        this.ID = ID;
-        this.Model = Model;
-        this.Price = Price;
-        this.Color = Color;
-        this.CurrentSize = CurrentSize;
-        this.Quantity = Quantity;
-        return this;
+    function check(a, b, c, d, e, f, h) {
+        var t = a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + h;
+        window.alert(t);
     }
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-    function IsEmpty(name) {
-        if (getCookie(name) == "")
-            return null;
-    }
-    var key = "ListItem";
-    function AddTocart(name, id, model, color, currentsize, quantity) {
-        if (getCookie('ListItem') == "") {
-            var ListItem = new Array();
-            var item = new Item(
-                ID = id,
-                Model = model,
-                Color = color,
-                CurrentSize = currentsize,
-                Quantity = quantity
-            );
-            ListItem.push(item);
-            setCookie(key, JSON.stringify(ListItem), 60);
-        }
-        else {
-            var ListResult = JSON.parse(getCookie('ListItem'));
-            ListResult.forEach(function (e) {
-                if (e.ID == id) {
-                    e.Quantity++;
-                }
-            });
-            setCookie('ListItem', JSON.stringify(ListResult), 60);
-            console.Log(ListResult);
-        }
-    }
-</script>
-<style>
-    .currentColor {
-        border: none;
-        outline: none;
-        padding: 10px 16px;
-        background-color: #f1f1f1;
-        cursor: pointer;
-    }
-
-    /* Style the active class (and buttons on mouse-over) */
-    .myColor .active {
-        border: 2px solid none;
-    }
-</style>
-<script>
-    var btnContainer = document.getElementById("myColor");
-
-    // Get all buttons with class="btn" inside the container
-    var btns = btnContainer.getElementsByClassName("currentColor");
-
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
-</script>
+</script>     
