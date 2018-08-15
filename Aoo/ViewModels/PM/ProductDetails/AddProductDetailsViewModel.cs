@@ -14,7 +14,7 @@ namespace Aoo.ViewModels.PM.ProductDetails
         public TypeColorEnum TypeColor { get; set; }
         public int Size { get; set; } = 0;
         public string Product { get; set; }
-        public string Specification { get; set; } = string.Empty;
+        public string Specification { get; set; } 
         public string Note { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public List<IFormFile> ListDefaultImage { get; set; }

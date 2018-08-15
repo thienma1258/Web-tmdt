@@ -16,6 +16,7 @@ namespace Aoo.ViewModels.PM.Product
         public int StockMin { get; set; } = 0;
         public IFormFile DefaultImage { get; set; }
         public string Specification { get; set; }
+        public decimal DefauftPrice { get; set; }
         public string OldSpecification { get; set; }
         public string Details { get; set; }
         //adidas nike

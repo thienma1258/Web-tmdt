@@ -89,6 +89,7 @@ namespace Aoo.Controllers.Shop
                 ListColor = listColor,
                 Price = price == 0 ? "Chưa có hàng" : price.ToString(),
                 Descrtiption = pro.Details,
+                Specification=pro.Specification,
                 IsAllowFacebookComment = pro.IsAllowComment
             };
             return View(temp);

@@ -92,7 +92,7 @@
         <tr>
 
             <th>
-                <a>  @Html.DisplayFor(modelItem => item.Model)</a>
+                <a href="/ProductDetails/AddProductDetails?id=@item.ID">  @Html.DisplayFor(modelItem => item.Model)</a>
                 @{
                     var listColor = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
                     foreach(var i in listColor)

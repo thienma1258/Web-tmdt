@@ -21,7 +21,7 @@ namespace Aoo.Controllers.Admin.PM
         private readonly IMainGroupBLL MainGroupBLL;
         private readonly ISubGroupBLL SubGroupBLL;
         private readonly IProductDetailsBLL ProductDetailsBLL;
-        public ProductController(IProductBLL productBLL, IProductDetailsBLL productDetailsBLL, ISubGroupBLL subGrouptBLL, IMainGroupBLL mainGroupBL, IBrandBLL brandBLL,ICategoryBLL  categoryBLL, IImageServices imageServices) : base(imageServices)
+        public ProductController(IProductBLL productBLL, IProductDetailsBLL productDetailsBLL, ISubGroupBLL subGrouptBLL, IMainGroupBLL mainGroupBL, IBrandBLL brandBLL, ICategoryBLL categoryBLL, IImageServices imageServices) : base(imageServices)
         {
             ProductBLL = productBLL;
             this.MainGroupBLL = mainGroupBL;
@@ -30,23 +30,23 @@ namespace Aoo.Controllers.Admin.PM
             this.SubGroupBLL = subGrouptBLL;
             this.ProductDetailsBLL = productDetailsBLL;
         }
-        
-        public async Task<IActionResult> Index(int page=1,string contain=null)
+
+        public async Task<IActionResult> Index(int page = 1, string contain = null)
         {
             ViewBag.currentPage = page;
             ViewBag.totalPage = TotalPage(ProductBLL.Cout());
             if (contain != null)
-            { 
-                var ListResult = await ProductBLL.Get(numberPerPage,page,filter: p => p.Model.Contains(contain));
+            {
+                var ListResult = await ProductBLL.Get(numberPerPage, page, filter: p => p.Model.Contains(contain));
                 ViewBag.currentPage = page;
                 ViewBag.totalPage = TotalPage(ProductBLL.Cout(filter: p => p.Model.Contains(contain)));
                 return View(ListResult);
             }
-            return View(await ProductBLL.Get(numberPerPage, page,orderBy:p=>p.OrderByDescending(x=>x.EditedDate)));
-            
-           
+            return View(await ProductBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate)));
+
+
         }
-      
+
         public async Task<IActionResult> AddProduct()
         {
             return View();
@@ -65,22 +65,22 @@ namespace Aoo.Controllers.Admin.PM
                     {
                         Model = addProductViewModel.Model,
                         DefaultImage = ImagePath,
+                        Price = addProductViewModel.DefauftPrice,
                         isOnlineOnly = addProductViewModel.isOnlineOnly,
-                        IsAllowComment=addProductViewModel.IsAllowComment,
+                        IsAllowComment = addProductViewModel.IsAllowComment,
                         StockMin = addProductViewModel.StockMin,
-                        Details=addProductViewModel.Details
-
+                        Details = addProductViewModel.Details
                         //LadingPage = addProductViewModel.LadingPage,
                     };
                     product.BrandID = addProductViewModel.Brand;
                     product.CategoryID = addProductViewModel.Category;
                     //product.MainGroup = await MainGroupBLL.Find(addProductViewModel.MainGroup);
                     product.SubGroupID = addProductViewModel.SubGroup;
-                    await  ProductBLL.Add(product);
+                    await ProductBLL.Add(product);
                     return RedirectToAction("Index");
 
                 }
-               
+
             }
             return View();
         }
@@ -90,8 +90,9 @@ namespace Aoo.Controllers.Admin.PM
 
             ViewModels.PM.Product.EditProductViewModel editProductViewModel = new ViewModels.PM.Product.EditProductViewModel
             {
-                
+
                 OldImage = objproduct.DefaultImage,
+                DefauftPrice = objproduct.Price,
                 //DefaultImage=objproduct.DefaultImage,
                 SubGroup = objproduct.SubGroupID,
                 Category = objproduct.CategoryID,
@@ -106,7 +107,7 @@ namespace Aoo.Controllers.Admin.PM
         public async Task<IActionResult> EditProduct(ViewModels.PM.Product.EditProductViewModel editProductViewModel)
         {
             string ImagePath = null; ;
-           ImageErrorModel imageErrorModel = new ImageErrorModel();
+            ImageErrorModel imageErrorModel = new ImageErrorModel();
             if (editProductViewModel.DefaultImage == null)
             {
                 ImagePath = editProductViewModel.OldImage;
@@ -117,26 +118,21 @@ namespace Aoo.Controllers.Admin.PM
             }
             if (ModelState.IsValid)
             {
-                     Product objproduct = new Product
-                    {
-                        ID=editProductViewModel.ID,
-                        Specification=editProductViewModel.Specification,
-                        Model = editProductViewModel.Model,
-                        DefaultImage=ImagePath,
-                        isOnlineOnly = editProductViewModel.isOnlineOnly,
-                        StockMin = editProductViewModel.StockMin,
-                        Details = editProductViewModel.Details,
-                         IsAllowComment = editProductViewModel.IsAllowComment,
-                         CreatedTime = editProductViewModel.CreateTime
-
-                        
-                    };
-                    objproduct.BrandID = editProductViewModel.Brand;
-                    objproduct.CategoryID = editProductViewModel.Category;
-                    objproduct.SubGroupID = editProductViewModel.SubGroup;
-                    await ProductBLL.Update(objproduct);
-                    return RedirectToAction("Index");
-              
+                Product objProduct = await this.ProductBLL.Find(editProductViewModel.ID);
+                objProduct.ID = editProductViewModel.ID;
+                objProduct.Specification = editProductViewModel.Specification;
+                objProduct.DefaultImage = ImagePath;
+                objProduct.Price = editProductViewModel.DefauftPrice;
+                objProduct.isOnlineOnly = editProductViewModel.isOnlineOnly;
+                objProduct.StockMin = editProductViewModel.StockMin;
+                objProduct.Details = editProductViewModel.Details;
+                objProduct.IsAllowComment = editProductViewModel.IsAllowComment;
+                objProduct.CreatedTime = editProductViewModel.CreateTime;
+                objProduct.BrandID = editProductViewModel.Brand;
+                objProduct.CategoryID = editProductViewModel.Category;
+                objProduct.SubGroupID = editProductViewModel.SubGroup;
+                await ProductBLL.Update(objProduct);
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
@@ -150,6 +146,6 @@ namespace Aoo.Controllers.Admin.PM
 
             }
             return Json(new { success = "false" });
-        }      
+        }
     }
 }

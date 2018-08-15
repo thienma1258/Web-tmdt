@@ -21,12 +21,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" class="form-control" />
             <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
-            <input asp-for="ID" type="hidden" class="form-control" />
-            <div class="form-group">
                 <div class="checkbox">
                     <label>
                         <input asp-for="IsAllowComment" /> @Html.DisplayNameFor(model => model.IsAllowComment)
@@ -45,9 +39,14 @@
                 <input asp-for="StockMin" class="form-control" />
                 <span asp-validation-for="StockMin" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="DefauftPrice" class="control-label"></label>
+                @await Html.PartialAsync("~/Views/Component/CurrencyInput.cshtml", new Aoo.ViewModels.Component.CurrencyInputModel { Name = "DefauftPrice", Price = 1000 })
+                <span asp-validation-for="DefauftPrice" class="text-danger"></span>
+            </div>
             <div style="width:250%">
-                
-                <label asp-for="Specification"  class="control-label" ></label>
+
+                <label asp-for="Specification" class="control-label"></label>
                 <textarea name="Specification" style="width:100%;height:200px" id="editor">@Model.Specification</textarea>
             </div>
             <br />

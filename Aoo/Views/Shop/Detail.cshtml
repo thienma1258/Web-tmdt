@@ -12,6 +12,7 @@
     var currencolor = Model.Color;
     var listcolor = await ProductDetailsBLL.Get(filter: p => p.ProductID == Model.ID);
     var productspecification = await ProductBLL.Find(Model.ID);
+    var pricedefau = productspecification.Price;
     List<string> morecolor = new List<string>();
     foreach (var item in listcolor)
     {
@@ -20,7 +21,6 @@
             string a = item.TypeColor.ToString();
             morecolor.Add(a);
         }
-
     }
 }
 <head>
@@ -36,7 +36,8 @@
         js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-share-button" data-href="http://thienma1258.somee.com/" data-layout="button_count"></div>
+<div class="fb-share-button" data-href="http://localhost:62086/Shop/Detail?id=2a6c9129-d326-402a-adbf-94b95abfa37c&color=Red" data-layout="button_count"></div>
+<div class="fb-share-button" data-href='@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path))'  data-layout="button_count"></div>
 <link rel=" stylesheet" href="~/css/flexslider.css" />
 <link rel=" stylesheet" href="~/css/shopdev.css" />
 <!-- Single-Product-View -->
@@ -48,14 +49,20 @@
                     <div id="listimage" class="col-md-6 single-top-left">
                         <div class="flexslider">
                             <ul class="slides">
-                                <li data-thumb=@Url.Content(Model.DefaultImages)>
-                                    <div class="thumb-image detail_images"> <img src=@Url.Content(Model.DefaultImages) data-imagezoom="true" class="img-responsive" ></div>
-                                </li>
-                                @{foreach (var item in images)
+                                @{
+                                    if (Model.Color == null)
                                     {
-                                        <li data-thumb=@Url.Content(item)>
-                                            <div class="thumb-image detail_images"> <img src=@Url.Content(item) data-imagezoom="true" class="img-responsive"></div>
-                                        </li>
+                                        <li data-thumb=@Url.Content(Model.DefaultImages)>
+                                            <div class="thumb-image detail_images"> <img src=@Url.Content(Model.DefaultImages) data-imagezoom="true" class="img-responsive"></div>
+                                        </li>}
+                                    else
+                                    {
+                                        foreach (var item in images)
+                                        {
+                                            <li data-thumb=@Url.Content(item)>
+                                                <div class="thumb-image detail_images"> <img src=@Url.Content(item) data-imagezoom="true" class="img-responsive"></div>
+                                            </li>
+                                        }
                                     }
                                 }
                             </ul>
@@ -82,19 +89,22 @@
 
                         <div id="info" class="single-price">
                             <ul>
-                                <li>@(string.Format("{0:N}", Model.Price))</li>
+                                <li>@(string.Format("{0:N0}", pricedefau))</li>
                             </ul>
-                            <label>Size:</label>
+                            <br />
+                            <label>Size giày:</label><br />
+                            @{
+                                <select class="form-control" asp-items="@(new SelectList(Model.ListSize))">
+                                    <option selected="selected" value="">Please select</option>
+                                </select>
 
-                            <select class="form-control" asp-items="@(new SelectList(Model.ListSize))">
-                                <option selected="selected" value="">Please select</option>
-                            </select>
+                            }
 
 
 
 
                         </div>
-                        <div style="margin-top:15px">
+                        <div style="margin-top:15px;">
                             <h3>Color:</h3>
                             @foreach (var item in Model.ListColor)
                             {
@@ -104,7 +114,7 @@
                                     </a>
                                 </div>
                             }
-                            @{ 
+                            @{
                                 if (morecolor.Count > 0)
                                 {
                                     List<string>
@@ -119,25 +129,26 @@
                                         }
 
                                     }
+                                
+                                    <h3>More Color:</h3><br />
                                     foreach (var item in l)
                                     {
-                                            <div class="myColor">
-                                                <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
-                                                 <h3>More Color:</h3>
-                                                 <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
-                                                </a>
-                                            </div>
-                                        }
+                                    <div class="myColor" style="display:inline-flex">
+                                        <a id="myColor" href="/Shop/Detail?id=@Model.ID&color=@item">
+
+                                            <div class="active" style="display:inline-flex;width:50px;height:50px;border:1px solid #000;background-color:@item"></div>
+                                        </a>
+                                    </div>
                                     }
                                 }
-                                    <br />
+                            }
+                            <br />
                         </div>
-                        <div>
-                            @Html.Raw(Model.Specification)
-                        </div>
-                        <p class="single-price-text">Fusce a egestas nibh, eget ornare erat. Proin placerat, urna et consequat efficitur, sem odio blandit enim, sit amet euismod turpis est mattis lectus. Vestibulum maximus quam et quam egestas imperdiet. In dignissim auctor viverra.</p>
+
+
+                        <p class="single-price-text">@Html.Raw(Model.Specification)</p>
                         <div class="cbp-pgcontent aitssinglew3" id="mens_single">
-                            <button onclick="AddTocart('ListCart','ID','STANMITH','RED','39','1')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Add To Cart</button>
+                            <button onclick="AddTocart('ListCart','ID','STANMITH','RED','39','1')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>
                             <div class="clearfix"></div>
                         </div>
 
@@ -208,7 +219,6 @@
 {
     <div class="facebook-comment">
         <div class="fb-comments" data-width="100%" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path)) " data-numposts="5"></div>
-        <span class="fb-comments-count" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path))"></span>
         Comment
     </div>
 }
@@ -216,59 +226,13 @@
 <!-- //Single-Product-View -->
 <!-- Custom-JavaScript-File-Links -->
 <!-- Default-JavaScript -->
-<script src="~/js/jquery-2.2.3.js"></script>
-<script src="~/js/modernizr.custom.js"></script>
 <!-- Custom-JavaScript-File-Links -->
 <!-- cart-js -->
-<script src="~/js/minicart.js"></script>
-<script>
-    w3l.render();
-
-    w3l.cart.on('w3agile_checkout', function (evt) {
-        var items, len, i;
-
-        if (this.subtotal() > 0) {
-            items = this.items();
-
-            for (i = 0, len = items.length; i < len; i++) {
-            }
-        }
-    });
-</script>
 <!-- //cart-js -->
 <!-- Dropdown-Menu-JavaScript -->
-<script>
-    $(document).ready(function () {
-        $(".dropdown").hover(
-            function () {
-                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                $(this).toggleClass('open');
-            },
-            function () {
-                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                $(this).toggleClass('open');
-            }
-        );
-    });
-</script>
 <!-- //Dropdown-Menu-JavaScript -->
 <!-- Popup-Box-JavaScript -->
 <script src="~/js/jquery.magnific-popup.js" type="text/javascript"></script>
-<script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-    });
-</script>
 <!-- //Popup-Box-JavaScript -->
 <!-- FlexSlider-JavaScript -->
 <script defer src="~/js/Shop/jquery.flexslider.js"></script>
@@ -320,11 +284,10 @@
     }
     function IsEmpty(name) {
         if (getCookie(name) == "")
-            return null;     
+            return null;
     }
     var key = "ListItem";
-    function AddTocart(name, id, model, color, currentsize, quantity)
-    {  
+    function AddTocart(name, id, model, color, currentsize, quantity) {
         if (getCookie('ListItem') == "") {
             var ListItem = new Array();
             var item = new Item(
@@ -337,10 +300,9 @@
             ListItem.push(item);
             setCookie(key, JSON.stringify(ListItem), 60);
         }
-        else
-        {
+        else {
             var ListResult = JSON.parse(getCookie('ListItem'));
-            ListResult.forEach(function (e) { 
+            ListResult.forEach(function (e) {
                 if (e.ID == id) {
                     e.Quantity++;
                 }
@@ -348,7 +310,7 @@
             setCookie('ListItem', JSON.stringify(ListResult), 60);
             console.Log(ListResult);
         }
-     }
+    }
 </script>
 <style>
     .currentColor {
@@ -359,9 +321,9 @@
         cursor: pointer;
     }
 
-        /* Style the active class (and buttons on mouse-over) */
-    .myColor .active{
-        border:2px solid none;
+    /* Style the active class (and buttons on mouse-over) */
+    .myColor .active {
+        border: 2px solid none;
     }
 </style>
 <script>

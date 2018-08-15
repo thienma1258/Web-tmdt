@@ -60,7 +60,6 @@ namespace BLL.BLL.PM.Implement
         {
             try
             {
-                product.UrlFriendly = product.Model.UrlFriendLy();
                 product.EditedUser = UpdatedUser;
                 this.unitOfWork.ProductRepository.Update(product);
                 await this.unitOfWork.SaveChangeAsync();

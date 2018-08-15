@@ -15,6 +15,7 @@ namespace Aoo.ViewModels.PM
         public string Model { get; set; } = string.Empty;
         public bool isOnlineOnly { get; set; } = false;
         public int StockMin { get; set; } = 0;
+        public decimal DefauftPrice { get; set; }
         [Required]
         public IFormFile DefaultImage { get; set; }
         [Required]
