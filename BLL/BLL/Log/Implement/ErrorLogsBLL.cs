@@ -20,6 +20,10 @@ namespace BLL.BLL.Log.Implement
         {
             return this.unitOfWork.ErrorLogsRepository.Cout(filter);
         }
+        public ErrorLogs Find(string ID)
+        {
+            return this.unitOfWork.ErrorLogsRepository.Find(ID);
+        }
         public bool DeleteAll()
         {
            return this.unitOfWork.ErrorLogsRepository.DeleteAll();

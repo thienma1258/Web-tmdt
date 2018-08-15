@@ -11,5 +11,6 @@ namespace BLL.BLL.Log
         int Cout(Expression<Func<ErrorLogs, bool>> filter = null);
         IEnumerable<ErrorLogs> Get(Expression<Func<ErrorLogs, bool>> filter = null);
         bool DeleteAll();
+        ErrorLogs Find(string ID);
     }
 }
