@@ -75,7 +75,7 @@ namespace Aoo.Controllers.Admin.PM
                     product.CategoryID = addProductViewModel.Category;
                     //product.MainGroup = await MainGroupBLL.Find(addProductViewModel.MainGroup);
                     product.SubGroupID = addProductViewModel.SubGroup;
-             
+                    await ProductBLL.Add(product);
                     return RedirectToAction("Index");
 
                 }
@@ -134,7 +134,7 @@ namespace Aoo.Controllers.Admin.PM
                 await ProductBLL.Update(objProduct);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(editProductViewModel);
         }
         [HttpDelete("{id}")]
         public async Task<JsonResult> Delete(string id)

@@ -3,70 +3,28 @@
 @inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
 @inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
+@inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
 @{
     var listSubGroup = await SubGroupBLL.Get();
     var listMainGroup = await MainGroupBLL.Get();
     var listBrand = await BrandBLL.Get();
+
 }
+<!-- Facebook Share -->
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class="fb-share-button" data-href='@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path))' data-layout="button_count"></div>
 <img src="~/images/1240x-bighb-2015-mh-038-1980x1346px.jpg" />
-<h1 class="w3wthreeheadingaits">MEN'S SHOES</h1>
-@*@foreach (var item in Model)
-    {
-        <div class="wthreeproductdisplay" style="display:flex">
-            <div id="cbp-pgcontainer" class="cbp-pgcontainer">
-                <ul class="cbp-pggrid">
-                    <li class="wthree aits w3l">
-                        <div class="cbp-pgcontent" id="men-8">
-                            <span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>
-                            <a href="mens_single.html">
-                                <div class="cbp-pgitem a3ls">
-
-                                    <div class="cbp-pgitem-flip">
-                                        <img src="@Url.Content(item.DefaultImage)">
-                                    </div>
-                                </div>
-                            </a>
-                            <ul class="cbp-pgoptions w3l">
-                                <li style="color:black" class="cbp-pgoptcompare">
-                                   Nike
-
-                                </li>
-                                <li class="cbp-pgoptsize agile">
-                                    <span data-size="XL">XL</span>
-                                    <div class="cbp-pgopttooltip">
-                                        <span data-size="XL">XL</span>
-                                        <span data-size="L">L</span>
-                                        <span data-size="M">M</span>
-                                        <span data-size="S">S</span>
-                                    </div>
-                                </li>
-                                <li class="cbp-pgoptcart">
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart">
-                                        <input type="hidden" name="add" value="1">
-                                        <input type="hidden" name="w3l_item" value="Sweater ">
-                                        <input type="hidden" name="amount" value="25.00">
-                                        <button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-                                        <span class="w3-agile-line"> </span>
-                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="mens_single.html">
-                            <div class="cbp-pginfo w3layouts">
-                                <ul>
-                                    <li><h3>@item.Model</h3></li>
-                                    <li><span class="cbp-pgprice">$25</span></li>
-                                </ul>
-
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    }*@
+<h1 class="w3wthreeheadingaits">SHOES 's INDEX</h1>
+<link href="~/css/shopdev.css" rel="stylesheet" />
 @foreach (var item in Model)
 {
     <div class="cover">
@@ -77,7 +35,7 @@
                 </div>
             </li>
         </ul>
-       
+
         <ul class="cbp-pgoptions w3l">
             <li style="color:black" class="cbp-pgoptcompare">
                 @{
@@ -115,6 +73,7 @@
                     </li>
                 }
             }
+
             <li class="cbp-pgoptcart">
                 <form action="#" method="post">
                     <input type="hidden" name="cmd" value="_cart">
@@ -129,12 +88,41 @@
         </ul>
 
         <div class="pricemodel">
-            <ul>
-                <li><a href="#"><span>@item.Model</span></a></li>
-                <li><span class="price">$25</span></li>
-            </ul>
+            <div class="pricemodel">
+                <ul>
+                    @{ var lisDetail = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
+                        if (lisDetail.Count() > 0)
+                        {
+                            var color = lisDetail.First();
+                            <li><a href="/@(item.SubGroup.UrlFriendly)/@(item.UrlFriendly)"><span>@item.Model</span></a></li>
+                            <li><span class="price">@(string.Format("{0:N0}", item.Price))</span></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Shop/Detail?id=@item.ID"><span>@item.Model</span></a></li>
+                            <li><span class="price">$25</span></li>
+                        }
+                    }
+
+                </ul>
+            </div>
 
         </div>
     </div>
 
 }
+<!-- Shopping-Cart-JavaScript -->
+<!-- cart-js -->
+<!-- Shopping-Cart-JavaScript -->
+<!-- Dropdown-Menu-JavaScript -->
+<!-- //Dropdown-Menu-JavaScript -->
+<!-- Popup-Box-JavaScript -->
+@*<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>*@
+<!-- //Popup-Box-JavaScript -->
+@*<script src="js/cbpShop.min.js"></script>
+    <script>
+        var shop = new cbpShop(document.getElementById('cbp-pgcontainer'));
+    </script>*@
+
+<!-- //Custom-JavaScript-File-Links -->
+<!-- Bootstrap-JavaScript -->

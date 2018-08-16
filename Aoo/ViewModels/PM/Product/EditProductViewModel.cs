@@ -10,7 +10,6 @@ namespace Aoo.ViewModels.PM.Product
     public class EditProductViewModel
     {
         public string ID { get; set; }
-        [MinLength(5)]
         public string Model { get; set; } = string.Empty;
         public bool isOnlineOnly { get; set; } = false;
         public int StockMin { get; set; } = 0;

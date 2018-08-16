@@ -1,119 +1,13 @@
 ﻿@model IEnumerable<DAL.Model.PM.Product>
 @using Common.Enum.PM;
-@inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
-@inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
-@inject BLL.BLL.PM.IBrandBLL BrandBLL
-@inject BLL.BLL.PM.IProductDetailsBLL ProductDetailsBLL
+
 @{
     ViewData["Title"] = "MenShop";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
-    var listSubGroup = await SubGroupBLL.Get();
-    var listMainGroup = await MainGroupBLL.Get();
-    var listBrand = await BrandBLL.Get();
-
+ 
 }
-<!-- Facebook Share -->
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-<div class="fb-share-button" data-href='@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path))' data-layout="button_count"></div>
-<div class="fb-share-button" data-href="http://localhost:62086/Shop/Detail?id=2a6c9129-d326-402a-adbf-94b95abfa37c&color=Red" data-layout="button_count"></div>
-<img src="~/images/1240x-bighb-2015-mh-038-1980x1346px.jpg" />
-<h1 class="w3wthreeheadingaits">SHOES 's INDEX</h1>
-<link href="~/css/shopdev.css" rel="stylesheet" />
-@foreach (var item in Model)
-{
-    <div class="cover">
-        <ul>
-            <li>
-                <div class="coverimg">
-                    <img src="@Url.Content(item.DefaultImage)">
-                </div>
-            </li>
-        </ul>
+@await Html.PartialAsync("~/Views/Shared/ListProduct.cshtml", Model);
 
-        <ul class="cbp-pgoptions w3l">
-            <li style="color:black" class="cbp-pgoptcompare">
-                @{
-                    var listimgbrand = await BrandBLL.Find(item.BrandID);
-                    <img style="width:50px;height:50px;margin:-10px" src="@Url.Content(listimgbrand.DefaultImage)" />
-                }
-
-            </li>
-            @{
-                var listsubgroup = await SubGroupBLL.Find(item.SubGroupID);
-                @if (listsubgroup.TypeSex.ToString() == "Male")
-                {
-                    <li class="cbp-pgoptsize agile">
-                        <span data-size="XL">39</span>
-                        <div class="cbp-pgopttooltip">
-                            <span data-size="XL">43</span>
-                            <span data-size="XL">42</span>
-                            <span data-size="XL">41</span>
-                            <span data-size="XL">40</span>
-                        </div>
-                    </li>
-                }
-                else
-                {
-                    <li class="cbp-pgoptsize agile">
-                        <span style="color:#d109ae" data-size="XL">35</span>
-                        <div class="cbp-pgopttooltip">
-                            <div class="women">
-                                <span data-size="XL">39</span>
-                                <span data-size="XL">38</span>
-                                <span data-size="XL">37</span>
-                                <span data-size="XL">36</span>
-                            </div>
-                        </div>
-                    </li>
-                }
-            }
-
-            <li class="cbp-pgoptcart">
-                <form action="#" method="post">
-                    <input type="hidden" name="cmd" value="_cart">
-                    <input type="hidden" name="add" value="1">
-                    <input type="hidden" name="w3l_item" value="Sweater ">
-                    <input type="hidden" name="amount" value="25.00">
-                    <button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-                    <span class="w3-agile-line"> </span>
-                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                </form>
-            </li>
-        </ul>
-
-        <div class="pricemodel">
-            <div class="pricemodel">
-                <ul>
-                    @{ var lisDetail = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
-                        if (lisDetail.Count() > 0)
-                        {
-                            var color = lisDetail.First();
-                            <li><a href="/Shop/Detail?id=@item.ID&color=@color.TypeColor.ToString()"><span>@item.Model</span></a></li>
-                            <li><span class="price">@(string.Format("{0:N0}", item.Price))</span></li>
-                        }
-                        else
-                        {
-                            <li><a href="/Shop/Detail?id=@item.ID"><span>@item.Model</span></a></li>
-                            <li><span class="price">$25</span></li>
-                        }
-                    }
-
-                </ul>
-            </div>
-
-        </div>
-    </div>
-
-}
 <!-- Shopping-Cart-JavaScript -->
 <!-- cart-js -->
 <!-- Shopping-Cart-JavaScript -->

@@ -44,6 +44,11 @@ namespace BLL.BLL.PM.Implement
             try
             {
                 this.unitOfWork.ProductRepository.Delete(productID, DeletedUser);
+                IEnumerable<ProductDetails> listProductDetails = this.unitOfWork.ProductDetailsRepository.Get(filter: p => p.ProductID == productID);
+                foreach(var objProductdetail in listProductDetails)
+                {
+                    this.unitOfWork.ProductDetailsRepository.Delete(objProductdetail.ID);
+                }
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }

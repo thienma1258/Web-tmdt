@@ -86,6 +86,7 @@ namespace Aoo
                 // User settings
                 options.User.RequireUniqueEmail = false;
             });
+
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
