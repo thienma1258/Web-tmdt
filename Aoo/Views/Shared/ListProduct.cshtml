@@ -90,19 +90,11 @@
         <div class="pricemodel">
             <div class="pricemodel">
                 <ul>
-                    @{ var lisDetail = await ProductDetailsBLL.Get(filter: p => p.ProductID == item.ID);
-                        if (lisDetail.Count() > 0)
-                        {
-                            var color = lisDetail.First();
+                        
+                            
                             <li><a href="/@(item.SubGroup.UrlFriendly)/@(item.UrlFriendly)"><span>@item.Model</span></a></li>
                             <li><span class="price">@(string.Format("{0:N0}", item.Price))</span></li>
-                        }
-                        else
-                        {
-                            <li><a href="/Shop/Detail?id=@item.ID"><span>@item.Model</span></a></li>
-                            <li><span class="price">$25</span></li>
-                        }
-                    }
+                            
 
                 </ul>
             </div>

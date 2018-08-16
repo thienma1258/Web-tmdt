@@ -114,11 +114,19 @@ namespace Aoo.Controllers
             if (pro == null)
                 return NotFound();
             var spe = pro.Specification;
+            result = await productDetailsBLL.Get(filter: p => p.ProductID==pro.ID);
+            string Color=null;
             if (color != null)
-                result = await productDetailsBLL.Get(filter: p => p.ProductID == pro.ID && p.TypeColor.ToString() == color);
-            else
-                result = await productDetailsBLL.Get(filter: p => p.ProductID == pro.ID);
-
+            {
+                Color = color;
+                result = result.Where(p => p.TypeColor.ToString() == color);
+            }
+            else if (result.Count() > 0)
+            {
+                var firstProductDetails = result.FirstOrDefault();
+                Color = firstProductDetails.TypeColor.ToString();
+                result = result.Where(p => p.TypeColor == firstProductDetails.TypeColor).ToList();
+            }
             decimal price = pro.Price;
             //string IDtemp = id;
             List<string> listSize = new List<string>();
@@ -153,7 +161,7 @@ namespace Aoo.Controllers
                 ListIDDetails = listIdDetail,
                 ListSize = listSize,
                 ID = pro.ID,
-                Color = color,
+                Color = Color,
                 DefaultImages = pro.DefaultImage,
                 Model = pro.Model,
                 ListImage = listImage,
