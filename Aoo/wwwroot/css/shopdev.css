@@ -80,3 +80,8 @@
     width:35%;
     margin:8%;
 }
+table td img {
+     max-width:initial!important;
+     width:50px!important;
+     height:30px!important;
+}

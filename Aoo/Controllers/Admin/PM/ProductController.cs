@@ -63,6 +63,9 @@ namespace Aoo.Controllers.Admin.PM
                 {
                     Product product = new Product()
                     {
+                        //MetaKey=addProductViewModel.MetaKey,
+                        MetaTitle=addProductViewModel.MetaTitle,
+                        MetaDescription=addProductViewModel.MetaDescription,
                         Model = addProductViewModel.Model,
                         DefaultImage = ImagePath,
                         Price = addProductViewModel.DefauftPrice,

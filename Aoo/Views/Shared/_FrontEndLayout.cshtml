@@ -43,6 +43,7 @@
     <!-- TTF -->
     <link rel="stylesheet" href="~/fonts/fontawesome-webfont.ttf" type="text/css" media="all">
     <script src="~/js/jquery-2.2.3.js"></script>
+    <script src="~/js/Cookie.js"></script>
     <!-- //Font-Awesome-File-Links -->
     <style type="text/css">
         .eboundDynamicAdsbygoogle {
@@ -63,7 +64,7 @@
 </head>
 <body>
     <!-- Header -->
-    <script src="https://uhchat.net/code.php?f=8b8c5d"></script>
+    @*<script src="https://uhchat.net/code.php?f=8b8c5d"></script>*@
     <div class="agileheader" id="agileheadermens">
 
         <!-- Navigation -->
@@ -248,16 +249,12 @@
                             </form>
                         </li>
                         <li class="wthreecartaits wthreecartaits2 cart cart box_1">
-                            <form action="#" method="post" class="last">
-
-                                <input type="hidden" name="cmd" value="_cart" />
-                                <input type="hidden" name="display" value="1" />
-
-                                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                                <p>4</p>
-                            </form>
-
-                        </li>
+                        <form action="#" method="post" class="last">
+                            <input type="hidden" name="cmd" value="_cart" />
+                            <input type="hidden" name="display" value="1" />
+                            <button class="w3view-cart" onclick="window.location.href='/san-pham/gio-hang'" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                        </form>
+                    </li>
 
                     </ul>
 
@@ -514,3 +511,11 @@
 <!-- Bootstrap-JavaScript -->
 <script src="~/js/bootstrap.js"></script>
 <script src="~/js/subscribeEmail.js"></script>
+@*<script>
+    $(document).ready(function () {
+
+        LoadCartCout();
+
+    });
+</script>*@
+

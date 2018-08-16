@@ -37,5 +37,8 @@ namespace Aoo.ViewModels.PM
         public bool IsAllowComment { get; set; }
         [Required] 
         public decimal Price { get; set; }
+        public string MetaTitle { get; set; }
+        //public string MetaKey { get; set; }
+        public string MetaDescription { get; set; }
     }
 }
