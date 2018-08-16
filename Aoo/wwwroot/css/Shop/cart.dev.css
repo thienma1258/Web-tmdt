@@ -7,9 +7,11 @@ div {
     background-color: #70658A;
     margin-bottom: 30px;
     border-radius: 5px;
+    color:#fff;
 }
 .product {
-    width: 45%;
+  ;
+    width: 48%;
     float: left;
 }
 .quantity {
@@ -30,7 +32,8 @@ div {
     background-color: #ffffff;
     border-radius: 5px;
 }
-.title1, .title2, .title3 {
+
+.title1 {
     width: 45%;
     float: left;
 }
@@ -38,17 +41,18 @@ div {
     /*width: 15%;
     float: left;*/
     text-align: center;
-    float:right;
-    margin:-35px 45% 0 40%;
+    float: right;
+    margin: 0px 45% 0 40%;
+    color: #000000;
 }
 form {
     display: block;
     margin-top: 0em;
 }
-.price1, .price2, .price3 {
-    width: 72%;
+.price1 {
+    margin-right: 22%;
     float: right;
-    text-align: center;
+    color: #000000;
 }
 .total {
     padding: 0 60px;

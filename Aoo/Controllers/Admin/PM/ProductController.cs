@@ -67,6 +67,8 @@ namespace Aoo.Controllers.Admin.PM
                         MetaTitle=addProductViewModel.MetaTitle,
                         MetaDescription=addProductViewModel.MetaDescription,
                         Model = addProductViewModel.Model,
+                        MetaDescription=addProductViewModel.MetaDescription,
+                        MetaKey=addProductViewModel.MetaTitle,
                         DefaultImage = ImagePath,
                         Price = addProductViewModel.DefauftPrice,
                         isOnlineOnly = addProductViewModel.isOnlineOnly,

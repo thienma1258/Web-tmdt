@@ -57,7 +57,8 @@
                                     {
                                         <li data-thumb=@Url.Content(Model.DefaultImages)>
                                             <div class="thumb-image detail_images"> <img src=@Url.Content(Model.DefaultImages) data-imagezoom="true" class="img-responsive"></div>
-                                        </li>}
+                                        </li>
+                                    }
                                     else
                                     {
                                         foreach (var item in images)
@@ -96,11 +97,11 @@
                             </ul>
                             <br />
                             <label>Size giày:</label><br />
-                                                     <select id="currentSize">
+                                                     <select id="currentSize" class="form-control">
                                                          {
                                                          @{for (int i = 0; i < Model.ListSize.Count; i++)
                                                              {
-                                                                 <option value="@Model.ListIDDetails[i]">@Model.ListSize[i]</option>
+                                                                 <option class="form-control" value="@Model.ListIDDetails[i]">@Model.ListSize[i]</option>
 
                                                              }
                                                          }
@@ -132,8 +133,7 @@
                                         }
 
                                     }
-                                
-                                    <h3>More Color:</h3><br />
+                                    <h2>More Color:</h2><br />
                                     foreach (var item in l)
                                     {
                                         <div class="myColor">
@@ -186,29 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title asd">
-                                <a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    More Colors (2) <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true"></span><i class="glyphicon glyphicon-menu-up" aria-hidden="true"></i>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="accordion-image">
-                                <div class="ac-img">
-                                    <a href="#"><img src="~/images/product-1.jpg" alt="Groovy Apparel"></a>
-                                </div>
-                                <div class="ac-img">
-                                    <a href="#"><img src="~/images/product-2.jpg" alt="Groovy Apparel"></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-
+                    </div>      
                 </div>
             </div>
 
