@@ -118,14 +118,14 @@ namespace Aoo
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-           
+
 
             app.UseStaticFiles();
             app.UseMiddleware<IgnoreRouteMiddleware>();
             app.UseAuthentication();
             app.UseSession();
             RouteConfig.RegisterRoutes(ref app);
-          
+
         }
     }
 }

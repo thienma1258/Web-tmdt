@@ -1,4 +1,5 @@
 ﻿@model DAL.Model.PM.Brand;
+
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -8,7 +9,7 @@
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     int currentPage = ViewBag.page ;
     var listProduct = await IProductBLL.Get(6, currentPage, filter: p => p.BrandID == Model.ID);
-    int totalPage =  IProductBLL.Cout( filter: p => p.BrandID == Model.ID);
+    int totalPage = Aoo.Helpers.ViewHelpers.TotalPage (IProductBLL.Cout( filter: p => p.BrandID == Model.ID),6);
 }
 <style>
     .brand-content {

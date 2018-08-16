@@ -26,7 +26,7 @@ namespace Aoo.Controllers
                 page++;
             return page;
         }
-
+       
         protected string UploadImage(IFormFile file, ref ImageErrorModel imageErrorModel)
         {
             MemoryStream memoryStream = new MemoryStream();

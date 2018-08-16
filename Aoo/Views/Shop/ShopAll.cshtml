@@ -2,7 +2,6 @@
 @using Common.Enum.PM;
 
 @{
-    ViewData["Title"] = "MenShop";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
  
 }
@@ -23,3 +22,7 @@
 
 <!-- //Custom-JavaScript-File-Links -->
 <!-- Bootstrap-JavaScript -->
+<div class="" style="margin-bottom:10em">
+    @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.page, totalPage = ViewBag.totalpage })
+
+</div>

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Http;
 using Aoo.Helpers;
 namespace Aoo.Controllers.Shop
 {
-    [Route("[controller]/[action]")]
     public class ShopController : BaseController
     {
         private readonly IProductBLL ProductBLL;
@@ -28,20 +27,38 @@ namespace Aoo.Controllers.Shop
             ProductDetailsBLL = productDetailsBLL;
             HttpContextAccessor = httpContextAccessor;
         }
-        public async Task<IActionResult> MenSHop()
+        
+        [Route("san-pham/{typesex:regex(nam|nu)?}")]
+        public async Task<IActionResult> ShopAll(int page = 1,string typesex=null)
         {
-            IEnumerable<Product> listProducts = await ProductBLL.Get(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Male || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
+            IEnumerable<Product> listProducts=null;
+            if (typesex=="nam")
+            {
+                listProducts = await ProductBLL.Get(intNumber:numberPerPage,currentPage:page,filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Male || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
+                ViewBag.page = page;
+                ViewBag.Title = "Sản phẩm  dành cho nam";
+                ViewBag.totalpage =TotalPage( ProductBLL.Cout(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Male || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All));
+            }
+            else if (typesex == "nu")
+            {
+                listProducts = await ProductBLL.Get(intNumber: numberPerPage, currentPage: page, filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
+                ViewBag.page = page;
+                ViewBag.Title = "Sản phẩm  dành cho nữ";
+                ViewBag.totalpage = TotalPage(ProductBLL.Cout(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All));
+            }
+            else if (typesex == null)
+            {
+               listProducts=await ProductBLL.Get(intNumber: numberPerPage, currentPage: page, filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
+                ViewBag.page = page;
+                ViewBag.Title = "Danh sách Sản phẩm ";
 
+                ViewBag.totalpage =TotalPage( ProductBLL.Cout(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All));
+            }
+            else
+            {
+                NotFound();
+            }
             return View(listProducts);
-        }
-        public async Task<IActionResult> WomenShop()
-        {
-            IEnumerable<Product> listProducts = await ProductBLL.Get(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
-            return View(listProducts);
-        }
-        public async Task<IActionResult> ShopAll()
-        {
-            return View(await ProductBLL.Get());
         }
         public async Task<IActionResult> Detail(string id, string color=null)
         {
@@ -139,6 +156,7 @@ namespace Aoo.Controllers.Shop
         //    return View(temp);
 
         //}
+        [Route("san-pham/gio-hang")]
         public IActionResult CartItem()
         {
             return View();

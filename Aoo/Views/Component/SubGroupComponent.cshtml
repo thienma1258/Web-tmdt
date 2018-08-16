@@ -8,7 +8,7 @@
     int currentPage = ViewBag.page;
 
     var listProduct = await IProductBLL.Get(6, currentPage, filter: p => p.SubGroupID == Model.ID);
-    int totalPage = IProductBLL.Cout(filter: p => p.SubGroupID == Model.ID);
+    int totalPage = Aoo.Helpers.ViewHelpers.TotalPage(IProductBLL.Cout(filter: p => p.SubGroupID == Model.ID),6);
 }
 <style>
     .brand-content {

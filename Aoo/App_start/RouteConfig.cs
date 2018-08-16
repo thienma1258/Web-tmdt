@@ -16,12 +16,29 @@ namespace Aoo.App_start
 
            
             {
-            routes.MapRoute(
+                routes.MapRoute(
+              name: "Shop",
+            template: "san-pham/{action}",
+            defaults: new { controller = "Shop", action = "ShopAll" }
+
+
+                    );
+                routes.MapRoute(
             name: "default_route",
             template: "{controller}/{action}/{id?}",
-            defaults: new { controller = "Home", action = "Index" });
-                    
-            });
+            defaults: new { controller = "Home", action = "Index" }
+            
+            
+            
+            );
+                
+           
+            }
+            
+            
+            
+            );
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
