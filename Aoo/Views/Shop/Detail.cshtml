@@ -199,7 +199,7 @@
 @if (Model.IsAllowFacebookComment)
 {
     <div class="facebook-comment">
-        <div class="fb-comments" data-width="100%" data-href="@(string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path)) " data-numposts="5"></div>
+        <div class="fb-comments" data-width="100%" data-href="@(string.Format("{0}://{1}/{2}", Context.Request.Scheme, Context.Request.Host, productspecification.SubGroup.UrlFriendly+"/"+productspecification.UrlFriendly)) " data-numposts="5"></div>
         Comment
     </div>
 }

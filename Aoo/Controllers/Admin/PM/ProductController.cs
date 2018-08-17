@@ -42,7 +42,8 @@ namespace Aoo.Controllers.Admin.PM
                 ViewBag.totalPage = TotalPage(ProductBLL.Cout(filter: p => p.Model.Contains(contain)));
                 return View(ListResult);
             }
-            return View(await ProductBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate)));
+            var listProduct = await ProductBLL.Get(numberPerPage, page, orderBy: p => p.OrderByDescending(x => x.EditedDate));
+            return View(listProduct);
 
 
         }

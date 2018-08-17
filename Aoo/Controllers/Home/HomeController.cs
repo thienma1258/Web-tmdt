@@ -57,6 +57,22 @@ namespace Aoo.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+
+        [HttpGet("tim-kiem")]
+        public async Task<IActionResult> Search(int page=1,string Search = null)
+        {
+            IEnumerable<Product> listProduct=null;
+            if (Search != null)
+            {
+                listProduct = await productBLL.Get(ViewHelpers.NumberPerPageFront, page, filter: p => p.Model.Contains(Search), orderBy: p => p.OrderByDescending(product => product.EditedDate));
+                ViewBag.page = page;
+                int totalCount = productBLL.Cout(p => p.Model.Contains(Search));
+                ViewBag.totalpage =ViewHelpers.TotalPage(totalCount,ViewHelpers.NumberPerPageFront);
+            }
+            return View("~/Views/Shop/ShopAll.cshtml", listProduct);
+
+        }
+
         [HttpGet("/{urlType:regex(^(((?!images).)|((?!\\s)))+$)}")]
         public async Task<IActionResult> Seo(string urlType = null, int page = 1)
         {

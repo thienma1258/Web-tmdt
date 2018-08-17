@@ -31,7 +31,6 @@ namespace Aoo.Controllers.Payment
         public IActionResult ExecutePayment(string paymentId, string token, string PayerID)
         {
             var payment = _PaypalServices.ExecutePayment(paymentId, PayerID);
-
             // Hint: You can save the transaction details to your database using payment/buyer info
 
             return Ok();

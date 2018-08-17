@@ -46,5 +46,6 @@ namespace Aoo.Controllers
             }
             return Json(new { success = "false",message="Định dạng email không chính xác" });
         }
+
     }
 }

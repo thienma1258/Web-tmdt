@@ -21,7 +21,8 @@ namespace DAL.Repository.PM.Implement
             query = query.Include(p => p.Brand).Include(p => p.SubGroup).Include(p => p.Category);
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                var listProduct= orderBy(query).ToList();
+                return listProduct;
             }
             else
             {

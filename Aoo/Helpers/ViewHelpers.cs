@@ -14,5 +14,8 @@ namespace Aoo.Helpers
                 page++;
             return page;
         }
+        public static int NumberPerPageFront { get; set; } = 9;
+
+
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.EmailServices;
 using Services.Implement;
+using Services.SMSServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Aoo.App_start
             services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddSingleton<IPaypalServices, PaypalServices>();
+            services.AddSingleton<ISMSServices, SMSServices>();
 
         }
     }

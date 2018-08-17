@@ -15,9 +15,20 @@ namespace DAL.Repository
         }
         protected override IQueryable<TTrackingObject> filterObject(Expression<Func<TTrackingObject, bool>> filter = null, int currentPage = -1, int number = -1)
         {
-            IQueryable<TTrackingObject> Query= base.filterObject(filter, currentPage, number);
-            Query = Query.Where(p => p.isDeleted == false);
-            return Query;
+            IQueryable<TTrackingObject> query = dbSet;
+            query = query.Where(p => p.isDeleted == false);
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (number != -1)
+            {
+                if (currentPage != -1)
+                    query = query.Skip(number * (currentPage - 1));
+                query = query.Take(number);
+            }
+            return query;
         }
         public override IEnumerable<TTrackingObject> Get(Expression<Func<TTrackingObject, bool>> filter = null, Func<IQueryable<TTrackingObject>, IOrderedQueryable<TTrackingObject>> orderBy = null, int currentPage = -1, int number = -1)
         {

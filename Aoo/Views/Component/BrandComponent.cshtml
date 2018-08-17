@@ -8,8 +8,8 @@
 @{ 
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     int currentPage = ViewBag.page ;
-    var listProduct = await IProductBLL.Get(6, currentPage, filter: p => p.BrandID == Model.ID);
-    int totalPage = Aoo.Helpers.ViewHelpers.TotalPage (IProductBLL.Cout( filter: p => p.BrandID == Model.ID),6);
+    var listProduct = await IProductBLL.Get(Aoo.Helpers.ViewHelpers.NumberPerPageFront, currentPage, filter: p => p.BrandID == Model.ID);
+    int totalPage = Aoo.Helpers.ViewHelpers.TotalPage (IProductBLL.Cout( filter: p => p.BrandID == Model.ID), Aoo.Helpers.ViewHelpers.NumberPerPageFront);
 }
 <style>
     .brand-content {
