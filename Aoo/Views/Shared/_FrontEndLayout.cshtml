@@ -249,12 +249,33 @@
                             </form>
                         </li>
                         <li class="wthreecartaits wthreecartaits2 cart cart box_1">
-                        <form action="#" method="post" class="last">
-                            <input type="hidden" name="cmd" value="_cart" />
-                            <input type="hidden" name="display" value="1" />
-                            <button class="w3view-cart" onclick="window.location.href='/san-pham/gio-hang'" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                        </form>
-                    </li>
+                            <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="display" value="1" />
+                                <style>
+                                    .cart-num {
+                                        position: absolute;
+                                        background: #f36e36;
+                                        color: #fff;
+                                        top: -4px;
+                                        font-weight: 400;
+                                        right: -4px;
+                                        text-align: center;
+                                        border: 3px solid #f36e36;
+                                        font-size: 13px;
+                                        min-width: 14px;
+                                        line-height: 14px;
+                                        border-radius: 50%;
+                                        margin-top: 5px;
+                                        display:none;
+                                    }
+                                </style>
+                                <div id="count">
+
+                                </div>
+                                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                            </form>
+                        </li>
 
                     </ul>
 
@@ -511,11 +532,18 @@
 <!-- Bootstrap-JavaScript -->
 <script src="~/js/bootstrap.js"></script>
 <script src="~/js/subscribeEmail.js"></script>
-@*<script>
-    $(document).ready(function () {
+<script>
+    $(document).ready(function CartCout() {
+        var count = 0;
+        var html = '';
+        $("#count").html('');
+        var ListItems = JSON.parse(getCookie("ListCartItem"));
+        for (var i = 0; i < ListItems.length; i++) {
+            count += ListItems[i].Quantity;
+        }
 
-        LoadCartCout();
-
+        html = '<span class="cart-num" id="topActionCartNumber" style="display: block;" data-spm-anchor-id="a2o4n.cart.dcart.i0.4f25705bGOvobf">' + count + '</span>';
+        $("#count").append(html);
     });
-</script>*@
+</script>
 
