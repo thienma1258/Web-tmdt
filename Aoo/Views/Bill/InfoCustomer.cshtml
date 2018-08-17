@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "InfoCustomer";
+    Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
+}
+<link href="~/css/Bill/billdev.css" rel="stylesheet" />
+<h2>THÔNG TIN KHÁCH MUA HÀNG</h2>
+
+<div class="containerbill">
+    <div class="container-1">
+        <div class="namephone">
+            <div class="dividename">
+                <div>
+                    <label>Tên</label><br />
+                    <input type="text" placeholder="Họ tên" />
+                </div>
+                <div>
+                    <label>Số điện thoại</label><br />
+                    <input type="text" placeholder="Nhập số điện thoại" />
+                </div>
+                <button>LƯU</button><br />
+            </div>
+
+            <div class="dividetransport">
+                <div>
+                    <label>Địa chỉ nhận hàng</label><br />
+                    <input type="text" placeholder="Nhập địa chỉ nhận hàng" />
+                </div>
+                <div style="width:50%">
+                    <div>
+                        <label>Tỉnh / Thành phố</label>
+                        <select class="form-control">
+                            <option>Nhập Tỉnh / Thành phố</option>
+                        </select>
+                        <br />
+                    </div>
+                    <div>
+                        <label>Quận, Huyện</label>
+                        <select class="form-control">
+                            <option>Nhập Quận, Huyện</option>
+                        </select>
+                        <br />
+                    </div>
+                    <div>
+                        <label>Địa chỉ</label><br />
+                            <input style="width:185%;" type="text" placeholder="Địa chỉ" />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="container-2">
+        <div class="pay">
+            <button>THANH TOÁN</button><br />
+            <label>Thông tin đơn hàng</label><br />
+            <label>Phí giao hàng</label>
+        </div>
+        <label>Thành Tiền :</label>
+    </div>
+</div>

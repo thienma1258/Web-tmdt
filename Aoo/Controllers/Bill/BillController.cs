@@ -17,5 +17,9 @@ namespace Aoo.Controllers.Bill
         {
             return View();
         }
+        public IActionResult InfoCustomer()
+        {
+            return View();
+        }
     }
 }
