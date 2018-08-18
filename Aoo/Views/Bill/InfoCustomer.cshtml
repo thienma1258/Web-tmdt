@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject BLL.BLL.PM.IProvinceBLL ProvinceBLL
+@{
     ViewData["Title"] = "InfoCustomer";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listprovince = (await ProvinceBLL.Get()).ToList();
@@ -32,13 +33,6 @@
                                 {
                                     <option class="form-control"  value="@i">@listprovince[i].Name</option>
 
-                                }
-                            }
-                            @{
-                                foreach (var item in listProvine)
-                                {
-
-                                    <option value="@item.ProvinceID">@item.Name</option>
                                 }
                             }
                         </select>
@@ -86,4 +80,25 @@
         GiveInfo();
         LoadItemBill();
     });
+</script>
+<script>
+    var listProvince;
+    (function () {
+        $.get('/api/Common/District', function (data) {
+            listProvince = data;
+        }
+
+        )
+        })();
+        function myFunction(event) 
+            {
+            var index = event.target.value;
+            var listDistrict = listProvince[index].districts;
+            $('#district').html('');
+            var html = '';
+            for (i in listDistrict) {
+                html += "<option>" + listDistrict[i].name + "</option>";
+            }
+            $('#district').html(html);
+        }
 </script>

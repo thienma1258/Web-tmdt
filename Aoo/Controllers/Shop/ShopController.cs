@@ -48,7 +48,7 @@ namespace Aoo.Controllers.Shop
             }
             else if (typesex == null)
             {
-               listProducts=await ProductBLL.Get(intNumber: numberPerPage, currentPage: page, filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
+               listProducts=await ProductBLL.Get(intNumber: numberPerPage, currentPage: page);
                 ViewBag.page = page;
                 ViewBag.Title = "Danh sách Sản phẩm ";
 
