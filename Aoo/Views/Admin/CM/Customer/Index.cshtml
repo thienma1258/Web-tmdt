@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<DAL.Model.CM.CM_Customer>
+
+@{
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+
+<form method="get">
+    <input name="Search" type="search" class="form-control" placeholder="Search by Customer Name,Customer Phone" />
+    
+</form>
+<table class="tablebrand">
+    <thead class="thead-dark">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeCustomerEnum)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.DefaultImage)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeCustomerEnum.ToString())
+                </td>
+                <td>
+                    <img src=@Url.Content(item.DefaultImage) />
+                </td>
+
+            </tr>
+        }
+        <tr></tr>
+    </tbody>
+</table>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })

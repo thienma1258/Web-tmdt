@@ -9,6 +9,6 @@ namespace Common.Enum.SM
         Pending=0,
         Success=1,
         False=-1,
-
+        Uncofirm=-2,
     }
 }

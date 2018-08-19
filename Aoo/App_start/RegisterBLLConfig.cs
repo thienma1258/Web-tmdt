@@ -1,8 +1,12 @@
-﻿using BLL;
+using BLL;
+using BLL.BLL.CM;
+using BLL.BLL.CM.Implement;
 using BLL.BLL.Log;
 using BLL.BLL.Log.Implement;
 using BLL.BLL.PM;
 using BLL.BLL.PM.Implement;
+using BLL.BLL.SM;
+using BLL.BLL.SM.Implement;
 using BLL.BLL.System;
 using BLL.BLL.System.Implement;
 using DAL.Model.PM;
@@ -38,6 +42,8 @@ namespace Aoo.App_start
             services.AddTransient<ITransportTypeBLL, TransportTypeBLL>();
             services.AddTransient<ITransportPriceBLL, TransportPriceBLL>();
             services.AddTransient<ISubscribeEmailBLL, SubscribeEmailBLL>();
+            services.AddTransient<ICustomerBLL, CustomerBLL>();
+            services.AddTransient<ISaleOrderBLL, SaleOrderBLL>();
         }
     }
 }

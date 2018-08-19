@@ -2,6 +2,9 @@
     Layout = null;
     string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Bán giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
     string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
+    string Description = ViewBag.Description == null ? "Shop giày buôn mê thuật" : ViewBag.Description;
+    string Image = ViewBag.Image == null ? Url.Content("~/wwwroot/defaultImage.jpg") : Url.Content(ViewBag.Image);
+
 }
 
 <!DOCTYPE html>
@@ -17,9 +20,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta property="fb:app_id" content="1425936334136017" />
     <meta property="og:url" content="URL" />
-    <meta property="og:title" content="TITLE" />
-    <meta property="og:description" content="DESC" />
-    <meta property="og:image" content="IMG" />
+    <meta property="og:title" content="@Title" />
+    <meta property="og:description" content="@Description" />
+    <meta property="og:image" content="@Image" />
     <meta name="keywords" content="Groovy Apparel a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
     @*<script src="https://pagead2.googlesyndication.com/pagead/js/r20180723/r20180604/osd.js"></script>
         <script src="https://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-7733626117287363.js"></script>

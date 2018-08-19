@@ -13,6 +13,7 @@ namespace Aoo.Controllers.Admin.System
         {
             return View();
         }
+
         [AllowAnonymous]
         public async Task<IActionResult> Denided()
         {

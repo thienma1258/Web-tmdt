@@ -37,11 +37,15 @@ namespace Aoo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+    //        services.AddDbContext<ShopContext>(
+    //);
+
             services.AddDbContext<ShopContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                 sqlServerOptions => sqlServerOptions.CommandTimeout(60))
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
+                 , sqlServerOptions => sqlServerOptions.CommandTimeout(60))
                 );
-             
+
             services.AddIdentity<System_User, IdentityRole>()
                 .AddEntityFrameworkStores<ShopContext>()
                 .AddDefaultTokenProviders();
@@ -119,9 +123,11 @@ namespace Aoo
                 app.UseExceptionHandler("/Home/Error");
             }
 
-
+            app.UseBrowserLink();
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
             app.UseStaticFiles();
-            app.UseMiddleware<IgnoreRouteMiddleware>();
+         //   app.UseMiddleware<IgnoreRouteMiddleware>();
             app.UseAuthentication();
             app.UseSession();
             RouteConfig.RegisterRoutes(ref app);

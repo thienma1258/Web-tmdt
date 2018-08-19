@@ -7,6 +7,10 @@ namespace Services.ImageServices
 {
    public class ImageErrorModel
     {
+        public override string ToString()
+        {
+            return this.exception.Message + "Khong them hinh thanh cong do ";
+        }
         public Exception exception;
         public string message;
         private Common.Enum.Log.ImageUploadEnum imageUploadEnum;

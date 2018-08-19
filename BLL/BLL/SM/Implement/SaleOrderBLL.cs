@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
@@ -95,7 +97,6 @@ namespace BLL.BLL.SM.Implement
         {
             try
             {
-                saleOrder.EditedUser = UpdatedUser;
                 this.unitOfWork.SaleOrderRepository.Update(saleOrder);
                 await this.unitOfWork.SaveChangeAsync();
                 AddLogSaleOrder(saleOrder);
@@ -106,6 +107,44 @@ namespace BLL.BLL.SM.Implement
                 AddError(objEx);
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<SaleOrder>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null)
+        {
+            try
+            {
+                return unitOfWork.SaleOrderRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+
+            }
+            catch (Exception objEx)
+            {
+                await AddError(objEx);
+                return null;
+            }
+        }
+
+        public int Cout(Expression<Func<SaleOrder, bool>> filter = null)
+        {
+            return this.unitOfWork.SaleOrderRepository.Cout(filter);
+
+        }
+
+        public async Task<bool> ConfirmSaleOrder(SaleOrder objSaleOrder, string ReviewUser)
+        {
+            objSaleOrder.ReviewBy = ReviewUser;
+            objSaleOrder.ReviewDate = DateTime.Now;
+            objSaleOrder.State = Common.Enum.SM.StateConfirmEnum.Pending;
+
+            return await Update(objSaleOrder);
+        }
+        public async Task<bool> SuccessOrder(SaleOrder objSaleOrder, string ReviewUser)
+        {
+           
+            objSaleOrder.ReviewBy = ReviewUser;
+            objSaleOrder.ReviewDate = DateTime.Now;
+            objSaleOrder.State = Common.Enum.SM.StateConfirmEnum.Success;
+
+            return await Update(objSaleOrder);
         }
     }
 }

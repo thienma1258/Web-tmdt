@@ -1,5 +1,6 @@
 ﻿using DAL.Model;
 using DAL.Repository;
+using DAL.Repository.CM;
 using DAL.Repository.Log;
 using DAL.Repository.PM;
 using DAL.Repository.SM;
@@ -14,8 +15,13 @@ namespace DAL
     public interface IUnitOfWork : IDisposable
     {
         IUserRepository UserRepository { get;  }
-        #region Log
-        IErrorLogsRepository ErrorLogsRepository { get; }
+        #region CM
+
+        ICM_Customer_Repository CM_Customer_Repository { get; }
+        
+                #endregion
+                #region Log
+                IErrorLogsRepository ErrorLogsRepository { get; }
         ISaleOrderLogsRepository SaleOrderLogsRepository { get; }
         #endregion
         #region PM

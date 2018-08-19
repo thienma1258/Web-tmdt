@@ -37,6 +37,7 @@ namespace Aoo.Controllers.Shop
                 listProducts = await ProductBLL.Get(intNumber:numberPerPage,currentPage:page,filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Male || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All);
                 ViewBag.page = page;
                 ViewBag.Title = "Sản phẩm  dành cho nam";
+
                 ViewBag.totalpage =TotalPage( ProductBLL.Cout(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Male || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All));
             }
             else if (typesex == "nu")
@@ -48,9 +49,11 @@ namespace Aoo.Controllers.Shop
             }
             else if (typesex == null)
             {
+             
                listProducts=await ProductBLL.Get(intNumber: numberPerPage, currentPage: page);
                 ViewBag.page = page;
                 ViewBag.Title = "Danh sách Sản phẩm ";
+
 
                 ViewBag.totalpage =TotalPage( ProductBLL.Cout(filter: p => p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.Female || p.SubGroup.MainGroup.TypeSex == Common.Enum.PM.TypeSexEnum.All));
             }

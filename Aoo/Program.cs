@@ -22,6 +22,12 @@ namespace Aoo
                .UseDefaultServiceProvider(options =>
             options.ValidateScopes = false)
                 .UseStartup<Startup>()
+               .CaptureStartupErrors(true)
+            .UseSetting("detailedErrors", "true")
+
+            //.UseKestrel()
+            // .UseContentRoot(Directory.GetCurrentDirectory() + "\\wwwroot\\")
+            .UseIISIntegration()
                 .Build();
     }
 }

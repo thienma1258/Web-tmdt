@@ -67,7 +67,8 @@ namespace DAL.DataContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(connectString);
+           //optionsBuilder.UseSqlServer(connectString);
+           // this.Database.SetCommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

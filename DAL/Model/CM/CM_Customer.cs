@@ -11,14 +11,16 @@ namespace DAL.Model.CM
     {
         
         public CustomerStateEnum CustomerStateEnum { get; set; } = CustomerStateEnum.confirm;
+        [Display(Name ="Tên khách hàng")]
         public string CustomerName { get; set; }
+        [Display(Name = "Số điện thoại KH")]
         public string CustomerPhone { get; set; }
      
         public TypeCustomerEnum TypeCustomerEnum { get; set; } = TypeCustomerEnum.website;
         public int Prestige { get; set; } = 0;
         public string CMNN { get; set; }
         public string ConfirmCode { get; set; }
-        
+        public string DefaultImage { get; set; }
     
     }
 }

@@ -92,6 +92,8 @@ namespace Aoo.Controllers
                 ViewBag.Title = objBrand.MetaTitle;
                 ViewBag.Name = objBrand.Name;
                 ViewBag.Keyword = objBrand.MetaDescription;
+                ViewBag.Description = objBrand.MetaDescription;
+                ViewBag.Image = objBrand.DefaultImage;
                 return PartialView("~/Views/Component/BrandComponent.cshtml", objBrand);
             }
             #endregion
@@ -102,6 +104,9 @@ namespace Aoo.Controllers
                 ViewBag.Title = objSubGroup.MetaTitle;
                 ViewBag.Name = objSubGroup.Name;
                 ViewBag.Keyword = objSubGroup.MetaDescription;
+                ViewBag.Description = objSubGroup.MetaDescription;
+                ViewBag.Image = objSubGroup.DefaultImage;
+
                 return PartialView("~/Views/Component/SubGroupComponent.cshtml", objSubGroup);
 
             }
@@ -113,6 +118,9 @@ namespace Aoo.Controllers
                 ViewBag.Title = objCategory.MetaTitle;
                 ViewBag.Name = objCategory.Name;
                 ViewBag.Keyword = objCategory.MetaDescription;
+                ViewBag.Description = objCategory.MetaDescription;
+                ViewBag.Image = objCategory.DefaultImage;
+
                 return PartialView("~/Views/Component/CategoryComponent.cshtml", objCategory);
 
             }
@@ -198,6 +206,9 @@ namespace Aoo.Controllers
                 ViewBag.Name = pro.Model;
 
             ViewBag.Keyword = pro.MetaDescription;
+            ViewBag.Description = pro.MetaDescription;
+            ViewBag.Image = pro.DefaultImage;
+
             return View("~/Views/Shop/Detail.cshtml", temp);
         }
         //[HttpGet("/{urlSubgroup}/{name}")]

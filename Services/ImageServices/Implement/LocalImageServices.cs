@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using Services.ImageServices;
-using System.Drawing.Imaging;
 using Microsoft.AspNetCore.Hosting;
+using System.Drawing;
 
 namespace Services.Implement
 {
     public class LocalImageServices: ImageService, IImageServices
      {
-        public System.Drawing.Image resize(int Width, int Height, Image current)
+        public Image resize(int Width, int Height, Image current)
         {
             try
             {
@@ -35,9 +33,9 @@ namespace Services.Implement
 
                 using (var graphics = Graphics.FromImage(canvas))
                 {
-                    graphics.CompositingQuality = CompositingQuality.HighQuality;
-                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    graphics.CompositingMode = CompositingMode.SourceCopy;
+                    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                     graphics.DrawImage(current, 0, 0, width, height);
                 }
                 return canvas;
@@ -56,34 +54,39 @@ namespace Services.Implement
         public LocalImageServices(IHostingEnvironment hostingEnvironment)
         {
             _env = hostingEnvironment;
-            defaultLocationImage = System.IO.Path.Combine(_env.WebRootPath, subRoot);
+            defaultLocationImage = System.IO.Path.Combine(Directory.GetCurrentDirectory()+"\\wwwroot\\", subRoot);
         }
         public string defaultLocationImage;
         public override string UploadImage(MemoryStream memoryStream, string imageName,out ImageErrorModel errorModel)
         {
             string imagePath = "";
+            Logging.Logging logging = new Logging.Logging();
+
             errorModel = new ImageErrorModel();
             try
             {
-                Image image=Image.FromStream(memoryStream);
-                if (IsValidImage(memoryStream, out image))
+                Image image=null;
+                using (image = Image.FromStream(memoryStream))
                 {
-                    if (image.Width < defaultWidth || image.Height < defaultHeight)
-                    {
-                        image = resize(defaultWidth, defaultHeight, image);
-                    }
+                        if (image.Width < defaultWidth || image.Height < defaultHeight)
+                        {
+                            image = resize(defaultWidth, defaultHeight, image);
+                        }
+                        imagePath = defaultLocationImage + "\\" + imageName;
+                        image.Save(imagePath);
+                        errorModel.isSuccess = true;
+                        return "~/" + subRoot + "/" + imageName;
+                    
 
                 }
-                imagePath = defaultLocationImage + "\\" + imageName;
-                image.Save(imagePath);
-                errorModel.isSuccess = true;
-                return "~/"+subRoot+"/"+ imageName;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 errorModel.exception = e;
+                errorModel.isSuccess = false;
                 errorModel.message = "Không thể upload hình thành công";
                 errorModel.ImageUploadEnum = Common.Enum.Log.ImageUploadEnum.Local;
+                logging.ErrorLogs(errorModel.ToString());
                 return "false";
             }
 

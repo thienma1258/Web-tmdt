@@ -15,6 +15,10 @@ namespace Aoo.Controllers
         public string BASE_ADMIN_URL = "~/Views/Admin/";
         public readonly IImageServices ImageServices;
         public int numberPerPage =6;
+        public BaseController()
+        {
+
+        }
         public BaseController( IImageServices imageServices)
         {
             this.ImageServices = imageServices;
