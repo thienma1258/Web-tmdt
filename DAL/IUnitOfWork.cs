@@ -46,6 +46,8 @@ namespace DAL
         #endregion
         #region SM
         ISaleOrderRepository SaleOrderRepository { get; }
+        ISaleOrderDetailsRepository SaleOrderDetailsRepository { get; }
+
         #endregion
         #region System
         ISystem_Policy_Repository System_Policy_Repository { get; }
