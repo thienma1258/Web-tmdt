@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using DAL;
 using DAL.Model.Log;
 using DAL.Model.SM;
-
+using DAL.Model.CM;
 namespace BLL.BLL.SM.Implement
 {
     public class SaleOrderBLL : GenericBLL,ISaleOrderBLL
     {
+        private string strMessage = string.Empty;
+        public string Message { get { return strMessage; }  }
         public SaleOrderBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
@@ -104,7 +106,7 @@ namespace BLL.BLL.SM.Implement
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+                await AddError(objEx);
                 return false;
             }
         }
@@ -152,9 +154,20 @@ namespace BLL.BLL.SM.Implement
             throw new NotImplementedException();
         }
 
-        public Task<bool> CreateBill(SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser)
+        public async Task<bool> CreateBill(CM_Customer objCustomer,SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.unitOfWork.SaleOrderRepository.Update(objSaleOrder);
+                await this.unitOfWork.SaveChangeAsync();
+                AddLogSaleOrder(objSaleOrder);
+                return true;
+            }
+            catch (Exception objEx)
+            {
+                await AddError(objEx);
+                return false;
+            }
         }
     }
 }

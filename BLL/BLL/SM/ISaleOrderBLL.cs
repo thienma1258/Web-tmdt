@@ -1,4 +1,5 @@
-﻿using DAL.Model.SM;
+﻿using DAL.Model.CM;
+using DAL.Model.SM;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,9 @@ namespace BLL.BLL.SM
 {
     public interface ISaleOrderBLL:IGenericBLL<SaleOrder,string>
     {
+         string Message { get; }
         Task<bool> ConfirmSaleOrder(SaleOrder objSaleOrder, string ReviewUser);
         Task<bool> SuccessOrder(SaleOrder objSaleOrder, string ReviewUser);
-        Task<bool> CreateBill(SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser);
+        Task<bool> CreateBill(CM_Customer objCustomer,SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser);
     }
 }

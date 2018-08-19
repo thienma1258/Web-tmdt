@@ -29,6 +29,9 @@ namespace DAL.Model.SM
         [Display(Name = "Đã trả tiền chưa")]
         public bool IsPay { get; set; } = false;
         public int VAT { get; set; }
+        public string ReceiveAddress { get; set; }
+        public string DistrictID { get; set; }
+
         [Display(Name = "Người xác nhận")]
         public string  ReviewBy { get; set; }
         public DateTime ReviewDate { get; set; } 

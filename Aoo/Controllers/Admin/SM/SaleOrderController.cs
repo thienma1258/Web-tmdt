@@ -41,7 +41,6 @@ namespace Aoo.Controllers.Admin.SM
             }
             return View(listSaleOrder);
         }
-        [Authorize]
         public async Task<JsonResult> ConfirmSaleOrder(string strSaleOrderID)
         {
             SaleOrder objSaleOrder = await this.ISaleOrderBLL.Find(strSaleOrderID);
@@ -54,5 +53,6 @@ namespace Aoo.Controllers.Admin.SM
                 return Json(new { success = true, message = "Xac nhan don hang thang cong" });
                 return Json(new { success = false, message = "Xac nhan don hang khong thanh cong vui long thu lai sau" });
         }
+        
     }
 }

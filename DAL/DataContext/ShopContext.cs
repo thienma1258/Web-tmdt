@@ -67,7 +67,7 @@ namespace DAL.DataContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-           //optionsBuilder.UseSqlServer(connectString);
+           optionsBuilder.UseSqlServer(connectString);
            // this.Database.SetCommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds);
         }
 
@@ -113,6 +113,7 @@ namespace DAL.DataContext
             #endregion
             #region SM
             builder.Entity<SaleOrder>().ToTable("SaleOrder").HasOne(p=>p.Voucher).WithMany(p=>p.SaleOrders).HasForeignKey(p=>p.VoucherID).HasConstraintName("FK_Voucher_SaleOrders");
+
             builder.Entity<SaleOrderDetail>().ToTable("SaleOrderDetail").HasOne(p=>p.Discout).WithMany(p=>p.SaleOrderDetails).HasForeignKey(p=>p.DiscoutID).HasConstraintName("FK_Discout_SaleOrderDetails");
             #endregion
             #region Log

@@ -18,9 +18,10 @@ namespace DAL.Model.CM
      
         public TypeCustomerEnum TypeCustomerEnum { get; set; } = TypeCustomerEnum.website;
         public int Prestige { get; set; } = 0;
-        public string CMNN { get; set; }
+        public string CMND { get; set; }
         public string ConfirmCode { get; set; }
         public string DefaultImage { get; set; }
+        public string Address { get; set; }
     
     }
 }

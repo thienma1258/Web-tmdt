@@ -9,7 +9,8 @@ namespace Common.Enum.SM
         website=0,
         facebook=1,
         twiter=2,
-        google=3
+        google=3,
+        KVL=-1
 
     }
     public enum CustomerStateEnum
