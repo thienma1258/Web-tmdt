@@ -14,7 +14,7 @@ using System;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20180819064152_gen-database")]
+    [Migration("20180819084411_gen-database")]
     partial class gendatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
