@@ -146,5 +146,15 @@ namespace BLL.BLL.SM.Implement
 
             return await Update(objSaleOrder);
         }
+
+        public Task<bool> CreateSaleOrder(SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> CreateBill(SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
