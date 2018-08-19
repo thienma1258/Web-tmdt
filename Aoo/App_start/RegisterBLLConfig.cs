@@ -32,7 +32,6 @@ namespace Aoo.App_start
             services.AddTransient<ISubGroupBLL, SubGroupBLL>();
             services.AddTransient<IProductBLL, ProductBLL>();
             services.AddTransient<IUserBLL, UserBLL>();
-
             services.AddTransient<IErrorLogsBLL, ErrorLogsBLL>();
             services.AddTransient<IProductDetailsBLL, ProductDetailsBLL>();
             services.AddTransient<ISystem_User_PermissionBLL, System_User_Permission_BLL>();

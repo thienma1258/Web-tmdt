@@ -1,11 +1,16 @@
 ﻿@inject BLL.BLL.PM.IProvinceBLL ProvinceBLL
+@inject BLL.BLL.PM.ITransportTypeBLL TransportTypeBLL
+@inject BLL.BLL.PM.ITransportPriceBLL TransportPriceBLL
 @{
     ViewData["Title"] = "InfoCustomer";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
     var listprovince = (await ProvinceBLL.Get()).ToList();
+    var listtransporttype = (await TransportTypeBLL.Get()).ToList();
+    var listtransportprice = (await TransportPriceBLL.Get()).ToList();
 }
 <link href="~/css/Bill/billdev.css" rel="stylesheet" />
 <h2>THÔNG TIN KHÁCH MUA HÀNG</h2>
+<script src="~/js/Cookie.js" type="text/javascript"></script>
 <script src="~/js/BillPayment.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <div class="containerbill">
@@ -29,19 +34,32 @@
                         <label>Tỉnh / Thành phố</label>
                         <select id="province" class="form-control" onchange="myFunction(event)">
                             <option>Nhập tỉnh thành</option>
-                            @{for (int i=0;i <listprovince.Count();i++)
-                                {
+                           @{for (int i = 0; i < listprovince.Count(); i++)
+                               {
                                     <option class="form-control"  value="@i">@listprovince[i].Name</option>
 
-                                }
-                            }
+                                   }
+                               }
                         </select>
                         <br />
                     </div>
                     <div>
                         <label>Quận, Huyện</label>
-                        <select id="district" class="form-control">
+                        <select onchange="GetFee()" id="district" class="form-control">
                             <option>Nhập Quận, Huyện</option>
+                        </select>
+                        <br />
+                    </div>
+                    <div>
+                        <label>Chọn nhà vận chuyển</label>
+                        <select onchange="GetFee()" id="transport" class="form-control">
+                            <option>Chọn nhà vận chuyển</option>
+                            @{for (int i = 0; i < listtransporttype.Count(); i++)
+                                {
+                                    <option  class="form-control" value="@listtransporttype[i].ID">@listtransporttype[i].Name</option>
+
+                                }
+                            }
                         </select>
                         <br />
                     </div>
@@ -60,19 +78,29 @@
             <button>THANH TOÁN</button><br />
             <label>Thông tin đơn hàng</label><br />
             <div id="payarea"></div>
-            <label>Phí giao hàng</label>
+            <div id="fee"></div>
         </div>
-        <label>Thành Tiền :</label>
+        <div id="thanhtien"></div>
+        <div class="payfee">
+            <button id="home">THANH TOÁN TẠI NHÀ</button>
+            <button id="paypal"></button>
+            <button id="local">THANH TOÁN CỔNG NỘI ĐỊA</button>
+        </div>
     </div>
 </div>
 <style>
-    #CartTable img {
+    #CartTable1 img {
         max-width: initial;
         width: 50px !important;
         height: 30px !important;
     }
+    #CartTable1 tr:nth-child(1) {
+        background-color: #70658a;
+        color: #ffffff;
+        font-size: 16px;
+    }
 </style>
-<table class="table" id="CartTable">
+<table class="table" id="CartTable1">
 
 </table>
 <script>
@@ -82,13 +110,21 @@
     });
 </script>
 <script>
+    function getTotalPrice() {
+        var ListItems = JSON.parse(getCookie("ListCartItem"));
+        var TotalPrice = 0;
+        for (var i = 0; i < ListItems.length; i++) {
+            TotalPrice += ListItems[i].Price * ListItems[i].Quantity;
+        }
+        return TotalPrice;
+    }
     var listProvince;
+    var listtransportType;
+    var listtransportPrice;
     (function () {
         $.get('/api/Common/District', function (data) {
             listProvince = data;
-        }
-
-        )
+        })
         })();
         function myFunction(event) 
             {
@@ -97,8 +133,47 @@
             $('#district').html('');
             var html = '';
             for (i in listDistrict) {
-                html += "<option>" + listDistrict[i].name + "</option>";
+                html += '<option class="form-control" value="' + listDistrict[i].districtID + '">' + listDistrict[i].name + '</option>';
             }
-            $('#district').html(html);
+            $('#district').append(html);
+    };
+    (function () {
+        $.get('/api/Common/Price', function (data) { 
+            listtransportPrice = data;
+            console.log(listtransportPrice);
+        })
+        $.get('/api/Common/Type', function (data) {
+            listtransportType = data;
+            console.log(listtransportType);
+        })
+        })();
+    function GetFee() {
+        getTotalPrice();
+        $('#fee').html('');
+        $('#thanhtien').html('');
+            var e = document.getElementById("district"); 
+            var IdDis = e.options[e.selectedIndex].value;
+            var f = document.getElementById("transport");
+            var IdTran = f.options[f.selectedIndex].value;
+            var fee = 0;
+        for (var i = 0; i < listtransportPrice.length; i++) { 
+            console.log(IdDis == listtransportPrice[i].districtID);
+                if (listtransportPrice[i].districtID == IdDis && listtransportPrice[i].transportTypeID == IdTran) {
+                    fee = listtransportPrice[i].price;
+                    $('#fee').append('<p> Phi giao hang: ' + fee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</p>');
+                }           
+            }
+            if (fee == 0) {
+                for (var j = 0; j < listtransportType.length; j++) {
+                    if (listtransportType[j].id == IdTran) {
+                        fee = listtransportType[j].price;
+                        $('#fee').append('<p> Phi giao hang: ' + fee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</p>');
+                    }
+                }
         }
+        var total = getTotalPrice() + fee;
+        var t = total.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+
+        $('#thanhtien').append('<label><span>Thanh tien: ' + t+'</span></label>')
+    };
 </script>

@@ -55,10 +55,12 @@ function AddToCart(imagepath, model, price, color) {
                 Quantity = 1
             );
             ListItem.push(item);
-            console.log(ListItem);
             setCookie(key, JSON.stringify(ListItem), 60);
-            //LoadCartCout();
             alert("Them Thanh Cong");
+            //CartCout();
+            //LoadPopup();
+            //GiveInfo();
+            location.reload();
         }
         else {
             var ListResult = JSON.parse(getCookie(key));
@@ -67,10 +69,8 @@ function AddToCart(imagepath, model, price, color) {
             ListResult.forEach(function (e) {
                 if (e.ID == Id) {
                     e.Quantity++;
-                    LoadCartCout();
                     isExist = true;
                 }
-
             });
             if (isExist == false) {
                 var item = new Item(
@@ -88,6 +88,9 @@ function AddToCart(imagepath, model, price, color) {
             setCookie(key, JSON.stringify(ListResult), 60);
             //LoadCartCout();
             alert("Them Moi Thanh Cong");
+            //CartCout();
+            ////LoadPopup();
+            location.reload();
         }
     }
 }
@@ -100,13 +103,13 @@ function RemoveItem(idCanMove) {
     }
     setCookie(key, JSON.stringify(ListItems), 60);
     LoadItem();
-    //LoadCartCout();
+    //CartCout();
+    location.reload();
 }
 function LoadItem() {
     var ListItems = JSON.parse(getCookie(key));
     var TotalPrice = 0;
-    //$(".items").html('');
-    var html2 = '<tr><td><span>Image</span></td><td><span>Model</span></td><td><span>Color</span></td><td><span>Size</span></td><td><span>Quantity</span></td><td><span>Price</span></td></tr >'
+    var html2 = '<tr><td><span>Image</span></td><td><span>Model</span></td><td><span>Color</span></td><td><span>Size</span></td><td><span>Quantity</span></td><td><span>Price</span></td><td><span>Total Price</span></td></tr >'
     $("#CartTable").html('');
     $("#CartTable").append(html2);
     $('.total').html('');
@@ -114,16 +117,11 @@ function LoadItem() {
     for (var i = 0; i < ListItems.length;i++) {
         html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
             + '<td>' + '<button  onclick=Down("' + ListItems[i].ID + '")>'+"  " + "-" + '</button>'  + '<span>' + ListItems[i].Quantity + '</span>'+"  " + '<button  onclick=Up("' + ListItems[i].ID + '")>' + "+" + '</button>'+ '</td>'
-            + '<td>' + '<span>' + ListItems[i].Price * ListItems[i].Quantity + '</span>' + '</td>' + '<td>' + '<button onclick=RemoveItem("' + ListItems[i].ID+'") > '+"Remove"+'</button >'+'</td>'
-         //html += '<div class="item1">' + '<div class="close1">' + '<div class="alert-close1"> </div>'
-         //   + '<div class="image1">' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '" alt="item1">' + '</div>' + '<div class="title1">' + '<p>' + ListItems[i].Model + '</p>' + ' </div>'
-         //    + '<div class="quantity1">' + '<p>' + ListItems[i].Quantity + '</p>' + '</div>' + '<div>' + '<p>' + ListItems[i].Color + '</p>' + '</div>' + '<div>' + '<p>' + ListItems[i].CurrentSize + '</p>' + '</div>' + '<div class="price1">' + '<p>' + ListItems[i].Price * ListItems[i].Quantity + '</p>' + '<button  onclick=Up("' + ListItems[i].ID + '")>' + "+" + '</button>' + '<button class="UD" value="Sub" onclick=Down("' + ListItems[i].ID +'")>' + "-" + '</button>' + '</div>' + '<div><button onclick=RemoveItem("' + ListItems[i].ID+'")>'+"Remove"+'</button></div>'
-     
+            + '<td>' + '<span>' + (ListItems[i].Price).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Price*ListItems[i].Quantity + '</span>' + '</td>'+ '<td>' + '<button onclick=RemoveItem("' + ListItems[i].ID+'") > '+"Remove"+'</button >'+'</td>'
         TotalPrice += ListItems[i].Price * ListItems[i].Quantity;
     };
-    //$(".items").append(html);
     $("#CartTable").append(html);
-    $(".total").append('<div class="total1">Total Price:' + TotalPrice +'</div>');
+    $(".total").append('<div class="total1">Total Price:' + TotalPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) +'</div>');
 }
 function Up(idCanUp) {
     var ListItems = JSON.parse(getCookie(key));
@@ -132,8 +130,12 @@ function Up(idCanUp) {
             ListItems[i].Quantity += 1;
             setCookie(key, JSON.stringify(ListItems), 60);
             LoadItem();
+            //CartCout();
+            //LoadPopup();
+            
         }
     }
+    location.reload();
 }
 function Down(idCanDown) {
     var ListItems = JSON.parse(getCookie(key));
@@ -146,19 +148,39 @@ function Down(idCanDown) {
                 ListItems[i].Quantity -= 1;
                 setCookie(key, JSON.stringify(ListItems), 60);
                 LoadItem();
+                //CartCout();
+                //LoadPopup(); 
+               
             }
         }
     }
+    location.reload();
 }
-function LoadCartCout() {
-    $("#CountCart").html("");
-    var ListItems = JSON.parse(getCookie(key));
+function CartCout() {
     var count = 0;
+    var html = '';
+    $("#count").html('');
+    var ListItems = JSON.parse(getCookie("ListCartItem"));
     for (var i = 0; i < ListItems.length; i++) {
         count += ListItems[i].Quantity;
     }
-    var html = '<p> So san pham trong gio hang la : ' + count + '</p>'
-    $("#CountCart").append(html);
-
+    html = '<span class="cart-num" id="topActionCartNumber" style="display: block;" data-spm-anchor-id="a2o4n.cart.dcart.i0.4f25705bGOvobf">' + count + '</span>';
+    $("#count").append(html);
+}
+function LoadPopup() {
+    var ListItems = JSON.parse(getCookie(key));
+    var TotalPrice = 0;
+    var html2 = '<tr><td><span>Image</span></td><td><span>Model</span></td><td><span>Color</span></td><td><span>Size</span></td><td><span>Quantity</span></td><td><span>Price</span></td><td><span>Total Price</span></td></tr >'
+    $("#bodyPopup").html('');
+    $("#bodyPopup").append(html2);
+    $('.total').html('');
+    var html = "";
+    for (var i = 0; i < ListItems.length; i++) {
+        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
+            + '<td>' + '<button  onclick=Down("' + ListItems[i].ID + '")>' + "  " + "-" + '</button>' + '<span>' + ListItems[i].Quantity + '</span>' + "  " + '<button  onclick=Up("' + ListItems[i].ID + '")>' + "+" + '</button>' + '</td>'
+            + '<td>' + '<span>' + (ListItems[i].Price).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<span>' + (ListItems[i].Price * ListItems[i].Quantity).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<button onclick=RemoveItem("' + ListItems[i].ID + '") > ' + "Remove" + '</button >' + '</td>'
+        TotalPrice += ListItems[i].Price * ListItems[i].Quantity;
+    };
+    $("#bodyPopup").append(html);
 }
 

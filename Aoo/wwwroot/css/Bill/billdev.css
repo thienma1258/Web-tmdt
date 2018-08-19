@@ -70,3 +70,33 @@ input::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         width:185%;
         font-size:initial;
     }
+
+.payfee button {
+    width: 32%;
+}
+
+#home {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+#local {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+#paypal {
+    height: 44px;
+    background-repeat: no-repeat;
+    background-size: 105px 41px;
+    background-image: url(../../images/paypal.png);
+    padding-bottom: 26px;
+}
+       
+      

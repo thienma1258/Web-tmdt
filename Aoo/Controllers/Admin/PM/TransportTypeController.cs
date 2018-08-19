@@ -32,7 +32,6 @@ namespace Aoo.Controllers.Admin.PM
         }
         public async Task<IActionResult> Create()
         {
-
             return View();
         }
         [HttpPost]
