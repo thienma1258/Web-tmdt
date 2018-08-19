@@ -10,8 +10,8 @@ namespace DAL.Model.SM
     {
         public string SaleOrderID { get; set; }
         public virtual SaleOrder SaleOrder { get; set; }
-        public string ProductID { get; set; }
-        public virtual Product Product { get; set; }
+        public string ProductDetailId { get; set; }
+        public virtual ProductDetails ProductDetail { get; set; }
         public string Note { get; set; }
        public int Quality { get; set; }
         public decimal Price { get; set; }

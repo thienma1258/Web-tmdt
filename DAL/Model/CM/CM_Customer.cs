@@ -1,4 +1,5 @@
 ﻿using Common.Enum.SM;
+using DAL.Model.SM;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

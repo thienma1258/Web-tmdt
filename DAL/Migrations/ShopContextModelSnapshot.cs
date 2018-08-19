@@ -787,7 +787,7 @@ namespace DAL.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("ProductID");
+                    b.Property<string>("ProductDetailId");
 
                     b.Property<int>("Quality");
 
@@ -799,7 +799,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("DiscoutID");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("ProductDetailId");
 
                     b.HasIndex("SaleOrderID");
 
@@ -1204,9 +1204,9 @@ namespace DAL.Migrations
                         .HasForeignKey("DiscoutID")
                         .HasConstraintName("FK_Discout_SaleOrderDetails");
 
-                    b.HasOne("DAL.Model.PM.Product", "Product")
+                    b.HasOne("DAL.Model.PM.ProductDetails", "ProductDetail")
                         .WithMany()
-                        .HasForeignKey("ProductID");
+                        .HasForeignKey("ProductDetailId");
 
                     b.HasOne("DAL.Model.SM.SaleOrder", "SaleOrder")
                         .WithMany("ListSaleOrderDetails")

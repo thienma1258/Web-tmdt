@@ -158,9 +158,6 @@ namespace BLL.BLL.SM.Implement
         {
             try
             {
-                this.unitOfWork.SaleOrderRepository.Update(objSaleOrder);
-                await this.unitOfWork.SaveChangeAsync();
-                AddLogSaleOrder(objSaleOrder);
                 return true;
             }
             catch (Exception objEx)

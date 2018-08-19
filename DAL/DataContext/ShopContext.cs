@@ -114,7 +114,7 @@ namespace DAL.DataContext
             #region SM
             builder.Entity<SaleOrder>().ToTable("SaleOrder").HasOne(p=>p.Voucher).WithMany(p=>p.SaleOrders).HasForeignKey(p=>p.VoucherID).HasConstraintName("FK_Voucher_SaleOrders");
 
-            builder.Entity<SaleOrderDetail>().ToTable("SaleOrderDetail").HasOne(p=>p.Discout).WithMany(p=>p.SaleOrderDetails).HasForeignKey(p=>p.DiscoutID).HasConstraintName("FK_Discout_SaleOrderDetails");
+            builder.Entity<SaleOrderDetail>().ToTable("SaleOrderDetail").HasOne(p => p.Discout).WithMany(p => p.SaleOrderDetails).HasForeignKey(p => p.DiscoutID).HasConstraintName("FK_Discout_SaleOrderDetails");
             #endregion
             #region Log
             builder.Entity<ErrorLogs>().ToTable("ErrorLogs");
