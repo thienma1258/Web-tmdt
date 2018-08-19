@@ -82,6 +82,11 @@ namespace BLL.BLL.SM.Implement
             try
             {
                 this.unitOfWork.SaleOrderRepository.Delete(saleOrderID, DeletedUser);
+                IEnumerable<SaleOrderDetail> listSaleOrderdetails =  this.unitOfWork.SaleOrderDetailsRepository.Get(p => p.SaleOrderID == saleOrderID);
+                foreach(var SaleOrderDetail in listSaleOrderdetails)
+                {
+                    this.unitOfWork.SaleOrderDetailsRepository.Delete(SaleOrderDetail.SaleOrderID);
+                }
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
             }
