@@ -8,7 +8,5 @@ namespace Services.EmailServices
     public interface IEmailSender
     {
         Task SendEmailAsync( List<string> listToEmail, string body, string subject, string message);
-
-
     }
 }
