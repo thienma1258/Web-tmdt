@@ -13,9 +13,11 @@ namespace Aoo.Controllers.Admin.SM
     public class SaleOrderController : BaseController
     {
         ISaleOrderBLL ISaleOrderBLL;
-        public SaleOrderController(ISaleOrderBLL SaleOrderBLL)
+        ISaleOrderDetailsBLL SaleOrderDetailsBLL;
+        public SaleOrderController(ISaleOrderBLL SaleOrderBLL, ISaleOrderDetailsBLL SaleOrderDetailsBLL)
         {
             this.ISaleOrderBLL = SaleOrderBLL;
+            this.SaleOrderDetailsBLL = SaleOrderDetailsBLL;
         }
         [Route("don-hang")]
         public async  Task<IActionResult> Index(DateTime FromDate,DateTime ToDate,int page = 1, string Search = null,string StateSaleOrder=null)

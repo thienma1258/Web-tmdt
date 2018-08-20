@@ -44,6 +44,7 @@ namespace Aoo.App_start
             services.AddTransient<ISubscribeEmailBLL, SubscribeEmailBLL>();
             services.AddTransient<ICustomerBLL, CustomerBLL>();
             services.AddTransient<ISaleOrderBLL, SaleOrderBLL>();
+            services.AddTransient<ISaleOrderDetailsBLL, SaleOrderDetailsBLL>();
         }
     }
 }

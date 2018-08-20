@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Services.EmailServices;
 using BLL.PayMentBLL.ConfigOptions;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace Aoo
 {
@@ -120,12 +121,18 @@ namespace Aoo
             }
             else
             {
+                var options = new RewriteOptions()
+        .AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443);
+                app.UseRewriter(options);
+
+                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseBrowserLink();
-            app.UseDeveloperExceptionPage();
-            app.UseDatabaseErrorPage();
+           
             app.UseStaticFiles();
          //   app.UseMiddleware<IgnoreRouteMiddleware>();
             app.UseAuthentication();
