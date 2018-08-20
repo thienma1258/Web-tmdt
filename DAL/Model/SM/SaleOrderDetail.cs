@@ -13,10 +13,9 @@ namespace DAL.Model.SM
         public string ProductDetailId { get; set; }
         public virtual ProductDetails ProductDetail { get; set; }
         public string Note { get; set; }
-       public int Quality { get; set; }
+        public int Quality { get; set; }
         public decimal Price { get; set; }
         public string DiscoutID { get; set; }
-
         public virtual Discout Discout { get; set; }
     }
 }

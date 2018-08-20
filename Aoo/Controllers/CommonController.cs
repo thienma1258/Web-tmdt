@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aoo.ViewModels.CM;
 using BLL.BLL.PM;
+using DAL.Model.CM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +64,5 @@ namespace Aoo.Controllers
             }
             return Json(new { success = "false",message="Định dạng email không chính xác" });
         }
-
     }
 }

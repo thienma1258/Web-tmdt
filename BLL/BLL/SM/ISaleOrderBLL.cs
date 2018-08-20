@@ -11,9 +11,11 @@ namespace BLL.BLL.SM
     public interface ISaleOrderBLL:IGenericBLL<SaleOrder,string>
     {
          string Message { get; }
+         Task<CM_Customer> FindUserByCMND(string CMND);
          ErrorSaleOrder enumErrorSaleOrder { get; set; }
         Task<bool> ConfirmSaleOrder(SaleOrder objSaleOrder, string ReviewUser);
         Task<bool> SuccessOrder(SaleOrder objSaleOrder, string ReviewUser);
-        Task<bool> CreateBill(CM_Customer objCustomer,SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails, string CreateUser);
+        Task<bool> ConfirmCode(CM_Customer objCustomer, string Code);
+        Task<bool> CreateBill(CM_Customer objCustomer,SaleOrder objSaleOrder, List<SaleOrderDetail> saleOrderDetails);
     }
 }

@@ -57,10 +57,10 @@ function AddToCart(imagepath, model, price, color) {
             ListItem.push(item);
             setCookie(key, JSON.stringify(ListItem), 60);
             alert("Them Thanh Cong");
-            //CartCout();
-            //LoadPopup();
-            //GiveInfo();
-            location.reload();
+            CartCout();
+            LoadPopup();
+            GiveInfo();
+           
         }
         else {
             var ListResult = JSON.parse(getCookie(key));
@@ -86,11 +86,9 @@ function AddToCart(imagepath, model, price, color) {
                 console.log(ListResult);
             }
             setCookie(key, JSON.stringify(ListResult), 60);
-            //LoadCartCout();
             alert("Them Moi Thanh Cong");
-            //CartCout();
-            ////LoadPopup();
-            location.reload();
+            CartCout();
+            LoadPopup();
         }
     }
 }
@@ -103,8 +101,8 @@ function RemoveItem(idCanMove) {
     }
     setCookie(key, JSON.stringify(ListItems), 60);
     LoadItem();
-    //CartCout();
-    location.reload();
+    CartCout();
+    LoadItemBill();
 }
 function LoadItem() {
     var ListItems = JSON.parse(getCookie(key));
@@ -118,10 +116,8 @@ function LoadItem() {
         html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
             + '<td>' + '<button  onclick=Down("' + ListItems[i].ID + '")>'+"  " + "-" + '</button>'  + '<span>' + ListItems[i].Quantity + '</span>'+"  " + '<button  onclick=Up("' + ListItems[i].ID + '")>' + "+" + '</button>'+ '</td>'
             + '<td>' + '<span>' + (ListItems[i].Price).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Price*ListItems[i].Quantity + '</span>' + '</td>'+ '<td>' + '<button onclick=RemoveItem("' + ListItems[i].ID+'") > '+"Remove"+'</button >'+'</td>'
-        TotalPrice += ListItems[i].Price * ListItems[i].Quantity;
     };
     $("#CartTable").append(html);
-    $(".total").append('<div class="total1">Total Price:' + TotalPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) +'</div>');
 }
 function Up(idCanUp) {
     var ListItems = JSON.parse(getCookie(key));
@@ -130,12 +126,11 @@ function Up(idCanUp) {
             ListItems[i].Quantity += 1;
             setCookie(key, JSON.stringify(ListItems), 60);
             LoadItem();
-            //CartCout();
-            //LoadPopup();
-            
+            CartCout();
+            LoadPopup();
+            LoadItemBill();
         }
     }
-    location.reload();
 }
 function Down(idCanDown) {
     var ListItems = JSON.parse(getCookie(key));
@@ -148,13 +143,13 @@ function Down(idCanDown) {
                 ListItems[i].Quantity -= 1;
                 setCookie(key, JSON.stringify(ListItems), 60);
                 LoadItem();
-                //CartCout();
-                //LoadPopup(); 
-               
+                CartCout();
+                LoadPopup(); 
+                LoadItemBill();
+
             }
         }
     }
-    location.reload();
 }
 function CartCout() {
     var count = 0;

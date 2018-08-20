@@ -20,18 +20,20 @@ namespace BLL.BLL.SM.Implement
         CreateBill=1,
         NotValid=2,
         Success=3,
-        ConfirmCodeError=4
+        ConfirmCodeError=4,
+        Error=5,
+        SuccessActive=6
 
     }
     public class SaleOrderBLL : GenericBLL,ISaleOrderBLL
     {
         private  bool IsPhoneNumber(string number)
         {
-            return Regex.Match(number, @"^(\0[0-9]{9,12})$").Success;
+            return Regex.Match(number, @"^(0[0-9]{9,12})$").Success;
         }
         private bool CheckCMND(string number)
         {
-            return Regex.Match(number, @"^(([A-Z0-9]){9,12})$").Success;
+            return Regex.Match(number, @"^(([0-9]){9,12})$").Success;
         }
         private string strMessage = string.Empty;
         public ErrorSaleOrder enumErrorSaleOrder { get; set; }
@@ -182,7 +184,7 @@ namespace BLL.BLL.SM.Implement
         {
             throw new NotImplementedException();
         }
-        private async void validateCustomer(CM_Customer objCustomer)
+        private async Task validateCustomer(CM_Customer objCustomer)
         {
             CM_Customer Customer = await this.unitOfWork.CM_Customer_Repository.FindCustomer(p => p.CMND == objCustomer.CMND );
             if (Customer == null)
@@ -190,23 +192,27 @@ namespace BLL.BLL.SM.Implement
                 try
                 {
                     //check valid phonenumber
-                    if (string.IsNullOrEmpty(Customer.CustomerPhone) || !IsPhoneNumber(Customer.CustomerPhone))
+                    if (string.IsNullOrEmpty(objCustomer.CustomerPhone) || !IsPhoneNumber(objCustomer.CustomerPhone))
                     {
                         this.enumErrorSaleOrder = ErrorSaleOrder.NotValid;
                         strMessage = "Số điện thoại nhập vào không phù hợp";
                         return;
                     }
-                    else if (string.IsNullOrEmpty(Customer.CMND) || CheckCMND(Customer.CMND))
+                    else if (string.IsNullOrEmpty(objCustomer.CMND) || !CheckCMND(objCustomer.CMND))
                     {
                         this.enumErrorSaleOrder = ErrorSaleOrder.NotValid;
                         strMessage = "Số CMND không phù hợp";
                         return;
                     }
 
-                    sendCode(Customer);
+                   await sendCode(objCustomer);
+                    this.unitOfWork.CM_Customer_Repository.Insert(objCustomer);
+                    await this.unitOfWork.SaveChangeAsync();
                 }
                 catch(Exception objEx)
                 {
+                    this.enumErrorSaleOrder = ErrorSaleOrder.Error;
+                    strMessage =objEx.ToString();
                     throw objEx;
                 }
 
@@ -214,28 +220,19 @@ namespace BLL.BLL.SM.Implement
             }
             else
             {
-                if (string.IsNullOrEmpty(Customer.CustomerPhone) || !IsPhoneNumber(Customer.CustomerPhone))
+                if (string.IsNullOrEmpty(objCustomer.CustomerPhone) || !IsPhoneNumber(objCustomer.CustomerPhone))
                 {
                     this.enumErrorSaleOrder = ErrorSaleOrder.NotValid;
                     strMessage = "Số điện thoại nhập vào không phù hợp";
                     return;
                 }
-                var rng = new Random();
-                string first = rng.Next(10).ToString();
-                string second = rng.Next(10).ToString();
-                string third = rng.Next(10).ToString();
-                string fourth = rng.Next(10).ToString();
-                Customer.ConfirmCode = first + second + third + fourth;
+                Customer.CustomerPhone = objCustomer.CustomerPhone;
+                await   sendCode(Customer);
                 this.unitOfWork.CM_Customer_Repository.Update(Customer);
-
-                enumErrorSaleOrder = ErrorSaleOrder.ConfirmUser;
-                strMessage = "Vui lòng nhập  mã xác nhận  " + Customer.ConfirmCode;
-                await this.SMSServices.sendSMS(Customer.CustomerPhone, Customer.ConfirmCode);
-
                 await this.unitOfWork.SaveChangeAsync();
             }
         }
-        public async void sendCode(CM_Customer Customer)
+        private async Task sendCode(CM_Customer Customer)
         {
             var rng = new Random();
             string first = rng.Next(10).ToString();
@@ -243,19 +240,32 @@ namespace BLL.BLL.SM.Implement
             string third = rng.Next(10).ToString();
             string fourth = rng.Next(10).ToString();
             Customer.ConfirmCode = first + second + third + fourth;
-            this.unitOfWork.CM_Customer_Repository.Update(Customer);
-
             enumErrorSaleOrder = ErrorSaleOrder.ConfirmUser;
-            strMessage = "Vui lòng nhập  mã xác nhận  " + Customer.ConfirmCode;
+            strMessage = "Vui lòng nhập  mã xác nhận  ";
+         
+
             await this.SMSServices.sendSMS(Customer.CustomerPhone, Customer.ConfirmCode);
 
-            await this.unitOfWork.SaveChangeAsync();
+        }
+        public async Task SendAgainCode(CM_Customer Customer)
+        {
+            await sendCode(Customer);
+            this.unitOfWork.CM_Customer_Repository.Update(Customer);
+        }
+        public async Task<CM_Customer> FindUserByCMND(string CMND)
+        {
+            return await this.unitOfWork.CM_Customer_Repository.FindCustomer(p => p.CMND == CMND);
+
         }
         public async Task<bool> ConfirmCode(CM_Customer objCustomer,string Code)
-        {
+        {   
+            
             if (objCustomer.ConfirmCode == Code)
             {
                 objCustomer.ConfirmCode ="true";
+                objCustomer.CustomerStateEnum = Common.Enum.SM.CustomerStateEnum.active;
+                strMessage = "Xac nhan tai khoan thanh cong";
+                enumErrorSaleOrder = ErrorSaleOrder.SuccessActive;
                 this.unitOfWork.CM_Customer_Repository.Update(objCustomer);
                 await this.unitOfWork.SaveChangeAsync();
                 return true;
@@ -267,16 +277,23 @@ namespace BLL.BLL.SM.Implement
                 return false;
             }
         }
-        public async Task<bool> CreateBill(CM_Customer objCustomer,SaleOrder objSaleOrder, List<SaleOrderDetail> listSaleOrderDetails, string CreateUser)
+        public async Task<bool> CreateBill(CM_Customer objCustomer,SaleOrder objSaleOrder, List<SaleOrderDetail> listSaleOrderDetails)
         {
             try
             {
                 CM_Customer Customer = await this.unitOfWork.CM_Customer_Repository.FindCustomer(p => p.CMND == objCustomer.CMND  && p.CustomerPhone == objCustomer.CustomerPhone);
-                if (Customer==null||Customer.ConfirmCode!="true")
+                if (Customer==null||Customer.CustomerStateEnum!=Common.Enum.SM.CustomerStateEnum.active)
                 {
-                    validateCustomer(objCustomer);
+                    await  validateCustomer(objCustomer);
                     return false;
                 }
+                else if (listSaleOrderDetails.Count == 0)
+                {
+                    enumErrorSaleOrder = ErrorSaleOrder.NotValid;
+                    strMessage = "Khong the tao bill khi khong mua gi";
+                    return false;
+                }
+
                 foreach(var SaleOrderDetail in listSaleOrderDetails)
                 {
                     SaleOrderDetail.SaleOrderID = objSaleOrder.ID;
@@ -285,7 +302,8 @@ namespace BLL.BLL.SM.Implement
                 this.unitOfWork.SaleOrderRepository.Insert(objSaleOrder);
                 await this.unitOfWork.SaveChangeAsync();
                 this.enumErrorSaleOrder = ErrorSaleOrder.Success;
-               
+                strMessage = "Tạo đơn hàng  thành công";
+
                 return true;
             }
             catch (Exception objEx)
