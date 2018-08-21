@@ -17,7 +17,22 @@ namespace PayPal.Api
         /// <summary>
         /// The configValue is readonly as it should not be changed outside constructor (but the content can)
         /// </summary>
-        private readonly Dictionary<string, string> configValues;
+        public  Dictionary<string, string> configValues { get; set; }
+        public Dictionary <string,string> ConfigValues {
+            get
+            {
+                if(this.configValues!=null)
+                return this.configValues;
+                return null;
+            }
+            set
+            {
+
+                this.configValues = value;
+
+            }
+
+        }
 
         private static readonly Dictionary<string, string> defaultConfig;
 

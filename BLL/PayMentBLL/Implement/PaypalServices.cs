@@ -37,8 +37,9 @@ namespace BLL.PayMentBLL.Implement
         }
         public Payment CreatePayment(decimal amount, string returnUrl, string cancelUrl, string intent)
         {
-            var apiContext = new APIContext(new OAuthTokenCredential(_options.PayPalClientId, _options.PayPalClientSecret).GetAccessToken());
-
+            var accessToken = new OAuthTokenCredential(_options.PayPalClientId, _options.PayPalClientSecret).GetAccessToken();
+            var apiContext = new APIContext(accessToken);
+            apiContext.Config = ConfigManager.Instance.configValues;
             var payment = new Payment()
             {
                 intent = intent,

@@ -88,7 +88,7 @@ namespace PayPal.Api
         /// <returns></returns>
         public Dictionary<string, string> GetConfigWithDefaults()
         {
-            return ConfigManager.GetConfigWithDefaults(this.Config); // ?? ConfigManager.Instance.GetProperties());
+            return ConfigManager.Instance.configValues;
         }
     }
 }

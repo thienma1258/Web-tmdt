@@ -20,8 +20,8 @@ namespace Aoo.Controllers.Payment
         {
             return View();
         }
-
-        public IActionResult CreatePayment()
+        [Route("thanh-toan/payment")]
+        public  IActionResult CreatePayment()
         {
             var payment = _PaypalServices.CreatePayment(100, "http://localhost:28079/Payment/ExecutePayment", "http://localhost:28079/Payment/Cancel", "sale");
 

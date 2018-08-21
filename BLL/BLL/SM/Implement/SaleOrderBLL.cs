@@ -293,8 +293,8 @@ namespace BLL.BLL.SM.Implement
                     strMessage = "Khong the tao bill khi khong mua gi";
                     return false;
                 }
-
-                foreach(var SaleOrderDetail in listSaleOrderDetails)
+                objSaleOrder.CustomerID = Customer.Id;
+                foreach (var SaleOrderDetail in listSaleOrderDetails)
                 {
                     SaleOrderDetail.SaleOrderID = objSaleOrder.ID;
                     this.unitOfWork.SaleOrderDetailsRepository.Insert(SaleOrderDetail);

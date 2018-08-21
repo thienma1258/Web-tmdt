@@ -95,8 +95,14 @@ namespace PayPal.Api
         /// <param name="config"></param>
         public OAuthTokenCredential(string clientId = "", string clientSecret = "", Dictionary<string, string> config = null)
         {
-            this.config = config != null ? ConfigManager.GetConfigWithDefaults(config) : ConfigManager.GetConfigWithDefaults(ConfigManager.Instance.GetProperties());
+         
+            // this.config = config != null ? ConfigManager.GetConfigWithDefaults(config) : ConfigManager.GetConfigWithDefaults(ConfigManager.Instance.GetProperties());
+            Dictionary<string, string> configValues=new Dictionary<string,string>();
+            configValues.Add(BaseConstants.ClientId, clientId);
+            configValues.Add(BaseConstants.ClientSecret, clientSecret);
 
+            ConfigManager.Instance.configValues = ConfigManager.GetConfigWithDefaults(configValues);
+            this.config = ConfigManager.Instance.configValues;
             // Set the client ID.
             if(string.IsNullOrEmpty(clientId))
             {
@@ -171,7 +177,7 @@ namespace PayPal.Api
 
             var apiContext = new APIContext
             {
-                Config = this.config,
+                Config = ConfigManager.Instance.configValues,
                 SdkVersion = this.SdkVersion,
                 HTTPHeaders = new Dictionary<string,string>
                 {

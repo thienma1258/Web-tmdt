@@ -249,7 +249,7 @@ namespace PayPal.Api
             }
             else
             {
-                var config = apiContext.GetConfigWithDefaults();
+                var config = ConfigManager.Instance.configValues;
                 var clientId = config.ContainsKey(BaseConstants.ClientId) ? config[BaseConstants.ClientId] : null;
                 var clientSecret = config.ContainsKey(BaseConstants.ClientSecret) ? config[BaseConstants.ClientSecret] : null;
                 var encodedCredentials = EncodeToBase64(clientId, clientSecret);
