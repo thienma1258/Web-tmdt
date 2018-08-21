@@ -100,9 +100,11 @@ function RemoveItem(idCanMove) {
         }
     }
     setCookie(key, JSON.stringify(ListItems), 60);
+    LoadPopup();
     LoadItem();
     CartCout();
     LoadItemBill();
+    LoadPopup();
 }
 function LoadItem() {
     var ListItems = JSON.parse(getCookie(key));

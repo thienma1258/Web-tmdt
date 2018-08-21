@@ -95,7 +95,7 @@ function GetFee() {
             fee = listtransportPrice[i].price;
             for (var j = 0; j < listtransportType.length; j++) {
                 if (listtransportType[j].id == IdTran) {
-                    $('#delivery').append('<button id="transportTypeID" value="' + IdTran + '"disable>NHÀ VẬN CHUYỂN: ' + listtransportType[j].name + '</button>');
+                    $('#delivery').append('<button id="transportTypeID" value="' + listtransportType[j].id + '"disable>NHA VAN CHUYEN: ' + listtransportType[j].name + '</button>');
                 }
             }
             $('#fee').append('<button disable id="transportPriceID" value="' + listtransportPrice[i].id + '"> PHÍ GIAO HÀNG: ' + fee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</button>');
@@ -105,13 +105,12 @@ function GetFee() {
         for (var j = 0; j < listtransportType.length; j++) {
             if (listtransportType[j].id == IdTran) {
                 fee = listtransportType[j].price;
-                $('#delivery').append('<button id="delivery" value="' + IdTran + '"disable>NHÀ VẬN CHUYỂN: ' + listtransportType[j].name + '</button>');
-                $('#fee').append('<p> PHÍ GIAO HÀNG: ' + fee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</p>');
+                $('#delivery').append('<button id="transportTypeID" value="' + listtransportType[j].id + '"disable>NHA VAN CHUYEN: ' + listtransportType[j].name + '</button>');
+                $('#fee').append('<button disable id="transportPriceID" value="' + listtransportType[j].id + '"> PHÍ GIAO HÀNG: ' + fee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</button>');
             }
         }
     }
     var total = getTotalPrice() + fee;
     var t = total.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
-
     $('#thanhtien').append('<button id="money" value="' + total + '"disable>THÀNH TIỀN: ' + t + '</button>')
 };
