@@ -37,6 +37,7 @@ namespace BLL.BLL.SM.Implement
         }
 
         public async Task<IEnumerable<SaleOrderDetail>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SaleOrderDetail, bool>> filter = null, Func<IQueryable<SaleOrderDetail>, IOrderedQueryable<SaleOrderDetail>> orderBy = null)
+
         {
             try
             {

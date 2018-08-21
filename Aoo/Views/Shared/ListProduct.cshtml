@@ -79,7 +79,7 @@
                     <input type="hidden" name="add" value="1">
                     <input type="hidden" name="w3l_item" value="Sweater ">
                     <input type="hidden" name="amount" value="25.00">
-                    <button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                    <button disabled type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
                     <span class="w3-agile-line"> </span>
                     <a href="#" data-toggle="modal" data-target="#myModal1"></a>
                 </form>
@@ -87,14 +87,11 @@
         </ul>
 
         <div class="pricemodel">
-            <div class="pricemodel">
                 <ul>                      
-                            <li><a href="/@(item.SubGroup.UrlFriendly)/@(item.UrlFriendly)"><span>@item.Model</span></a></li>
+                            <li><a href="/@(item.SubGroup.UrlFriendly)/@(item.UrlFriendly)"><span class="b">@item.Model</span></a></li>
                             <li><span class="price">@(string.Format("{0:N0}", item.Price))</span></li>                        
 
                 </ul>
-            </div>
-
         </div>
     </div>
 

@@ -1,19 +1,25 @@
-﻿@{
+﻿@inject BLL.BLL.PM.ICategoryBLL CategoryBLL
+@inject BLL.BLL.PM.IMainGroupBLL MainGroupBLL
+@inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
+@inject BLL.BLL.PM.IHomeCarouselBLL HomeCarouselBLL
+@inject BLL.BLL.PM.IBrandBLL BrandBLL
+@{
     Layout = null;
     string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Bán giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
     string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
-    string Description = ViewBag.Description == null ? "Shop giày buôn mê thuật" : ViewBag.Description;
+    string Description = ViewBag.Description == null ? "Shop giày Buôn Mê Thuột" : ViewBag.Description;
     string Image = ViewBag.Image == null ? Url.Content("~/wwwroot/defaultImage.jpg") : Url.Content(ViewBag.Image);
-
+    var listcategory = await CategoryBLL.Get();
+    var listmaingroup = await MainGroupBLL.Get();
+    var listsubgroup = await SubGroupBLL.Get();
+    var listbrand = await BrandBLL.Get(intNumber:3,currentPage:1,orderBy:p=>p.OrderByDescending(brand=>brand.EditedDate));
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <script src="https://ahachat.com/libs/buttonplugin.js" id="ahachat-button-sdk"></script>
     <title>@Title</title>
-
     <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="@Keyword">
@@ -38,7 +44,6 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500" type="text/css" media="all">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     @*<link rel="shortcut icon" href="../assets/ico/favicon.ico">*@
-
     <!-- //Fonts -->
     <!-- Font-Awesome-File-Links -->
     <!-- CSS -->
@@ -48,38 +53,33 @@
     <script src="~/js/jquery-2.2.3.js"></script>
     <script src="~/js/Cookie.js"></script>
     <!-- //Font-Awesome-File-Links -->
-    <style type="text/css">
-        .eboundDynamicAdsbygoogle {
-            display: none !important;
-        }
-    </style>
-
-    <style type="text/css">
-        .eboundDynamicAdsbygoogle {
-            display: none !important;
-        }
-    </style>
-    <style type="text/css">
-        .eboundDynamicAdsbygoogle {
-            display: none !important;
-        }
-    </style>
 </head>
 <body>
-    <style>
+    <style type="text/css">
+
+        .eboundDynamicAdsbygoogle {
+            display: none !important;
+        }
+
         #bodyPopup img {
             max-width: initial;
             width: 50px !important;
             height: 30px !important;
         }
+
+        #bodyPopup tr:nth-child(1) {
+            background-color: #70658a;
+            color: #ffffff;
+            font-size: 16px;
+        }
+        .fiximg img{
+            width:15%;
+        }
     </style>
     <!--PopupCartItem-->
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        < class="modal-dialog">
-     
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -100,287 +100,244 @@
     <!--EndPopupCartItem-->
     <!-- Header -->
     @*<script src="https://uhchat.net/code.php?f=8b8c5d"></script>*@
-    <div class="agileheader" id="agileheadermens">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default w3l navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header wthree nav_2">
-                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand agileinfo" href="/"><span>BMT</span> STORE</a>
-                    <ul class="w3header-cart">
-                        <li class="wthreecartaits"><span class="my-cart-icon"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="badge badge-notify my-cart-badge"></span></span></li>
-                    </ul>
-                </div>
-                <div id="bs-megadropdown-tabs" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="~/san-pham" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> SẢN PHẨM </span></a>
-                            <ul class="dropdown-menu aits-w3 multi multi1">
-                                <div class="row">
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Discount Store</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Editor's Pick</a></li>
-                                        </ul>
+        <div class="agileheader" id="agileheadermens">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default w3l navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header wthree nav_2">
+                        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand agileinfo" href="/"><span>BMT</span> STORE</a>
+                        <ul class="w3header-cart">
+                            <li class="wthreecartaits"><span class="my-cart-icon"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="badge badge-notify my-cart-badge"></span></span></li>
+                        </ul>
+                    </div>
+                    <div id="bs-megadropdown-tabs" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="~/san-pham" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> SẢN PHẨM </span></a>
+                                <ul class="dropdown-menu aits-w3 multi multi1">
+                                    <div class="row">
+                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
+                                                <ul class="multi-column-dropdown">
+                                                    <li class="heading">DANH SÁCH</li>
+                                                    @foreach (var item in listsubgroup)
+                                                    {
+                                                        <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        @foreach (var brand in listbrand)
+                                        {
+                                           
+                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                                    <p>@brand.Name</p>
+                                                    <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
+                                            </div>
+                                            
+                                        }
+                                           
+                                            <div class="clearfix"></div>
+                                            <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
+                                        </div>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> NAM </span></a>
+                                <ul class="dropdown-menu multi multi2">
+                                    <div class="row">
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-1">
+                                            <ul class="multi-column-dropdown">
+                                                <li class="heading">DANH SÁCH</li>
+                                                @foreach (var item in listsubgroup)
+                                                {
+                                                    <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        @foreach (var brand in listbrand)
+                                        {
+
+                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                                <p>@brand.Name</p>
+                                                <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
+                                            </div>
+
+                                        }
+                                        <div class="clearfix"></div>
+                                        <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
                                     </div>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> NỮ </span></a>
+                                <ul class="dropdown-menu multi multi3">
+                                    <div class="row">
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
+                                            <ul class="multi-column-dropdown">
+                                                <li class="heading">DANH SÁCH</li>
+                                                @foreach (var item in listsubgroup)
+                                                {
+                                                    <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        @foreach (var brand in listbrand)
+                                        {
 
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                        <p>TORSO</p>
-                                        <a href="~/Product/Index"><img src="~/images/men-nav-1.jpg" alt="Groovy Apparel"></a>
+                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                                <p>@brand.Name</p>
+                                                <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
+                                            </div>
+
+                                        }
+                                        <div class="clearfix"></div>
+                                        <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
                                     </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-3">
-                                        <p>LEGS</p>
-                                        <a href="mens.html"><img src="~/images/men-nav-2.jpg" alt="Groovy Apparel"></a>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> HOTLIST </span></a>
+                                <ul class="dropdown-menu multi multi4">
+                                    <div class="row">
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-1">
+                                            <ul class="multi-column-dropdown">
+                                                <li class="heading">FEATURED</li>
+                                                <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
+                                                <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
+                                                <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
+                                                <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
+                                                <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Discount Store</a></li>
+                                                <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Editor's Pick</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-2">
+                                            <p>MEN</p>
+                                            <a href="mens.html"><img src="~/images/other-nav-1.jpg" alt="Groovy Apparel"></a>
+                                        </div>
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-3">
+                                            <p>WOMEN</p>
+                                            <a href="womens.html"><img src="~/images/other-nav-2.jpg" alt="Groovy Apparel"></a>
+                                        </div>
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-4">
+                                            <p>ACCESSORIES</p>
+                                            <a href="mens_accessories.html"><img src="~/images/other-nav-3.jpg" alt="Groovy Apparel"></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
                                     </div>
+                                </ul>
+                            </li>
+                            <li><a href="about.html">ABOUT</a></li>
+                            <li class="wthreesearch">
+                                <form action="/tim-kiem" method="get">
+                                    <input type="search" name="Search" placeholder="Search for a Product" required="">
+                                    <button type="submit" class="btn btn-default search" aria-label="Left Align">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="wthreecartaits wthreecartaits2 cart cart box_1">
+                                <form action="#" method="post" class="last">
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="display" value="1" />
+                                    <style>
 
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-4">
-                                        <p>ACCESSORIES</p>
-                                        <a href="mens_accessories.html"><img src="~/images/men-nav-3.jpg" alt="Groovy Apparel"></a>
+                                        .cart-num {
+                                            position: absolute;
+                                            background: #f36e36;
+                                            color: #fff;
+                                            top: -4px;
+                                            font-weight: 400;
+                                            right: -4px;
+                                            text-align: center;
+                                            border: 3px solid #f36e36;
+                                            font-size: 13px;
+                                            min-width: 14px;
+                                            line-height: 14px;
+                                            border-radius: 50%;
+                                            margin-top: 5px;
+                                            display: none;
+                                        }
+                                    </style>
+                                    <div id="count">
                                     </div>
-
-                                    <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                </div>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> NAM </span></a>
-                            <ul class="dropdown-menu multi multi2">
-                                <div class="row">
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            <li><a href="~/san-pham/nam"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
-                                            <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
-                                            <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
-                                            <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
-                                            <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Discount Store</a></li>
-                                            <li><a href="womens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Editor's Pick</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-2">
-                                        <p>TOP</p>
-                                        <a href="womens.html"><img src="images/women-nav-1.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-3">
-                                        <p>LEGS</p>
-                                        <a href="womens.html"><img src="~/images/women-nav-2.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-4">
-                                        <p>ACCESSORIES</p>
-                                        <a href="womens_accessories.html"><img src="~/images/women-nav-3.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                </div>
-
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> NỮ </span></a>
-                            <ul class="dropdown-menu multi multi3">
-                                <div class="row">
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
-                                            <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
-                                            <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
-                                            <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
-                                            <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Discount Store</a></li>
-                                            <li><a href="mens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Editor's Pick</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-2">
-                                        <p>MEN</p>
-                                        <a href="mens_accessories.html"><img src="~/images/other-nav-1.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-4">
-                                        <p>WOMEN</p>
-                                        <a href="womens_accessories.html"><img src="~/images/other-nav-2.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-4">
-                                        <p>ACCESSORIES</p>
-                                        <a href="mens_accessories.html"><img src="~/images/other-nav-3.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                </div>
-
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> HOTLIST </span></a>
-                            <ul class="dropdown-menu multi multi4">
-                                <div class="row">
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">FEATURED</li>
-                                            <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Discount Store</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Editor's Pick</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-2">
-                                        <p>MEN</p>
-                                        <a href="mens.html"><img src="~/images/other-nav-1.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-3">
-                                        <p>WOMEN</p>
-                                        <a href="womens.html"><img src="~/images/other-nav-2.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-4">
-                                        <p>ACCESSORIES</p>
-                                        <a href="mens_accessories.html"><img src="~/images/other-nav-3.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                </div>
-
-                            </ul>
-                        </li>
-                        <li><a href="about.html">ABOUT</a></li>
-                        <li class="wthreesearch">
-                            <form action="/tim-kiem" method="get">
-                                <input type="search" name="Search" placeholder="Search for a Product" required="">
-                                <button type="submit" class="btn btn-default search" aria-label="Left Align">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        </li>
-                        <li class="wthreecartaits wthreecartaits2 cart cart box_1">
-                            <form action="#" method="post" class="last">
-                                <input type="hidden" name="cmd" value="_cart" />
-                                <input type="hidden" name="display" value="1" />
-                                <style>
-                                    .cart-num {
-                                        position: absolute;
-                                        background: #f36e36;
-                                        color: #fff;
-                                        top: -4px;
-                                        font-weight: 400;
-                                        right: -4px;
-                                        text-align: center;
-                                        border: 3px solid #f36e36;
-                                        font-size: 13px;
-                                        min-width: 14px;
-                                        line-height: 14px;
-                                        border-radius: 50%;
-                                        margin-top: 5px;
-                                        display: none;
-                                    }
-                                </style>
-                                <div id="count">
-
-                                </div>
-                                <!--Cart-->
-                                <button type="button" data-toggle="modal" data-target="#myModal" class="w3view-cart" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                                <!--EndCart-->
-                            </form>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-        </nav>
-        <!-- //Navigation -->
-        <!-- Header-Top-Bar-(Hidden) -->
-        <div class="agileheader-topbar">
-            <div class="container">
-                <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid1">
-                    <p>Free shipping on orders over $150. <a href="payment.html">Details</a></p>
-                </div>
-                <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid2">
-                    <ul>
-                        <li><a href="stores.html">Store Locator</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a class="popup-with-zoom-anim" href="#small-dialog1">Login</a></li>
-                        <li><a class="popup-with-zoom-anim" href="#small-dialog2">Sign Up</a></li>
-                        <li><a href="codes.html">Codes</a></li>
-                        <li><a href="icons.html">Icons</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
-            <!-- Popup-Box -->
-            <div id="popup">
-                <div id="small-dialog1" class="mfp-hide agileinfo">
-                    <div class="pop_up">
-                        <form action="#" method="post">
-                            <h3>LOGIN</h3>
-                            <input type="text" Name="Userame" placeholder="Username" required="">
-                            <input type="password" Name="Password" placeholder="Password" required="">
-                            <ul class="tick w3layouts agileinfo">
-                                <li>
-                                    <input type="checkbox" id="brand1" value="">
-                                    <label for="brand1"><span></span>Remember me</label>
-                                </li>
-                                <li>
-                                    <a href="#">Forgot Password?</a>
-                                </li>
-                            </ul>
-                            <div class="send-button wthree agileits">
-                                <input type="submit" value="LOGIN">
-                            </div>
-                        </form>
+                                    <!--Cart-->
+                                    <button type="button" data-toggle="modal" data-target="#myModal" class="w3view-cart" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                                    <!--EndCart-->
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div id="small-dialog2" class="mfp-hide agileinfo">
-                    <div class="pop_up">
-                        <form action="#" method="post">
-                            <h3>SIGN UP</h3>
-                            <input type="text" Name="Name" placeholder="Name" required="">
-                            <input type="text" Name="Email" placeholder="Email" required="">
-                            <input type="password" Name="Password" placeholder="Password" required="">
-                            <input type="text" Name="Phone Number" placeholder="Phone Number" required="">
-                            <div class="send-button wthree agileits">
-                                <input type="submit" value="SIGN UP">
-                            </div>
-                        </form>
+            </nav>
+            <!-- //Navigation -->
+            <!-- Header-Top-Bar-(Hidden) -->
+            <div class="agileheader-topbar">
+                <div class="container">
+                    <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid1">
+                        <p>Free shipping on orders over $150. <a href="payment.html">Details</a></p>
+                    </div>
+                    <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid2">
+                        <ul>
+                            <li><a href="stores.html">Store Locator</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a class="popup-with-zoom-anim" href="#small-dialog1">Login</a></li>
+                            <li><a class="popup-with-zoom-anim" href="#small-dialog2">Sign Up</a></li>
+                            <li><a href="codes.html">Codes</a></li>
+                            <li><a href="icons.html">Icons</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Popup-Box -->
+                <div id="popup">
+                    <div id="small-dialog1" class="mfp-hide agileinfo">
+                        <div class="pop_up">
+                            <form action="#" method="post">
+                                <h3>LOGIN</h3>
+                                <input type="text" Name="Userame" placeholder="Username" required="">
+                                <input type="password" Name="Password" placeholder="Password" required="">
+                                <ul class="tick w3layouts agileinfo">
+                                    <li>
+                                        <input type="checkbox" id="brand1" value="">
+                                        <label for="brand1"><span></span>Remember me</label>
+                                    </li>
+                                    <li>
+                                        <a href="#">Forgot Password?</a>
+                                    </li>
+                                </ul>
+                                <div class="send-button wthree agileits">
+                                    <input type="submit" value="LOGIN">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="small-dialog2" class="mfp-hide agileinfo">
+                        <div class="pop_up">
+                            <form action="#" method="post">
+                                <h3>SIGN UP</h3>
+                                <input type="text" Name="Name" placeholder="Name" required="">
+                                <input type="text" Name="Email" placeholder="Email" required="">
+                                <input type="password" Name="Password" placeholder="Password" required="">
+                                <input type="text" Name="Phone Number" placeholder="Phone Number" required="">
+                                <div class="send-button wthree agileits">
+                                    <input type="submit" value="SIGN UP">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                <!-- //Popup-Box -->
             </div>
-            <!-- //Popup-Box -->
-
+            <!-- //Header-Top-Bar-(Hidden) -->
         </div>
-        <!-- //Header-Top-Bar-(Hidden) -->
-    </div>
     <!-- //Header -->
     <!-- Body -->
     @RenderBody()
@@ -393,10 +350,8 @@
                     <h2>Subscribe to our Newsletter</h2>
                 </div>
                 <div class="col-md-7 w3lsnewsletter-grid w3lsnewsletter-grid-2 email-form">
-
                     <input class="email" type="email" name="Email" placeholder="Email Address" id="EmailValue" required="">
                     <input type="submit" class="submit" value="SUBSCRIBE" id="SUBSCRIBEEMAIL">
-
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -406,7 +361,6 @@
     <!-- Footer -->
     <div class="agileinfofooter">
         <div class="agileinfofooter-grids">
-
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid1">
                 <ul>
                     <li><a href="about.html">ABOUT</a></li>
@@ -416,7 +370,6 @@
                     <li><a href="womens_accessories.html">WOMEN'S ACCESSORIES</a></li>
                 </ul>
             </div>
-
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid2">
                 <ul>
                     <li><a href="stores.html">STORE LOCATOR</a></li>
@@ -426,7 +379,6 @@
                     <li><a href="contact.html">CONTACT</a></li>
                 </ul>
             </div>
-
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid3">
                 <address>
                     <ul>
@@ -454,7 +406,6 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-
         </div>
     </div>
     <!-- //Footer -->
@@ -464,10 +415,8 @@
         <div class="col-md-8 w3lscopyrightaitsgrid w3lscopyrightaitsgrid1">
             <p>© 2017 Groovy Apparel. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="=_blank"> W3layouts </a></p>
         </div>
-
         <div class="clearfix"></div>
     </div>
-
     <!--//Copyright-->
 </body>
 </html>
@@ -572,4 +521,3 @@
         LoadPopup();
     });
 </script>
-

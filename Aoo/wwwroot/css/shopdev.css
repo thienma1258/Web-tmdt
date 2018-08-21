@@ -46,7 +46,7 @@
 .price {
     float: right;
     font-size:26px;
-    margin: -35px 15px 0 0;
+    margin: -49px 15px 0 0;
     color:dodgerblue!important;
 }
 .single-price input[type="text"], input[type="password"], input.email.aitsw3ls, textarea.text{
@@ -84,4 +84,11 @@ table td img {
      max-width:initial!important;
      width:50px!important;
      height:30px!important;
+}
+div.pricemodel span.b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 59%;
+    display: inline-block;
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.BLL.SM;
+using BLL.BLL.SM.Implement;
 using DAL.Model.SM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,15 @@ namespace Aoo.Controllers.Admin.SM
     [Area("SM")]
     public class SaleOrderController : BaseController
     {
+
+
+
         ISaleOrderBLL ISaleOrderBLL;
+
         ISaleOrderDetailsBLL SaleOrderDetailsBLL;
         public SaleOrderController(ISaleOrderBLL SaleOrderBLL, ISaleOrderDetailsBLL SaleOrderDetailsBLL)
         {
+            this.ISaleOrderDetailsBLL = SaleOrderDetailsBLL;
             this.ISaleOrderBLL = SaleOrderBLL;
             this.SaleOrderDetailsBLL = SaleOrderDetailsBLL;
         }
@@ -30,17 +36,18 @@ namespace Aoo.Controllers.Admin.SM
                     ModelState.AddModelError("A1", "Định dạng ngày không chính xác");
                     return View(null);
                 }
-                listSaleOrder = await this.ISaleOrderBLL.Get(numberPerPage, page, p => (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || p.State.ToString() == StateSaleOrder) && (p.ReviewDate.Date < FromDate.Date && p.ReviewDate.Date > ToDate.Date));
+                listSaleOrder = await this.ISaleOrderBLL.Get(numberPerPage, page, p => (Search ==null||( p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search ||(StateSaleOrder == null|| p.State.ToString() == StateSaleOrder)) && (p.ReviewDate.Date < FromDate.Date && p.ReviewDate.Date > ToDate.Date)));
                 ViewBag.currentPage = page;
                 ViewBag.totalPage = ISaleOrderBLL.Cout(p => (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || p.State.ToString() == StateSaleOrder) && (p.ReviewDate.Date < FromDate.Date && p.ReviewDate.Date > ToDate.Date));
 
             }
             else
             {
-                listSaleOrder = await this.ISaleOrderBLL.Get(numberPerPage, page, p => p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || p.State.ToString() == StateSaleOrder);
+                listSaleOrder = await this.ISaleOrderBLL.Get(currentPage: page, intNumber: numberPerPage,filter: p =>Search==null||( p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || (StateSaleOrder == null || p.State.ToString() == StateSaleOrder)));
                 ViewBag.currentPage = page;
-                ViewBag.totalPage = ISaleOrderBLL.Cout(p => p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || p.State.ToString() == StateSaleOrder);
+                ViewBag.totalPage = ISaleOrderBLL.Cout(p => Search == null || (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || (StateSaleOrder == null || p.State.ToString() == StateSaleOrder)));
             }
+           var list=await ISaleOrderDetailsBLL.Get();
             return View(listSaleOrder);
         }
         public async Task<JsonResult> ConfirmSaleOrder(string strSaleOrderID)

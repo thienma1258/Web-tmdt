@@ -17,17 +17,19 @@ namespace Aoo.Controllers
     public class CommonController : Controller
     {
         IProvinceBLL IProvinceBLL;
+
         ISubscribeEmailBLL subscribeEmailBLL;
         IMailchimpServices MailchimpServices;
         ITransportPriceBLL TransportPriceBLL;
         ITransportTypeBLL TransportTypeBLL;
         public CommonController(ITransportPriceBLL transportPriceBLL,ITransportTypeBLL transportTypeBLL, IMailchimpServices MailchimpServices,IProvinceBLL provinceBLL, ISubscribeEmailBLL subscribeEmailBLL)
         {
+            this.TransportPriceBLL = transportPriceBLL;
+            this.TransportTypeBLL = transportTypeBLL;
             this.IProvinceBLL = provinceBLL;
             this.subscribeEmailBLL = subscribeEmailBLL;
             this.MailchimpServices = MailchimpServices;
-            this.TransportPriceBLL = transportPriceBLL;
-            this.TransportTypeBLL = transportTypeBLL;
+
         }
         [Route("Type")]
         public async Task<JsonResult> TransportType()
@@ -47,6 +49,7 @@ namespace Aoo.Controllers
             var listProvince = await this.IProvinceBLL.Get();
             return Json (listProvince);
         }
+
         [HttpPost]
         [Route("SubscribeEmail")]
         public async Task<JsonResult> SubscribeEmail([FromBody]SubscribeEmail Email)

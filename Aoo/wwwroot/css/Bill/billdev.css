@@ -1,7 +1,7 @@
 ﻿.namephone input[type="text"], input[type="password"], input.email.aitsw3ls, textarea.text {
     width: 95%;
     font-size: initial;
-    height: 35px;
+    height: 34px;
     background-color: #fff !important;
     color: #000 !important;
     border: 1px solid #ddd;
@@ -22,8 +22,8 @@
 
     }
     .containerbill > .container-2 {
-        width: 26%;
-        height:180px;
+        width: 30%;
+        height: 180px;
         margin-top: 2%;
     }
 .pay{
@@ -33,8 +33,9 @@
     .pay button {
         background-color: #1a9cb7;
         border-color: transparent;
+        cursor:initial;
         width: 100%;
-        height:40px;
+        height: 40px;
         color: #fff;
     }
 .containerbill label{
@@ -69,12 +70,11 @@ input::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     .dividetransport .form-control{
         width:185%;
         font-size:initial;
-    }
-
-.payfee button {
-    width: 32%;
 }
-
+.payfee button{
+    width:30%;
+    margin-left:10px;
+}
 #home {
     color: #fff;
     background-color: #d9534f;
@@ -82,7 +82,6 @@ input::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     border: 1px solid transparent;
     border-radius: 4px;
 }
-
 #local {
     color: #fff;
     background-color: #449d44;
@@ -90,7 +89,6 @@ input::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     border: 1px solid transparent;
     border-radius: 4px;
 }
-
 #paypal {
     height: 44px;
     background-repeat: no-repeat;

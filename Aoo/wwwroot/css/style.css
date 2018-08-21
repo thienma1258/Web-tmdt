@@ -200,12 +200,13 @@ a:focus, a:hover {
 		border-width: 2px;
 	}
 
-	li.wthreesearch .btn-default {
-		color: #000;
-		border-color: #000;
-		border-radius: 0;
-		padding: 5px 10px;
-	}
+        li.wthreesearch .btn-default {
+            color: #000;
+            margin-bottom: 6px;
+            border-color: #000;
+            border-radius: 0;
+            padding: 6.5px 10px;
+        }
 
 	li.wthreesearch .btn-default:hover {
 		background-color: #000;
@@ -999,15 +1000,15 @@ figure.effect-apollo:hover figcaption::before {
 /*-- Winter-Collection --*/
 
 .wthreewinter-coll {
-	background-image: url("../images/winter.jpg");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	padding: 170px 0 150px;
-	text-align: center;
+    background-image: url('../images/giay-nu.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    padding: 170px 0 150px;
+    text-align: center;
 }
 
 .wthreewinter-coll h1 {

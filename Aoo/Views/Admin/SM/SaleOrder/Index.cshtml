@@ -1,6 +1,8 @@
-﻿@model IEnumerable<DAL.Model.SM.SaleOrder>
+﻿    @model IEnumerable<DAL.Model.SM.SaleOrder>
+@inject BLL.BLL.SM.ISaleOrderDetailsBLL SaleOrderDetailBLL
 @{
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    var listdetail = await SaleOrderDetailBLL.Get();
 }
 <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
@@ -25,7 +27,7 @@
         color:red;
         font-weight:500
     }
-    input::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    input::-webkit-input-placeholder { /* Chrome    , Firefox, Opera, Safari 10.1+ */
         color: red;
         opacity: 1; /* Firefox */
     }
@@ -114,11 +116,14 @@
                         @Html.DisplayFor(modelItem => item.VAT)
                     </td>
 
-
+                    <td></td>
                     <td>
                         <a href="#" class="view" title="" data-toggle="tooltip" data-original-title="View"><i class="material-icons"></i></a>
-
-
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
+                            Xem chi tiết hóa đơn
+                        </button>
                     </td>
                 </tr>
             }
@@ -150,6 +155,75 @@
         </div>
     </div>
 
+    <div class="modal fade" id="DetailOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleDetail">Chi tiết hóa đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="namebill">
+                        <tr>
+                            <td>
+                                STT
+                            </td>
+                            <td>
+                                giá
+                            </td>
+
+                            <td>
+                                số lượng
+                            </td>
+                            <td>
+                                Product Detail
+                            </td>
+                            <td>
+                                Ghi chú
+                            </td>
+                        </tr>
+                    </table>
+                    @foreach (var item in listdetail)
+                    {
+                    <div class="billinfo">
+                        <table id="paybill" class="infobill">
+                            <tr>
+                                <td>@item.ID</td>
+                                <td id="price"> @(string.Format("{0:N0}", item.Price))</td>
+                                <td id="quality">@item.Quality</td>
+                                <td> @item.ProductDetail</td>
+                                <td> @item.Note</td>
+                            </tr>
+                        </table>
+                    </div>
+                     }
+                </div>
+                    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button onclick="PayBill()" type="button" class="btn btn-primary">Xuất hóa đơn</button>
+                    <p id="demo"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .infobill {
+        width:100%;
+    }
+    .infobill tr td{
+        width:20%;
+    }
+    .namebill{
+        width:100%;
+    }
+    .namebill tr td{
+        width:20%;
+    }
+</style>
 
 
     @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
@@ -159,3 +233,5 @@
         $("#datepicker").datepicker();
     });
 </script>
+
+

@@ -100,7 +100,6 @@ namespace Aoo.Controllers.Admin.PM
             {
                 var listTransportPrice = await this.TransportPriceBLL.Get(filter: p => p.TransportTypeID == deleteTransportID);
                 return Json(new { success = "true", data = listTransportPrice });
-
             }
             return Json(new { success = "false" });
         }
