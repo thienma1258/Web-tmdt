@@ -9,7 +9,7 @@
     var listcategory = await CategoryBLL.Get();
     var listmaingroup = await MainGroupBLL.Get();
     var listsubgroup = await SubGroupBLL.Get();
-    var listbrand = await BrandBLL.Get();
+    var listbrand = await BrandBLL.Get(intNumber: 4, currentPage: 1, orderBy: p => p.OrderByDescending(brand => brand.EditedDate));
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
 }
 <!-- Model-Slider -->
@@ -39,7 +39,7 @@
             <div class="col-md-6 wthreehome-latest-grid wthreehome-latest-grid1">
                 <div class="grid">
                     <figure class="effect-apollo">
-                        <img height="361px" width="500px" src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
+                          <img height="361px" width="500px" src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
                         <figcaption></figcaption>
                     </figure>
                 </div>
@@ -68,8 +68,9 @@
 <!-- Denim-Collection -->
 <div class="wthreedenim-coll">
     <div class="style-grids">
+        @foreach (var item in listbrand) {
         <div class="col-md-6 style-grid style-grid-1">
-            <img src="images/style-1.jpg" alt="Groovy Apparel">
+            <img src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
             <div class="style-grid-1-text">
                 <h3>DENIM JEANS</h3>
                 <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p>
@@ -78,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 style-grid style-grid-2">
+        @*<div class="col-md-6 style-grid style-grid-2">
             <div class="style-image-1">
                 <img src="images/style-2.jpg" alt="Groovy Apparel">
                 <div class="style-grid-2-text">
@@ -93,7 +94,8 @@
                     <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
                 </div>
             </div>
-        </div>
+        </div>*@
+        }
         <div class="clearfix"></div>
     </div>
 </div>
@@ -127,7 +129,7 @@
                 <div class="grid">
                     <figure class="effect-apollo">
                         <img src="images/womens.jpg" alt="Groovy Apparel">
-                        <figcaption></figcaption>
+                            <figcaption></figcaption>
                     </figure>
                 </div>
             </div>
@@ -156,15 +158,15 @@
 </div>
 <script>
     $(document).ready(function CartCout() {
-        var count = 0;
-        var html = '';
+            var count = 0;
+            var html = '';
         $("#countindex").html('');
-        var ListItems = JSON.parse(getCookie("ListCartItem"));
-        for (var i = 0; i < ListItems.length; i++) {
-            count += ListItems[i].Quantity;
-        }
+            var ListItems = JSON.parse(getCookie("ListCartItem"));
+            for (var i = 0; i < ListItems.length; i++) {
+                count += ListItems[i].Quantity;
+            }
 
-        html = '<span class="cart-num" id="topActionCartNumber" style="display: block;" data-spm-anchor-id="a2o4n.cart.dcart.i0.4f25705bGOvobf">' + count + '</span>';
+            html = '<span class="cart-num" id="topActionCartNumber" style="display: block;" data-spm-anchor-id="a2o4n.cart.dcart.i0.4f25705bGOvobf">' + count + '</span>';
         $("#countindex").append(html);
-    });
+        });
 </script>

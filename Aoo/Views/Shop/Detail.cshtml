@@ -97,17 +97,17 @@
                             </ul>
                             <br />
                             <label>Size giày:</label><br />
-                                                     <select id="currentSize" class="form-control">
-                                                         {
-                                                         @{for (int i = 0; i < Model.ListSize.Count; i++)
-                                                             {
-                                                                 <option class="form-control" value="@Model.ListIDDetails[i]">@Model.ListSize[i]</option>
+                            <select id="currentSize" class="form-control">
+                                {
+                                @{for (int i = 0; i < Model.ListSize.Count; i++)
+                                    {
+                                        <option class="form-control" value="@Model.ListIDDetails[i]">@Model.ListSize[i]</option>
 
-                                                             }
-                                                         }
-                                                     </select>
+                                    }
+                                }
+                            </select>
 
-                            </div>
+                        </div>
                         <div style="margin-top:15px;">
                             <h3>Color:</h3>
                             @foreach (var item in Model.ListColor)
@@ -154,8 +154,8 @@
                             <button onclick="AddToCart('@Model.ImagePath','@Model.Model',@pricedefau,'@Model.Color')" class="btn btn-danger agileits my-cart-btn" data-id="mens_single" data-name="Black Leather Jacket" data-summary="Black Leather Jacket" data-price="67.5" data-quantity="1" data-image="images/s1.jpg"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</button>
                             <div class="clearfix"></div>
                         </div>
-
                         <div class="agilesocialwthree">
+
                             <h4>Share this Product</h4>
                             <ul class="social-icons">
                                 <li><a href="#" class="facebook w3ls" title="Go to Our Facebook Page"><i class="fa w3ls fa-facebook-square" aria-hidden="true"></i></a></li>

@@ -1,111 +1,111 @@
-﻿    @model IEnumerable<DAL.Model.SM.SaleOrder>
-@inject BLL.BLL.SM.ISaleOrderDetailsBLL SaleOrderDetailBLL
-@{
+﻿@model IEnumerable<DAL.Model.SM.SaleOrder>
+    @inject BLL.BLL.SM.ISaleOrderDetailsBLL SaleOrderDetailBLL
+    @{
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
-    var listdetail = await SaleOrderDetailBLL.Get();
-}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script>
-<style>
-    .container-body {
-        margin: 10% 10% 10% 0;
-    }
-    #datePicker {
-        margin-bottom: 20%;
-        margin-left: 70px;
-    }
-    .container-body>form{
-        margin-bottom:10%;
 
     }
-    .container-body>form>*{
-        margin:10px;
-    }
-    .error{
-        color:red;
-        font-weight:500
-    }
-    input::-webkit-input-placeholder { /* Chrome    , Firefox, Opera, Safari 10.1+ */
-        color: red;
-        opacity: 1; /* Firefox */
-    }
-    .title {
-        font-weight: 500
-    }
-</style>
-<script>
-    $('#datePicker').data('datepicker')
+    <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script>
+    <style>
+        .container-body {
+            margin: 10% 10% 10% 0;
+        }
 
-</script>
-<span class="error">
-    @Html.ValidationSummary();
-</span>
-<div class="container-body">
+        #datePicker {
+            margin-bottom: 20%;
+            margin-left: 70px;
+        }
 
-    <form method="get">
-        <label class="title">Tìm kiếm bởi tên khach hàng,tên người xác nhận</label>
-        <input name="Search" type="search" class="form-control" placeholder="Tìm kiếm bởi tên khach hàng,tên người xác nhận" />
-        <label class="control-label">Tình trạng</label>
-        <select name="StateSaleOrder" class="form-control" asp-items="Html.GetEnumSelectList<Common.Enum.SM.StateConfirmEnum>()">
-            <option selected="selected" value="">Please select</option>
-        </select>
-        <div class="form-control">
-            <lable style="font-weight:500">Xác nhận vào ngày  :  </lable>
-            <label>Từ ngày</label> <input name="FromDate" type='text' id="datePicker" class="datepicker-here" data-language='en' data-position="bottom left" />
+        .container-body > form {
+            margin-bottom: 10%;
+        }
 
-            <label>Đến ngày</label> <input name="ToDate" type='text' id="datePicker" class="datepicker-here" data-language='en' data-position="bottom left" />
-        </div>
-        <input type="submit" class="btn btn-success pull-right btn-lg" />
-    </form>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
+            .container-body > form > * {
+                margin: 10px;
+            }
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Customer.CustomerName)
-                </th>
+        .error {
+            color: red;
+            font-weight: 500
+        }
+
+        input::-webkit-input-placeholder {
+            / Chrome, Firefox, Opera, Safari 10.1+ / color: red;
+            opacity: 1;
+            / Firefox /
+        }
+
+        .title {
+            font-weight: 500
+        }
+    </style>
+    <script>
+        $('#datePicker').data('datepicker')
+
+    </script>
+    <span class="error">
+        @Html.ValidationSummary();
+    </span>
+    <div class="container-body">
+
+        <form method="get">
+            <label class="title">Tìm kiếm bởi tên khach hàng,tên người xác nhận</label>
+            <input name="Search" type="search" class="form-control" placeholder="Tìm kiếm bởi tên khach hàng,tên người xác nhận" />
+            <label class="control-label">Tình trạng</label>
+            <select name="StateSaleOrder" class="form-control" asp-items="Html.GetEnumSelectList<Common.Enum.SM.StateConfirmEnum>()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <div class="form-control">
+                <lable style="font-weight:500">Xác nhận vào ngày  :  </lable>
+                <label>Từ ngày</label> <input name="FromDate" type='text' id="datePicker" class="datepicker-here" data-language='en' data-position="bottom left" />
+                <label>Đến ngày</label> <input name="ToDate" type='text' id="datePicker" class="datepicker-here" data-language='en' data-position="bottom left" />
+            </div>
+            <input type="submit" class="btn btn-success pull-right btn-lg" />
+        </form>
+        <table class="tablebrand" style="width:108%!important">
+            <thead class="thead-dark">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaymentMethod)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransportTypePrice)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsPay)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReviewBy)
+                    </th>
 
 
-                <th>
-                    @Html.DisplayNameFor(model => model.CurrentTransportPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PaymentMethod)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.TransportTypePrice)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsPay)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.ReviewBy)
-                </th>
-
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Customer.CustomerName)
                     </td>
-
                     <td>
-                        @Html.DisplayFor(modelItem => item.TransportPriceID)
+                        @Html.DisplayFor(modelItem => item.PaymentMethod)
                     </td>
-
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportTypePrice)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TotalPrice)
                     </td>
@@ -113,125 +113,99 @@
                         @Html.DisplayFor(modelItem => item.IsPay)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.VAT)
+                        @Html.DisplayFor(modelItem => item.ReviewBy)
                     </td>
-
-                    <td></td>
-                    <td>
+                    @*<td>
                         <a href="#" class="view" title="" data-toggle="tooltip" data-original-title="View"><i class="material-icons"></i></a>
-                    </td>
+                    </td>*@
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
+                        <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
                             Xem chi tiết hóa đơn
                         </button>
                     </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-        Launch demo modal
-    </button>
+                }
+            </tbody>
+        </table>
 
-    @* pop up region *@
-    <!-- Modal -->
-    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Modal -->
+        <div class="modal fade" id="DetailOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleDetail">Chi tiết hóa đơn</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
 
-    <div class="modal fade" id="DetailOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleDetail">Chi tiết hóa đơn</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="namebill">
-                        <tr>
-                            <td>
-                                STT
-                            </td>
-                            <td>
-                                giá
-                            </td>
-
-                            <td>
-                                số lượng
-                            </td>
-                            <td>
-                                Product Detail
-                            </td>
-                            <td>
-                                Ghi chú
-                            </td>
-                        </tr>
-                    </table>
-                    @foreach (var item in listdetail)
-                    {
-                    <div class="billinfo">
-                        <table id="paybill" class="infobill">
-                            <tr>
-                                <td>@item.ID</td>
-                                <td id="price"> @(string.Format("{0:N0}", item.Price))</td>
-                                <td id="quality">@item.Quality</td>
-                                <td> @item.ProductDetail</td>
-                                <td> @item.Note</td>
-                            </tr>
-                        </table>
                     </div>
-                     }
-                </div>
-                    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button onclick="PayBill()" type="button" class="btn btn-primary">Xuất hóa đơn</button>
-                    <p id="demo"></p>
+                    <div class="modal-body">
+                        <div id="NameCus">
+
+                        </div>
+                        <div id="PhoneCus">
+
+                        </div>
+                        <div id="Adress">
+
+                        </div>
+
+                        <table id="TableDetails" class="tablebrand"></table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        @*<button onclick="printData(@item.I" type="button" class="btn btn-primary">Xuất hóa đơn</button>*@
+                        <p id="demo"></p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            .infobill {
+                width: 100%;
+            }
+
+                .infobill tr td {
+                    width: 20%;
+                }
+
+            .namebill {
+                width: 100%;
+            }
+
+                .namebill tr td {
+                    width: 20%;
+                }
+        </style>
+
+
+        @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
     </div>
-
-<style>
-    .infobill {
-        width:100%;
-    }
-    .infobill tr td{
-        width:20%;
-    }
-    .namebill{
-        width:100%;
-    }
-    .namebill tr td{
-        width:20%;
-    }
-</style>
-
-
-    @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
-</div>
-<script type="text/javascript">
-    $(function () {
-        $("#datepicker").datepicker();
-    });
-</script>
-
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        function getDetails(idsaleOrder) {
+            $.get('/don-hang/chi-tiet', { idsaleOrder: idsaleOrder }).done(function (data) {
+                var list = JSON.parse(data);
+                var currentData = list[0];
+                $("#NameCus").html('');
+                $("#PhoneCus").html('');
+                $("#Adress").html('');
+                $("#NameCus").append('<span> Tên Khách Hàng: ' + currentData.NameCus + '</span>')
+                $("#PhoneCus").append('<span> SĐT Khách Hàng: ' + currentData.PhoneCus + '</span>')
+                $("#Adress").append('<span> Địa chỉ nhận hàng: ' + currentData.AdressDev + '</span>')
+                $("#TableDetails").html('');
+                var title = '<tr><th>Tên Sản Phẩm</th><th>Màu Sắc</th><th>Giá</th><th>Số lượng</th></tr>'
+                $("#TableDetails").append(title);
+                var html = "";
+                for (var i = 0; i < list.length; i++) {
+                    html = '<tr>' + '<td>' + list[i].ModelName + '</td>' + '<td>' + list[i].Color + '</td>' + '<td>' + list[i].PricePro + '</td>' + '<td>' + list[i].QuantityPro + '</td>' + '</tr>';
+                    $("#TableDetails").append(html);
+                }
+            });
+        }
+    </script>
 
