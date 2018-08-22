@@ -1,11 +1,10 @@
 ﻿using Aoo.Helpers;
-using BLL.PayMentBLL;
-using BLL.PayMentBLL.ConfigOptions;
-using BLL.PayMentBLL.Implement;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.EmailServices;
 using Services.Implement;
+using Services.PaypalServices;
+using Services.PaypalServices.Implement;
 using Services.SMSServices;
 using System;
 using System.Collections.Generic;
@@ -23,8 +22,9 @@ namespace Aoo.App_start
             services.AddSingleton<IMailchimpServices, MailchimpSErvices>();
             services.AddSingleton<IEmailSender, EmailSender>();
 
-            services.AddSingleton<IPaypalServices, PaypalServices>();
             services.AddSingleton<ISMSServices, SMSServices>();
+            services.AddSingleton<IPaypalServices, PaypalSDKServices>();
+
 
         }
     }

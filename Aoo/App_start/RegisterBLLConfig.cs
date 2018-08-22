@@ -9,6 +9,7 @@ using BLL.BLL.SM;
 using BLL.BLL.SM.Implement;
 using BLL.BLL.System;
 using BLL.BLL.System.Implement;
+using BLL.ServicesGatewayBLL;
 using DAL.Model.PM;
 using DAL.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -45,7 +46,7 @@ namespace Aoo.App_start
             services.AddTransient<ICustomerBLL, CustomerBLL>();
             services.AddTransient<ISaleOrderBLL, SaleOrderBLL>();
             services.AddTransient<ISaleOrderDetailsBLL, SaleOrderDetailsBLL>();
-
+            services.AddTransient<IPaypalServicesGatewayBLL, PaypalServicesGatewayBLL>();
         }
     }
 }

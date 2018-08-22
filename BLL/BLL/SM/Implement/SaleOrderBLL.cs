@@ -10,6 +10,9 @@ using DAL.Model.SM;
 using DAL.Model.CM;
 using Services.SMSServices;
 using System.Text.RegularExpressions;
+using BLL.ServicesGatewayBLL;
+using PayPal.v1.Payments;
+using Services.Logging;
 
 namespace BLL.BLL.SM.Implement
 {
@@ -25,9 +28,9 @@ namespace BLL.BLL.SM.Implement
         SuccessActive=6
 
     }
-    public class SaleOrderBLL : GenericBLL,ISaleOrderBLL
+    public class SaleOrderBLL : GenericBLL, ISaleOrderBLL
     {
-        private  bool IsPhoneNumber(string number)
+        private bool IsPhoneNumber(string number)
         {
             return Regex.Match(number, @"^(0[0-9]{9,12})$").Success;
         }
@@ -37,11 +40,13 @@ namespace BLL.BLL.SM.Implement
         }
         private string strMessage = string.Empty;
         public ErrorSaleOrder enumErrorSaleOrder { get; set; }
-        public string Message { get { return strMessage; }  }
+        public string Message { get { return strMessage; } }
         ISMSServices SMSServices { get; set; }
-        public SaleOrderBLL(IUnitOfWork unitOfWork, ISMSServices SMSServices) : base(unitOfWork)
+        IPaypalServicesGatewayBLL _PaypalServicesGatewayBLL { get ;set;}
+        public SaleOrderBLL(IUnitOfWork unitOfWork, ISMSServices SMSServices, IPaypalServicesGatewayBLL PaypalServicesGatewayBLL) : base(unitOfWork)
         {
             this.SMSServices = SMSServices;
+            this._PaypalServicesGatewayBLL = PaypalServicesGatewayBLL;
         }
         private async void AddLogSaleOrder(SaleOrder saleOrder)
         {
@@ -311,6 +316,30 @@ namespace BLL.BLL.SM.Implement
                 await AddError(objEx);
                 this.enumErrorSaleOrder = ErrorSaleOrder.CreateBill;
                 strMessage = "Tạo đơn hàng không thành công vui lòng liên hệ nhân viên kiểm tra";
+                return false;
+            }
+        }
+
+        public async Task<bool> ExcutePayment(Payment payment)
+        {
+            try
+            {
+               var Saleorder= this.unitOfWork.SaleOrderRepository.Find(p => p.AuthenticationMethodGuid == payment.Id);
+                if (Saleorder == null)
+                    return false;
+                var isSuccess = await _PaypalServicesGatewayBLL.ExcutePayment(payment);
+                if (isSuccess == true)
+                {
+                    Saleorder.IsPay = true;
+                    this.unitOfWork.SaleOrderRepository.Update(Saleorder);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception objEx)
+            {
+                Logging logging = new Logging();
+                logging.ErrorLogs(objEx.ToString());
                 return false;
             }
         }

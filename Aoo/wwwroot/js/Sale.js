@@ -92,7 +92,7 @@ function GetFullParam(methodPayment) {
         contentType: 'application/json',
         success: function (data) {
             console.log(data);
-            alert(data.message);
+          
             if (data.errorSaleOrder == "0") {
                 var confirmCode = prompt("nhap vao ma xac nhan");
                 $.ajax({
@@ -102,15 +102,31 @@ function GetFullParam(methodPayment) {
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (data) {
-                        if (data.issuccess)
+                        if (data.issuccess) {
                             alert("Ban da xac nhan thanh cong vui long thanh toan lai");
+
+
+                        }
                         alert(data.message);
 
                     },
                     data: JSON.stringify(postdata)
 
                 });
+                return;
+            }
+            else if (data.errorSaleOrder == "3")
+            {
+                var httt = alert("Tiep tuc hoan thanh thanh toan ");
+                if (!httt)
+                {
+                    window.location.replace(data.redirectoURl);
+                }
 
+            }
+            else
+            {
+                alert(data.message);
             }
            
         },

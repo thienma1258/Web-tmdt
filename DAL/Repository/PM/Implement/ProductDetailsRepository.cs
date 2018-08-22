@@ -13,6 +13,10 @@ namespace DAL.Repository.PM.Implement
         public ProductDetailsRepository(ShopContext context) : base(context)
         {
         }
+        public override ProductDetails Find(string id)
+        {
+           return dbSet.Include(p=>p.Product).FirstOrDefault(p=>p.ID==id);
+        }
         public override IEnumerable<ProductDetails> Get(Expression<Func<ProductDetails, bool>> filter = null, Func<IQueryable<ProductDetails>, IOrderedQueryable<ProductDetails>> orderBy = null, int currentPage = -1, int number = -1)
         {
             var query = filterObject(filter, currentPage, number);

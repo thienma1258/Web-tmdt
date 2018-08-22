@@ -17,11 +17,9 @@ using DAL.DataContext;
 using DAL.Model;
 using DAL;
 using CacheHelpers;
-
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Services.EmailServices;
-using BLL.PayMentBLL.ConfigOptions;
 using Microsoft.AspNetCore.Rewrite;
 
 namespace Aoo
@@ -38,8 +36,7 @@ namespace Aoo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var builder = new ConfigurationBuilder()
-      .AddJsonFile("appsettings.json");
+            
             services.AddOptions();
     //        services.AddDbContext<ShopContext>(
     //);
@@ -73,7 +70,7 @@ namespace Aoo
             services.AddScoped<IDataCache, CacheMemory>();
             RegisterBLLConfig.RegisterBLL(ref services);
             RegisterServicesConfig.RegisterServices(ref services);
-            services.Configure<PayPalAuthOptions>(Configuration);
+         
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -109,7 +106,7 @@ namespace Aoo
             });
 
             services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            Configuration = builder.Build();
+            //Configuration = builder.Build();
 
         }
 

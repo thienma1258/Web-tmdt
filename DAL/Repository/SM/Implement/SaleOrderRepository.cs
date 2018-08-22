@@ -14,6 +14,10 @@ namespace DAL.Repository.SM.Implement
         public SaleOrderRepository(ShopContext context) : base(context)
         {
         }
+        public  SaleOrder Find(Expression<Func<SaleOrder, bool>> filter = null)
+        {
+            return dbSet.FirstOrDefault(filter);
+        }
         public override IEnumerable<SaleOrder> Get(Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null, int currentPage = -1, int number = -1)
         {
             var query = filterObject(filter, currentPage, number);

@@ -18,5 +18,6 @@ namespace Services.Logging
             File.AppendAllText(ErrorLogsFile, Message + Environment.NewLine);
 
         }
+
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Globalization;
 using System.Net;
 using System.Reflection;
 using Xunit;
@@ -35,6 +36,15 @@ namespace UniTest
         {
             var test = Test2();
             Assert.Equal<string>(test, "Test3");
+        }
+        [Fact]
+        public void TestCurrencyFormat()
+        {
+            var test = Test2();
+            decimal money = 9.2m;
+            CultureInfo USDCulture = new CultureInfo("en-US");
+             string stringMoney=money.ToString("N", USDCulture);
+            Assert.Equal(money.ToString(), stringMoney);
         }
         [Fact]
         public void TextSMS()
