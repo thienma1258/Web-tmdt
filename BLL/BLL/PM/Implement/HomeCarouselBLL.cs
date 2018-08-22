@@ -76,11 +76,11 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.HomeCarouselRepository.Cout();
         }
 
-        public  async Task<IEnumerable<HomeCarousel>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeCarousel, bool>> filter = null, Func<IQueryable<HomeCarousel>, IOrderedQueryable<HomeCarousel>> orderBy = null)
+        public  async Task<IEnumerable<HomeCarousel>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<HomeCarousel, bool>> filter = null, Func<IQueryable<HomeCarousel>, IOrderedQueryable<HomeCarousel>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.HomeCarouselRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.HomeCarouselRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

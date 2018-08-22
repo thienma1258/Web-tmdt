@@ -59,16 +59,16 @@ namespace BLL.BLL.PM.Implement
 
        
 
-        public async Task<IEnumerable<TransportPrice>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<TransportPrice, bool>> filter = null, Func<IQueryable<TransportPrice>, IOrderedQueryable<TransportPrice>> orderBy = null)
+        public async Task<IEnumerable<TransportPrice>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<TransportPrice, bool>> filter = null, Func<IQueryable<TransportPrice>, IOrderedQueryable<TransportPrice>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.TransportPriceRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.TransportPriceRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)
             {
-                AddError(objEx);
+               await AddError(objEx);
                 return null;
             }
         }

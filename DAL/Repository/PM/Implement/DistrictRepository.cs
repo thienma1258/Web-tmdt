@@ -21,7 +21,7 @@ namespace DAL.Repository.PM
             return this.shopContext.Districts.Find(ID);
         }
 
-        public override IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int skippage = -1, int number = -1)
+        public override IEnumerable<District> Get(Expression<Func<District, bool>> filter = null, Func<IQueryable<District>, IOrderedQueryable<District>> orderBy = null, int skippage = -1, int number = -1, string includeProperties = null)
         {
 
             var IQuery = this.shopContext.Districts

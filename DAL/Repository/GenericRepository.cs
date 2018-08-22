@@ -35,10 +35,20 @@ namespace DAL.Repository
             }
             return query;
         }
+       protected IQueryable<TEntity> Include(IQueryable<TEntity> IQuery,string includeProperties)
+        {
+            IQueryable<TEntity> Query = IQuery;
+            foreach (var includeProperty in includeProperties.Split
+              (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                Query = Query.Include(includeProperty);
+            }
+            return Query;
 
+        }
         public virtual IEnumerable<TEntity> Get(
           Expression<Func<TEntity, bool>> filter = null,
-              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int currentPage = -1, int number = -1)
+              Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int currentPage = -1, int number = -1, string includeProperties = null)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -53,10 +63,13 @@ namespace DAL.Repository
                     query = query.Skip(number * (currentPage - 1));
                 query = query.Take(number);
             }
+            if (includeProperties != null)
+                query = Include(query, includeProperties);
             if (orderBy != null)
             {
                 return orderBy(query).ToList();
             }
+            
             else
             {
                 return query.ToList();

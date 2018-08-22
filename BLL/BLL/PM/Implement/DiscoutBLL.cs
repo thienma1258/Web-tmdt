@@ -73,11 +73,11 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.DiscoutRepository.Cout(filter);
         }
 
-        public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Discout, bool>> filter = null, Func<IQueryable<Discout>, IOrderedQueryable<Discout>> orderBy = null)
+        public async Task<IEnumerable<Discout>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Discout, bool>> filter = null, Func<IQueryable<Discout>, IOrderedQueryable<Discout>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.DiscoutRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.DiscoutRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

@@ -58,11 +58,11 @@ namespace BLL.BLL.PM
 
        
 
-        public async Task<IEnumerable<SubGroup>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SubGroup, bool>> filter = null, Func<IQueryable<SubGroup>, IOrderedQueryable<SubGroup>> orderBy = null)
+        public async Task<IEnumerable<SubGroup>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SubGroup, bool>> filter = null, Func<IQueryable<SubGroup>, IOrderedQueryable<SubGroup>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.SubGroupRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.SubGroupRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

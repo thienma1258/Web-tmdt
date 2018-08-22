@@ -72,11 +72,11 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.VoucherRepository.Cout(filter);
         }
 
-        public  async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Voucher, bool>> filter = null, Func<IQueryable<Voucher>, IOrderedQueryable<Voucher>> orderBy = null)
+        public  async Task<IEnumerable<Voucher>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Voucher, bool>> filter = null, Func<IQueryable<Voucher>, IOrderedQueryable<Voucher>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.VoucherRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.VoucherRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

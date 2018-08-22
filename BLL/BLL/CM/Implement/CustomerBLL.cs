@@ -36,11 +36,11 @@ namespace BLL.BLL.CM.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<CM_Customer>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<CM_Customer, bool>> filter = null, Func<IQueryable<CM_Customer>, IOrderedQueryable<CM_Customer>> orderBy = null)
+        public async Task<IEnumerable<CM_Customer>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<CM_Customer, bool>> filter = null, Func<IQueryable<CM_Customer>, IOrderedQueryable<CM_Customer>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return  unitOfWork.CM_Customer_Repository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return  unitOfWork.CM_Customer_Repository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

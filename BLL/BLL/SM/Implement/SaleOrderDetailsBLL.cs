@@ -36,12 +36,12 @@ namespace BLL.BLL.SM.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<SaleOrderDetail>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SaleOrderDetail, bool>> filter = null, Func<IQueryable<SaleOrderDetail>, IOrderedQueryable<SaleOrderDetail>> orderBy = null)
+        public async Task<IEnumerable<SaleOrderDetail>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SaleOrderDetail, bool>> filter = null, Func<IQueryable<SaleOrderDetail>, IOrderedQueryable<SaleOrderDetail>> orderBy = null, string includeProperties = null)
 
         {
             try
             {
-                return unitOfWork.SaleOrderDetailsRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.SaleOrderDetailsRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

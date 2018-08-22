@@ -77,11 +77,11 @@ namespace BLL.BLL.PM.Implement
             return this.unitOfWork.CategoryRepository.Cout(filter);
         }
 
-        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Category, bool>> filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null)
+        public async Task<IEnumerable<Category>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<Category, bool>> filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.CategoryRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.CategoryRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

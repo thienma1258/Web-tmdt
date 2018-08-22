@@ -17,7 +17,7 @@ namespace DAL.Repository.PM.Implement
         {
            return dbSet.Include(p=>p.Product).FirstOrDefault(p=>p.ID==id);
         }
-        public override IEnumerable<ProductDetails> Get(Expression<Func<ProductDetails, bool>> filter = null, Func<IQueryable<ProductDetails>, IOrderedQueryable<ProductDetails>> orderBy = null, int currentPage = -1, int number = -1)
+        public override IEnumerable<ProductDetails> Get(Expression<Func<ProductDetails, bool>> filter = null, Func<IQueryable<ProductDetails>, IOrderedQueryable<ProductDetails>> orderBy = null, int currentPage = -1, int number = -1, string includeProperties = null)
         {
             var query = filterObject(filter, currentPage, number);
             query = query.Include(p => p.Product);

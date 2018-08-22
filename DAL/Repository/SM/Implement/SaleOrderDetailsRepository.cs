@@ -14,19 +14,19 @@ namespace DAL.Repository.SM.Implement
         public SaleOrderDetailsRepository(ShopContext context) : base(context)
         {
         }
-        public override IEnumerable<SaleOrderDetail> Get(Expression<Func<SaleOrderDetail, bool>> filter = null, Func<IQueryable<SaleOrderDetail>, IOrderedQueryable<SaleOrderDetail>> orderBy = null, int currentPage = -1, int number = -1)
-        {
-            var query = filterObject(filter, currentPage, number);
-            query = query.Include(p => p.SaleOrder);
-            if (orderBy != null)
-            {
-                var listSaleOrder = orderBy(query).ToList();
-                return listSaleOrder;
-            }
-            else
-            {
-                return query.ToList(); ;
-            }
-        }
+        //public override IEnumerable<SaleOrderDetail> Get(Expression<Func<SaleOrderDetail, bool>> filter = null, Func<IQueryable<SaleOrderDetail>, IOrderedQueryable<SaleOrderDetail>> orderBy = null, int currentPage = -1, int number = -1,string i)
+        //{
+        //    var query = filterObject(filter, currentPage, number);
+        //    query = query.Include(p => p.SaleOrder);
+        //    if (orderBy != null)
+        //    {
+        //        var listSaleOrder = orderBy(query).ToList();
+        //        return listSaleOrder;
+        //    }
+        //    else
+        //    {
+        //        return query.ToList(); ;
+        //    }
+        //}
     }
 }

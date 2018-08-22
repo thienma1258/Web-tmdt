@@ -14,7 +14,7 @@ namespace DAL.Repository.PM.Implement
         public ProvinceRepository(ShopContext context) : base(context)
         {
         }
-        public override IEnumerable<Province> Get(Expression<Func<Province, bool>> filter = null, Func<IQueryable<Province>, IOrderedQueryable<Province>> orderBy = null, int skippage = -1, int number = -1)
+        public override IEnumerable<Province> Get(Expression<Func<Province, bool>> filter = null, Func<IQueryable<Province>, IOrderedQueryable<Province>> orderBy = null, int skippage = -1, int number = -1, string includeProperties = null)
         {
 
             var IQuery = this.shopContext.Provinces

@@ -18,19 +18,19 @@ namespace DAL.Repository.SM.Implement
         {
             return dbSet.FirstOrDefault(filter);
         }
-        public override IEnumerable<SaleOrder> Get(Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null, int currentPage = -1, int number = -1)
-        {
-            var query = filterObject(filter, currentPage, number);
-            query = query.Include(p => p.Customer);
-            if (orderBy != null)
-            {
-                var listSaleOrder = orderBy(query).ToList();
-                return listSaleOrder;
-            }
-            else
-            {
-                return query.ToList(); ;
-            }
-        }
+        //public override IEnumerable<SaleOrder> Get(Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null, int currentPage = -1, int number = -1)
+        //{
+        //    var query = filterObject(filter, currentPage, number);
+        //    query = query.Include(p => p.Customer);
+        //    if (orderBy != null)
+        //    {
+        //        var listSaleOrder = orderBy(query).ToList();
+        //        return listSaleOrder;
+        //    }
+        //    else
+        //    {
+        //        return query.ToList(); ;
+        //    }
+        //}
     }
 }

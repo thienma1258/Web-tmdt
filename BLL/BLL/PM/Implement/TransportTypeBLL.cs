@@ -60,11 +60,11 @@ namespace BLL.BLL.PM.Implement
 
       
 
-        public async Task<IEnumerable<TransportType>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<TransportType, bool>> filter = null, Func<IQueryable<TransportType>, IOrderedQueryable<TransportType>> orderBy = null)
+        public async Task<IEnumerable<TransportType>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<TransportType, bool>> filter = null, Func<IQueryable<TransportType>, IOrderedQueryable<TransportType>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.TransportTypeRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.TransportTypeRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

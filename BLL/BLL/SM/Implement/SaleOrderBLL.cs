@@ -147,11 +147,11 @@ namespace BLL.BLL.SM.Implement
             }
         }
 
-        public async Task<IEnumerable<SaleOrder>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null)
+        public async Task<IEnumerable<SaleOrder>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.SaleOrderRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.SaleOrderRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

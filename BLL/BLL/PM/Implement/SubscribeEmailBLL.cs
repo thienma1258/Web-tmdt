@@ -48,11 +48,11 @@ namespace BLL.BLL.PM.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<SubscribeEmail>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SubscribeEmail, bool>> filter = null, Func<IQueryable<SubscribeEmail>, IOrderedQueryable<SubscribeEmail>> orderBy = null)
+        public async Task<IEnumerable<SubscribeEmail>> Get(int intNumber = -1, int currentPage = -1, Expression<Func<SubscribeEmail, bool>> filter = null, Func<IQueryable<SubscribeEmail>, IOrderedQueryable<SubscribeEmail>> orderBy = null, string includeProperties = null)
         {
             try
             {
-                return unitOfWork.SubscribeEmailRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage);
+                return unitOfWork.SubscribeEmailRepository.Get(filter: filter, orderBy: orderBy, number: intNumber, currentPage: currentPage,includeProperties:includeProperties);
 
             }
             catch (Exception objEx)

@@ -15,7 +15,7 @@ namespace DAL.Repository.PM.Implement
         public ProductRepository(ShopContext context) : base(context)
         {
         }
-        public override IEnumerable<Product> Get(Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null, int currentPage = -1, int number = -1)
+        public override IEnumerable<Product> Get(Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null, int currentPage = -1, int number = -1, string includeProperties = null)
         {
             var query = filterObject(filter, currentPage, number);
             query = query.Include(p => p.Brand).Include(p => p.SubGroup).Include(p => p.Category);

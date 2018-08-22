@@ -14,7 +14,7 @@ namespace DAL.Repository.PM.Implement
         public TransportPriceRepository(ShopContext context) : base(context)
         {
         }
-        public override IEnumerable<TransportPrice> Get(Expression<Func<TransportPrice, bool>> filter = null, Func<IQueryable<TransportPrice>, IOrderedQueryable<TransportPrice>> orderBy = null, int currentPage = -1, int number = -1)
+        public override IEnumerable<TransportPrice> Get(Expression<Func<TransportPrice, bool>> filter = null, Func<IQueryable<TransportPrice>, IOrderedQueryable<TransportPrice>> orderBy = null, int currentPage = -1, int number = -1, string includeProperties = null)
         {
             IQueryable<TransportPrice> query = dbSet;
             query = query.Where(p => p.isDeleted == false);

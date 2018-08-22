@@ -30,13 +30,16 @@ namespace DAL.Repository
             }
             return query;
         }
-        public override IEnumerable<TTrackingObject> Get(Expression<Func<TTrackingObject, bool>> filter = null, Func<IQueryable<TTrackingObject>, IOrderedQueryable<TTrackingObject>> orderBy = null, int currentPage = -1, int number = -1)
+        public override IEnumerable<TTrackingObject> Get(Expression<Func<TTrackingObject, bool>> filter = null, Func<IQueryable<TTrackingObject>, IOrderedQueryable<TTrackingObject>> orderBy = null, int currentPage = -1, int number = -1, string includeProperties = null)
         {
             var query=filterObject(filter, currentPage, number);
+            if (includeProperties != null)
+                query = Include(query, includeProperties);
             if (orderBy != null)
             {
                 return orderBy(query).ToList();
             }
+            
             else
             {
                 return query.ToList(); ;
