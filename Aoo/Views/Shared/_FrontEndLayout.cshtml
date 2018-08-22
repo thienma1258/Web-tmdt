@@ -3,6 +3,7 @@
 @inject BLL.BLL.PM.ISubGroupBLL SubGroupBLL
 @inject BLL.BLL.PM.IHomeCarouselBLL HomeCarouselBLL
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
+@inject BLL.BLL.PM.IStoreBLL StoreBLL
 @{
     Layout = null;
 
@@ -14,6 +15,7 @@
     var listmaingroup = await MainGroupBLL.Get();
     var listsubgroup = await SubGroupBLL.Get();
     var listbrand = await BrandBLL.Get(intNumber:3,currentPage:1,orderBy:p=>p.OrderByDescending(brand=>brand.EditedDate));
+    var liststore = await StoreBLL.Get();
 }
 <!DOCTYPE html>
 <html>
@@ -125,28 +127,28 @@
                                 <a href="~/san-pham" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> SẢN PHẨM </span></a>
                                 <ul class="dropdown-menu aits-w3 multi multi1">
                                     <div class="row">
-                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
-                                                <ul class="multi-column-dropdown">
-                                                    <li class="heading">DANH SÁCH</li>
-                                                    @foreach (var item in listsubgroup)
-                                                    {
-                                                        <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
-                                                    }
-                                                </ul>
-                                            </div>
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
+                                            <ul class="multi-column-dropdown">
+                                                <li class="heading">DANH SÁCH</li>
+                                                @foreach (var item in listsubgroup)
+                                                {
+                                                    <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                }
+                                            </ul>
+                                        </div>
                                         @foreach (var brand in listbrand)
                                         {
-                                           
+
                                             <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                                    <p>@brand.Name</p>
-                                                    <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
+                                                <p>@brand.Name</p>
+                                                <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
                                             </div>
-                                            
+
                                         }
-                                           
-                                            <div class="clearfix"></div>
-                                            <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
+                                    </div>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -235,14 +237,32 @@
                                     </div>
                                 </ul>
                             </li>
-                            <li><a href="about.html">ABOUT</a></li>
-                            <li class="wthreesearch">
-                                <form action="/tim-kiem" method="get">
-                                    <input type="search" name="Search" placeholder="Search for a Product" required="">
-                                    <button type="submit" class="btn btn-default search" aria-label="Left Align">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Cửa hàng </span></a>
+                                <ul class="dropdown-menu multi multi3">
+                                    <div class="row">
+                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
+                                            <ul class="multi-column-dropdown">
+                                                <li class="heading">CỬA HÀNG</li>
+                                                @foreach (var item in liststore)
+                                                {
+                                                    <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Address</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        @foreach (var store in liststore)
+                                        {
+
+                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                                <p>@store.Address</p>
+                                                <a href="~/san-pham/@store.Address"><img width="140px" height="180px" src="@Url.Content(store.DefaultImage)" alt="Groovy Apparel"></a>
+                                            </div>
+
+                                        }
+                                        <div class="clearfix"></div>
+                                        <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
+                                    </div>
+                                </ul>
                             </li>
                             <li class="wthreecartaits wthreecartaits2 cart cart box_1">
                                 <form action="#" method="post" class="last">

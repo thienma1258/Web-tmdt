@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using Aoo.ViewModels.PM.Store;
 using BLL.BLL.PM;
 using DAL.Model.PM;
 using Microsoft.AspNetCore.Authorization;
@@ -19,11 +20,11 @@ namespace Aoo.Controllers.Admin.PM
     public class StoreController : BaseController
     {
         private readonly IStoreBLL StoreBLL;
-        
-        public StoreController(IStoreBLL storeBLL, IImageServices imageServices ) : base(imageServices)
+        private IDistrictBLL DistrictBLL;
+        public StoreController(IDistrictBLL DistrictBLL, IStoreBLL storeBLL, IImageServices imageServices ) : base(imageServices)
         {
             StoreBLL = storeBLL;
-           
+            this.DistrictBLL = DistrictBLL;
         }
 
         public async Task<IActionResult> Index(int page = 1)
@@ -54,7 +55,8 @@ namespace Aoo.Controllers.Admin.PM
                         Address = addViewStoreModel.Address,
                         NameStore = addViewStoreModel.NameStore,
                         DefaultImage = ImagePath,
-                        Description = addViewStoreModel.Description
+                        Description = addViewStoreModel.Description,
+                        DistrictID=addViewStoreModel.DicstrictID
 
                     };
                     await StoreBLL.Add(store);
@@ -111,6 +113,9 @@ namespace Aoo.Controllers.Admin.PM
             }
             return Json(new { success = "false" });
         }
-
+        public async Task<JsonResult> GetDistrict()
+        {
+            return Json(await this.DistrictBLL.Get());
+        }
     }
 }

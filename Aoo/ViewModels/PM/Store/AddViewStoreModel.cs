@@ -13,6 +13,8 @@ namespace Aoo.ViewModels.PM.Store
         public string Address { get; set; }
         [Required]
         public string NameStore { get; set; }
+        [Required]
+        public string DicstrictID { get; set; }
         public IFormFile DefaultImage { get; set; }
         [MaxLength(80)]
         [MinLength(5)]

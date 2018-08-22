@@ -135,12 +135,13 @@ namespace Aoo.Controllers.Bill
                 CurrentSaleDetails.Add(temp);
             }
             var isSuccess=await  SaleOrderBLL.CreateBill(CurrentCustomer, CurrentSaleOrder, CurrentSaleDetails);
+            string BaseUrl = string.Format("{0}://{1}", HttpContext.Request.Scheme, HttpContext.Request.Host);
+
             if (isSuccess)
             {
                 if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.Paypal)
                 {
 
-                  string BaseUrl = string.Format("{0}://{1}", HttpContext.Request.Scheme, HttpContext.Request.Host);
                   string SuccessUrl= BaseUrl+ Url.Action("ExcutePayment", "Bill");
                   string ErrorUrl = BaseUrl+ Url.Action("ErrorBill", "Bill");
                   var payment=await this._paypalServicesGatewayBLL.CreatePayment(SuccessUrl, ErrorUrl,CurrentSaleOrder , CurrentSaleDetails, CurrentCustomer);
@@ -148,6 +149,15 @@ namespace Aoo.Controllers.Bill
                   await  this.SaleOrderBLL.Update(CurrentSaleOrder);
                    return Json(new ResponseMessage { Message = SaleOrderBLL.Message, IsSuccess = isSuccess, errorSaleOrder = SaleOrderBLL.enumErrorSaleOrder,RedirectoURl=payment.Links[1].Href });
 
+
+                }
+                else if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.NganLuong)
+                {
+                    var ReturnUrlNganLuong = BaseUrl + Url.Action("NganLuongSuccess", "Bill");
+                    string Note = "WEB BMT";
+                    string UrlNLRedirecto = "https://www.nganluong.vn/button_payment.php?receiver=ducnhan1551997@gmail.com&product_name="+CurrentSaleOrder.ID+"&price="+CurrentSaleOrder.TotalPrice+"&return_url="+ ReturnUrlNganLuong + "&comments="+ Note;
+
+                    return Json(new ResponseMessage { Message = SaleOrderBLL.Message, IsSuccess = isSuccess, errorSaleOrder = SaleOrderBLL.enumErrorSaleOrder, RedirectoURl = UrlNLRedirecto });
 
                 }
                 return Json(new ResponseMessage { Message=SaleOrderBLL.Message,IsSuccess=isSuccess,errorSaleOrder=SaleOrderBLL.enumErrorSaleOrder });

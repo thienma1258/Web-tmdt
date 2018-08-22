@@ -1,14 +1,18 @@
 ﻿@model IEnumerable<DAL.Model.PM.Store>
+@inject BLL.BLL.PM.IProvinceBLL ProvinceBLL
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
 }
+@{
+    var listprovince = (await ProvinceBLL.Get()).ToList();
+ }
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <h2> Danh sách cửa hàng </h2>
 <div class="subadd">
     <a href="/Store/AddStore">Thêm</a>
 </div>
-<table class="tablestore" >
+<table class="tablestore">
     <thead>
         <tr>
             <th>

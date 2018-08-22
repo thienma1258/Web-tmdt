@@ -1,52 +1,70 @@
 ﻿@model Aoo.ViewModels.PM.Store.AddViewStoreModel
-    @{
-        ViewData["Title"] = "Add";
-        Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
-   
-    }
+@inject BLL.BLL.PM.IProvinceBLL ProvinceBLL
+@{
+    ViewData["Title"] = "AddStore";
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+    var listprovince = (await ProvinceBLL.Get()).ToList();
 
-    @{
-        ViewData["Title"] = "AddStore";
-        Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
-    }
+}
+<script src="~/js/BillPayment.js" type="text/javascript"></script>
+<h2>Tạo cửa hàng mới</h2>
 
-    <h2>Tạo cửa hàng mới</h2>
-    
-        <hr />
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="AddStore" enctype="multipart/form-data">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Address" class="control-label"></label>
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-                    <div cla
-                    <div class="form-group">
-                        <label asp-for="NameStore" class="control-label"></label>
-                        <input asp-for="NameStore" class="form-control" />
-                        <span asp-validation-for="NameStore" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddStore" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameStore" class="control-label"></label>
+                <input asp-for="NameStore" class="form-control" />
+                <span asp-validation-for="NameStore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="dividetransport">
+                <div style="width:50%">
+                    <div>
+                        <label>Tỉnh / Thành phố</label>
+                        <select id="province" class="form-control" onchange="myFunction(event)">
+                            <option>Nhập tỉnh thành</option>
 
+                            @{for (int i = 0; i < listprovince.Count(); i++)
+                                {
+                                    <option class="form-control" value="@i">@listprovince[i].Name</option>
 
-                    <div class="form-group">
-                        <label asp-for="DefaultImage" class="control-label"></label>
-                        @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
-                        <span asp-validation-for="DefaultImage" class="text-danger"></span>
+                                }
+                            }
+                        </select>
+                        <br />
                     </div>
+                    <div>
+                        <label>Quận, Huyện</label>
+                        <select id="district" name="DicstrictID" class="form-control" onchange="GetFee()">
+                            <option>Nhập Quận, Huyện</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultImage" class="control-label"></label>
+                @await Html.PartialAsync("~/Views/Component/SingpleUploadImage.cshtml", new Aoo.ViewModels.Component.SingleUploadImageModel { Name = "DefaultImage" })
+                <span asp-validation-for="DefaultImage" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-danger" />
             </div>
-                </form>
-            </div>
-        </div>
+        </form>
+    </div>
+</div>
 
-        <div class="backtolist">
-            <a href="/Store/Index">Trở lại trang chủ</a>
-        </div>
+<div class="backtolist">
+    <a href="/Store/Index">Trở lại trang chủ</a>
+</div>
