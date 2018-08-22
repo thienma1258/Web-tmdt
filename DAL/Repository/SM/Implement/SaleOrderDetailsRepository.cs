@@ -14,6 +14,7 @@ namespace DAL.Repository.SM.Implement
         public SaleOrderDetailsRepository(ShopContext context) : base(context)
         {
         }
+      
         //public override IEnumerable<SaleOrderDetail> Get(Expression<Func<SaleOrderDetail, bool>> filter = null, Func<IQueryable<SaleOrderDetail>, IOrderedQueryable<SaleOrderDetail>> orderBy = null, int currentPage = -1, int number = -1,string i)
         //{
         //    var query = filterObject(filter, currentPage, number);

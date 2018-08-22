@@ -52,6 +52,7 @@ namespace DAL.DataContext
         #region Log
         public DbSet<ErrorLogs> ErrorLogs{ get; set; }
         public DbSet<ImageUploadLog> ImageUploadLogs { get; set; }
+        public DbSet<SaleOrderLogs> SaleOrderLogs { get; set; }
 
         #endregion
         #endregion
@@ -119,7 +120,7 @@ namespace DAL.DataContext
             #region Log
             builder.Entity<ErrorLogs>().ToTable("ErrorLogs");
             builder.Entity<ImageUploadLog>().ToTable("ImageUploadLog");
-            builder.Entity<ImageUploadLog>().ToTable("ImageUploadLog");
+            builder.Entity<SaleOrderLogs>().ToTable("SaleOrderLogs");
 
             #endregion
             // Customize the ASP.NET Identity model and override the defaults if needed.

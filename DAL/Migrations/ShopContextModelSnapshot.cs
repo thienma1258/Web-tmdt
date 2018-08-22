@@ -121,6 +121,44 @@ namespace DAL.Migrations
                     b.ToTable("ImageUploadLog");
                 });
 
+            modelBuilder.Entity("DAL.Model.Log.SaleOrderLogs", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AuthenticationMethodGuid");
+
+                    b.Property<DateTime>("CreatedTime");
+
+                    b.Property<string>("CustomerId");
+
+                    b.Property<bool>("IsPay");
+
+                    b.Property<string>("Logs");
+
+                    b.Property<string>("LogsSaleOrderID");
+
+                    b.Property<int>("PaymentMethod");
+
+                    b.Property<string>("ReviewBy");
+
+                    b.Property<DateTime>("ReviewDate");
+
+                    b.Property<int>("State");
+
+                    b.Property<decimal>("TotalPrice");
+
+                    b.Property<decimal>("TransportTypePrice");
+
+                    b.Property<int>("VAT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("SaleOrderLogs");
+                });
+
             modelBuilder.Entity("DAL.Model.PM.Brand", b =>
                 {
                     b.Property<string>("ID")
@@ -1112,6 +1150,13 @@ namespace DAL.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("DAL.Model.Log.SaleOrderLogs", b =>
+                {
+                    b.HasOne("DAL.Model.CM.CM_Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("DAL.Model.PM.Discout", b =>

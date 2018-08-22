@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 
 namespace Aoo.Controllers.Admin.SM
 {
+    [Authorize]
     [Area("SM")]
     [Authorize]
     [Route("SM")]
@@ -25,7 +26,7 @@ namespace Aoo.Controllers.Admin.SM
         IProductDetailsBLL IProductDetailsBLL;
         IProductBLL IProductBLL;
         ICustomerBLL ICustomerBLL;
-        public SaleOrderController(IProductBLL ProductBLL, IProductDetailsBLL ProductDetailsBLL, ISaleOrderBLL SaleOrderBLL, ISaleOrderDetailsBLL SaleOrderDetailsBLL, ICustomerBLL CustomerBLL)
+        public SaleOrderController(IProductBLL ProductBLL,IProductDetailsBLL ProductDetailsBLL,ISaleOrderBLL SaleOrderBLL, ISaleOrderDetailsBLL SaleOrderDetailsBLL,ICustomerBLL CustomerBLL)
         {
             this.ISaleOrderDetailsBLL = SaleOrderDetailsBLL;
             this.ISaleOrderBLL = SaleOrderBLL;
@@ -35,35 +36,37 @@ namespace Aoo.Controllers.Admin.SM
             this.ICustomerBLL = CustomerBLL;
         }
         [Route("don-hang")]
-        public async Task<IActionResult> Index(DateTime FromDate, DateTime ToDate, int page = 1, string Search = null, string StateSaleOrder = null)
+        public async Task<IActionResult> Index(DateTime FromDate, DateTime ToDate, int page = 1, string Search = null, int StateSaleOrder = -2)
         {
-            IEnumerable<SaleOrder> listSaleOrder = null;
+
+            IEnumerable<SaleOrder> listSaleOrder = new List<SaleOrder>();
+
+
             if (FromDate != DateTime.MinValue && ToDate != DateTime.MinValue)
             {
-                if (FromDate.Date < ToDate.Date)
+                if (FromDate.Date >ToDate.Date)
                 {
                     ModelState.AddModelError("A1", "Định dạng ngày không chính xác");
-                    return View(null);
+                    ViewBag.currentPage = 1;
+                    ViewBag.totalPage = 1;
+
+                    return View(listSaleOrder);
                 }
-                listSaleOrder = await this.ISaleOrderBLL.Get(numberPerPage, page, p => (Search == null || (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || (StateSaleOrder == null || p.State.ToString() == StateSaleOrder)) && (p.ReviewDate.Date < FromDate.Date && p.ReviewDate.Date > ToDate.Date)));
+                listSaleOrder = await this.ISaleOrderBLL.Get(numberPerPage, page, p => ((Search == null ||(p.Customer.CustomerName.Contains(Search)|| p.ReviewBy == Search)) && p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder) && ((p.ReviewDate.Date >= FromDate.Date && p.ReviewDate.Date <= ToDate.Date)||((p.EditedDate.Date >= FromDate.Date && p.EditedDate.Date <= ToDate.Date))));
                 ViewBag.currentPage = page;
-                ViewBag.totalPage = TotalPage(ISaleOrderBLL.Cout(p => (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || p.State.ToString() == StateSaleOrder) && (p.ReviewDate.Date < FromDate.Date && p.ReviewDate.Date > ToDate.Date)));
+                ViewBag.totalPage = TotalPage(ISaleOrderBLL.Cout(p => ((Search == null || (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) && p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder) && ((p.ReviewDate.Date >= FromDate.Date && p.ReviewDate.Date <= ToDate.Date) || ((p.EditedDate.Date >= FromDate.Date && p.EditedDate.Date <= ToDate.Date)))));
 
             }
             else
             {
-                listSaleOrder = await this.ISaleOrderBLL.Get(currentPage: page, intNumber: numberPerPage, filter: p => Search == null || (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || (StateSaleOrder == null || p.State.ToString() == StateSaleOrder)));
+                listSaleOrder = await this.ISaleOrderBLL.Get(currentPage: page, intNumber: numberPerPage, filter: p => ((Search != null && (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) || p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder));
                 ViewBag.currentPage = page;
-                ViewBag.totalPage = TotalPage(ISaleOrderBLL.Cout(p => Search == null || (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search || (StateSaleOrder == null || p.State.ToString() == StateSaleOrder))));
+                ViewBag.totalPage = TotalPage(ISaleOrderBLL.Cout(p =>  ((Search != null && (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) || p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder)));
             }
             var list = await ISaleOrderDetailsBLL.Get();
             return View(listSaleOrder);
         }
-        [Route("xuat-hoa-don")]
-        public async Task<IActionResult> ReportBill()
-        {
-            return View(await IProductBLL.Get());
-        }
+        [Route("don-hang/chi-tiet/confirm")]
         public async Task<JsonResult> ConfirmSaleOrder(string strSaleOrderID)
         {
             SaleOrder objSaleOrder = await this.ISaleOrderBLL.Find(strSaleOrderID);
@@ -75,6 +78,26 @@ namespace Aoo.Controllers.Admin.SM
             if (ConfirmOrder)
                 return Json(new { success = true, message = "Xac nhan don hang thang cong" });
             return Json(new { success = false, message = "Xac nhan don hang khong thanh cong vui long thu lai sau" });
+        }
+        [Route("don-hang/chi-tiet/success")]
+        public async Task<JsonResult> SuccessSaleOrder(string strSaleOrderID)
+        {
+            SaleOrder objSaleOrder = await this.ISaleOrderBLL.Find(strSaleOrderID);
+            if (objSaleOrder == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy đơn hàng" });
+            }
+            else if (!objSaleOrder.IsPay)
+            {
+                return Json(new { success = false, message = "Don hang chua duoc thanh toan" });
+
+            }
+            else{
+                var SuccessOrder = await this.ISaleOrderBLL.SuccessOrder(objSaleOrder, HttpContext.User.Identity.Name);
+                if (SuccessOrder)
+                    return Json(new { success = true, message = "Hoan thanh don hang thang cong" });
+                return Json(new { success = false, message = "Da xay ra loi, vui long thu lai sau" });
+            }
         }
         [HttpGet]
         [Route("don-hang/chi-tiet")]

@@ -9,7 +9,8 @@ namespace DAL.Model.Log
 {
     public class SaleOrderLogs
     {
-        public string LogsSaleOrder { get; set; } = Guid.NewGuid().ToString();
+        public string ID { get; set; } = Guid.NewGuid().ToString();
+        public string LogsSaleOrderID { get; set; } 
         public DateTime CreatedTime { get; set; } = DateTime.Now;
         public virtual CM.CM_Customer Customer { get; set; }
         public StateConfirmEnum State { get; set; } = StateConfirmEnum.Pending;

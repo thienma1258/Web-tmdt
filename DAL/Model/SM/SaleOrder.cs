@@ -12,7 +12,7 @@ namespace DAL.Model.SM
     {
         public string CustomerID { get; set; }
         public virtual CM.CM_Customer Customer { get; set; }
-        public StateConfirmEnum State { get; set; } = StateConfirmEnum.Pending;
+        public StateConfirmEnum State { get; set; } = StateConfirmEnum.Uncofirm;
         [Display(Name = "Nhà vận chuyển")]
         public virtual TransportType TransportPrice { get; set; }
         public string TransportPriceID { get; set; }

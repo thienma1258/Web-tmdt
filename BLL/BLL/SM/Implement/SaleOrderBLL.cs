@@ -53,10 +53,11 @@ namespace BLL.BLL.SM.Implement
             SaleOrderLogs saleOrderLogs = new SaleOrderLogs
             {
                 AuthenticationMethodGuid = saleOrder.AuthenticationMethodGuid,
+                LogsSaleOrderID=saleOrder.ID,
                 Logs = "Loi o order "+saleOrder.ID,
                 IsPay = saleOrder.IsPay,
                 TotalPrice = saleOrder.TotalPrice,
-                TransportTypePrice = saleOrder.TransportPrice.Price,
+                TransportTypePrice = saleOrder.TransportTypePrice,
                 State = saleOrder.State,
                 ReviewBy = saleOrder.ReviewBy,
                 ReviewDate = saleOrder.ReviewDate,
@@ -320,18 +321,19 @@ namespace BLL.BLL.SM.Implement
             }
         }
 
-        public async Task<bool> ExcutePayment(Payment payment)
+        public async Task<bool> ExcutePayment(string paymentid,string payerId)
         {
             try
             {
-               var Saleorder= this.unitOfWork.SaleOrderRepository.Find(p => p.AuthenticationMethodGuid == payment.Id);
+               var Saleorder= this.unitOfWork.SaleOrderRepository.Find(p => p.AuthenticationMethodGuid == paymentid);
                 if (Saleorder == null)
                     return false;
-                var isSuccess = await _PaypalServicesGatewayBLL.ExcutePayment(payment);
+                var isSuccess = await _PaypalServicesGatewayBLL.ExcutePayment(paymentid, payerId);
                 if (isSuccess == true)
                 {
                     Saleorder.IsPay = true;
                     this.unitOfWork.SaleOrderRepository.Update(Saleorder);
+                    await this.unitOfWork.SaveChangeAsync();
                     return true;
                 }
                 return false;

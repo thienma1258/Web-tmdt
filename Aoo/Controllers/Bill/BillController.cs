@@ -57,14 +57,12 @@ namespace Aoo.Controllers.Bill
             return Json(new ResponseMessage { Message = SaleOrderBLL.Message, IsSuccess = isSuccess, errorSaleOrder = SaleOrderBLL.enumErrorSaleOrder });
 
         }
-        public async Task<JsonResult> ExcutePayment(PayPal.v1.Payments.Payment  payment)
+        public async Task<bool> ExcutePayment(string paymentId,string Token,string payerID)
         {
-            Logging logging = new Logging();
-            logging.ErrorLogs(payment.ToString());
-            await SaleOrderBLL.ExcutePayment(payment);
-            
-            return Json(payment);
+           var isSucess=await  this.SaleOrderBLL.ExcutePayment(paymentId, payerID);
+            return isSucess;
         }
+
         public async  Task<JsonResult> ErrorBill(PayPal.v1.Payments.Payment payment)
         {
             Logging logging = new Logging();
@@ -151,11 +149,18 @@ namespace Aoo.Controllers.Bill
 
 
                 }
+                else if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.GDTT)
+                {
+                    string SuccessUrl = BaseUrl + Url.Action("Index", "Home");
+                    string ErrorUrl = BaseUrl + Url.Action("ErrorBill", "Bill");
+                    return Json(new ResponseMessage { Message=SaleOrderBLL.Message,IsSuccess=isSuccess,errorSaleOrder=SaleOrderBLL.enumErrorSaleOrder });
+
+                }
                 else if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.NganLuong)
                 {
                     var ReturnUrlNganLuong = BaseUrl + Url.Action("NganLuongSuccess", "Bill");
                     string Note = "WEB BMT";
-                    string UrlNLRedirecto = "https://www.nganluong.vn/button_payment.php?receiver=ducnhan1551997@gmail.com&product_name="+CurrentSaleOrder.ID+"&price="+CurrentSaleOrder.TotalPrice+"&return_url="+ ReturnUrlNganLuong + "&comments="+ Note;
+                    string UrlNLRedirecto = "https://www.nganluong.vn/button_payment.php?receiver=ducnhan1551997@gmail.com&product_name=" + CurrentSaleOrder.ID + "&price=" + CurrentSaleOrder.TotalPrice + "&return_url=" + ReturnUrlNganLuong + "&comments=" + Note;
 
                     return Json(new ResponseMessage { Message = SaleOrderBLL.Message, IsSuccess = isSuccess, errorSaleOrder = SaleOrderBLL.enumErrorSaleOrder, RedirectoURl = UrlNLRedirecto });
 

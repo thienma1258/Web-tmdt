@@ -180,4 +180,7 @@ function LoadPopup() {
     };
     $("#bodyPopup").append(html);
 }
+function deleteCookie(name) {
+    setCookie(name, '', -1);
+}
 

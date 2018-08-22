@@ -103,7 +103,7 @@ namespace Aoo.Controllers.Admin.PM
                 
 
             }
-            return RedirectToAction("Index");
+            return View(editBrand);
         }
         [HttpDelete("{id}")]
         public  async Task<JsonResult> Delete(string id)
