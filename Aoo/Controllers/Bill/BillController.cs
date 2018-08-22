@@ -61,7 +61,8 @@ namespace Aoo.Controllers.Bill
         {
             Logging logging = new Logging();
             logging.ErrorLogs(payment.ToString());
-
+            await SaleOrderBLL.ExcutePayment(payment);
+            
             return Json(payment);
         }
         public async  Task<JsonResult> ErrorBill(PayPal.v1.Payments.Payment payment)

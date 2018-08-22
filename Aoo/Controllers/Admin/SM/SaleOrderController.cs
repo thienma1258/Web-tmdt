@@ -16,6 +16,8 @@ using Newtonsoft.Json;
 namespace Aoo.Controllers.Admin.SM
 {
     [Area("SM")]
+    [Authorize]
+    [Route("SM")]
     public class SaleOrderController : BaseController
     {
         ISaleOrderBLL ISaleOrderBLL;

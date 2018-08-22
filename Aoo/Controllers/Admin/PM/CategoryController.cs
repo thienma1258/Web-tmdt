@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using BLL;
 using BLL.BLL.PM;
 using DAL.Model.PM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.ImageServices;
 
 namespace Aoo.Controllers.Admin.PM
 {
+    [Authorize]
     [Route("[controller]/[action]")]
     [Area("PM")]
-
     public class CategoryController : BaseController
     {
         private readonly  ICategoryBLL CategoryBLL;

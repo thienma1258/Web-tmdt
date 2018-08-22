@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Aoo.Services;
 using Aoo.ViewModels.PM.EmailMarketing;
 using BLL.BLL.PM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.EmailServices;
@@ -13,6 +14,7 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]")]
     [Area("PM")]
+    [Authorize]
     public class EmailMarketingController : BaseController
     {
         private ISubscribeEmailBLL SubscribeEmailBLL;

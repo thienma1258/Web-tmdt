@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BLL;
 using BLL.BLL.PM;
 using DAL.Model.PM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.ImageServices;
@@ -15,9 +16,9 @@ namespace Aoo.Controllers.Admin.PM
 
     [Route("[controller]/[action]")]
     [Area("PM")]
+    [Authorize]
     public class SubGroupController : BaseController
     {
-        private readonly IMainGroupBLL MainGroupBLL;
         private readonly ISubGroupBLL SubGroupBLL;
         public SubGroupController(ISubGroupBLL subGroupBLL, IImageServices imageServices, IMainGroupBLL MainGroupBLL) : base(imageServices)
         {

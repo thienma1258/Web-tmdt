@@ -6,6 +6,7 @@ using Aoo.ViewModels.PM.TransportType;
 using BLL.BLL.PM;
 using BLL.BLL.PM.Implement;
 using DAL.Model.PM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -13,6 +14,7 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
+    [Authorize]
     public class TransportTypeController : BaseController
     {
         private ITransportTypeBLL TransportTypeBLL;

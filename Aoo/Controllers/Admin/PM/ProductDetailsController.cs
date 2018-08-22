@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL.BLL.PM;
 using DAL.Model.PM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -13,7 +14,7 @@ namespace Aoo.Controllers.Admin.PM
 {
     [Route("[controller]/[action]")]
     [Area("PM")]
-    
+    [Authorize]
     public class ProductDetailsController : BaseController
     {
         private readonly IProductBLL ProductBLL;

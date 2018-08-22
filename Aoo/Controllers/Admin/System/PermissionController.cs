@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aoo.Controllers.Admin.System
 {
+    [Authorize]
     public class PermissionController : Controller
     {
         public IActionResult Index()
