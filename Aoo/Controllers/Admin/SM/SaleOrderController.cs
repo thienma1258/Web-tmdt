@@ -57,6 +57,11 @@ namespace Aoo.Controllers.Admin.SM
             var list = await ISaleOrderDetailsBLL.Get();
             return View(listSaleOrder);
         }
+        [Route("xuat-hoa-don")]
+        public async Task<IActionResult> ReportBill()
+        {
+            return View(await IProductBLL.Get());
+        }
         public async Task<JsonResult> ConfirmSaleOrder(string strSaleOrderID)
         {
             SaleOrder objSaleOrder = await this.ISaleOrderBLL.Find(strSaleOrderID);
