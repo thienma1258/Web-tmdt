@@ -140,6 +140,7 @@
                             <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
                                 Xem chi tiết hóa đơn
                             </button>
+                            <button onclick="window.location.href='/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
                         </td>
                         @{
                             if (item.ReviewBy != null)
@@ -158,11 +159,12 @@
                             }
                         }
                     </tr>
+
                 }
+
             </tbody>
         </table>
-        @await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
-
+    </div>
     </div>
     @* pop up region *@
     <!-- Modal -->

@@ -1,0 +1,52 @@
+﻿@model DAL.Model.SM.SaleOrder
+@inject BLL.BLL.SM.ISaleOrderDetailsBLL SaleOrderBLLDetailBLL
+@{ 
+    ViewData["Title"] = "Xuất hóa đơn";
+    var list = await SaleOrderBLLDetailBLL.Get(filter: p => p.SaleOrderID == Model.ID,includeProperties: "ProductDetail.Product");
+}
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
+<link href="~/css/Admin/admindev.css" rel="stylesheet" />
+<div class="bannerbill">
+    <img src="~/images/banner3.png" />
+</div>
+<div class="bill">
+    <h3>HÓA ĐƠN</h3>
+    <h2>Tên khách hàng : @Model.Customer.CustomerName </h2>
+
+    <table id="bill" class="tablebrand" style="width:75%">
+        <tr>
+            <th>
+                <span>Tên Sản phẩm</span>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+        </tr>
+
+            @foreach (var item in list)
+            {
+              <tr>
+                <td>
+                     @Html.DisplayFor(modelItem => item.ProductDetail.Product.Model)
+                </td>
+                 <td>
+                      @Html.DisplayFor(modelItem => Model.PaymentMethod)
+                </td>
+                 <td>
+                       @Html.DisplayFor(modelItem => Model.IsPay)
+                </td>
+                <td>
+                       @Html.DisplayFor(modelItem => Model.TotalPrice)
+                </td>
+              </tr>
+            }
+
+    </table>
+</div>
+

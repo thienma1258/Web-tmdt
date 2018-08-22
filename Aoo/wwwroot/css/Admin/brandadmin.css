@@ -93,4 +93,26 @@ img {
         width: 78px;
         height: 78px;
     }
-
+.bannerbill{
+   
+}
+    .bannerbill img {
+        width: 90%;
+        margin-left: 60px;
+        padding:initial;
+    }
+    .bill h3 {
+        margin: -11% 0 0 40%;
+        font-size: 50px;
+        color: #fff;
+    }
+    .bill h2 {
+    margin: 9% 0 -4% 9%;
+}
+#bill {
+    border: 1px solid;
+    margin:10% 0 10% 12%;
+}
+    #bill.tablebrand tr{
+        text-align:center
+    }

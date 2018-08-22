@@ -18,6 +18,10 @@ namespace DAL.Repository.SM.Implement
         {
             return dbSet.FirstOrDefault(filter);
         }
+        public override SaleOrder Find(string ID)
+        {
+            return dbSet.Include(p => p.Customer).FirstOrDefault(p => p.ID == ID);
+        }
         //public override IEnumerable<SaleOrder> Get(Expression<Func<SaleOrder, bool>> filter = null, Func<IQueryable<SaleOrder>, IOrderedQueryable<SaleOrder>> orderBy = null, int currentPage = -1, int number = -1)
         //{
         //    var query = filterObject(filter, currentPage, number);

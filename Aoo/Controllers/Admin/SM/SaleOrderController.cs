@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Aoo.ViewModels;
 using BLL.BLL.CM;
@@ -66,7 +67,16 @@ namespace Aoo.Controllers.Admin.SM
             var list = await ISaleOrderDetailsBLL.Get();
             return View(listSaleOrder);
         }
-        [Route("don-hang/chi-tiet/confirm")]
+
+   
+        [Route("xuat-hoa-don")]
+        public async Task<IActionResult> ReportBill(string id)
+        {
+
+            SaleOrder saleOrder =await ISaleOrderBLL.Find(id);
+            return View(saleOrder);
+        }
+     [Route("don-hang/chi-tiet/confirm")]
         public async Task<JsonResult> ConfirmSaleOrder(string strSaleOrderID)
         {
             SaleOrder objSaleOrder = await this.ISaleOrderBLL.Find(strSaleOrderID);
