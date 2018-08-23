@@ -66,7 +66,6 @@ namespace BLL.BLL.SM.Implement
                 
             };
             this.unitOfWork.SaleOrderLogsRepository.Insert(saleOrderLogs);
-            await this.unitOfWork.SaveChangeAsync();
         }
         public async Task<bool> Add(SaleOrder saleOrder, string CreatedUser = "adminstrator")
         {
@@ -74,8 +73,9 @@ namespace BLL.BLL.SM.Implement
             {
                 saleOrder.CreatedUser = CreatedUser;
                 this.unitOfWork.SaleOrderRepository.Insert(saleOrder);
-                await this.unitOfWork.SaveChangeAsync();
                 AddLogSaleOrder( saleOrder);
+                await this.unitOfWork.SaveChangeAsync();
+
                 return true;
             }
             catch (Exception objEx)

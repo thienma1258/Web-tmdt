@@ -33,14 +33,15 @@ namespace BLL.ServicesGatewayBLL
                     Total = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TotalPrice)),
                     Details = new AmountDetails
                     {
-                        Subtotal = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TotalPrice) - ExchangeMoneyCurrency(saleOrder.TransportTypePrice)),
+                      
+                        Subtotal = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TotalPrice) -ExchangeMoneyCurrency( saleOrder.TransportTypePrice)),
                         Shipping = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TransportTypePrice)),
-                        Tax = "0.00",
-                        HandlingFee = "0.00",
-                        Insurance = "0.00",
-                        ShippingDiscount = "0.00"
-
-
+                        Tax= "0.00",
+                        HandlingFee="0.00",
+                        Insurance="0.00",
+                        ShippingDiscount="0.00"
+                       
+                        
                     }
                 };
                 List<Item> listItem = new List<Item>();
@@ -49,10 +50,11 @@ namespace BLL.ServicesGatewayBLL
                     Item item = new Item
                     {
                         Currency = "USD",
-                        Price = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(detail.Price)),
+                        Price = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(detail.ProductDetail.Product.Price)),
                         Quantity = detail.Quality.ToString(),
                         Name = detail.ProductDetail.Product.Model,
                     };
+                    listItem.Add(item);
                 }
                 ItemList itemList = new ItemList
                 {
@@ -65,15 +67,13 @@ namespace BLL.ServicesGatewayBLL
                     Amount = amount,
                     Description = "Phi tien cho Shop BMT",
                     ItemList = itemList,
-                    Custom = saleOrder.ID,
-                    ReferenceId = saleOrder.ID,
+                   
                     NoteToPayee = "Goi dien cho 0937019527 cho moi cau hoi",
-
 
                 };
                 return await this._paypalServices.CreatePayment(SuccessURl, ErrorUrl, transaction);
             }
-            catch (Exception objEx)
+            catch(Exception objEx)
             {
                 Exception exception = new Exception(objEx.Message + "loi goi paypal o sale" + saleOrder.ID);
 
@@ -83,14 +83,18 @@ namespace BLL.ServicesGatewayBLL
             }
 
         }
+
         public async Task<bool> ExcutePayment(string paymentId,string payerID)
         {
             try
             {
+                 
                  PaymentExecution paymentExecution = new PaymentExecution
                     {
 
+                        
                         PayerId=payerID
+
 
                     };
 
@@ -102,7 +106,7 @@ namespace BLL.ServicesGatewayBLL
                 
                 return false;
             }
-            catch (Exception objEx)
+            catch(Exception objEx)
             {
                 Logging logging = new Logging();
                 logging.ErrorLogs(objEx.ToString());
@@ -116,6 +120,7 @@ namespace BLL.ServicesGatewayBLL
         private string FormatCurrencyUSDToPayPal(decimal Money)
         {
             CultureInfo USDCulture = new CultureInfo("en-US");
+           
             //  Money = ExchangeMoneyCurrency(Money);
             string stringMoney = Money.ToString("N", USDCulture);
             return stringMoney;

@@ -51,10 +51,10 @@ namespace Aoo.Controllers
         }
 
 
-
+        [HttpGet("Error")]
         public async Task<IActionResult> Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
 
 

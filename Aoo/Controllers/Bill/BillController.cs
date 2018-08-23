@@ -57,12 +57,22 @@ namespace Aoo.Controllers.Bill
             return Json(new ResponseMessage { Message = SaleOrderBLL.Message, IsSuccess = isSuccess, errorSaleOrder = SaleOrderBLL.enumErrorSaleOrder });
 
         }
-        public async Task<bool> ExcutePayment(string paymentId,string Token,string payerID)
+        public async Task<IActionResult> ExcutePayment(string paymentId,string Token,string payerID)
         {
-           var isSucess=await  this.SaleOrderBLL.ExcutePayment(paymentId, payerID);
-            return isSucess;
+            var isSucess=await  this.SaleOrderBLL.ExcutePayment(paymentId, payerID);
+            if (isSucess)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
-
+        public async Task<IActionResult> PaymentTTTN(string paymentId, string Token, string payerID)
+        {
+            return View();
+        }
         public async  Task<JsonResult> ErrorBill(PayPal.v1.Payments.Payment payment)
         {
             Logging logging = new Logging();
@@ -145,20 +155,23 @@ namespace Aoo.Controllers.Bill
                   var payment=await this._paypalServicesGatewayBLL.CreatePayment(SuccessUrl, ErrorUrl,CurrentSaleOrder , CurrentSaleDetails, CurrentCustomer);
                   CurrentSaleOrder.AuthenticationMethodGuid = payment.Id;
                   await  this.SaleOrderBLL.Update(CurrentSaleOrder);
+
+
+
                    return Json(new ResponseMessage { Message = SaleOrderBLL.Message, IsSuccess = isSuccess, errorSaleOrder = SaleOrderBLL.enumErrorSaleOrder,RedirectoURl=payment.Links[1].Href });
 
 
                 }
                 else if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.GDTT)
                 {
-                    string SuccessUrl = BaseUrl + Url.Action("Index", "Home");
+                    string SuccessUrl = BaseUrl + Url.Action("PaymentTTTN", "Bill");
                     string ErrorUrl = BaseUrl + Url.Action("ErrorBill", "Bill");
                     return Json(new ResponseMessage { Message=SaleOrderBLL.Message,IsSuccess=isSuccess,errorSaleOrder=SaleOrderBLL.enumErrorSaleOrder });
 
                 }
                 else if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.NganLuong)
                 {
-                    var ReturnUrlNganLuong = BaseUrl + Url.Action("NganLuongSuccess", "Bill");
+                    var ReturnUrlNganLuong = BaseUrl + Url.Action("PaymentTTTN", "Bill");
                     string Note = "WEB BMT";
                     string UrlNLRedirecto = "https://www.nganluong.vn/button_payment.php?receiver=ducnhan1551997@gmail.com&product_name=" + CurrentSaleOrder.ID + "&price=" + CurrentSaleOrder.TotalPrice + "&return_url=" + ReturnUrlNganLuong + "&comments=" + Note;
 
