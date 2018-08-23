@@ -132,17 +132,19 @@
                                             <li class="heading">DANH SÁCH</li>
                                             @foreach (var item in listsubgroup)
                                             {
-                                                <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                <li><a href="~/@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
                                             }
                                         </ul>
                                     </div>
                                     @foreach (var brand in listbrand)
                                     {
-
+                                    <a href="~/@brand.UrlFriendly">
                                         <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
                                             <p>@brand.Name</p>
-                                            <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
+                                            <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
+
                                         </div>
+                                    </a>
 
                                     }
 
@@ -160,17 +162,19 @@
                                             <li class="heading">DANH SÁCH</li>
                                             @foreach (var item in listsubgroup)
                                             {
-                                                <li><a href="@item.ID"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                <li><a href="@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
                                             }
                                         </ul>
                                     </div>
                                     @foreach (var brand in listbrand)
                                     {
-
+                                    <a href="~/@brand.UrlFriendly">
                                         <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
                                             <p>@brand.Name</p>
-                                            <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
+                                            <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
+
                                         </div>
+                                    </a>
 
                                     }
                                     <div class="clearfix"></div>
@@ -187,18 +191,19 @@
                                             <li class="heading">DANH SÁCH</li>
                                             @foreach (var item in listsubgroup)
                                             {
-                                                <li><a href="mens.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                <li><a href="@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
                                             }
                                         </ul>
                                     </div>
                                     @foreach (var brand in listbrand)
                                     {
-
+                                    <a href="~/@brand.UrlFriendly">
                                         <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
                                             <p>@brand.Name</p>
-                                            <a href="~/san-pham/@brand.ID"><img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel"></a>
-                                        </div>
+                                            <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
 
+                                        </div>
+                                    </a>
                                     }
                                     <div class="clearfix"></div>
                                     <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
@@ -206,49 +211,46 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> HOTLIST </span></a>
-                            <ul class="dropdown-menu multi multi4">
+                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> MẶT HÀNG </span></a>
+                            <ul class="dropdown-menu multi multi3">
                                 <div class="row">
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-1">
+                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
-                                            <li class="heading">FEATURED</li>
-                                            <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>New Arrivals</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Online Only</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Brands</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Clearance Sale</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Discount Store</a></li>
-                                            <li><a href="womens_accessories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Editor's Pick</a></li>
+                                            <li class="heading">DANH SÁCH</li>
+                                            @foreach (var item in listmaingroup)
+                                            {
+                                                <li><a href="@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                            }
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-2">
-                                        <p>MEN</p>
-                                        <a href="mens.html"><img src="~/images/other-nav-1.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-3">
-                                        <p>WOMEN</p>
-                                        <a href="womens.html"><img src="~/images/other-nav-2.jpg" alt="Groovy Apparel"></a>
-                                    </div>
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-4">
-                                        <p>ACCESSORIES</p>
-                                        <a href="mens_accessories.html"><img src="~/images/other-nav-3.jpg" alt="Groovy Apparel"></a>
-                                    </div>
+                                    @foreach (var brand in listbrand)
+                                    {
+                                        <a href="~/@brand.UrlFriendly">
+                                            <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                                <p>@brand.Name</p>
+                                                <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
+
+                                            </div>
+                                        </a>
+                                    }
                                     <div class="clearfix"></div>
                                     <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
                                 </div>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span>CHI NHANH</span></a>
+                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span>CHI NHÁNH</span></a>
                             <ul class="dropdown-menu multi multi4">
                                 <div class="row">
+                                    <h3>CÁC CHI NHÁNH CỦA SHOP</h3>
                                     @foreach (var item in liststore)
                                     {
                                         <div class="col-sm-3 w3layouts-nav-agile w3layouts-hot-nav-agileits w3layouts-hot-nav-agileits-2">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="~/Women/ShopWomen"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Address</a></li>
+                                                <li><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Address</li>
                                                 
                                             </ul>
-                                            <p>@item.District.Name,@item.District.Province.type @item.District.Province.Name</p>
+                                            <p>@item.District.type @item.District.Name,@item.District.Province.type @item.District.Province.Name</p>
                                             <a href="mens.html"><img style="width:180px;height:115px" src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel"></a>
                                         </div>
                                     }

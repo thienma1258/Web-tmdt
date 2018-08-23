@@ -114,6 +114,7 @@ a:focus, a:hover {
 
 	ul.multi-column-dropdown li {
 		display: block;
+        width:95%;
 		line-height: 32px;
 		color: #000;
 	}

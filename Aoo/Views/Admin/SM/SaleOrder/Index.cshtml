@@ -148,7 +148,8 @@
                     <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
                         Xem chi tiết hóa đơn
                     </button>
-                    <button onclick="window.location.href='/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
+
+                        <button onclick="window.location.href='/sm/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
                 </td>
                 @{
                     if (item.ReviewBy != null)
@@ -268,35 +269,42 @@
     function confirmSaleOrder() {
         var id = document.getElementById('getId').value;
         $.ajax({
+
             url: '/sm/don-hang/chi-tiet/confirm?strSaleOrderID=' + id,
             type: 'post',
             async: true,
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
+
                 if (data.success) {
                     alert(data.message);
                     window.location.reload();
-                }             
-                alert(data.message);
+                }
+                else { alert(data.message); }
             }
         });
+
     }
     function successSaleOrder(id) {
         $.ajax({
+
             url: '/sm/don-hang/chi-tiet/success?strSaleOrderID=' + id,
             type: 'post',
             async: true,
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
+
                 if (data.success) {
                     alert(data.message);
                     window.location.reload();
                 }
-                alert(data.message);
+                else { alert(data.message); }
+
             }
         });
+
     }
     function isPaySaleOrder(id) {
         $.ajax({
@@ -310,7 +318,8 @@
                     alert(data.message);
                     window.location.reload();
                 }
-                alert(data.message);
+                else { alert(data.message); }
+
             }
         });
     }

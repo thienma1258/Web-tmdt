@@ -36,17 +36,18 @@
         <div class="wthreehome-latest-grids">
             @foreach (var item in listcategory)
             {
+                <a href="~/@item.UrlFriendly">
             <div class="col-md-6 wthreehome-latest-grid wthreehome-latest-grid1">
                 <div class="grid">
-                    <figure class="effect-apollo">
-                          <img height="361px" width="500px" src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
-                        <figcaption></figcaption>
-                    </figure>
-                </div>
-                <h4>@item.Name</h4>
-                <h5>@item.Description</h5>
-                <h6><a href="/san-pham">SHOPPING</a></h6>
-            </div>
+             <figure class="effect-apollo">
+                    <img height="361px" width="500px" src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
+             <figcaption></figcaption>
+            </figure>
+        </div>
+        <h4>@item.Name</h4>
+        <h5>@item.Description</h5>
+    </div>
+            </a>
             }
         </div>
         <div class="clearfix"></div>
@@ -69,32 +70,17 @@
 <div class="wthreedenim-coll">
     <div class="style-grids">
         @foreach (var item in listbrand) {
-        <div class="col-md-6 style-grid style-grid-1">
-            <img src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
-            <div class="style-grid-1-text">
-                <h3>DENIM JEANS</h3>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p>
-                <div class="wthreeshop-a">
-                    <a href="womens.html">SHOP DENIM COLLECTION</a>
+        <a href="~/@item.UrlFriendly">
+            <div class="col-md-6 style-grid style-grid-1">
+                <img src="@Url.Content(item.DefaultImage)" alt="Groovy Apparel">
+                <div class="style-grid-1-text">
+                    <h3>DENIM JEANS</h3>
+                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p>
+                    <div class="wthreeshop-a">
+                    </div>
                 </div>
             </div>
-        </div>
-        @*<div class="col-md-6 style-grid style-grid-2">
-            <div class="style-image-1">
-                <img src="images/style-2.jpg" alt="Groovy Apparel">
-                <div class="style-grid-2-text">
-                    <h3>WATER REPELLENT</h3>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-                </div>
-            </div>
-            <div class="style-image-2">
-                <img src="images/style-3.jpg" alt="Groovy Apparel">
-                <div class="style-grid-2-text">
-                    <h3>STITCHED TO PERFECTION</h3>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-                </div>
-            </div>
-        </div>*@
+        </a>
         }
         <div class="clearfix"></div>
     </div>
