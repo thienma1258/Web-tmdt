@@ -5,6 +5,12 @@
     <UserSecretsId>aspnet-Aoo-8CBF634C-D1BE-4C1C-A499-6549ECB22EC7</UserSecretsId>
   <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
 
+
+  <StartupObject />
+
+
+  <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+
   </PropertyGroup>
 
 

@@ -70,7 +70,7 @@ namespace Services.Implement
                 {
                         if (image.Width < defaultWidth || image.Height < defaultHeight)
                         {
-                            image = resize(defaultWidth, defaultHeight, image);
+                      //      image = resize(defaultWidth, defaultHeight, image);
                         }
                         imagePath = defaultLocationImage + "\\" + imageName;
                         image.Save(imagePath);

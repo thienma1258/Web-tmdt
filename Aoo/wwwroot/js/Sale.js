@@ -10,6 +10,7 @@
 }
 include('/js/Cookie.js');
 include('/js/BillPayment.js');
+
 function CustomerModel(Name, Phone ,CMND) {
     this.Name = Name;
     this.Phone = Phone;
@@ -41,6 +42,7 @@ function payment(methodPayment) {
     GetFullParam(methodPayment);
 }
 function GetFullParam(methodPayment) {
+
     var NameI = document.getElementById("NameCustomer").value;
     var PhoneI = document.getElementById("PhoneCustomer").value;
     var CM = document.getElementById("CMND").value;
@@ -92,6 +94,7 @@ function GetFullParam(methodPayment) {
                 Customer = CustomerI
             );
             var postdata = ListFullParam;
+            LoadingScript.loading();
             $.ajax({
                 url: '/Bill/GetFullParam',
                 type: 'post',
@@ -100,7 +103,7 @@ function GetFullParam(methodPayment) {
                 contentType: 'application/json',
                 success: function (data) {
                     console.log(data);
-
+                    LoadingScript.finish();
                     if (data.errorSaleOrder == "0") {
                         var confirmCode = prompt("nhap vao ma xac nhan");
                         $.ajax({

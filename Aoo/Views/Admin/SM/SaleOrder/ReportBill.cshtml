@@ -2,8 +2,17 @@
 @inject BLL.BLL.SM.ISaleOrderDetailsBLL SaleOrderBLLDetailBLL
 @{ 
     ViewData["Title"] = "Xuất hóa đơn";
+    Layout = null;
     var list = await SaleOrderBLLDetailBLL.Get(filter: p => p.SaleOrderID == Model.ID,includeProperties: "ProductDetail.Product");
 }
+<style>
+    body {
+        margin: 1.6cm;
+    }
+</style>
+<script>
+    window.print();
+</script>
 <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
 <link href="~/css/Admin/admindev.css" rel="stylesheet" />
 <div class="bannerbill">
@@ -12,41 +21,42 @@
 <div class="bill">
     <h3>HÓA ĐƠN</h3>
     <h2>Tên khách hàng : @Model.Customer.CustomerName </h2>
-
+    <h2> SDT : @Model.Customer.CustomerPhone </h2>
+    <h2>CMND  : @Model.Customer.CMND </h2>
+    <h2>Ngay xuất hóa đơn  : @DateTime.Now </h2>
+    <h2>Tổng tiền  : @(string.Format("{0:N0}", Model.TotalPrice)) </h2>
     <table id="bill" class="tablebrand" style="width:75%">
         <tr>
             <th>
                 <span>Tên Sản phẩm</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaymentMethod)
+                Số lượng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsPay)
+                Giá
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
+
             </th>
         </tr>
-
-            @foreach (var item in list)
-            {
-              <tr>
+        @foreach (var item in list)
+        {
+            <tr>
                 <td>
-                     @Html.DisplayFor(modelItem => item.ProductDetail.Product.Model)
-                </td>
-                 <td>
-                      @Html.DisplayFor(modelItem => Model.PaymentMethod)
-                </td>
-                 <td>
-                       @Html.DisplayFor(modelItem => Model.IsPay)
+                    @Html.DisplayFor(modelItem => item.ProductDetail.Product.Model)
                 </td>
                 <td>
-                       @Html.DisplayFor(modelItem => Model.TotalPrice)
+                    @item.Quality;
                 </td>
-              </tr>
-            }
-
+                <td>
+                    @(string.Format("{0:N0}",item.ProductDetail.Product.Price));
+                </td>
+                <td>
+                    @(item.ProductDetail.Product.Price * item.Quality);
+                </td>
+            </tr>
+        }
     </table>
 </div>
 

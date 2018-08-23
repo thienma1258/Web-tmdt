@@ -13,26 +13,29 @@ namespace UniTest.EmailServices
         {
             MailchimpSErvices mailchimpSErvices = new MailchimpSErvices();
             var test =   mailchimpSErvices.GetAllMailingLists();
-            
+            Assert.True(true);
         }
         [Fact]
         public void GetAllTemplete_Test()
         {
+
             MailchimpSErvices mailchimpSErvices = new MailchimpSErvices();
             var test = mailchimpSErvices.GetAllTemplates();
-
+            Assert.True(true);
         }
         [Fact]
         public void SendEmailCampain_Test()
         {
             MailchimpSErvices mailchimpSErvices = new MailchimpSErvices();
              mailchimpSErvices.CreateAndSendCampaign("test");
+            Assert.True(true);
         }
         [Fact]
         public void AddUserToList()
         {
             MailchimpSErvices mailchimpSErvices = new MailchimpSErvices();
             mailchimpSErvices.AddUserToList("cpud1258@gmail.com");
+            Assert.True(true);
         }
     }
 }

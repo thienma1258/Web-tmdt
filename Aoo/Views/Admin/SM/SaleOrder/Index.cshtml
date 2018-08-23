@@ -124,10 +124,10 @@
                     @Html.DisplayFor(modelItem => item.PaymentMethod)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TransportTypePrice)
+                    @(string.Format("{0:N0}", item.TransportTypePrice))
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                    @(string.Format("{0:N0}", item.TotalPrice))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsPay)
@@ -149,7 +149,7 @@
                         Xem chi tiết hóa đơn
                     </button>
 
-                        <button onclick="window.location.href='/sm/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
+                    <a target="_blank" href="/sm/xuat-hoa-don?id=@item.ID">xuất hoán đơn</a>
                 </td>
                 @{
                     if (item.ReviewBy != null)
@@ -167,9 +167,15 @@
                                 <span>Succesed</span>
                             </td>
                         }
+                    }
+                    else
+                    {
+                        <td>
+                            <span>Unconfirm</span>
+                        </td>
 
                     }
-                    if (item.IsPay && (int)(item.State) != 1)
+                    if (item.IsPay && (int)(item.State) != 1 && (int)(item.State) != -2)
                     {
                         <td>
                             <button onclick="successSaleOrder('@item.ID')" class="btn-success">Success</button>

@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Services.EmailServices;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace Aoo
 {
@@ -38,8 +39,8 @@ namespace Aoo
         {
             
             services.AddOptions();
-    //        services.AddDbContext<ShopContext>(
-    //);
+            //        services.AddDbContext<ShopContext>(
+
 
             services.AddDbContext<ShopContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
@@ -84,7 +85,6 @@ namespace Aoo
 
                 // Lockout settings
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
                 // User settings
@@ -94,7 +94,6 @@ namespace Aoo
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
-                options.Cookie.HttpOnly = false;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 // If the LoginPath isn't set, ASP.NET Core defaults 
                 // the path to /Account/Login.
@@ -121,9 +120,9 @@ namespace Aoo
             }
             else
             {
-                var options = new RewriteOptions()
-        .AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443);
-                app.UseRewriter(options);
+        //        var options = new RewriteOptions()
+        //.AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443);
+        //        app.UseRewriter(options);
 
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
@@ -132,7 +131,7 @@ namespace Aoo
                 app.UseExceptionHandler("/Home/Error");
             }
 
-           
+
             app.UseStaticFiles();
          //   app.UseMiddleware<IgnoreRouteMiddleware>();
             app.UseAuthentication();

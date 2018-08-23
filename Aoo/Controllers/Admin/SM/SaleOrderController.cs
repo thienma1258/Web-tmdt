@@ -53,18 +53,17 @@ namespace Aoo.Controllers.Admin.SM
 
                     return View(listSaleOrder);
                 }
-                listSaleOrder = await this.ISaleOrderBLL.Get(numberPerPage, page, p => ((Search == null ||(p.Customer.CustomerName.Contains(Search)|| p.ReviewBy == Search)) && p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder) && ((p.ReviewDate.Date >= FromDate.Date && p.ReviewDate.Date <= ToDate.Date)||((p.EditedDate.Date >= FromDate.Date && p.EditedDate.Date <= ToDate.Date))));
+                listSaleOrder = await this.ISaleOrderBLL.Get(currentPage: page, intNumber: numberPerPage, filter: p => ((Search == null ||(p.Customer.CustomerName.Contains(Search)|| p.ReviewBy == Search)) && p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder) && ((p.ReviewDate.Date >= FromDate.Date && p.ReviewDate.Date <= ToDate.Date)||((p.EditedDate.Date >= FromDate.Date && p.EditedDate.Date <= ToDate.Date))),orderBy:p=>p.OrderByDescending(saleorder=>saleorder.EditedDate), includeProperties: "Customer");
                 ViewBag.currentPage = page;
                 ViewBag.totalPage = TotalPage(ISaleOrderBLL.Cout(p => ((Search == null || (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) && p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder) && ((p.ReviewDate.Date >= FromDate.Date && p.ReviewDate.Date <= ToDate.Date) || ((p.EditedDate.Date >= FromDate.Date && p.EditedDate.Date <= ToDate.Date)))));
 
             }
             else
             {
-                listSaleOrder = await this.ISaleOrderBLL.Get(currentPage: page, intNumber: numberPerPage, filter: p => ((Search != null && (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) || p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder));
+                listSaleOrder = await this.ISaleOrderBLL.Get(currentPage: page, intNumber: numberPerPage, includeProperties:"Customer",filter: p => ((Search != null && (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) || p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder), orderBy: p => p.OrderByDescending(psaleorder => psaleorder.EditedDate));
                 ViewBag.currentPage = page;
                 ViewBag.totalPage = TotalPage(ISaleOrderBLL.Cout(p =>  ((Search != null && (p.Customer.CustomerName.Contains(Search) || p.ReviewBy == Search)) || p.State == (Common.Enum.SM.StateConfirmEnum)StateSaleOrder)));
             }
-            var list = await ISaleOrderDetailsBLL.Get();
             return View(listSaleOrder);
         }
 

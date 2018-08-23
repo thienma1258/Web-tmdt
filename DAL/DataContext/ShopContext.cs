@@ -15,7 +15,7 @@ namespace DAL.DataContext
 {
     public class ShopContext : IdentityDbContext<System_User>
     {
-        private string connectString = "Server=.; Database= ShopTMDT; Integrated Security=True;";
+        private string connectString = "Server=.\\SQLEXPRESS;Database=ShopTMDT;User Id=sa1; Password=manga24h.com;";
 
         #region DBsetModel
         #region System
@@ -69,7 +69,7 @@ namespace DAL.DataContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-           optionsBuilder.UseSqlServer(connectString);
+         //  optionsBuilder.UseSqlServer(connectString);
            // this.Database.SetCommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds);
         }
 

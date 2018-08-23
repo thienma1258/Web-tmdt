@@ -15,7 +15,7 @@ namespace UniTest.EmailServices
             List<string> listemail = new List<string>();
             listemail.Add("cpud1258@gmail.com");
            await mailchimpSErvices.SendEmailAsync(listemail,"adsad","dsadsa","adssads");
-
+            Assert.True(true);
         }
     }
 }

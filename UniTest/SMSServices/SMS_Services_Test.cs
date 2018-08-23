@@ -12,7 +12,7 @@ namespace UniTest.SMSServices
         {
             Services.SMSServices.SMSServices SMSServices = new Services.SMSServices.SMSServices();
             var test =await SMSServices.sendSMS("0969656692","12345");
-
+            Assert.True(true);
         }
     }
 }

@@ -25,9 +25,9 @@ namespace Aoo
                .CaptureStartupErrors(true)
             .UseSetting("detailedErrors", "true")
 
-            //.UseKestrel()
+        
             // .UseContentRoot(Directory.GetCurrentDirectory() + "\\wwwroot\\")
-            .UseIISIntegration()
+            //.UseIISIntegration()
                 .Build();
     }
 }

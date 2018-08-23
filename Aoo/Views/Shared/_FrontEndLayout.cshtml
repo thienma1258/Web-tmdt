@@ -5,18 +5,18 @@
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
 @inject BLL.BLL.PM.IStoreBLL StoreBLL
 @{
-    Layout = null;
+        Layout = null;
 
-    string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Shop giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
-    string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
-    string Description = ViewBag.Description == null ? "Shop giày Buôn Mê Thuột" : ViewBag.Description;
-    string Image = ViewBag.Image == null ? Url.Content("~/wwwroot/defaultImage.jpg") : Url.Content(ViewBag.Image);
-    var listcategory = await CategoryBLL.Get();
-    var listmaingroup = await MainGroupBLL.Get();
-    var listsubgroup = await SubGroupBLL.Get();
-    var listbrand = await BrandBLL.Get(intNumber: 3, currentPage: 1, orderBy: p => p.OrderByDescending(brand => brand.EditedDate));
-    var liststore = await StoreBLL.Get(includeProperties: "District,.District.Province");
-}
+        string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Shop giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
+        string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
+        string Description = ViewBag.Description == null ? "Shop giày Buôn Mê Thuột" : ViewBag.Description;
+        string Image = ViewBag.Image == null ? string.Format("{0}://{1}/{2}", Context.Request.Scheme, Context.Request.Host, Url.Content("~/wwwroot/defaultImage.jpg")) : string.Format("{0}://{1}/{2}", Context.Request.Scheme, Context.Request.Host, Url.Content(ViewBag.Image));
+        var listcategory = await CategoryBLL.Get();
+        var listMaingroup = await MainGroupBLL.Get(intNumber:3,currentPage:1,orderBy:p=>p.OrderByDescending(maingroup=>maingroup.EditedDate),includeProperties: "SubGroups");
+        var listsubgroup = await SubGroupBLL.Get();
+        var listbrand = await BrandBLL.Get(intNumber: 3, currentPage: 1, orderBy: p => p.OrderByDescending(brand => brand.EditedDate));
+        var liststore = await StoreBLL.Get(includeProperties: "District,.District.Province");
+    }
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,117 +127,81 @@
                             <a href="~/san-pham" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> SẢN PHẨM </span></a>
                             <ul class="dropdown-menu aits-w3 multi multi1">
                                 <div class="row">
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            @foreach (var item in listsubgroup)
-                                            {
-                                                <li><a href="~/@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
-                                            }
-                                        </ul>
+
+
+
+                                    <div class="col-sm-4 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                        <a href="~/san-pham/nam">
+                                            <ul style="list-style-type:none">
+                                                <li>NAM</li>
+                                                <li>
+                                                    <img width="140" height="180" src="https://images.complex.com/complex/images/c_crop,h_547,w_801,x_0,y_58/c_fill,g_center,w_1200/fl_lossy,pg_1,q_auto/Cpkvs6dVMAAjIwe_uqeygo/zayn-malik-giuseppe-zanotti-collab" />
+                                                </li>
+
+                                            </ul>
+                                        </a>
                                     </div>
-                                    @foreach (var brand in listbrand)
-                                    {
-                                    <a href="~/@brand.UrlFriendly">
-                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                            <p>@brand.Name</p>
-                                            <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
+                                    <div class="col-sm-4 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
 
-                                        </div>
-                                    </a>
+                                        <a href="~/san-pham/nu">
+                                            <ul style="list-style-type:none">
+                                                <li>NU</li>
+                                                <li><img width="140" height="180" src="~/images/Gigi_hadid_shoes_header_-_reebok.jpg" /></li>
+                                            </ul>
+                                        </a>
 
-                                    }
+                                    </div>
+                                    <div class="col-sm-4 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+
+                                        <a href="~/san-pham">
+                                            <ul style="list-style-type:none">
+                                                <li>Shop</li>
+                                                <li><img width="140" height="180" src="https://i.ytimg.com/vi/j1_38h-x0jQ/maxresdefault.jpg" /></li>
+                                            </ul>
+                                        </a>
+
+                                    </div>
+
+
 
                                     <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
+                                    <p class="promo" <span></span></p>
                                 </div>
                             </ul>
                         </li>
+                        @foreach (var item in listMaingroup)
+                        {
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> NAM </span></a>
+                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> @item.Name </span></a>
                             <ul class="dropdown-menu multi multi2">
                                 <div class="row">
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-womens-nav-agileits w3layouts-womens-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            @foreach (var item in listsubgroup)
+                                            <li class="heading">Danh sách @item.Name :</li>
+                                            @foreach (var subgroup in item.SubGroups)
                                             {
-                                                <li><a href="@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
+                                                <li><a href="@subgroup.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@subgroup.Name</a></li>
                                             }
                                         </ul>
                                     </div>
-                                    @foreach (var brand in listbrand)
+                                    @foreach (var subgroup in item.SubGroups.Take(3))
                                     {
-                                    <a href="~/@brand.UrlFriendly">
-                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                            <p>@brand.Name</p>
-                                            <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
-
-                                        </div>
-                                    </a>
-
-                                    }
-                                    <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> NỮ </span></a>
-                            <ul class="dropdown-menu multi multi3">
-                                <div class="row">
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            @foreach (var item in listsubgroup)
-                                            {
-                                                <li><a href="@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
-                                            }
-                                        </ul>
-                                    </div>
-                                    @foreach (var brand in listbrand)
-                                    {
-                                    <a href="~/@brand.UrlFriendly">
-                                        <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                            <p>@brand.Name</p>
-                                            <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
-
-                                        </div>
-                                    </a>
-                                    }
-                                    <div class="clearfix"></div>
-                                    <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> MẶT HÀNG </span></a>
-                            <ul class="dropdown-menu multi multi3">
-                                <div class="row">
-                                    <div class="col-sm-3 w3layouts-nav-agile w3layouts-acc-nav-agileits w3layouts-acc-nav-agileits-1">
-                                        <ul class="multi-column-dropdown">
-                                            <li class="heading">DANH SÁCH</li>
-                                            @foreach (var item in listmaingroup)
-                                            {
-                                                <li><a href="@item.UrlFriendly"><i class="fa fa-angle-right" aria-hidden="true"></i>@item.Name</a></li>
-                                            }
-                                        </ul>
-                                    </div>
-                                    @foreach (var brand in listbrand)
-                                    {
-                                        <a href="~/@brand.UrlFriendly">
+                                        <a href="~/@subgroup.UrlFriendly">
                                             <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                                <p>@brand.Name</p>
-                                                <img width="140px" height="180px" src="@Url.Content(brand.DefaultImage)" alt="Groovy Apparel">
+                                                <p>@subgroup.Name</p>
+                                                <img width="140px" height="180px" src="@Url.Content(subgroup.DefaultImage)" alt="Groovy Apparel">
 
                                             </div>
                                         </a>
+
                                     }
                                     <div class="clearfix"></div>
                                     <p class="promo">Use Promo Code <span>#CFFGTY56</span> and take 30% off the products. <a href="#">Details</a></p>
                                 </div>
                             </ul>
                         </li>
+                        }
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span>CHI NHÁNH</span></a>
                             <ul class="dropdown-menu multi multi4">

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.ImageServices;
+using Services.Logging;
 
 namespace Aoo.Controllers.Admin.PM
 {
@@ -40,9 +41,11 @@ namespace Aoo.Controllers.Admin.PM
             
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddBrand(ViewModels.PM.Brand.AddBrandViewModel addBrandViewModel)
         {
+        
             if (ModelState.IsValid)
             {
                 ImageErrorModel imageErrorModel=new ImageErrorModel();

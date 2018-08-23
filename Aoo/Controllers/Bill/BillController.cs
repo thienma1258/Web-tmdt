@@ -166,7 +166,7 @@ namespace Aoo.Controllers.Bill
                 {
                     string SuccessUrl = BaseUrl + Url.Action("PaymentTTTN", "Bill");
                     string ErrorUrl = BaseUrl + Url.Action("ErrorBill", "Bill");
-                    return Json(new ResponseMessage { Message=SaleOrderBLL.Message,IsSuccess=isSuccess,errorSaleOrder=SaleOrderBLL.enumErrorSaleOrder });
+                    return Json(new ResponseMessage { Message=SaleOrderBLL.Message,IsSuccess=isSuccess,errorSaleOrder=SaleOrderBLL.enumErrorSaleOrder ,RedirectoURl= SuccessUrl });
 
                 }
                 else if (CurrentSaleOrder.PaymentMethod == Common.Enum.SM.PaymentMethod.NganLuong)

@@ -9,24 +9,26 @@
     var listtransportprice = (await TransportPriceBLL.Get()).ToList();
 }
 <link href="~/css/Bill/billdev.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/Component/styleloading.css" />
 <h2>THÔNG TIN KHÁCH MUA HÀNG</h2>
 <script src="~/js/Cookie.js" type="text/javascript"></script>
 <script src="~/js/BillPayment.js" type="text/javascript"></script>
+<script src="~/js/loadingScript.js"></script>
 <script src="~/js/Sale.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<form autocomplete="on">
+<form autocomplete="on" id="buyForm">
     <div class="containerbill">
-    <div class="container-1">
-        <div class="namephone">
-            <div class="dividename">
-                <div>
-                    <label>Tên</label><br />
+        <div class="container-1">
+            <div class="namephone">
+                <div class="dividename">
+                    <div>
+                        <label>Tên</label><br />
                         <input id="NameCustomer" type="text" placeholder="Họ tên" />
-                </div>
-                <div>
-                    <label>Số điện thoại</label><br />
+                    </div>
+                    <div>
+                        <label>Số điện thoại</label><br />
                         <input id="PhoneCustomer" type="text" placeholder="Nhập số điện thoại" />
-                </div>
+                    </div>
                     <div>
                         <label>Ghi chú</label><br />
                         <input id="Note" type="text" placeholder="Nhập ghi chú của bạn" />
@@ -37,89 +39,90 @@
                     </div>
                     <button id="CheckOutButton">THANH TOÁN</button><br />
                 </div>
-
-            <div class="dividetransport">
-                <div style="width:50%">
-                    <div>
-                        <label>Tỉnh / Thành phố</label>
-                        <select id="province" class="form-control" onchange="myFunction(event)">
-                            <option>Nhập tỉnh thành</option>
-
-                            @{for (int i = 0; i < listprovince.Count(); i++)
-                               {
-                                    <option class="form-control"  value="@i">@listprovince[i].Name</option>
-
-                                   }
-                               }
-                        </select>
-                        <br />
-                    </div>
-                    <div>
-                        <label>Quận, Huyện</label>
-                        <select id="district" class="form-control" onchange="GetFee()">
-                            <option>Nhập Quận, Huyện</option>
-                        </select>
-                    </div>
-                        <br />
-                            <label>Chọn nhà vận chuyển</label>
-                            <select onchange="GetFee()" id="transport" class="form-control">
-                                <option>Chọn nhà vận chuyển</option>
-                                @{for (int i = 0; i < listtransporttype.Count(); i++)
+                <div class="dividetransport">
+                    <div style="width:50%">
+                        <div>
+                            <label>Tỉnh / Thành phố</label>
+                            <select id="province" class="form-control" onchange="myFunction(event)">
+                                <option>Nhập tỉnh thành</option>
+                                @{for (int i = 0; i < listprovince.Count(); i++)
                                     {
-                                        <option class="form-control" value="@listtransporttype[i].ID">@listtransporttype[i].Name</option>
+                                        <option class="form-control" value="@i">@listprovince[i].Name</option>
 
                                     }
                                 }
                             </select>
                             <br />
-                        <div>   
-                    </div>
-                    <div>
-                        <label>Nhập địa chỉ giao hàng</label><br />
-                            <input id="adress" style="width:185%;" type="text" placeholder="Nhập địa chỉ giao hàng " />
+                        </div>
+                        <div>
+                            <label>Quận, Huyện</label>
+                            <select id="district" class="form-control" onchange="GetFee()">
+                                <option>Nhập Quận, Huyện</option>
+                            </select>
+                        </div>
                         <br />
+                        <label>Chọn nhà vận chuyển</label>
+                        <select onchange="GetFee()" id="transport" class="form-control">
+                            <option>Chọn nhà vận chuyển</option>
+                            @{for (int i = 0; i < listtransporttype.Count(); i++)
+                                {
+                                    <option class="form-control" value="@listtransporttype[i].ID">@listtransporttype[i].Name</option>
+
+                                }
+                            }
+                        </select>
+                        <br />
+                        <div>
+                        </div>
+                        <div>
+                            <label>Nhập địa chỉ giao hàng</label><br />
+                            <input id="adress" style="width:185%;" type="text" placeholder="Nhập địa chỉ giao hàng " />
+                            <br />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div id="billinfo" class="container-2">
-        <div class="pay">
+        <div id="billinfo" class="container-2">
+            <div class="pay">
                 <button>THÔNG TIN THANH TOÁN</button><br />
                 <div id="payarea"></div>
                 <div id="delivery"></div>
-            <div id="fee"></div>
-            <div id="delivery"></div>
-        </div>
-        <div id="thanhtien"></div><br />
-        <div class="payfee">
+                <div id="fee"></div>
+                <div id="delivery"></div>
+            </div>
+            <div id="thanhtien"></div><br />
+            <div class="payfee">
                 <button type="button" id="home" onclick="payment(0)">THANH TOÁN TẠI NHÀ</button>
-                <button  type="button" id="paypal" onclick="payment(1)"></button>
+                <button type="button" id="paypal" onclick="payment(1)"></button>
                 <button id="nganluong" style="background-image:url(/images/nganluong.jpg); height:40px" type="button" onclick="payment(3)"></button>
+            </div>
         </div>
     </div>
-    </div>
+    <table class="table" id="CartTable1"></table>
+
 </form>
-<table class="table" id="CartTable1"></table>
 <style>
-    #nganluong {
+   
+ #nganluong {
         height: 45px !important;
         background-repeat: no-repeat;
         background-size: 116px 41px;
         padding-bottom: 26px;
     }
 
-        #CartTable1 img {
+    #CartTable1 img {
         max-width: initial;
         width: 50px !important;
         height: 30px !important;
     }
+
     #CartTable1 tr:nth-child(1) {
         background-color: #70658a;
-        color:#ffffff;
-        font-size:16px;
+        color: #ffffff;
+        font-size: 16px;
     }
+
     #thanhtien {
         margin-top: 15px;
         margin-bottom: 15px;
@@ -132,12 +135,14 @@
             height: 40px;
             color: #fff;
         }
+
     #delivery button {
         color: #000000;
         background-color: initial;
         text-align: left;
         margin-left: -8px;
     }
+
     #fee button {
         color: #000000;
         background-color: initial;
@@ -145,10 +150,9 @@
         margin-left: -8px;
     }
 </style>
-
-<table class="table" id="CartTable1">
-
-</table>
+<div class="main" id="loadingForm" style="display:none">
+    <div class="loading"></div>
+</div>
 <script>
     $(document).ready(function () {
         GiveInfo();

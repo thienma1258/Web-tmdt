@@ -6,7 +6,11 @@ EXPOSE 44300
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY Aoo/Aoo.csproj Aoo/
+COPY DAL/DAL.csproj DAL/
 COPY BLL/BLL.csproj BLL/
+COPY Helpers/Helpers.csproj Helpers/
+COPY Services/Services.csproj Services/
+COPY CacheHelpers/CacheHelpers.csproj CacheHelpers/
 RUN dotnet restore Aoo/Aoo.csproj
 COPY . .
 WORKDIR /src/Aoo
@@ -19,3 +23,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet Aoo.dll
+
