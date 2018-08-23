@@ -36,7 +36,7 @@ namespace Aoo.Controllers
             MemoryStream memoryStream = new MemoryStream();
              file.CopyTo(memoryStream);
             string guidImage = DateTime.Now.ToString("yyMMddHHmmssff"); 
-             string ImagePath = this.ImageServices.UploadImage(memoryStream, guidImage+".png", out imageErrorModel);
+             string ImagePath = this.ImageServices.UploadImage(memoryStream, guidImage, out imageErrorModel);
             return ImagePath;
         }
         protected List<string> UploadListImage(List<IFormFile> listfile, ref List<ImageErrorModel> imageErrorModels)

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.EmailServices;
+using Services.ImageServices.Implement;
 using Services.Implement;
 using Services.PaypalServices;
 using Services.PaypalServices.Implement;
@@ -17,7 +18,7 @@ namespace Aoo.App_start
     {
         public static void RegisterServices(ref IServiceCollection services)
         {
-            services.AddTransient<IImageServices, LocalImageServices>();
+            services.AddTransient<IImageServices, ClouddinaryUploadImage>();
             services.AddSingleton<IViewRenderService, RenderView>();
             services.AddSingleton<IMailchimpServices, MailchimpSErvices>();
             services.AddSingleton<IEmailSender, EmailSender>();

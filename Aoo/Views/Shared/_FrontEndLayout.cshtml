@@ -5,18 +5,18 @@
 @inject BLL.BLL.PM.IBrandBLL BrandBLL
 @inject BLL.BLL.PM.IStoreBLL StoreBLL
 @{
-        Layout = null;
+    Layout = null;
 
-        string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Shop giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
-        string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
-        string Description = ViewBag.Description == null ? "Shop giày Buôn Mê Thuột" : ViewBag.Description;
-        string Image = ViewBag.Image == null ? string.Format("{0}://{1}/{2}", Context.Request.Scheme, Context.Request.Host, Url.Content("~/wwwroot/defaultImage.jpg")) : string.Format("{0}://{1}/{2}", Context.Request.Scheme, Context.Request.Host, Url.Content(ViewBag.Image));
-        var listcategory = await CategoryBLL.Get();
-        var listMaingroup = await MainGroupBLL.Get(intNumber:3,currentPage:1,orderBy:p=>p.OrderByDescending(maingroup=>maingroup.EditedDate),includeProperties: "SubGroups");
-        var listsubgroup = await SubGroupBLL.Get();
-        var listbrand = await BrandBLL.Get(intNumber: 3, currentPage: 1, orderBy: p => p.OrderByDescending(brand => brand.EditedDate));
-        var liststore = await StoreBLL.Get(includeProperties: "District,.District.Province");
-    }
+    string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Shop giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
+    string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
+    string Description = ViewBag.Description == null ? "Shop giày Buôn Mê Thuột" : ViewBag.Description;
+    string Image = ViewBag.Image == null ? Url.Content("~/wwwroot/defaultImage.jpg") : Url.Content(ViewBag.Image);
+    var listcategory = await CategoryBLL.Get();
+    var listMaingroup = await MainGroupBLL.Get(intNumber:3,currentPage:1,orderBy:p=>p.OrderByDescending(maingroup=>maingroup.EditedDate),includeProperties: "SubGroups");
+    var listsubgroup = await SubGroupBLL.Get();
+    var listbrand = await BrandBLL.Get(intNumber: 3, currentPage: 1, orderBy: p => p.OrderByDescending(brand => brand.EditedDate));
+    var liststore = await StoreBLL.Get(includeProperties: "District,.District.Province");
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,7 +184,7 @@
                                             }
                                         </ul>
                                     </div>
-                                    @foreach (var subgroup in item.SubGroups.Take(3))
+                                    @foreach (var subgroup in item.SubGroups.Take(2))
                                     {
                                         <a href="~/@subgroup.UrlFriendly">
                                             <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
