@@ -2,219 +2,219 @@
 @inject BLL.BLL.SM.ISaleOrderDetailsBLL SaleOrderDetailBLL
 @{
     Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+<link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script>
+<style>
+    .container-body {
+        margin: 10% 10% 10% 0;
     }
-    <link href="~/css/Admin/brandadmin.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script>
-    <style>
-        .container-body {
-            margin: 10% 10% 10% 0;
+
+    #datePicker {
+        margin-bottom: 20%;
+        margin-left: 70px;
+    }
+
+    .container-body > form {
+        margin-bottom: 10%;
+    }
+
+        .container-body > form > * {
+            margin: 10px;
         }
 
-        #datePicker {
-            margin-bottom: 20%;
-            margin-left: 70px;
-        }
+    .error {
+        color: red;
+        font-weight: 500
+    }
 
-        .container-body > form {
-            margin-bottom: 10%;
-        }
+    input::-webkit-input-placeholder {
+        / Chrome, Firefox, Opera, Safari 10.1+ / color: red;
+        opacity: 1;
+        / Firefox /
+    }
 
-            .container-body > form > * {
-                margin: 10px;
-            }
-        .error {
-            color: red;
-            font-weight: 500
-        }
+    .title {
+        font-weight: 500
+    }
+</style>
+<script>
+    //$('#datePicker').data('datepicker')
+    window.onload = function () {
+        var datepicker = $('#datePicker1').datepicker({
+            startDate: new Date(),
+            maxDate: new Date(),
 
-        input::-webkit-input-placeholder {
-            / Chrome, Firefox, Opera, Safari 10.1+ / color: red;
-            opacity: 1;
-            / Firefox /
-        }
+            todayButton: new Date()
 
-        .title {
-            font-weight: 500
-        }
-    </style>
-    <script>
-        //$('#datePicker').data('datepicker')
-        window.onload = function () {
-            var datepicker = $('#datePicker1').datepicker({
-                startDate: new Date(),
-                maxDate: new Date(),
+        });
+        var datepicker = $('#datePicker2').datepicker({
+            startDate: new Date(),
+            maxDate: new Date(),
 
-                todayButton: new Date()
+            todayButton: new Date()
 
-            });
-            var datepicker = $('#datePicker2').datepicker({
-                startDate: new Date(),
-                maxDate: new Date(),
+        });
 
-                todayButton: new Date()
 
-            });
-        
+    }
+</script>
+<span class="error">
+    @Html.ValidationSummary()
+</span>
+<div class="container-body">
 
-        }
-    </script>
-    <span class="error">
-        @Html.ValidationSummary()
-    </span>
-    <div class="container-body">
+    <form method="get">
+        <label class="title">Tìm kiếm bởi tên khach hàng,tên người xác nhận</label>
+        <input name="Search" type="search" class="form-control" placeholder="Tìm kiếm bởi tên khach hàng,tên người xác nhận" />
+        <label class="control-label">Tình trạng</label>
+        <select name="StateSaleOrder" class="form-control" asp-items="Html.GetEnumSelectList<Common.Enum.SM.StateConfirmEnum>()">
+            <option selected="selected" value="">Please select</option>
+        </select>
+        <div class="form-control">
+            <lable style="font-weight:500">Xác nhận vào ngày  :  </lable>
+            <label>Từ ngày</label> <input required name="FromDate" type='text' id="datePicker1" class="datepicker-here" data-language='en' data-position="bottom left" />
+            <label>Đến ngày</label> <input required name="ToDate" type='text' id="datePicker2" class="datepicker-here" data-language='en' data-position="bottom left" />
+        </div>
+        <input type="submit" class="btn btn-success pull-right btn-lg" />
+    </form>
+    <table class="tablebrand" style="width:108%!important">
+        <thead class="thead-dark">
+            <tr>
 
-        <form method="get">
-            <label class="title">Tìm kiếm bởi tên khach hàng,tên người xác nhận</label>
-            <input name="Search" type="search" class="form-control" placeholder="Tìm kiếm bởi tên khach hàng,tên người xác nhận" />
-            <label class="control-label">Tình trạng</label>
-            <select name="StateSaleOrder" class="form-control" asp-items="Html.GetEnumSelectList<Common.Enum.SM.StateConfirmEnum>()">
-                <option selected="selected" value="">Please select</option>
-            </select>
-            <div class="form-control">
-                <lable style="font-weight:500">Xác nhận vào ngày  :  </lable>
-                <label>Từ ngày</label> <input required name="FromDate" type='text' id="datePicker1" class="datepicker-here" data-language='en' data-position="bottom left" />
-                <label>Đến ngày</label> <input required name="ToDate" type='text' id="datePicker2" class="datepicker-here" data-language='en' data-position="bottom left" />
-            </div>
-            <input type="submit" class="btn btn-success pull-right btn-lg" />
-        </form>
-        <table class="tablebrand" style="width:108%!important">
-            <thead class="thead-dark">
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer.CustomerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentMethod)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransportTypePrice)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsPay)
+                </th>
+                <th>
+
+                </th>
+                <th>
+                    <span>State</span>
+                </th>
+                <th>
+                    <span>Change State Is Succes</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.Customer.CustomerName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PaymentMethod)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TransportTypePrice)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.TotalPrice)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IsPay)
-                    </th>
-                    <th>
-
-                    </th>
-                    <th>
-                        <span>State</span>
-                    </th>
-                    <th>
-                        <span>Change State Is Succes</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.CustomerName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PaymentMethod)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TransportTypePrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IsPay)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReviewBy)
-                        </td>
-                        @*<td></td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentMethod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportTypePrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsPay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReviewBy)
+                    </td>
+                    @*<td></td>
                         <td>
                             <a href="#" class="view" title="" data-toggle="tooltip" data-original-title="View"><i class="material-icons"></i></a>
                         </td>*@
-                        <td>
-                            <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
-                                Xem chi tiết hóa đơn
-                            </button>
-                            <button onclick="window.location.href='/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
-                        </td>
-                        @{
-                            if (item.ReviewBy != null)
-                            {
-                                <td>
-                                    <span>Confirmed</span>
-                                </td>
-                                <td>
-                                    <button onclick="successSaleOrder('@item.ID')" class="btn-success">Success</button>
-                                </td>
-                            }
-                            else
-                            {
-                                <td></td>
-                                <td></td>
-                            }
+                    <td>
+                        <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
+                            Xem chi tiết hóa đơn
+                        </button>
+                        <button onclick="window.location.href='/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
+                    </td>
+                    @{
+                        if (item.ReviewBy != null)
+                        {
+                            <td>
+                                <span>Confirmed</span>
+                            </td>
+                            <td>
+                                <button onclick="successSaleOrder('@item.ID')" class="btn-success">Success</button>
+                            </td>
                         }
-                    </tr>
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+                    }
+                </tr>
 
-                }
-
-            </tbody>
-        </table>
-    </div>
-    </div>
-    @* pop up region *@
-    <!-- Modal -->
-    <div class="modal fade" id="DetailOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleDetail">Chi tiết hóa đơn</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                </div>
-                <div class="modal-body">
-                    <div id="getIdsale">
-
-                    </div>
-                    <div id="NameCus">
-                       
-                    </div>
-                    <div id="PhoneCus">
-                      
-                    </div>
-                    <div id="Adress">
-
-                    </div>
-
-                    <table id="TableDetails" class="table">
-
-                    </table>
-                </div>
-                    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button onclick="confirmSaleOrder()" type="button" class="btn btn-primary">Confirm this</button>
-                    <p id="demo"></p>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            .infobill {
-                width: 100%;
             }
 
-                .infobill tr td {
-                    width: 20%;
-                }
-            </style>
+        </tbody>
+    </table>
 </div>
+@* pop up region *@
+<!-- Modal -->
+<div class="modal fade" id="DetailOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleDetail">Chi tiết hóa đơn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div id="getIdsale">
+
+                </div>
+                <div id="NameCus">
+
+                </div>
+                <div id="PhoneCus">
+
+                </div>
+                <div id="Adress">
+
+                </div>
+
+                <table id="TableDetails" class="table"></table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button onclick="confirmSaleOrder()" type="button" class="btn btn-primary">Confirm this</button>
+                <p id="demo"></p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .infobill {
+            width: 100%;
+        }
+
+            .infobill tr td {
+                width: 20%;
+            }
+    </style>
+</div>
+@await Html.PartialAsync("~/Views/Component/Pagination.cshtml", new Aoo.ViewModels.Component.PaginationModel { currentPage = ViewBag.currentPage, totalPage = ViewBag.totalPage })
+
 <script>
     function getDetails(idsaleOrder) {
         $.get('/sm/don-hang/chi-tiet', { idsaleOrder: idsaleOrder }).done(function (data) {
@@ -233,20 +233,20 @@
             $("#TableDetails").append(title);
             var html = "";
             for (var i = 0; i < list.length; i++) {
-                html = '<tr>' + '<td>' + list[i].ModelName + '</td>' + '<td>' + list[i].Color + '</td>' + '<td>' + list[i].PricePro + '</td>' + '<td>' + list[i].QuantityPro + '</td>'+'</tr>';
+                html = '<tr>' + '<td>' + list[i].ModelName + '</td>' + '<td>' + list[i].Color + '</td>' + '<td>' + list[i].PricePro + '</td>' + '<td>' + list[i].QuantityPro + '</td>' + '</tr>';
                 $("#TableDetails").append(html);
-            }        
-        });   
+            }
+        });
     }
 </script>
 <script>
     $(function () {
-      //  $("#datepicker").datepicker().datepicker("setDate", new Date());;
+        //  $("#datepicker").datepicker().datepicker("setDate", new Date());;
     });
     function confirmSaleOrder() {
         var id = document.getElementById('getId').value;
         $.ajax({
-            url: 'don-hang/chi-tiet/confirm?strSaleOrderID='+id,
+            url: 'don-hang/chi-tiet/confirm?strSaleOrderID=' + id,
             type: 'post',
             async: true,
             dataType: 'json',
@@ -275,10 +275,10 @@
         location.reload();
     }
 </script>
-        <style>
-                .namebill tr td {
-                    width: 20%;
-                }
-        </style>
+<style>
+    .namebill tr td {
+        width: 20%;
+    }
+</style>
 
 

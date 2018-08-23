@@ -43,8 +43,9 @@ namespace Services.PaypalServices.Implement
                 
                 RedirectUrls = new RedirectUrls()
                 {
-                    CancelUrl = successUrl,
-                    ReturnUrl = ErrorUrl
+                    CancelUrl = ErrorUrl,
+                    ReturnUrl = successUrl
+                    
                 },
                 
                  Payer = new Payer()
@@ -72,13 +73,13 @@ namespace Services.PaypalServices.Implement
                 throw objException;
             }
         }
-        public async Task<Payment> ExecutePayment(PaymentExecution objPaymentExecution)
+        public async Task<Payment> ExecutePayment(PaymentExecution objPaymentExecution,string paymentId)
         {
             var client = new PayPalHttpClient(environment);
             string intent = "sale";
-            
 
-            PaymentExecuteRequest request = new PaymentExecuteRequest(objPaymentExecution.PayerId);
+
+            PaymentExecuteRequest request = new PaymentExecuteRequest(paymentId); ;
             request.RequestBody(objPaymentExecution);
 
             try

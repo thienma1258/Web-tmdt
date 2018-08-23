@@ -11,6 +11,6 @@ namespace BLL.ServicesGatewayBLL
     public interface IPaypalServicesGatewayBLL
     {
         Task<Payment> CreatePayment(string SuccessURl, string ErrorUrl, SaleOrder saleOrder, List<SaleOrderDetail> listSaleOrderDetails, CM_Customer _Customer);
-        Task<bool> ExcutePayment(Payment payment);
+        Task<bool> ExcutePayment(string paymentId,string payId);
     }
 }

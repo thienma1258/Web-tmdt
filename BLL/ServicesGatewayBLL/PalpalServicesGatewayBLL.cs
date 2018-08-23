@@ -12,29 +12,35 @@ using System.Threading.Tasks;
 
 namespace BLL.ServicesGatewayBLL
 {
-    public class PaypalServicesGatewayBLL:GenericBLL,IPaypalServicesGatewayBLL
+    public class PaypalServicesGatewayBLL : GenericBLL, IPaypalServicesGatewayBLL
     {
-        public decimal currencyExchange = 23269.00M;
+        public decimal currencyExchange = 23000.00M;
         IPaypalServices _paypalServices;
-        public PaypalServicesGatewayBLL(IPaypalServices paypalServices, IUnitOfWork unitOfWork):base(unitOfWork)
+        public PaypalServicesGatewayBLL(IPaypalServices paypalServices, IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             this._paypalServices = paypalServices;
         }
 
-      
 
-        public async Task<Payment> CreatePayment(string SuccessURl,string ErrorUrl,SaleOrder saleOrder, List<SaleOrderDetail> listSaleOrderDetails, CM_Customer _Customer)
+
+        public async Task<Payment> CreatePayment(string SuccessURl, string ErrorUrl, SaleOrder saleOrder, List<SaleOrderDetail> listSaleOrderDetails, CM_Customer _Customer)
         {
             try
             {
                 Amount amount = new Amount
                 {
                     Currency = "USD",
-                    Total = FormatCurrencyUSDToPayPal(saleOrder.TotalPrice),
+                    Total = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TotalPrice)),
                     Details = new AmountDetails
                     {
-                        Subtotal = FormatCurrencyUSDToPayPal(saleOrder.TotalPrice - saleOrder.TransportTypePrice),
-                        Shipping = FormatCurrencyUSDToPayPal(saleOrder.TransportTypePrice)
+                        Subtotal = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TotalPrice) - ExchangeMoneyCurrency(saleOrder.TransportTypePrice)),
+                        Shipping = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(saleOrder.TransportTypePrice)),
+                        Tax = "0.00",
+                        HandlingFee = "0.00",
+                        Insurance = "0.00",
+                        ShippingDiscount = "0.00"
+
+
                     }
                 };
                 List<Item> listItem = new List<Item>();
@@ -43,14 +49,14 @@ namespace BLL.ServicesGatewayBLL
                     Item item = new Item
                     {
                         Currency = "USD",
-                        Price = FormatCurrencyUSDToPayPal(detail.Price).ToString(),
+                        Price = FormatCurrencyUSDToPayPal(ExchangeMoneyCurrency(detail.Price)),
                         Quantity = detail.Quality.ToString(),
                         Name = detail.ProductDetail.Product.Model,
                     };
                 }
                 ItemList itemList = new ItemList
                 {
-                    
+
                     Items = listItem
 
                 };
@@ -59,45 +65,44 @@ namespace BLL.ServicesGatewayBLL
                     Amount = amount,
                     Description = "Phi tien cho Shop BMT",
                     ItemList = itemList,
-                    Custom=saleOrder.ID,
-                    ReferenceId=saleOrder.ID,
+                    Custom = saleOrder.ID,
+                    ReferenceId = saleOrder.ID,
                     NoteToPayee = "Goi dien cho 0937019527 cho moi cau hoi",
 
 
                 };
                 return await this._paypalServices.CreatePayment(SuccessURl, ErrorUrl, transaction);
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
                 Exception exception = new Exception(objEx.Message + "loi goi paypal o sale" + saleOrder.ID);
-              
+
                 await AddError(exception);
-               
+
                 return null;
             }
 
         }
-        public async Task<bool> ExcutePayment(Payment payment)
+        public async Task<bool> ExcutePayment(string paymentId,string payerID)
         {
             try
             {
-                if (payment.State == "created")
-                {
-                    PaymentExecution paymentExecution = new PaymentExecution
+                 PaymentExecution paymentExecution = new PaymentExecution
                     {
 
-                        PayerId = payment.Id,
+                        PayerId=payerID
+
                     };
 
-                    var paymentrespond=await this._paypalServices.ExecutePayment(paymentExecution);
+                    var paymentrespond = await this._paypalServices.ExecutePayment(paymentExecution,paymentId);
                     if (paymentrespond.State == "approved")
                     {
                         return true;
                     }
-                }
+                
                 return false;
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
                 Logging logging = new Logging();
                 logging.ErrorLogs(objEx.ToString());
@@ -106,12 +111,12 @@ namespace BLL.ServicesGatewayBLL
         }
         private decimal ExchangeMoneyCurrency(decimal VNDMoney)
         {
-            return VNDMoney/currencyExchange;
+            return (System.Math.Round(VNDMoney / currencyExchange * 100) / 100);
         }
         private string FormatCurrencyUSDToPayPal(decimal Money)
         {
             CultureInfo USDCulture = new CultureInfo("en-US");
-            Money = ExchangeMoneyCurrency(Money);
+            //  Money = ExchangeMoneyCurrency(Money);
             string stringMoney = Money.ToString("N", USDCulture);
             return stringMoney;
         }
