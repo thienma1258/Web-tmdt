@@ -101,7 +101,9 @@
                     @Html.DisplayNameFor(model => model.IsPay)
                 </th>
                 <th>
-
+                    <span>User Confirm</span>
+                </th>
+                <th>
                 </th>
                 <th>
                     <span>State</span>
@@ -114,52 +116,72 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Customer.CustomerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaymentMethod)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TransportTypePrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsPay)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ReviewBy)
-                    </td>
-                    @*<td></td>
-                        <td>
-                            <a href="#" class="view" title="" data-toggle="tooltip" data-original-title="View"><i class="material-icons"></i></a>
-                        </td>*@
-                    <td>
-                        <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
-                            Xem chi tiết hóa đơn
-                        </button>
-                        <button onclick="window.location.href='/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
-                    </td>
-                    @{
-                        if (item.ReviewBy != null)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportTypePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPay)
+                    @if ((!item.IsPay) && (item.ReviewBy != null))
+                    {
+                        <button onclick="isPaySaleOrder('@item.ID')" class="btn-danger">Paying</button>
+
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewBy)
+                </td>
+                @*<td></td>
+        <td>
+            <a href="#" class="view" title="" data-toggle="tooltip" data-original-title="View"><i class="material-icons"></i></a>
+        </td>*@
+                <td>
+                    <button onclick="getDetails('@item.ID')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailOrder">
+                        Xem chi tiết hóa đơn
+                    </button>
+                    <button onclick="window.location.href='/xuat-hoa-don?id=@item.ID'">xuất hoán đơn</button>
+                </td>
+                @{
+                    if (item.ReviewBy != null)
+                    {
+                        if ((int)(item.State) == 0)
                         {
                             <td>
                                 <span>Confirmed</span>
                             </td>
+                        }
+
+                        else if ((int)(item.State) == 1)
+                        {
                             <td>
-                                <button onclick="successSaleOrder('@item.ID')" class="btn-success">Success</button>
+                                <span>Succesed</span>
                             </td>
                         }
-                        else
-                        {
-                            <td></td>
-                            <td></td>
-                        }
+
                     }
-                </tr>
+                    if (item.IsPay && (int)(item.State) != 1)
+                    {
+                        <td>
+                            <button onclick="successSaleOrder('@item.ID')" class="btn-success">Success</button>
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
+                }
+            </tr>
 
             }
 
@@ -246,33 +268,51 @@
     function confirmSaleOrder() {
         var id = document.getElementById('getId').value;
         $.ajax({
-            url: 'don-hang/chi-tiet/confirm?strSaleOrderID=' + id,
+            url: '/sm/don-hang/chi-tiet/confirm?strSaleOrderID=' + id,
             type: 'post',
             async: true,
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                if (data.issuccess)
+                if (data.success) {
                     alert(data.message);
+                    window.location.reload();
+                }             
                 alert(data.message);
             }
         });
-        location.reload();
     }
     function successSaleOrder(id) {
         $.ajax({
-            url: 'don-hang/chi-tiet/success?strSaleOrderID=' + id,
+            url: '/sm/don-hang/chi-tiet/success?strSaleOrderID=' + id,
             type: 'post',
             async: true,
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                if (data.issuccess)
+                if (data.success) {
                     alert(data.message);
+                    window.location.reload();
+                }
                 alert(data.message);
             }
         });
-        location.reload();
+    }
+    function isPaySaleOrder(id) {
+        $.ajax({
+            url: '/sm/don-hang/chi-tiet/isPay?strSaleOrderID=' + id,
+            type: 'post',
+            async: true,
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.reload();
+                }
+                alert(data.message);
+            }
+        });
     }
 </script>
 <style>

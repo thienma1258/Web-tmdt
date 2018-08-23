@@ -96,14 +96,21 @@
         <div class="payfee">
                 <button type="button" id="home" onclick="payment(0)">THANH TOÁN TẠI NHÀ</button>
                 <button  type="button" id="paypal" onclick="payment(1)"></button>
-                <button style="background-image:url(/images/nganluong.jpg); height:80px" type="button" onclick="payment(3)"></button>
+                <button id="nganluong" style="background-image:url(/images/nganluong.jpg); height:40px" type="button" onclick="payment(3)"></button>
         </div>
     </div>
     </div>
 </form>
 <table class="table" id="CartTable1"></table>
 <style>
-    #CartTable1 img {
+    #nganluong {
+        height: 45px !important;
+        background-repeat: no-repeat;
+        background-size: 116px 41px;
+        padding-bottom: 26px;
+    }
+
+        #CartTable1 img {
         max-width: initial;
         width: 50px !important;
         height: 30px !important;

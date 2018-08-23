@@ -349,9 +349,10 @@ namespace DAL
         }
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            //Dispose(true);
             this.dataContext.Dispose();
+            GC.SuppressFinalize(this);
+
         }
 
         public async Task<int> SaveChangeAsync()

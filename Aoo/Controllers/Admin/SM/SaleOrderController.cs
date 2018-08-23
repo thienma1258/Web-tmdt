@@ -76,7 +76,24 @@ namespace Aoo.Controllers.Admin.SM
             SaleOrder saleOrder =await ISaleOrderBLL.Find(id);
             return View(saleOrder);
         }
-     [Route("don-hang/chi-tiet/confirm")]
+        [Route("don-hang/chi-tiet/isPay")]
+        public async Task<JsonResult> IsPayConfirm(string strSaleOrderID)
+        {
+            SaleOrder saleOrder = await ISaleOrderBLL.Find(strSaleOrderID);
+            if (saleOrder == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy đơn hàng" });
+
+            }
+            saleOrder.IsPay = true;
+            var IsSuccess = await this.ISaleOrderBLL.Update(saleOrder);
+            if(IsSuccess)
+            {
+                return Json(new { success = true, message = "Don hang da thanh toan thanh cong" });
+            }
+            return Json(new { success = false, message = "Thanh toan don hang that bai" });
+        }
+        [Route("don-hang/chi-tiet/confirm")]
         public async Task<JsonResult> ConfirmSaleOrder(string strSaleOrderID)
         {
             SaleOrder objSaleOrder = await this.ISaleOrderBLL.Find(strSaleOrderID);
