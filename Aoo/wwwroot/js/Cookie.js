@@ -115,7 +115,7 @@ function LoadItem() {
     $('.total').html('');
     var html = "";
     for (var i = 0; i < ListItems.length;i++) {
-        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
+        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath+ '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
             + '<td>' + '<button  onclick=Down("' + ListItems[i].ID + '")>'+"  " + "-" + '</button>'  + '<span>' + ListItems[i].Quantity + '</span>'+"  " + '<button  onclick=Up("' + ListItems[i].ID + '")>' + "+" + '</button>'+ '</td>'
             + '<td>' + '<span>' + (ListItems[i].Price).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Price*ListItems[i].Quantity + '</span>' + '</td>'+ '<td>' + '<button onclick=RemoveItem("' + ListItems[i].ID+'") > '+"Remove"+'</button >'+'</td>'
     };
@@ -173,7 +173,7 @@ function LoadPopup() {
     $('.total').html('');
     var html = "";
     for (var i = 0; i < ListItems.length; i++) {
-        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
+        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath+ '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
             + '<td>' + '<button  onclick=Down("' + ListItems[i].ID + '")>' + "  " + "-" + '</button>' + '<span>' + ListItems[i].Quantity + '</span>' + "  " + '<button  onclick=Up("' + ListItems[i].ID + '")>' + "+" + '</button>' + '</td>'
             + '<td>' + '<span>' + (ListItems[i].Price).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<span>' + (ListItems[i].Price * ListItems[i].Quantity).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</span>' + '</td>' + '<td>' + '<button onclick=RemoveItem("' + ListItems[i].ID + '") > ' + "Remove" + '</button >' + '</td>'
         TotalPrice += ListItems[i].Price * ListItems[i].Quantity;

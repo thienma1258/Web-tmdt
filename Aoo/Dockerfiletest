@@ -1,7 +1,7 @@
 FROM microsoft/aspnetcore:2.0 AS base
 WORKDIR /app
 EXPOSE 62085
-EXPOSE 44300
+EXPOSE 443
 
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
@@ -18,4 +18,4 @@ RUN dotnet publish Aoo.csproj -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet Aoo.dll
+CMD ASPNETCORE_URLS=https://*:$PORT dotnet Aoo.dll

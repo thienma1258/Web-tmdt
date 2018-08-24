@@ -32,7 +32,7 @@ namespace Aoo.Controllers.Admin.Log
             return RedirectToAction("Index");
             return Redirect("/Error");
         }
-        [Route("Details/ID")]
+        [Route("Details")]
         public IActionResult Details(string ID)
         {
             return View(this.errorLogsBLL.Find(ID));

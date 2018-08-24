@@ -35,7 +35,7 @@ function LoadItemBill() {
     $('.total').html('');
     var html = "";
     for (var i = 0; i < ListItems.length; i++) {
-        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath.substring(1, ListItems[i].ImagePath.length) + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
+        html += '<tr>' + '<td>' + '<img src="' + ListItems[i].ImagePath + '">' + '</td>' + '<td>' + '<span>' + ListItems[i].Model + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].Color + '</span>' + '</td>' + '<td>' + '<span>' + ListItems[i].CurrentSize + '</span>' + '</td>'
             + '<td>' + '<span>' + ListItems[i].Quantity + '</span>' + "  " + '</td>'
             + '<td>' + '<span>' + (ListItems[i].Price).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) +'</span>' + '</td>'
     };

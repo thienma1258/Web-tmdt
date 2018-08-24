@@ -46,7 +46,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td></td>
+                <td>
+                    <div class="subedit">
+                        <a href="/ErrorLog/Details?ID=@item.ID">ChiTiet</a>
+                    </div>
+
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedTime)
                 </td>

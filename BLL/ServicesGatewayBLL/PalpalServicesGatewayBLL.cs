@@ -119,10 +119,10 @@ namespace BLL.ServicesGatewayBLL
         }
         private string FormatCurrencyUSDToPayPal(decimal Money)
         {
-            CultureInfo USDCulture = new CultureInfo("en-US");
+         //   CultureInfo USDCulture = new CultureInfo("en-US");
            
             //  Money = ExchangeMoneyCurrency(Money);
-            string stringMoney = Money.ToString("N", USDCulture);
+            string stringMoney = Money.ToString("0.00");
             return stringMoney;
         }
     }

@@ -10,7 +10,7 @@
     string Title = ViewBag.Title == null ? (ViewBag.Name == null ? "Shop giày Buôn Mê thuột" : ViewBag.Name) : ViewBag.Title;
     string Keyword = ViewBag.Keyword == null ? (ViewBag.Name == null ? "" : ViewBag.Name) : ViewBag.Keyword;
     string Description = ViewBag.Description == null ? "Shop giày Buôn Mê Thuột" : ViewBag.Description;
-    string Image = ViewBag.Image == null ? Url.Content("~/wwwroot/defaultImage.jpg") : Url.Content(ViewBag.Image);
+    string Image = ViewBag.Image == null ? "https://rukminim1.flixcart.com/flap/960/960/image/eed87c.jpg?q=75" : Url.Content(ViewBag.Image);
     var listcategory = await CategoryBLL.Get();
     var listMaingroup = await MainGroupBLL.Get(intNumber:3,currentPage:1,orderBy:p=>p.OrderByDescending(maingroup=>maingroup.EditedDate),includeProperties: "SubGroups");
     var listsubgroup = await SubGroupBLL.Get();
@@ -271,11 +271,11 @@
         <div class="agileheader-topbar">
             <div class="container">
                 <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid1">
-                    <p>Free shipping on orders over $150. <a href="payment.html">Details</a></p>
+                    @*<p>Free shipping on orders over $150. <a href="payment.html">Details</a></p>*@
                 </div>
                 <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid2">
                     <ul>
-                        <li><a class="" href="~/sm/don-hang">Quan Ly</a></li>                 
+                        <li><a class="" href="https://tmdt-web.herokuapp.com/sm/don-hang">Quan Ly</a></li>                 
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -308,33 +308,13 @@
     <div class="agileinfofooter">
         <div class="agileinfofooter-grids">
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid1">
-                <ul>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="mens.html">MEN'S</a></li>
-                    <li><a href="mens_accessories.html">MEN'S ACCESSORIES</a></li>
-                    <li><a href="womens.html">WOMEN'S</a></li>
-                    <li><a href="womens_accessories.html">WOMEN'S ACCESSORIES</a></li>
-                </ul>
+               
             </div>
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid2">
-                <ul>
-                    <li><a href="stores.html">STORE LOCATOR</a></li>
-                    <li><a href="faq.html">FAQs</a></li>
-                    <li><a href="codes.html">CODES</a></li>
-                    <li><a href="icons.html">ICONS</a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
-                </ul>
+             
             </div>
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid3">
-                <address>
-                    <ul>
-                        <li>40019 Parma Via Modena</li>
-                        <li>Sant'Agata Bolognese</li>
-                        <li>BO, Italy</li>
-                        <li>+1 (734) 123-4567</li>
-                        <li><a class="mail" href="mailto:mail@example.com">info@example.com</a></li>
-                    </ul>
-                </address>
+               
             </div>
             <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid3">
                 <div class="simple-subscription-form">
@@ -359,7 +339,7 @@
     <div class="ahahchat-button-plugin" data-plugin-code="q1et4NsAlJ5b6d5317c935b"></div>
     <div class="w3lscopyrightaits">
         <div class="col-md-8 w3lscopyrightaitsgrid w3lscopyrightaitsgrid1">
-            <p>© 2017 Groovy Apparel. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="=_blank"> W3layouts </a></p>
+            <p>Website TMDT</p>
         </div>
         <div class="clearfix"></div>
     </div>
