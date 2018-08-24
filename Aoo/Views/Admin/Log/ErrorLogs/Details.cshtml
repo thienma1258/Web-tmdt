@@ -1,0 +1,50 @@
+﻿@model DAL.Model.ErrorLogs
+@{ 
+    Layout = "~/Views/Admin/_FrontEndAdminLayout.cshtml";
+}
+    <div>
+        <h4>ErrorLogs</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TableName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TableName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ErrorLog)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ErrorLog)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModuleName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ModuleName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FunctionName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FunctionName)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
